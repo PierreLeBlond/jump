@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkv1jrfj2sg2q"]
+
+[ext_resource type="Script" path="res://scripts/Player.cs" id="1_ybq1t"]
+[ext_resource type="Texture2D" uid="uid://g7tnpsyfgd5d" path="res://icon.svg" id="2_j45x8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cwxst"]
+radius = 12.0
+height = 28.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_ybq1t")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -13)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_j45x8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -13)
+shape = SubResource("CapsuleShape2D_cwxst")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.1
+one_shot = true
+
+[node name="BufferedJumpTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.1

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6qgbirah1500"]
+
+[ext_resource type="PackedScene" uid="uid://dkv1jrfj2sg2q" path="res://scenes/Player.tscn" id="1_mkig5"]
+[ext_resource type="PackedScene" uid="uid://dw5st3cvj6h6k" path="res://scenes/Level.tscn" id="2_1nca6"]
+[ext_resource type="PackedScene" uid="uid://dyg1q4cxppdey" path="res://scenes/PlayerTestingUI.tscn" id="3_tvxfe"]
+
+[node name="Game" type="Node2D"]
+
+[node name="PlayerTestingUi" parent="." instance=ExtResource("3_tvxfe")]
+
+[node name="Player" parent="." instance=ExtResource("1_mkig5")]
+position = Vector2(577, 324)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="Level" parent="." instance=ExtResource("2_1nca6")]
+
+[connection signal="JumpFactorChanged" from="PlayerTestingUi" to="Player" method="OnPlayerTestingUIJumpFactorChanged"]
