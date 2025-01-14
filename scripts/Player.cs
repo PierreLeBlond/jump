@@ -18,6 +18,16 @@ public partial class Player : CharacterBody2D
     public float JumpRiseTime { get; set; } = 0.4f;
 
     [Export]
+    // How long the player will still rises if jump is cancelled mid-air
+    public float JumpCancelTime { get; set; } = 0.05f;
+
+    [Export]
+    public float MinimumJumpPressedTime { get; set; } = 0.1f;
+
+    [Export]
+    public float MaximumJumpPressedTime { get; set; } = 0.3f;
+
+    [Export]
     public float JumpFallTime { get; set; } = 0.3f;
 
     public Vector2 ScreenSize;
@@ -59,14 +69,42 @@ public partial class Player : CharacterBody2D
         return (newVelocity, acceleration);
     }
 
+    private bool CancelJump = false;
+    private bool JumpCanceled = false;
+    private float CancelGravity = 0;
+
     private Vector2 AddGravity(double delta, Vector2 currentVelocity)
     {
+        var jumping = currentVelocity.Y < 0;
+
+        if (jumping)
+        {
+            JumpPressedTime += delta;
+        }
+
+        if (
+            Input.IsActionJustReleased("jump")
+            && jumping
+            && JumpPressedTime < MaximumJumpPressedTime
+        )
+        {
+            CancelJump = true;
+        }
+
+        if (CancelJump && JumpPressedTime > MinimumJumpPressedTime && !JumpCanceled)
+        {
+            CancelGravity = -Velocity.Y / JumpCancelTime;
+            JumpCanceled = true;
+        }
+
         var gravity = Vector2.Zero;
 
-        var riseGravity = 2 * JumpHeight / (JumpRiseTime * JumpRiseTime);
+        var riseGravity = JumpCanceled
+            ? CancelGravity
+            : 2 * JumpHeight / (JumpRiseTime * JumpRiseTime);
         var fallGravity = 2 * JumpHeight / (JumpFallTime * JumpFallTime);
 
-        gravity.Y = currentVelocity.Y < 0 ? riseGravity : fallGravity;
+        gravity.Y = jumping ? riseGravity : fallGravity;
 
         var newVelocity = currentVelocity + gravity * (float)delta;
 
@@ -113,6 +151,8 @@ public partial class Player : CharacterBody2D
 
     private bool WasOnFloor = false;
 
+    private double JumpPressedTime = 0;
+
     private Vector2 AddPlayerJump(Vector2 currentVelocity)
     {
         if (BufferedJumpRemainingFrames > 0)
@@ -148,6 +188,10 @@ public partial class Player : CharacterBody2D
         {
             return newVelocity;
         }
+
+        JumpPressedTime = 0;
+        CancelJump = false;
+        JumpCanceled = false;
 
         newVelocity.Y -= 2 * JumpHeight / JumpRiseTime;
 
