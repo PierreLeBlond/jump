@@ -1,5 +1,3 @@
-using System;
-using System.Linq.Expressions;
 using Godot;
 
 public partial class Player : CharacterBody2D
@@ -11,16 +9,16 @@ public partial class Player : CharacterBody2D
     public int DecelerationFactor { get; set; } = 1000;
 
     [Export]
-    public int GravityFactor { get; set; } = 980;
+    public float JumpHeight { get; set; } = 64;
 
     [Export]
-    public int JumpingGravityFactor { get; set; } = 1400;
+    public float JumpMaxDistance { get; set; } = 192;
 
     [Export]
-    public int JumpFactor { get; set; } = 400;
+    public float JumpRiseTime { get; set; } = 0.4f;
 
     [Export]
-    public int MaxVelocity { get; set; } = 200;
+    public float JumpFallTime { get; set; } = 0.3f;
 
     public Vector2 ScreenSize;
 
@@ -53,8 +51,10 @@ public partial class Player : CharacterBody2D
             acceleration.X -= AccelerationFactor;
         }
 
+        var maxVelocity = JumpMaxDistance / (JumpRiseTime + JumpFallTime);
+
         var newVelocity = currentVelocity + acceleration * (float)delta;
-        newVelocity.X = Mathf.Clamp(newVelocity.X, -MaxVelocity, MaxVelocity);
+        newVelocity.X = Mathf.Clamp(newVelocity.X, -maxVelocity, maxVelocity);
 
         return (newVelocity, acceleration);
     }
@@ -62,7 +62,11 @@ public partial class Player : CharacterBody2D
     private Vector2 AddGravity(double delta, Vector2 currentVelocity)
     {
         var gravity = Vector2.Zero;
-        gravity.Y = currentVelocity.Y < 0 ? JumpingGravityFactor : GravityFactor;
+
+        var riseGravity = 2 * JumpHeight / (JumpRiseTime * JumpRiseTime);
+        var fallGravity = 2 * JumpHeight / (JumpFallTime * JumpFallTime);
+
+        gravity.Y = currentVelocity.Y < 0 ? riseGravity : fallGravity;
 
         var newVelocity = currentVelocity + gravity * (float)delta;
 
@@ -145,7 +149,7 @@ public partial class Player : CharacterBody2D
             return newVelocity;
         }
 
-        newVelocity.Y -= JumpFactor;
+        newVelocity.Y -= 2 * JumpHeight / JumpRiseTime;
 
         // Reset the jump counters
         BufferedJumpRemainingFrames = 0;
@@ -170,8 +174,8 @@ public partial class Player : CharacterBody2D
         MoveAndSlide();
     }
 
-    public void OnPlayerTestingUIJumpFactorChanged(double value)
+    public void OnPlayerTestingUIJumpHeightChanged(double value)
     {
-        JumpFactor = (int)value;
+        JumpHeight = (int)value;
     }
 }

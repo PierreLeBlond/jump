@@ -16,4 +16,4 @@ position = Vector2(576, 324)
 
 [node name="Level" parent="." instance=ExtResource("2_1nca6")]
 
-[connection signal="JumpFactorChanged" from="PlayerTestingUi" to="Player" method="OnPlayerTestingUIJumpFactorChanged"]
+[connection signal="JumpHeightChanged" from="PlayerTestingUi" to="Player" method="OnPlayerTestingUIJumpHeightChanged"]

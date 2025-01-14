@@ -3,17 +3,17 @@ using Godot;
 public partial class PlayerTestingUi : Control
 {
     [Export]
-    public Slider JumpFactorSlider;
+    public Slider JumpHeightSlider;
 
     [Signal]
-    public delegate void JumpFactorChangedEventHandler(double value);
+    public delegate void JumpHeightChangedEventHandler(double value);
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        JumpFactorSlider.ValueChanged += (double value) =>
+        JumpHeightSlider.ValueChanged += (double value) =>
         {
-            EmitSignal(SignalName.JumpFactorChanged, value);
+            EmitSignal(SignalName.JumpHeightChanged, value);
         };
     }
 
