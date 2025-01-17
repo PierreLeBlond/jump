@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://csvt6mnke156n"]
+
+[node name="VBoxContainer" type="VBoxContainer"]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 256.0
+offset_bottom = 136.0
+metadata/_edit_group_ = true
+
+[node name="TopContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TopContainer"]
+layout_mode = 2
+text = "JumpHeight"
+
+[node name="Spacer" type="Control" parent="TopContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ValueLabel" type="Label" parent="TopContainer"]
+layout_mode = 2
+
+[node name="Slider" type="HSlider" parent="."]
+layout_mode = 2
+max_value = 1000.0
+value = 400.0
+
+[node name="BottomContainer" type="HFlowContainer" parent="."]
+layout_mode = 2
+
+[node name="MinLabel" type="Label" parent="BottomContainer"]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="BottomContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MaxLabel" type="Label" parent="BottomContainer"]
+layout_mode = 2

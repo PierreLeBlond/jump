@@ -6,14 +6,16 @@
 
 [node name="Game" type="Node2D"]
 
-[node name="PlayerTestingUi" parent="." instance=ExtResource("3_tvxfe")]
+[node name="Level" parent="." instance=ExtResource("2_1nca6")]
+
+[node name="PlayerTestingUi" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("3_tvxfe")]
+offset_top = 1.0
+offset_right = 1024.0
+offset_bottom = 513.0
+Player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("1_mkig5")]
 position = Vector2(577, 324)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 324)
-
-[node name="Level" parent="." instance=ExtResource("2_1nca6")]
-
-[connection signal="JumpHeightChanged" from="PlayerTestingUi" to="Player" method="OnPlayerTestingUIJumpHeightChanged"]
+position = Vector2(512, 256)

@@ -1,30 +1,85 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkv1jrfj2sg2q"]
+[gd_scene load_steps=12 format=3 uid="uid://dkv1jrfj2sg2q"]
 
-[ext_resource type="Script" path="res://scripts/Player.cs" id="1_ybq1t"]
-[ext_resource type="Texture2D" uid="uid://g7tnpsyfgd5d" path="res://icon.svg" id="2_j45x8"]
+[ext_resource type="Script" path="res://scripts/ProjectileCharacter.cs" id="1_1y0jx"]
+[ext_resource type="Texture2D" uid="uid://15kcqkm8rewv" path="res://assets/pot-Sheet.png" id="2_igas2"]
+[ext_resource type="Script" path="res://scripts/StateMachine.cs" id="3_w55on"]
+[ext_resource type="Script" path="res://scripts/Idle.cs" id="4_k7oxf"]
+[ext_resource type="Script" path="res://scripts/Fall.cs" id="5_ad13h"]
+[ext_resource type="Script" path="res://scripts/Jump.cs" id="6_c18we"]
+[ext_resource type="Script" path="res://scripts/Run.cs" id="7_vuds8"]
+[ext_resource type="Script" path="res://scripts/PlayerController.cs" id="8_r0xo6"]
+[ext_resource type="Script" path="res://scripts/ProjectileParameters.cs" id="9_ecb6m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cwxst"]
-radius = 12.0
-height = 28.0
+radius = 8.0
+height = 24.0
 
-[node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_ybq1t")
-metadata/_edit_group_ = true
+[sub_resource type="LabelSettings" id="LabelSettings_t3nmw"]
+font_color = Color(0.0110876, 0.0110876, 0.0110876, 1)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("StateMachine", "MovementController", "ProjectileParameters")]
+script = ExtResource("1_1y0jx")
+StateMachine = NodePath("StateMachine")
+MovementController = NodePath("PlayerController")
+ProjectileParameters = NodePath("ProjectileParameters")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -13)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_j45x8")
+texture_filter = 1
+position = Vector2(0, -12)
+texture = ExtResource("2_igas2")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -13)
+position = Vector2(0, -8)
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_cwxst")
 
-[node name="CoyoteTimer" type="Timer" parent="."]
-process_callback = 0
-wait_time = 0.1
-one_shot = true
+[node name="Label" type="Label" parent="."]
+offset_left = -27.0
+offset_top = -51.0
+offset_right = 27.0
+offset_bottom = -28.0
+text = "Fall"
+label_settings = SubResource("LabelSettings_t3nmw")
+horizontal_alignment = 1
 
-[node name="BufferedJumpTimer" type="Timer" parent="."]
-process_callback = 0
-wait_time = 0.1
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("InitialState", "StateLabel")]
+script = ExtResource("3_w55on")
+InitialState = NodePath("Fall")
+StateLabel = NodePath("../Label")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("Jump", "Fall", "Run")]
+script = ExtResource("4_k7oxf")
+Jump = NodePath("../Jump")
+Fall = NodePath("../Fall")
+Run = NodePath("../Run")
+Label = "Idle"
+
+[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("Run", "Jump", "Idle")]
+script = ExtResource("5_ad13h")
+Run = NodePath("../Run")
+Jump = NodePath("../Jump")
+Idle = NodePath("../Idle")
+Label = "Fall"
+SpriteOffset = Vector2(32, 0)
+
+[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("Fall")]
+script = ExtResource("6_c18we")
+Fall = NodePath("../Fall")
+Label = "Jump"
+SpriteOffset = Vector2(96, 0)
+
+[node name="Run" type="Node" parent="StateMachine" node_paths=PackedStringArray("Fall", "Jump", "Idle")]
+script = ExtResource("7_vuds8")
+Fall = NodePath("../Fall")
+Jump = NodePath("../Jump")
+Idle = NodePath("../Idle")
+Label = "Run"
+SpriteOffset = Vector2(64, 0)
+
+[node name="PlayerController" type="Node" parent="."]
+script = ExtResource("8_r0xo6")
+
+[node name="ProjectileParameters" type="Node" parent="."]
+script = ExtResource("9_ecb6m")
