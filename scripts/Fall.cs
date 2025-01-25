@@ -15,7 +15,12 @@ public partial class Fall : State
     public State Jump { get; set; }
 
     [Export]
+    public State DoubleJump { get; set; }
+
+    [Export]
     public State Idle { get; set; }
+
+    private int DoubleJumpCount = 0;
 
     public override void Enter(State previousState, float delta)
     {
@@ -29,62 +34,26 @@ public partial class Fall : State
             CoyoteJumpRemainingFrames = 0;
         }
 
-        Compute(delta);
+        if (previousState.Label == "DoubleJump")
+        {
+            DoubleJumpCount--;
+        }
+        else
+        {
+            DoubleJumpCount = Parent.ProjectileParameters.MaxDoubleJumps;
+        }
     }
 
-    private void Compute(float delta)
-    {
-        if (CoyoteJumpRemainingFrames > 0)
-        {
-            CoyoteJumpRemainingFrames--;
-        }
-
-        if (BufferedJumpRemainingFrames > 0)
-        {
-            BufferedJumpRemainingFrames--;
-        }
-
-        if (Parent.MovementController.WantsToJump())
-        {
-            BufferedJumpRemainingFrames = Parent.ProjectileParameters.BufferedJumpFrames;
-        }
-
-        var gravity =
-            2
-            * Parent.ProjectileParameters.JumpHeight
-            / (Parent.ProjectileParameters.FallTime * Parent.ProjectileParameters.FallTime);
-
-        var velocity = Parent.Velocity;
-
-        var maximumVelocity =
-            Parent.ProjectileParameters.JumpMaxDistance
-            / (Parent.ProjectileParameters.JumpTime + Parent.ProjectileParameters.FallTime);
-
-        var direction = Parent.MovementController.GetDirection();
-        FlipSprite(direction);
-
-        velocity.X = StateUtils.ComputeLateralVelocity(
-            delta,
-            velocity.X,
-            direction,
-            maximumVelocity,
-            Parent.ProjectileParameters.AccelerationTime,
-            Parent.ProjectileParameters.DecelerationTime
-        );
-
-        velocity.Y += gravity * delta;
-
-        Parent.Velocity = velocity;
-
-        Parent.MoveAndSlide();
-    }
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override State? HandlePhysics(float delta)
+    public override State? GetNextState()
     {
         if (Parent.MovementController.WantsToJump() && CoyoteJumpRemainingFrames > 0)
         {
             return Jump;
+        }
+
+        if (Parent.MovementController.WantsToJump() && DoubleJumpCount > 0)
+        {
+            return DoubleJump;
         }
 
         if (Parent.IsOnFloor() && BufferedJumpRemainingFrames > 0)
@@ -102,8 +71,46 @@ public partial class Fall : State
             return Idle;
         }
 
-        Compute(delta);
-
         return null;
+    }
+
+    public override void Update(float delta)
+    {
+        if (CoyoteJumpRemainingFrames > 0)
+        {
+            CoyoteJumpRemainingFrames--;
+        }
+
+        if (BufferedJumpRemainingFrames > 0)
+        {
+            BufferedJumpRemainingFrames--;
+        }
+
+        if (Parent.MovementController.WantsToJump())
+        {
+            BufferedJumpRemainingFrames = Parent.ProjectileParameters.BufferedJumpFrames;
+        }
+    }
+
+    public override Vector2 GetVelocity(float delta)
+    {
+        var maximumVelocity =
+            Parent.ProjectileParameters.JumpMaxDistance
+            / (Parent.ProjectileParameters.JumpTime + Parent.ProjectileParameters.FallTime);
+        return new Vector2(
+            GetLateralVelocity(
+                delta,
+                Parent.Velocity.X,
+                maximumVelocity,
+                Parent.ProjectileParameters.AccelerationTime,
+                Parent.ProjectileParameters.DecelerationTime
+            ),
+            GetVerticalVelocity(
+                delta,
+                Parent.Velocity.Y,
+                Parent.ProjectileParameters.JumpHeight,
+                Parent.ProjectileParameters.FallTime
+            )
+        );
     }
 }

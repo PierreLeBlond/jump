@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyg1q4cxppdey"]
+
+[ext_resource type="Script" path="res://scripts/ui/PlayerTestingUi.cs" id="1_m2eg0"]
+[ext_resource type="PackedScene" uid="uid://csvt6mnke156n" path="res://scenes/ui/TestingSlider.tscn" id="2_tu04i"]
+[ext_resource type="Script" path="res://scripts/ui/TestingSlider.cs" id="3_g6vkh"]
+[ext_resource type="Script" path="res://scripts/ui/JumpCurve.cs" id="4_vwlus"]
+
+[node name="PlayerTestingUi" type="Control" node_paths=PackedStringArray("JumpHeightSlider", "JumpTimeSlider", "FallTimeSlider", "JumpMaxDistanceSlider", "JumpCurve")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m2eg0")
+JumpHeightSlider = NodePath("JumpHeightSlider")
+JumpTimeSlider = NodePath("JumpTimeSlider")
+FallTimeSlider = NodePath("FallTimeSlider")
+JumpMaxDistanceSlider = NodePath("JumpMaxDistanceSlider")
+JumpCurve = NodePath("JumpCurve")
+
+[node name="JumpHeightSlider" parent="." instance=ExtResource("2_tu04i")]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 454.0
+offset_right = 120.0
+offset_bottom = 512.0
+script = ExtResource("3_g6vkh")
+Label = "JumpHeight"
+MaxValue = 128.0
+Step = 1.0
+
+[node name="JumpTimeSlider" parent="." instance=ExtResource("2_tu04i")]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 454.0
+offset_right = 248.0
+offset_bottom = 512.0
+script = ExtResource("3_g6vkh")
+Label = "JumpTime"
+MaxValue = 1.0
+Step = 0.01
+
+[node name="FallTimeSlider" parent="." instance=ExtResource("2_tu04i")]
+layout_mode = 0
+offset_left = 263.0
+offset_top = 454.0
+offset_right = 375.0
+offset_bottom = 512.0
+script = ExtResource("3_g6vkh")
+Label = "FallTime"
+MaxValue = 1.0
+Step = 0.01
+
+[node name="JumpMaxDistanceSlider" parent="." instance=ExtResource("2_tu04i")]
+layout_mode = 0
+offset_left = 392.0
+offset_top = 454.0
+offset_right = 504.0
+offset_bottom = 512.0
+script = ExtResource("3_g6vkh")
+Label = "JumpMaxDistance"
+MaxValue = 1024.0
+Step = 1.0
+
+[node name="JumpCurve" type="Node2D" parent="."]
+script = ExtResource("4_vwlus")

@@ -1,18 +1,29 @@
-[gd_scene format=3 uid="uid://csvt6mnke156n"]
+[gd_scene load_steps=5 format=3 uid="uid://csvt6mnke156n"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ibsxb"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_f43e6"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_s8hv2"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_jm273"]
+font_size = 12
 
 [node name="VBoxContainer" type="VBoxContainer"]
-offset_left = 64.0
-offset_top = 64.0
-offset_right = 256.0
-offset_bottom = 136.0
-metadata/_edit_group_ = true
+offset_right = 112.0
+offset_bottom = 58.0
 
 [node name="TopContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="Label" type="Label" parent="TopContainer"]
 layout_mode = 2
-text = "JumpHeight"
+text = "Label"
+label_settings = SubResource("LabelSettings_ibsxb")
 
 [node name="Spacer" type="Control" parent="TopContainer"]
 layout_mode = 2
@@ -20,9 +31,11 @@ size_flags_horizontal = 3
 
 [node name="ValueLabel" type="Label" parent="TopContainer"]
 layout_mode = 2
+label_settings = SubResource("LabelSettings_f43e6")
 
 [node name="Slider" type="HSlider" parent="."]
 layout_mode = 2
+focus_mode = 0
 max_value = 1000.0
 value = 400.0
 
@@ -31,6 +44,7 @@ layout_mode = 2
 
 [node name="MinLabel" type="Label" parent="BottomContainer"]
 layout_mode = 2
+label_settings = SubResource("LabelSettings_s8hv2")
 
 [node name="Spacer" type="Control" parent="BottomContainer"]
 layout_mode = 2
@@ -38,3 +52,4 @@ size_flags_horizontal = 3
 
 [node name="MaxLabel" type="Label" parent="BottomContainer"]
 layout_mode = 2
+label_settings = SubResource("LabelSettings_jm273")

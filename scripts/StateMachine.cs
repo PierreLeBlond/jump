@@ -39,13 +39,20 @@ public partial class StateMachine : Node
 
     public void HandlePhysics(float delta)
     {
-        var state = CurrentState.HandlePhysics((float)delta);
+        var newState = CurrentState.GetNextState();
 
-        if (state == null)
+        if (newState != null)
         {
-            return;
+            ChangeState(newState, (float)delta);
         }
 
-        ChangeState(state, (float)delta);
+        CurrentState.Update(delta);
+
+        var velocity = CurrentState.GetVelocity((float)delta);
+        Parent.Velocity = velocity;
+
+        Parent.MoveAndSlide();
+
+        CurrentState.UpdateSprite();
     }
 }

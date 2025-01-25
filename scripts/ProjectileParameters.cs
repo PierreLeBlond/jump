@@ -15,6 +15,18 @@ public partial class ProjectileParameters : Node
     public float JumpMaxDistance { get; set; } = 192;
 
     [Export]
+    public int MaxDoubleJumps { get; set; } = 1;
+
+    [Export]
+    public float DoubleJumpHeight { get; set; } = 32;
+
+    [Export]
+    public float DoubleJumpTime { get; set; } = 0.3f;
+
+    [Export]
+    public float DoubleJumpMaxDistance { get; set; } = 96;
+
+    [Export]
     public float AccelerationTime { get; set; } = 0.1f;
 
     [Export]

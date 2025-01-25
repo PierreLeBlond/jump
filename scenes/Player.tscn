@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dkv1jrfj2sg2q"]
+[gd_scene load_steps=20 format=3 uid="uid://dkv1jrfj2sg2q"]
 
 [ext_resource type="Script" path="res://scripts/ProjectileCharacter.cs" id="1_1y0jx"]
 [ext_resource type="Texture2D" uid="uid://15kcqkm8rewv" path="res://assets/pot-Sheet.png" id="2_igas2"]
@@ -6,13 +6,131 @@
 [ext_resource type="Script" path="res://scripts/Idle.cs" id="4_k7oxf"]
 [ext_resource type="Script" path="res://scripts/Fall.cs" id="5_ad13h"]
 [ext_resource type="Script" path="res://scripts/Jump.cs" id="6_c18we"]
+[ext_resource type="Script" path="res://scripts/DoubleJump.cs" id="7_03yft"]
 [ext_resource type="Script" path="res://scripts/Run.cs" id="7_vuds8"]
 [ext_resource type="Script" path="res://scripts/PlayerController.cs" id="8_r0xo6"]
 [ext_resource type="Script" path="res://scripts/ProjectileParameters.cs" id="9_ecb6m"]
 
+[sub_resource type="Animation" id="Animation_8s06g"]
+resource_name = "DoubleJump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(11, 0), Vector2i(12, 0), Vector2i(13, 0), Vector2i(14, 0), Vector2i(15, 0), Vector2i(16, 0), Vector2i(17, 0), Vector2i(18, 0), Vector2i(19, 0), Vector2i(20, 0), Vector2i(21, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_aq6kb"]
+resource_name = "Fall"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
+[sub_resource type="Animation" id="Animation_6mcf0"]
+resource_name = "Idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_d16dk"]
+resource_name = "Jump"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [11]
+}
+
+[sub_resource type="Animation" id="Animation_260h7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(11, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gya4b"]
+resource_name = "Run"
+length = 0.26667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hclx3"]
+_data = {
+"DoubleJump": SubResource("Animation_8s06g"),
+"Fall": SubResource("Animation_aq6kb"),
+"Idle": SubResource("Animation_6mcf0"),
+"Jump": SubResource("Animation_d16dk"),
+"RESET": SubResource("Animation_260h7"),
+"Run": SubResource("Animation_gya4b")
+}
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cwxst"]
 radius = 8.0
-height = 24.0
+height = 22.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_t3nmw"]
 font_color = Color(0.0110876, 0.0110876, 0.0110876, 1)
@@ -27,11 +145,17 @@ ProjectileParameters = NodePath("ProjectileParameters")
 texture_filter = 1
 position = Vector2(0, -12)
 texture = ExtResource("2_igas2")
-region_enabled = true
+hframes = 22
+frame = 11
 region_rect = Rect2(0, 0, 32, 32)
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hclx3")
+}
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(-1, -8)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_cwxst")
 
@@ -55,20 +179,29 @@ Jump = NodePath("../Jump")
 Fall = NodePath("../Fall")
 Run = NodePath("../Run")
 Label = "Idle"
+Animation = "Idle"
 
-[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("Run", "Jump", "Idle")]
+[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("Run", "Jump", "DoubleJump", "Idle")]
 script = ExtResource("5_ad13h")
 Run = NodePath("../Run")
 Jump = NodePath("../Jump")
+DoubleJump = NodePath("../DoubleJump")
 Idle = NodePath("../Idle")
 Label = "Fall"
-SpriteOffset = Vector2(32, 0)
+Animation = "Fall"
 
-[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("Fall")]
+[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("Fall", "DoubleJump")]
 script = ExtResource("6_c18we")
 Fall = NodePath("../Fall")
+DoubleJump = NodePath("../DoubleJump")
 Label = "Jump"
-SpriteOffset = Vector2(96, 0)
+Animation = "Jump"
+
+[node name="DoubleJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("Fall")]
+script = ExtResource("7_03yft")
+Fall = NodePath("../Fall")
+Label = "DoubleJump"
+Animation = "DoubleJump"
 
 [node name="Run" type="Node" parent="StateMachine" node_paths=PackedStringArray("Fall", "Jump", "Idle")]
 script = ExtResource("7_vuds8")
@@ -76,7 +209,7 @@ Fall = NodePath("../Fall")
 Jump = NodePath("../Jump")
 Idle = NodePath("../Idle")
 Label = "Run"
-SpriteOffset = Vector2(64, 0)
+Animation = "Run"
 
 [node name="PlayerController" type="Node" parent="."]
 script = ExtResource("8_r0xo6")

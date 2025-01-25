@@ -1,49 +1,19 @@
 #nullable enable
 
-using System.ComponentModel.DataAnnotations;
 using Godot;
 
 public partial class Run : State
 {
     [Export]
-    public State Fall { get; set; }
+    public State Fall;
 
     [Export]
-    public State Jump { get; set; }
+    public State Jump;
 
     [Export]
-    public State Idle { get; set; }
+    public State Idle;
 
-    private void Compute(float delta)
-    {
-        var maximumVelocity =
-            Parent.ProjectileParameters.JumpMaxDistance
-            / (Parent.ProjectileParameters.JumpTime + Parent.ProjectileParameters.FallTime);
-
-        var direction = Parent.MovementController.GetDirection();
-        FlipSprite(direction);
-
-        var velocity = Parent.Velocity;
-        velocity.X = StateUtils.ComputeLateralVelocity(
-            delta,
-            velocity.X,
-            direction,
-            maximumVelocity,
-            Parent.ProjectileParameters.AccelerationTime,
-            Parent.ProjectileParameters.DecelerationTime
-        );
-        Parent.Velocity = velocity;
-
-        Parent.MoveAndSlide();
-    }
-
-    public override void Enter(State previousState, float delta)
-    {
-        base.Enter(previousState, delta);
-        Compute(delta);
-    }
-
-    public override State? HandlePhysics(float delta)
+    public override State? GetNextState()
     {
         if (Parent.MovementController.WantsToJump())
         {
@@ -60,8 +30,23 @@ public partial class Run : State
             return Idle;
         }
 
-        Compute(delta);
-
         return null;
+    }
+
+    public override Vector2 GetVelocity(float delta)
+    {
+        var maximumVelocity =
+            Parent.ProjectileParameters.JumpMaxDistance
+            / (Parent.ProjectileParameters.JumpTime + Parent.ProjectileParameters.FallTime);
+        return new Vector2(
+            GetLateralVelocity(
+                delta,
+                Parent.Velocity.X,
+                maximumVelocity,
+                Parent.ProjectileParameters.AccelerationTime,
+                Parent.ProjectileParameters.DecelerationTime
+            ),
+            0
+        );
     }
 }

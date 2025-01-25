@@ -7,41 +7,10 @@ public partial class Jump : State
     [Export]
     public State Fall { get; set; }
 
+    [Export]
+    public State DoubleJump { get; set; }
+
     private double JumpPressedTime = 0;
-
-    private void Compute(float delta)
-    {
-        JumpPressedTime += delta;
-
-        var gravity =
-            2
-            * Parent.ProjectileParameters.JumpHeight
-            / (Parent.ProjectileParameters.JumpTime * Parent.ProjectileParameters.JumpTime);
-
-        var velocity = Parent.Velocity;
-
-        var maximumVelocity =
-            Parent.ProjectileParameters.JumpMaxDistance
-            / (Parent.ProjectileParameters.JumpTime + Parent.ProjectileParameters.FallTime);
-
-        var direction = Parent.MovementController.GetDirection();
-        FlipSprite(direction);
-
-        velocity.X = StateUtils.ComputeLateralVelocity(
-            delta,
-            velocity.X,
-            direction,
-            maximumVelocity,
-            Parent.ProjectileParameters.AccelerationTime,
-            Parent.ProjectileParameters.DecelerationTime
-        );
-
-        velocity.Y += gravity * (float)delta;
-
-        Parent.Velocity = velocity;
-
-        Parent.MoveAndSlide();
-    }
 
     public override void Enter(State previousState, float delta)
     {
@@ -54,12 +23,15 @@ public partial class Jump : State
         Parent.Velocity = velocity;
 
         JumpPressedTime = 0;
-
-        Compute(delta);
     }
 
-    public override State? HandlePhysics(float delta)
+    public override State? GetNextState()
     {
+        if (Parent.MovementController.WantsToJump())
+        {
+            return DoubleJump;
+        }
+
         if (Parent.Velocity.Y > 0)
         {
             return Fall;
@@ -75,8 +47,33 @@ public partial class Jump : State
             return Fall;
         }
 
-        Compute(delta);
-
         return null;
+    }
+
+    public override void Update(float delta)
+    {
+        JumpPressedTime += delta;
+    }
+
+    public override Vector2 GetVelocity(float delta)
+    {
+        var maximumVelocity =
+            Parent.ProjectileParameters.JumpMaxDistance
+            / (Parent.ProjectileParameters.JumpTime + Parent.ProjectileParameters.FallTime);
+        return new Vector2(
+            GetLateralVelocity(
+                delta,
+                Parent.Velocity.X,
+                maximumVelocity,
+                Parent.ProjectileParameters.AccelerationTime,
+                Parent.ProjectileParameters.DecelerationTime
+            ),
+            GetVerticalVelocity(
+                delta,
+                Parent.Velocity.Y,
+                Parent.ProjectileParameters.JumpHeight,
+                Parent.ProjectileParameters.JumpTime
+            )
+        );
     }
 }

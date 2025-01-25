@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class TestingSlider : Node
@@ -11,6 +12,9 @@ public partial class TestingSlider : Node
     [Export]
     public float MaxValue { get; set; }
 
+    [Export]
+    public float Step { get; set; }
+
     [Signal]
     public delegate void ValueChangedEventHandler(float value);
 
@@ -18,6 +22,7 @@ public partial class TestingSlider : Node
     {
         var slider = GetNode<Slider>("Slider");
 
+        slider.Step = Step;
         slider.Value = initialValue;
         slider.MinValue = MinValue;
         slider.MaxValue = MaxValue;
@@ -37,7 +42,7 @@ public partial class TestingSlider : Node
         slider.ValueChanged += (double value) =>
         {
             EmitSignal(nameof(ValueChanged), value);
-            valueLabel.Text = value.ToString();
+            valueLabel.Text = Math.Round(value, 2).ToString();
         };
     }
 }
