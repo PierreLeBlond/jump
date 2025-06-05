@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://dyg1q4cxppdey"]
 
-[ext_resource type="Script" path="res://scripts/ui/PlayerTestingUi.cs" id="1_m2eg0"]
+[ext_resource type="Script" uid="uid://jbe6pxisy503" path="res://scripts/ui/PlayerTestingUi.cs" id="1_m2eg0"]
 [ext_resource type="PackedScene" uid="uid://csvt6mnke156n" path="res://scenes/ui/TestingSlider.tscn" id="2_tu04i"]
-[ext_resource type="Script" path="res://scripts/ui/TestingSlider.cs" id="3_g6vkh"]
-[ext_resource type="Script" path="res://scripts/ui/JumpCurve.cs" id="4_vwlus"]
+[ext_resource type="Script" uid="uid://dh2nwsywrrgp8" path="res://scripts/ui/TestingSlider.cs" id="3_g6vkh"]
+[ext_resource type="Script" uid="uid://c0mrhllopnwcv" path="res://scripts/ui/JumpCurve.cs" id="4_vwlus"]
 
-[node name="PlayerTestingUi" type="Control" node_paths=PackedStringArray("JumpHeightSlider", "JumpTimeSlider", "FallTimeSlider", "JumpMaxDistanceSlider", "JumpCurve")]
+[node name="PlayerTestingUi" type="Control" node_paths=PackedStringArray("JumpHeightSlider", "JumpTimeSlider", "FallTimeSlider", "JumpDistanceSlider", "RunFactorSlider", "JumpCurve")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,52 +16,66 @@ script = ExtResource("1_m2eg0")
 JumpHeightSlider = NodePath("JumpHeightSlider")
 JumpTimeSlider = NodePath("JumpTimeSlider")
 FallTimeSlider = NodePath("FallTimeSlider")
-JumpMaxDistanceSlider = NodePath("JumpMaxDistanceSlider")
+JumpDistanceSlider = NodePath("JumpDistanceSlider")
+RunFactorSlider = NodePath("RunFactorSlider")
 JumpCurve = NodePath("JumpCurve")
 
 [node name="JumpHeightSlider" parent="." instance=ExtResource("2_tu04i")]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 454.0
-offset_right = 120.0
-offset_bottom = 512.0
+offset_left = -127.0
+offset_top = 13.0
+offset_right = -15.0
+offset_bottom = 71.0
 script = ExtResource("3_g6vkh")
-Label = "JumpHeight"
+Label = "jump height"
 MaxValue = 128.0
 Step = 1.0
 
 [node name="JumpTimeSlider" parent="." instance=ExtResource("2_tu04i")]
 layout_mode = 0
-offset_left = 136.0
-offset_top = 454.0
-offset_right = 248.0
-offset_bottom = 512.0
+offset_left = -126.0
+offset_top = 70.0
+offset_right = -14.0
+offset_bottom = 128.0
 script = ExtResource("3_g6vkh")
-Label = "JumpTime"
+Label = "jump time"
 MaxValue = 1.0
 Step = 0.01
 
 [node name="FallTimeSlider" parent="." instance=ExtResource("2_tu04i")]
 layout_mode = 0
-offset_left = 263.0
-offset_top = 454.0
-offset_right = 375.0
-offset_bottom = 512.0
+offset_left = -128.0
+offset_top = 133.0
+offset_right = -16.0
+offset_bottom = 191.0
 script = ExtResource("3_g6vkh")
-Label = "FallTime"
+Label = "fall time"
 MaxValue = 1.0
 Step = 0.01
 
-[node name="JumpMaxDistanceSlider" parent="." instance=ExtResource("2_tu04i")]
+[node name="JumpDistanceSlider" parent="." instance=ExtResource("2_tu04i")]
 layout_mode = 0
-offset_left = 392.0
-offset_top = 454.0
-offset_right = 504.0
-offset_bottom = 512.0
+offset_left = -129.0
+offset_top = 198.0
+offset_right = -17.0
+offset_bottom = 256.0
 script = ExtResource("3_g6vkh")
-Label = "JumpMaxDistance"
+Label = "jump distance"
 MaxValue = 1024.0
 Step = 1.0
 
+[node name="RunFactorSlider" parent="." instance=ExtResource("2_tu04i")]
+layout_mode = 0
+offset_left = -130.0
+offset_top = 326.0
+offset_right = -18.0
+offset_bottom = 384.0
+script = ExtResource("3_g6vkh")
+Label = "run factor"
+MinValue = 1.0
+MaxValue = 10.0
+Step = 0.1
+
 [node name="JumpCurve" type="Node2D" parent="."]
+visible = false
 script = ExtResource("4_vwlus")

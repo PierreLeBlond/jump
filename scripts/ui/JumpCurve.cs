@@ -62,8 +62,7 @@ public partial class JumpCurve : Node2D
             / (ProjectileParameters.JumpTime * ProjectileParameters.JumpTime);
         var maximumVelocity =
             direction
-            * ProjectileParameters.JumpMaxDistance
-            / (ProjectileParameters.JumpTime + ProjectileParameters.FallTime);
+            * ProjectileParameters.MaximumVelocity;
 
         DrawCurve(
             center,
@@ -105,8 +104,7 @@ public partial class JumpCurve : Node2D
             / (ProjectileParameters.DoubleJumpTime * ProjectileParameters.DoubleJumpTime);
         var doubleJumpMaximumVelocity =
             direction
-            * ProjectileParameters.DoubleJumpMaxDistance
-            / (ProjectileParameters.DoubleJumpTime + ProjectileParameters.FallTime);
+            * ProjectileParameters.DoubleJumpMaximumVelocity;
 
         DrawCurve(
             fallCenter,

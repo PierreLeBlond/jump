@@ -18,6 +18,9 @@ public partial class Fall : State
     public State DoubleJump { get; set; }
 
     [Export]
+    public State WallJump { get; set; }
+
+    [Export]
     public State Idle { get; set; }
 
     private int DoubleJumpCount = 0;
@@ -32,6 +35,7 @@ public partial class Fall : State
         else
         {
             CoyoteJumpRemainingFrames = 0;
+            MaximumLateralVelocity = previousState.MaximumLateralVelocity;
         }
 
         if (previousState.Label == "DoubleJump")
@@ -44,8 +48,12 @@ public partial class Fall : State
         }
     }
 
-    public override State? GetNextState()
+    public override State? GetNextState(float delta)
     {
+        if (Parent.MovementController.WantsToJump() && IsOnWall()) {
+            return WallJump;
+        }
+
         if (Parent.MovementController.WantsToJump() && CoyoteJumpRemainingFrames > 0)
         {
             return Jump;
@@ -76,6 +84,8 @@ public partial class Fall : State
 
     public override void Update(float delta)
     {
+        base.Update(delta);
+
         if (CoyoteJumpRemainingFrames > 0)
         {
             CoyoteJumpRemainingFrames--;
@@ -94,16 +104,13 @@ public partial class Fall : State
 
     public override Vector2 GetVelocity(float delta)
     {
-        var maximumVelocity =
-            Parent.ProjectileParameters.JumpMaxDistance
-            / (Parent.ProjectileParameters.JumpTime + Parent.ProjectileParameters.FallTime);
         return new Vector2(
             GetLateralVelocity(
                 delta,
                 Parent.Velocity.X,
-                maximumVelocity,
-                Parent.ProjectileParameters.AccelerationTime,
-                Parent.ProjectileParameters.DecelerationTime
+                MaximumLateralVelocity,
+                Parent.ProjectileParameters.AirAccelerationTime,
+                Parent.ProjectileParameters.AirDecelerationTime
             ),
             GetVerticalVelocity(
                 delta,

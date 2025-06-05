@@ -39,7 +39,7 @@ public partial class StateMachine : Node
 
     public void HandlePhysics(float delta)
     {
-        var newState = CurrentState.GetNextState();
+        var newState = CurrentState.GetNextState(delta);
 
         if (newState != null)
         {

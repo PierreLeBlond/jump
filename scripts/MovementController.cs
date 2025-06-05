@@ -12,6 +12,11 @@ public partial class MovementController : Node
         return false;
     }
 
+    public virtual bool WantsToRun()
+    {
+        return false;
+    }
+
     public virtual bool CancelJump()
     {
         return false;

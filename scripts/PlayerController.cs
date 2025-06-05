@@ -24,6 +24,11 @@ public partial class PlayerController : MovementController
         return Input.IsActionJustPressed("jump");
     }
 
+    public override bool WantsToRun()
+    {
+        return Input.IsActionPressed("run");
+    }
+
     public override bool CancelJump()
     {
         return !Input.IsActionPressed("jump");

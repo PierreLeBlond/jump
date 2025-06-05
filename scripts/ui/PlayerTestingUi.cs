@@ -15,7 +15,10 @@ public partial class PlayerTestingUi : Control
     public TestingSlider FallTimeSlider;
 
     [Export]
-    public TestingSlider JumpMaxDistanceSlider;
+    public TestingSlider JumpDistanceSlider;
+
+    [Export]
+    public TestingSlider RunFactorSlider;
 
     [Export]
     public JumpCurve JumpCurve;
@@ -40,10 +43,16 @@ public partial class PlayerTestingUi : Control
             Player.ProjectileParameters.FallTime = value;
         };
 
-        JumpMaxDistanceSlider.Init(Player.ProjectileParameters.JumpMaxDistance);
-        JumpMaxDistanceSlider.ValueChanged += (float value) =>
+        JumpDistanceSlider.Init(Player.ProjectileParameters.JumpDistance);
+        JumpDistanceSlider.ValueChanged += (float value) =>
         {
-            Player.ProjectileParameters.JumpMaxDistance = value;
+            Player.ProjectileParameters.JumpDistance = value;
+        };
+
+        RunFactorSlider.Init(Player.ProjectileParameters.RunFactor);
+        RunFactorSlider.ValueChanged += (float value) =>
+        {
+            Player.ProjectileParameters.RunFactor = value;
         };
 
         JumpCurve.OriginNode = Player;

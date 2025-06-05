@@ -14,7 +14,7 @@ public partial class Idle : State
     public State Run { get; set; }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override State? GetNextState()
+    public override State? GetNextState(float delta)
     {
         if (!Parent.IsOnFloor())
         {

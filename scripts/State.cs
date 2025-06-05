@@ -10,12 +10,35 @@ public partial class State : Node
     [Export]
     public string Animation { get; set; }
 
+    public float MaximumLateralVelocity = 0;
+
     protected ProjectileCharacter Parent { get; set; }
+
+    public int WallSign = 1;
 
     public void Init(ProjectileCharacter parent)
     {
         Parent = parent;
     }
+
+    protected bool IsOnWall()
+    {
+        if (Parent.LeftRayCast2D.IsColliding())
+        {
+            WallSign = 1;
+            return true;
+        }
+
+        if (Parent.RightRayCast2D.IsColliding())
+        {
+            WallSign = -1;
+            return true;
+        }
+
+        return false;
+    }
+
+    
 
     protected void FlipSprite(int direction)
     {
@@ -74,8 +97,14 @@ public partial class State : Node
     {
         var gravity = 2 * jumpHeight / (jumpTime * jumpTime);
 
+        if (IsOnWall())
+        {
+            gravity *= Parent.ProjectileParameters.WallFrictionFactor;
+        }
+
         return currentVelocity + gravity * delta;
     }
+
 
     public virtual void Enter(State previousState, float delta)
     {
@@ -84,7 +113,7 @@ public partial class State : Node
         animationPlayer.Play();
     }
 
-    public virtual State? GetNextState()
+    public virtual State? GetNextState(float delta)
     {
         return null;
     }

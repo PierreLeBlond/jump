@@ -11,10 +11,18 @@ public partial class Run : State
     public State Jump;
 
     [Export]
+    public State Walk;
+
+    [Export]
     public State Idle;
 
-    public override State? GetNextState()
+    public override State? GetNextState(float delta)
     {
+        if (!Parent.MovementController.WantsToRun())
+        {
+            return Walk;
+        }
+
         if (Parent.MovementController.WantsToJump())
         {
             return Jump;
@@ -35,14 +43,15 @@ public partial class Run : State
 
     public override Vector2 GetVelocity(float delta)
     {
-        var maximumVelocity =
-            Parent.ProjectileParameters.JumpMaxDistance
-            / (Parent.ProjectileParameters.JumpTime + Parent.ProjectileParameters.FallTime);
+        MaximumLateralVelocity = Parent.MovementController.WantsToRun()
+            ? Parent.ProjectileParameters.MaximumVelocity * Parent.ProjectileParameters.RunFactor
+            : Parent.ProjectileParameters.MaximumVelocity;
+
         return new Vector2(
             GetLateralVelocity(
                 delta,
                 Parent.Velocity.X,
-                maximumVelocity,
+                MaximumLateralVelocity,
                 Parent.ProjectileParameters.AccelerationTime,
                 Parent.ProjectileParameters.DecelerationTime
             ),
