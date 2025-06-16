@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="Jump"
-run/main_scene="uid://yw6xhwyopvw5"
-config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
+run/main_scene="uid://mfaxiu15banr"
+config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [display]
