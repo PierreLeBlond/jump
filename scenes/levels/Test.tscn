@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=4 uid="uid://yw6xhwyopvw5"]
+[gd_scene load_steps=6 format=4 uid="uid://yw6xhwyopvw5"]
 
 [ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="1_17xb1"]
 [ext_resource type="TileSet" uid="uid://yuvk2fmol82y" path="res://tilesets/Blocks.tres" id="2_hbbmf"]
 [ext_resource type="PackedScene" uid="uid://dyg1q4cxppdey" path="res://scenes/ui/PlayerTestingUI.tscn" id="3_f4m1s"]
+[ext_resource type="PackedScene" uid="uid://cgexvf3ochgd8" path="res://scenes/areas/EndArea.tscn" id="4_hbbmf"]
+[ext_resource type="PackedScene" uid="uid://mfaxiu15banr" path="res://scenes/ui/TitleScreen.tscn" id="5_f4m1s"]
 
 [node name="Runner" type="Node2D"]
 
@@ -23,3 +25,7 @@ anchor_right = 0.0
 offset_left = -35.0
 grow_horizontal = 1
 player = NodePath("../Player")
+
+[node name="EndArea" parent="." instance=ExtResource("4_hbbmf")]
+position = Vector2(976, 48)
+next_scene = ExtResource("5_f4m1s")
