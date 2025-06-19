@@ -6,16 +6,13 @@ signal captured_player
 
 @export var speed: float = 100
 
-@export var area2d: Area2D
-
-func end_game() -> void:
-    var tree = get_tree()
-    tree.change_scene_to_file("res://scenes/ui/TitleScreen.tscn")
+@onready var area2d: Area2D = $Area2D
 
 func on_body_entered(body: Node2D) -> void:
-    if (body is ProjectileCharacter):
-        captured_player.emit()
-        call_deferred("end_game")
+    if (body is not ProjectileCharacter):
+        return
+
+    captured_player.emit()
 
 func _ready() -> void:
     area2d.body_entered.connect(on_body_entered)

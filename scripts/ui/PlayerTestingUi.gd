@@ -4,17 +4,17 @@ class_name PlayerTestingUi
 
 @export var player: ProjectileCharacter
 
-@export var jump_height_slider: TestingSlider
+@onready var jump_height_slider: TestingSlider = $JumpHeightSlider
 
-@export var jump_time_slider: TestingSlider
+@onready var jump_time_slider: TestingSlider = $JumpTimeSlider
 
-@export var fall_time_slider: TestingSlider
+@onready var fall_time_slider: TestingSlider = $FallTimeSlider
 
-@export var jump_distance_slider: TestingSlider
+@onready var jump_distance_slider: TestingSlider = $JumpDistanceSlider
 
-@export var run_factor_slider: TestingSlider
+@onready var run_factor_slider: TestingSlider = $RunFactorSlider
 
-@export var jump_curve: JumpCurve
+@onready var jump_curve: JumpCurve = $JumpCurve
 
 func _ready() -> void:
     jump_height_slider.init(player.projectile_parameters.jump_height)

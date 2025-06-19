@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cq404dg781ufs" path="res://scripts/ui/TitleScreen.gd" id="1_ny3vc"]
 
-[node name="TitleScreen" type="Control" node_paths=PackedStringArray("start_button")]
+[node name="TitleScreen" type="Control" node_paths=PackedStringArray("tutorial_button", "escape_level_button", "test_level_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,26 +10,34 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ny3vc")
-start_button = NodePath("Play/Button")
+tutorial_button = NodePath("VBoxContainer/TutorialButton")
+escape_level_button = NodePath("VBoxContainer/EscapeLevelButton")
+test_level_button = NodePath("VBoxContainer/TestLevelButton")
 
-[node name="Play" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 512.0
-offset_top = 256.0
-offset_right = 512.0
-offset_bottom = 256.0
-
-[node name="Button" type="Button" parent="Play"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.5
-offset_top = -15.5
-offset_right = 20.5
-offset_bottom = 15.5
+offset_left = -55.5
+offset_top = -88.5
+offset_right = 55.5
+offset_bottom = 88.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "   Play   "
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TutorialButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Tutorial"
+
+[node name="EscapeLevelButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Escape Level"
+
+[node name="TestLevelButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Test Level"

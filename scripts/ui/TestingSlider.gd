@@ -34,5 +34,5 @@ func init(initial_value: float) -> void:
 
     slider.value_changed.connect(func(value: float):
         value_changed.emit(value)
-        value_label_node.text = str(round(value))
+        value_label_node.text = str(snappedf(value, 0.01))
     )

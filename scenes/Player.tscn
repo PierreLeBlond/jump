@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" uid="uid://b6kdes8c5suyq" path="res://scripts/character/ProjectileCharacter.gd" id="1_lkdrv"]
 [ext_resource type="Texture2D" uid="uid://dob7ahdq57tjp" path="res://assets/spritesheets/feis.png" id="2_y7qcs"]
-[ext_resource type="Script" uid="uid://ssril2w6enj" path="res://scripts/character/StateMachine.gd" id="3_lkdrv"]
-[ext_resource type="Script" uid="uid://bucbmqmbeeupx" path="res://scripts/character/Idle.gd" id="4_p7iby"]
-[ext_resource type="Script" uid="uid://c710qahwivjfa" path="res://scripts/character/Fall.gd" id="5_0rnld"]
-[ext_resource type="Script" uid="uid://cbvidipydn5cv" path="res://scripts/character/Jump.gd" id="6_srp4u"]
-[ext_resource type="Script" uid="uid://cewi2c06dcqg3" path="res://scripts/character/WallJump.gd" id="7_jfpux"]
-[ext_resource type="Script" uid="uid://bild7t0pga5g6" path="res://scripts/character/DoubleJump.gd" id="8_61ith"]
-[ext_resource type="Script" uid="uid://c5we0dutkben8" path="res://scripts/character/Run.gd" id="9_ebwui"]
-[ext_resource type="Script" uid="uid://d4ejg1k4w0j6n" path="res://scripts/character/Walk.gd" id="10_sfy4j"]
+[ext_resource type="Script" uid="uid://ssril2w6enj" path="res://scripts/character/states/StateMachine.gd" id="3_lkdrv"]
+[ext_resource type="Script" uid="uid://bucbmqmbeeupx" path="res://scripts/character/states/Idle.gd" id="4_p7iby"]
+[ext_resource type="Script" uid="uid://c710qahwivjfa" path="res://scripts/character/states/Fall.gd" id="5_0rnld"]
+[ext_resource type="Script" uid="uid://cbvidipydn5cv" path="res://scripts/character/states/Jump.gd" id="6_srp4u"]
+[ext_resource type="Script" uid="uid://cewi2c06dcqg3" path="res://scripts/character/states/WallJump.gd" id="7_jfpux"]
+[ext_resource type="Script" uid="uid://bild7t0pga5g6" path="res://scripts/character/states/DoubleJump.gd" id="8_61ith"]
+[ext_resource type="Script" uid="uid://c5we0dutkben8" path="res://scripts/character/states/Run.gd" id="9_ebwui"]
+[ext_resource type="Script" uid="uid://d4ejg1k4w0j6n" path="res://scripts/character/states/Walk.gd" id="10_sfy4j"]
 [ext_resource type="Script" uid="uid://cx473tyk8323v" path="res://scripts/controls/PlayerController.gd" id="11_gv3ic"]
 [ext_resource type="Script" uid="uid://dimlaqea8jyy3" path="res://scripts/character/ProjectileParameters.gd" id="12_b8lor"]
 [ext_resource type="Script" uid="uid://blh3ndwp2n1vi" path="res://scripts/character/CornerCorrector.gd" id="13_lkdrv"]
@@ -41,10 +41,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667, 0.9, 0.933333, 0.966667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118]
+"values": [69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]
 }
 
 [sub_resource type="Animation" id="Animation_id2gt"]
@@ -71,10 +71,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667, 0.9, 0.933333, 0.966667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88]
+"values": [60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70]
 }
 
 [sub_resource type="Animation" id="Animation_18dal"]
@@ -106,7 +106,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667, 0.9, 0.933333, 0.966667, 1, 1.03333, 1.06667, 1.1, 1.13333, 1.16667, 1.2, 1.23333, 1.26667, 1.3, 1.33333, 1.36667, 1.4, 1.43333, 1.46667, 1.5, 1.53333, 1.56667, 1.6, 1.63333, 1.66667, 1.7, 1.73333, 1.76667, 1.8, 1.83333, 1.86667, 1.9, 1.93333, 1.96667),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190]
+"values": [80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139]
 }
 
 [sub_resource type="Animation" id="Animation_y7qcs"]
@@ -140,16 +140,13 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_18dal"]
 size = Vector2(21, 40.625)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("corner_corrector", "state_machine", "movement_controller", "projectile_parameters", "left_ray_cast_2d", "right_ray_cast_2d")]
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_lkdrv")
-corner_corrector = NodePath("CornerCorrector")
-state_machine = NodePath("StateMachine")
-movement_controller = NodePath("PlayerController")
-projectile_parameters = NodePath("ProjectileParameters")
-left_ray_cast_2d = NodePath("LeftRayCast2D")
-right_ray_cast_2d = NodePath("RightRayCast2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -4)
 scale = Vector2(0.4, 0.4)
 texture = SubResource("AtlasTexture_y7qcs")
 hframes = 16
@@ -178,8 +175,9 @@ run = NodePath("../Run")
 walk = NodePath("../Walk")
 animation = "Idle"
 
-[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("run", "jump", "double_jump", "wall_jump", "idle")]
+[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("walk", "run", "jump", "double_jump", "wall_jump", "idle")]
 script = ExtResource("5_0rnld")
+walk = NodePath("../Walk")
 run = NodePath("../Run")
 jump = NodePath("../Jump")
 double_jump = NodePath("../DoubleJump")
@@ -223,11 +221,12 @@ jump = NodePath("../Jump")
 idle = NodePath("../Idle")
 animation = "Walk"
 
-[node name="PlayerController" type="Node" parent="."]
+[node name="MovementController" type="Node" parent="."]
 script = ExtResource("11_gv3ic")
 
 [node name="ProjectileParameters" type="Node" parent="."]
 script = ExtResource("12_b8lor")
+max_double_jumps = 0
 
 [node name="LeftRayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(-15, 0)
@@ -235,12 +234,8 @@ target_position = Vector2(-15, 0)
 [node name="RightRayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(15, 0)
 
-[node name="CornerCorrector" type="Node2D" parent="." node_paths=PackedStringArray("outer_left_ceiling_ray_cast", "inner_left_ceiling_ray_cast", "outer_right_ceiling_ray_cast", "inner_right_ceiling_ray_cast")]
+[node name="CornerCorrector" type="Node2D" parent="."]
 script = ExtResource("13_lkdrv")
-outer_left_ceiling_ray_cast = NodePath("OuterLeftCeilingRayCast2D")
-inner_left_ceiling_ray_cast = NodePath("InnerLeftCeilingRayCast2D")
-outer_right_ceiling_ray_cast = NodePath("OuterRightCeilingRayCast2D")
-inner_right_ceiling_ray_cast = NodePath("InnerRightCeilingRayCast2D")
 
 [node name="InnerRightCeilingRayCast2D" type="RayCast2D" parent="CornerCorrector"]
 position = Vector2(7.2, 0)

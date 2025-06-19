@@ -5,6 +5,9 @@ class_name MovementController
 func get_direction() -> int:
     return 0
 
+func wants_to_move() -> bool:
+    return false
+
 func wants_to_jump() -> bool:
     return false
 

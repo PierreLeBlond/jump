@@ -6,7 +6,7 @@ class_name JumpCurve
 @export var projectile_parameters: ProjectileParameters
 
 var direction: int = 1
-var center: Vector2
+var center_from_floor: Vector2
 
 func get_curve_point(t: float, maximum_velocity: float, a: float, b: float, center: Vector2) -> Vector2:
     var x = maximum_velocity * t
@@ -40,7 +40,7 @@ func _draw() -> void:
         direction = -1
 
     if (origin_node.is_on_floor()):
-        center = origin_node.transform.origin
+        center_from_floor = origin_node.transform.origin
 
     var color = Color(1, 0, 0)
 
@@ -48,7 +48,7 @@ func _draw() -> void:
     var maximum_velocity = direction * projectile_parameters.maximum_velocity
 
     draw_curve(
-        center,
+        center_from_floor,
         0,
         projectile_parameters.jump_time,
         gravity / 2,
@@ -62,7 +62,7 @@ func _draw() -> void:
         maximum_velocity,
         gravity / 2,
         -2 * projectile_parameters.jump_height / projectile_parameters.jump_time,
-        center
+        center_from_floor
     )
     var fall_color = Color(0, 0, 1)
     var fall_gravity = 2 * projectile_parameters.jump_height / (projectile_parameters.fall_time * projectile_parameters.fall_time)

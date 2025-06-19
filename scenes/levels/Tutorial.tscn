@@ -1,0 +1,228 @@
+[gd_scene load_steps=10 format=4 uid="uid://dknoupu2hcn86"]
+
+[ext_resource type="Script" uid="uid://cik1brjqdcv0" path="res://scripts/camera/Camera.gd" id="1_8omqi"]
+[ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="2_dlxjb"]
+[ext_resource type="TileSet" uid="uid://yuvk2fmol82y" path="res://tilesets/Blocks.tres" id="3_dlxjb"]
+[ext_resource type="Script" uid="uid://k5d6a3o16mgt" path="res://scripts/ui/TextRevealArea.gd" id="4_af4br"]
+[ext_resource type="Script" uid="uid://d3gg6d2i1ygp5" path="res://scripts/area/UnlockArea.gd" id="5_0t4of"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0t4of"]
+size = Vector2(256, 64.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_af4br"]
+size = Vector2(53, 512)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_off5s"]
+size = Vector2(53, 512)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ktok"]
+size = Vector2(256, 64)
+
+[node name="Tutorial" type="Node2D"]
+
+[node name="TextRevealAreas" type="Node" parent="."]
+
+[node name="1" type="Area2D" parent="TextRevealAreas"]
+position = Vector2(258, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_af4br")
+
+[node name="Text" type="RichTextLabel" parent="TextRevealAreas/1"]
+z_index = -10
+offset_left = -159.0
+offset_top = 190.0
+offset_right = 474.0
+offset_bottom = 244.0
+bbcode_enabled = true
+text = "[font_size=32][color=#0f0f0f]Use [b]left[/b] and [b]right[/b] arrow to walk around[/color][/font_size]"
+horizontal_alignment = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/1"]
+position = Vector2(0, 480)
+shape = SubResource("RectangleShape2D_0t4of")
+
+[node name="2" type="Area2D" parent="TextRevealAreas"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_af4br")
+
+[node name="Text" type="RichTextLabel" parent="TextRevealAreas/2"]
+z_index = -10
+offset_left = 559.0
+offset_top = 245.0
+offset_right = 731.0
+offset_bottom = 299.0
+bbcode_enabled = true
+text = "[font_size=32][color=#0f0f0f]Keep going[/color][/font_size]"
+horizontal_alignment = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/2"]
+position = Vector2(427, 256)
+shape = SubResource("RectangleShape2D_af4br")
+
+[node name="3" type="Area2D" parent="TextRevealAreas"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_af4br")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/3"]
+position = Vector2(760, 256)
+shape = SubResource("RectangleShape2D_af4br")
+
+[node name="Text" type="RichTextLabel" parent="TextRevealAreas/3"]
+z_index = -10
+offset_left = 559.0
+offset_top = 304.0
+offset_right = 731.0
+offset_bottom = 358.0
+bbcode_enabled = true
+text = "[font_size=32][color=#0f0f0f]Nice,[/color][/font_size]"
+horizontal_alignment = 2
+
+[node name="4" type="Area2D" parent="TextRevealAreas"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_af4br")
+
+[node name="Text" type="RichTextLabel" parent="TextRevealAreas/4"]
+z_index = -10
+offset_left = 566.0
+offset_top = 304.0
+offset_right = 1102.0
+offset_bottom = 358.0
+bbcode_enabled = true
+text = "[font_size=32][color=#0f0f0f]now run by holding [b]Ctrl[/b][/color][/font_size]"
+horizontal_alignment = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/4"]
+position = Vector2(833, 256)
+shape = SubResource("RectangleShape2D_af4br")
+
+[node name="5" type="Area2D" parent="TextRevealAreas"]
+position = Vector2(1472, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_af4br")
+
+[node name="Text" type="RichTextLabel" parent="TextRevealAreas/5"]
+z_index = -10
+offset_left = -61.0
+offset_top = 190.0
+offset_right = 300.0
+offset_bottom = 244.0
+bbcode_enabled = true
+text = "[font_size=32][color=#0f0f0f]jump with [b]Space bar[/b][/color][/font_size]"
+horizontal_alignment = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/5"]
+position = Vector2(0, 256)
+shape = SubResource("RectangleShape2D_af4br")
+
+[node name="6" type="Area2D" parent="TextRevealAreas"]
+position = Vector2(2128, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_af4br")
+
+[node name="Text" type="RichTextLabel" parent="TextRevealAreas/6"]
+z_index = -10
+offset_left = 13.0
+offset_top = 351.0
+offset_right = 144.0
+offset_bottom = 405.0
+bbcode_enabled = true
+text = "[font_size=32][color=#0f0f0f]You can[/color][/font_size]"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/6"]
+position = Vector2(0, 256)
+shape = SubResource("RectangleShape2D_af4br")
+
+[node name="7" type="Area2D" parent="TextRevealAreas"]
+position = Vector2(2188, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_af4br")
+
+[node name="Text" type="RichTextLabel" parent="TextRevealAreas/7"]
+z_index = -10
+offset_left = 190.0
+offset_top = 263.0
+offset_right = 274.0
+offset_bottom = 317.0
+bbcode_enabled = true
+text = "[font_size=32][color=#0f0f0f]Jump[/color][/font_size]"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/7"]
+position = Vector2(0, 256)
+shape = SubResource("RectangleShape2D_af4br")
+
+[node name="8" type="Area2D" parent="TextRevealAreas"]
+position = Vector2(2243, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_af4br")
+
+[node name="Text" type="RichTextLabel" parent="TextRevealAreas/8"]
+z_index = -10
+offset_left = 158.0
+offset_top = 105.0
+offset_right = 314.0
+offset_bottom = 159.0
+bbcode_enabled = true
+text = "[font_size=32][color=#0f0f0f]On walls.[/color][/font_size]"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/8"]
+position = Vector2(0, 256)
+shape = SubResource("RectangleShape2D_af4br")
+
+[node name="UnlockAreas" type="Node" parent="."]
+
+[node name="UnlockRunArea" type="Area2D" parent="UnlockAreas"]
+position = Vector2(833, 256)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("5_0t4of")
+unlocked_keys = Array[String](["run_unlocked"])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UnlockAreas/UnlockRunArea"]
+shape = SubResource("RectangleShape2D_off5s")
+
+[node name="UnlockJumpArea" type="Area2D" parent="UnlockAreas"]
+position = Vector2(1472, 256)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("5_0t4of")
+unlocked_keys = Array[String](["jump_unlocked"])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UnlockAreas/UnlockJumpArea"]
+shape = SubResource("RectangleShape2D_off5s")
+
+[node name="LockRun&JumpArea" type="Area2D" parent="UnlockAreas"]
+position = Vector2(258, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("5_0t4of")
+locked_keys = Array[String](["jump_unlocked", "run_unlocked"])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UnlockAreas/LockRun&JumpArea"]
+position = Vector2(0, 480)
+shape = SubResource("RectangleShape2D_7ktok")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(512, 256)
+script = ExtResource("1_8omqi")
+target = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("2_dlxjb")]
+position = Vector2(258, 326)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("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AABIAA8AAAABAAAAAABJAA8AAAABAAAAAABKAA8AAAABAAAAAABLAA8AAAABAAAAAABMAA8AAAABAAAAAABNAA8AAAABAAAAAABOAA8AAAABAAAAAABPAA8AAAABAAAAAABQAA8AAAABAAAAAABRAA8AAAABAAAAAABSAA8AAAABAAAAAABTAA8AAAABAAAAAABTAAAAAAABAAAAAABSAAAAAAABAAAAAABRAAAAAAABAAAAAABQAAAAAAABAAAAAABPAAAAAAABAAAAAABOAAAAAAABAAAAAABNAAAAAAABAAAAAABMAAAAAAABAAAAAABLAAAAAAABAAAAAABKAAAAAAABAAAAAABJAAAAAAABAAAAAABIAAAAAAABAAAAAABHAAAAAAABAAAAAABGAAAAAAABAAAAAABFAAAAAAABAAAAAABEAAAAAAABAAAAAABDAAAAAAABAAAAAABCAAAAAAABAAAAAABBAAAAAAABAAAAAABAAAAAAAABAAAAAAA/AAAAAAABAAAAAAA+AAAAAAABAAAAAAA9AAAAAAABAAAAAAA8AAAAAAABAAAAAAA7AAAAAAABAAAAAAA6AAAAAAABAAAAAABUAAAAAAABAAAAAABVAAAAAAABAAAAAABWAAAAAAABAAAAAABXAAAAAAABAAAAAABYAAAAAAABAAAAAABZAAAAAAABAAAAAABaAAAAAAABAAAAAABbAAAAAAABAAAAAABcAAAAAAABAAAAAABdAAAAAAABAAAAAABeAAAAAAABAAAAAABfAAAAAAABAAAAAABgAAAAAAABAAAAAABhAAAAAAABAAAAAABiAAAAAAABAAAAAABjAAAAAAABAAAAAABkAAAAAAABAAAAAABlAAAAAAABAAAAAABmAAAAAAABAAAAAABnAAAAAAABAAAAAABoAAAAAAABAAAAAABpAAAAAAABAAAAAABqAAAAAAABAAAAAABrAAAAAAABAAAAAABsAAAAAAABAAAAAABtAAAAAAABAAAAAABuAAAAAAABAAAAAABvAAAAAAABAAAAAABwAAAAAAABAAAAAABxAAAAAAABAAAAAAByAAAAAAABAAAAAABzAAAAAAABAAAAAAB0AAAAAAABAAAAAAB1AAAAAAABAAAAAAB2AAAAAAABAAAAAAB3AAAAAAABAAAAAAB4AAAAAAABAAAAAAB5AAAAAAABAAAAAAB6AAAAAAABAAAAAAB7AAAAAAABAAAAAAB8AAAAAAABAAAAAAB9AAAAAAABAAAAAAB+AAAAAAABAAAAAAB/AAAAAAABAAAAAACAAAAAAAABAAAAAACBAAAAAAABAAAAAACCAAAAAAABAAAAAACDAAAAAAABAAAAAACEAAAAAAABAAAAAACFAAAAAAABAAAAAACGAAAAAAABAAAAAACHAAAAAAABAAAAAACHAAEAAAABAAAAAACHAAIAAAABAAAAAACHAAMAAAABAAAAAACHAAQAAAABAAAAAACHAAUAAAABAAAAAACHAAYAAAABAAAAAACHAAcAAAABAAAAAACHAAgAAAABAAAAAACHAAkAAAABAAAAAACHAAoAAAABAAAAAACHAAsAAAABAAAAAACHAAwAAAABAAAAAACHAA0AAAABAAAAAACHAA4AAAABAAAAAACHAA8AAAABAAAAAABUAA8AAAABAAAAAABVAA8AAAABAAAAAABWAA8AAAABAAAAAABXAA8AAAABAAAAAABYAA8AAAABAAAAAABZAA8AAAABAAAAAABaAA8AAAABAAAAAABbAA8AAAABAAAAAABcAA8AAAABAAAAAABdAA8AAAABAAAAAABeAA8AAAABAAAAAABfAA8AAAABAAAAAABgAA8AAAABAAAAAABhAA8AAAABAAAAAABiAA8AAAABAAAAAABjAA8AAAABAAAAAABkAA8AAAABAAAAAABlAA8AAAABAAAAAABmAA8AAAABAAAAAABnAA8AAAABAAAAAABoAA8AAAABAAAAAABpAA8AAAABAAAAAABqAA8AAAABAAAAAABrAA8AAAABAAAAAABsAA8AAAABAAAAAABtAA8AAAABAAAAAABuAA8AAAABAAAAAABvAA8AAAABAAAAAABwAA8AAAABAAAAAABxAA8AAAABAAAAAAByAA8AAAABAAAAAABzAA8AAAABAAAAAAB0AA8AAAABAAAAAAB1AA8AAAABAAAAAAB2AA8AAAABAAAAAAB3AA8AAAABAAAAAAB4AA8AAAABAAAAAAB5AA8AAAABAAAAAAB6AA8AAAABAAAAAAB7AA8AAAABAAAAAAB8AA8AAAABAAAAAAB9AA8AAAABAAAAAAB+AA8AAAABAAAAAAB/AA8AAAABAAAAAACAAA8AAAABAAAAAACBAA8AAAABAAAAAACCAA8AAAABAAAAAACDAA8AAAABAAAAAACEAA8AAAABAAAAAACFAA8AAAABAAAAAACGAA8AAAABAAAAAABHAAoAAAABAAAAAABIAAoAAAABAAAAAABJAAoAAAABAAAAAABHAAEAAAABAAAAAABHAAIAAAABAAAAAABHAAMAAAABAAAAAABHAAQAAAABAAAAAABHAAUAAAABAAAAAABHAAYAAAABAAAAAABHAAcAAAABAAAAAABHAAgAAAABAAAAAABHAAkAAAABAAAAAABIAAEAAAABAAAAAABIAAIAAAABAAAAAABIAAMAAAABAAAAAABIAAQAAAABAAAAAABIAAUAAAABAAAAAABIAAYAAAABAAAAAABIAAcAAAABAAAAAABIAAgAAAABAAAAAABIAAkAAAABAAAAAABJAAEAAAABAAAAAABJAAIAAAABAAAAAABJAAMAAAABAAAAAABJAAQAAAABAAAAAABJAAUAAAABAAAAAABJAAYAAAABAAAAAABJAAcAAAABAAAAAABJAAgAAAABAAAAAABJAAkAAAABAAAAAABPAAUAAAABAAAAAABPAAYAAAABAAAAAABPAAcAAAABAAAAAABPAAgAAAABAAAAAABPAAkAAAABAAAAAABPAAoAAAABAAAAAABPAAsAAAABAAAAAABPAAwAAAABAAAAAABPAA0AAAABAAAAAABPAA4AAAABAAAAAABOAAUAAAABAAAAAABOAAYAAAABAAAAAABOAAcAAAABAAAAAABOAAgAAAABAAAAAABOAAkAAAABAAAAAABOAAoAAAABAAAAAABOAAsAAAABAAAAAABOAAwAAAABAAAAAABOAA0AAAABAAAAAABOAA4AAAABAAAAAABNAAUAAAABAAAAAABNAAYAAAABAAAAAABNAAcAAAABAAAAAABNAAgAAAABAAAAAABNAAkAAAABAAAAAABNAAoAAAABAAAAAABNAAsAAAABAAAAAABNAAwAAAABAAAAAABNAA0AAAABAAAAAABNAA4AAAABAAAAAAA=")
+tile_set = ExtResource("3_dlxjb")
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -20
+offset_right = 4352.0
+offset_bottom = 512.0
+color = Color(0.986914, 0.931287, 0.912533, 1)

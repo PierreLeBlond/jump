@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7knon7shyodk"]
+
+[ext_resource type="Script" uid="uid://dfh6a42d2dq0n" path="res://scripts/collectibles/NoteCollector.gd" id="1_05qtw"]
+
+[node name="NoteCollector" type="Node"]
+script = ExtResource("1_05qtw")

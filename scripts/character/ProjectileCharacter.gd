@@ -2,17 +2,19 @@ extends CharacterBody2D
 
 class_name ProjectileCharacter
 
-@export var corner_corrector: CornerCorrector
+@onready var corner_corrector: CornerCorrector = $CornerCorrector
 
-@export var state_machine: StateMachine
+@onready var state_machine: StateMachine = $StateMachine
 
-@export var movement_controller: MovementController
+@onready var movement_controller: MovementController = $MovementController
 
-@export var projectile_parameters: ProjectileParameters
+@onready var projectile_parameters: ProjectileParameters = $ProjectileParameters
 
-@export var left_ray_cast_2d: RayCast2D
+@onready var left_ray_cast_2d: RayCast2D = $LeftRayCast2D
 
-@export var right_ray_cast_2d: RayCast2D
+@onready var right_ray_cast_2d: RayCast2D = $RightRayCast2D
+
+var unlocked_keys: UnlockedKeys = UnlockedKeys.new()
 
 func _ready() -> void:
     corner_corrector.init(self)

@@ -4,10 +4,10 @@ class_name CornerCorrector
 
 var parent: Node2D
 
-@export var outer_left_ceiling_ray_cast: RayCast2D
-@export var inner_left_ceiling_ray_cast: RayCast2D
-@export var outer_right_ceiling_ray_cast: RayCast2D
-@export var inner_right_ceiling_ray_cast: RayCast2D
+@onready var outer_left_ceiling_ray_cast: RayCast2D = $OuterLeftCeilingRayCast2D
+@onready var inner_left_ceiling_ray_cast: RayCast2D = $InnerLeftCeilingRayCast2D
+@onready var outer_right_ceiling_ray_cast: RayCast2D = $OuterRightCeilingRayCast2D
+@onready var inner_right_ceiling_ray_cast: RayCast2D = $InnerRightCeilingRayCast2D
 
 func init(node: Node2D) -> void:
     self.parent = node

@@ -31,8 +31,7 @@ var double_jump_maximum_velocity: float = double_jump_distance / (double_jump_ti
 @export var air_deceleration_time: float = 0.15
 
 
-# We don't want the player to be able to move back to the wall after the wall jump, hence less air controls
-
+# We don't want the player to be able to move back higher on the wall after the a wall jump, hence less air controls
 @export var wall_jump_acceleration_time: float = 0.45
 
 @export var wall_jump_deceleration_time: float = 0.35
@@ -41,7 +40,7 @@ var double_jump_maximum_velocity: float = double_jump_distance / (double_jump_ti
 
 @export var wall_friction_factor: float = 0.5
 
-@export var minimum_jump_pressed_time: float = 0.05
+@export var minimum_jump_pressed_time: float = 0.01
 
 @export var maximum_jump_pressed_time: float = 0.5
 

@@ -13,6 +13,9 @@ func get_direction() -> int:
 
     return direction
 
+func wants_to_move() -> bool:
+    return Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left")
+
 func wants_to_jump() -> bool:
     return Input.is_action_just_pressed("jump")
 
