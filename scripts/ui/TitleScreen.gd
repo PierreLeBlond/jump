@@ -17,7 +17,7 @@ func on_tutorial_button_pressed() -> void:
 
 func on_test_level_button_pressed() -> void:
     var tree = get_tree()
-    tree.change_scene_to_file("res://scenes/levels/Test.tscn")
+    tree.change_scene_to_file("res://scenes/levels/testing/Controls.tscn")
 
 func on_escape_level_button_pressed() -> void:
     var tree = get_tree()

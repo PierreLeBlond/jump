@@ -2,8 +2,13 @@ extends Node
 
 class_name Escape
 
-@onready var souba_coupe: SoubaCoupe = $SoubaCoupe
-@export var souba_coupe_speed: float = 100
+@export var player: ProjectileCharacter
+
+@export var souba_coupe: SoubaCoupe
+@export var souba_coupe_path_follow: PathFollow2D
+@export var souba_coupe_path_duration: float = 30
+
+var souba_coupe_time: float = 0
 
 func _ready() -> void:
     souba_coupe.captured_player.connect(on_player_captured)
@@ -16,4 +21,5 @@ func on_player_captured(_body: ProjectileCharacter) -> void:
     call_deferred("end_game")
 
 func _physics_process(delta: float) -> void:
-    souba_coupe.position += Vector2(souba_coupe_speed * delta, 0)
+    souba_coupe_time += delta
+    souba_coupe_path_follow.progress_ratio = souba_coupe_time / souba_coupe_path_duration

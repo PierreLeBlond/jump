@@ -25,8 +25,10 @@ size = Vector2(256, 64)
 [node name="Tutorial" type="Node"]
 script = ExtResource("1_7ktok")
 
-[node name="SoubaCoupe" parent="." instance=ExtResource("1_off5s")]
-position = Vector2(3218, 192)
+[node name="SoubaCoupe" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_off5s")]
+position = Vector2(3249, 256)
+player = NodePath("../Player")
+cone_height = 256.0
 
 [node name="RespawnPosition" type="Marker2D" parent="."]
 position = Vector2(2686, 374)

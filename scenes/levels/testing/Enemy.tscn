@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=4 uid="uid://bgl0xp27taw8"]
+
+[ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="1_j6ea0"]
+[ext_resource type="PackedScene" uid="uid://b8dorlf7ulbwy" path="res://scenes/SoubaCoupe.tscn" id="2_sy53j"]
+[ext_resource type="PackedScene" uid="uid://bml0bldhljk3n" path="res://scripts/blocks/Block.tscn" id="3_p2tik"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_if3ul"]
+scenes/1/scene = ExtResource("3_p2tik")
+
+[sub_resource type="TileSet" id="TileSet_8k7ik"]
+sources/0 = SubResource("TileSetScenesCollectionSource_if3ul")
+
+[node name="Enemy" type="Node2D"]
+
+[node name="SoubaCoupe" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_sy53j")]
+position = Vector2(-384, 0)
+player = NodePath("../Player")
+cone_angle = 0.372
+cone_height = 224.0
+
+[node name="Player" parent="." instance=ExtResource("1_j6ea0")]
+position = Vector2(-215, 203)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AADg/w8AAAAAAAAAAQDh/w8AAAAAAAAAAQDi/w8AAAAAAAAAAQDj/w8AAAAAAAAAAQDk/w8AAAAAAAAAAQDl/w8AAAAAAAAAAQDm/w8AAAAAAAAAAQDn/w8AAAAAAAAAAQDo/w8AAAAAAAAAAQDp/w8AAAAAAAAAAQDq/w8AAAAAAAAAAQDr/w8AAAAAAAAAAQDs/w8AAAAAAAAAAQDt/w8AAAAAAAAAAQDu/w8AAAAAAAAAAQDv/w8AAAAAAAAAAQDw/w8AAAAAAAAAAQDx/w8AAAAAAAAAAQDy/w8AAAAAAAAAAQDz/w8AAAAAAAAAAQD0/w8AAAAAAAAAAQD1/w8AAAAAAAAAAQD2/w8AAAAAAAAAAQD3/w8AAAAAAAAAAQD4/w8AAAAAAAAAAQD5/w8AAAAAAAAAAQD6/w8AAAAAAAAAAQD7/w8AAAAAAAAAAQD8/w8AAAAAAAAAAQD9/w8AAAAAAAAAAQD+/w8AAAAAAAAAAQD//w8AAAAAAAAAAQAAAA8AAAAAAAAAAQABAA8AAAAAAAAAAQACAA8AAAAAAAAAAQADAA8AAAAAAAAAAQAEAA8AAAAAAAAAAQAFAA8AAAAAAAAAAQAGAA8AAAAAAAAAAQAHAA8AAAAAAAAAAQAIAA8AAAAAAAAAAQA=")
+tile_set = SubResource("TileSet_8k7ik")

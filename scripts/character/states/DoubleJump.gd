@@ -25,19 +25,11 @@ func get_next_state(_delta: float) -> State:
 
     return null
 
-func get_velocity(delta: float) -> Vector2:
-    return Vector2(
-        get_lateral_velocity(
-                delta,
-                parent.velocity.x,
-                maximum_lateral_velocity,
-                parent.projectile_parameters.acceleration_time,
-                parent.projectile_parameters.deceleration_time
-            ),
-        get_vertical_velocity(
-            delta,
-            parent.velocity.y,
-            parent.projectile_parameters.double_jump_height,
-            parent.projectile_parameters.double_jump_time
-            )
-        )
+func get_parameters() -> Dictionary:
+    return {
+        "jump_height": parent.projectile_parameters.double_jump_height,
+        "jump_time": parent.projectile_parameters.double_jump_time,
+        "maximum_lateral_velocity": maximum_lateral_velocity,
+        "acceleration_factor": parent.projectile_parameters.acceleration_factor,
+        "deceleration_factor": parent.projectile_parameters.deceleration_factor
+    }

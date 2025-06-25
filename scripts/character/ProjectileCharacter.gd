@@ -16,6 +16,8 @@ class_name ProjectileCharacter
 
 var unlocked_keys: UnlockedKeys = UnlockedKeys.new()
 
+var external_accelerations: Dictionary[String, Vector2] = {}
+
 func _ready() -> void:
     corner_corrector.init(self)
     state_machine.init(self)

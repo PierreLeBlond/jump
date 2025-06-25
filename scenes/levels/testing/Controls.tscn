@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="1_17xb1"]
 [ext_resource type="TileSet" uid="uid://yuvk2fmol82y" path="res://tilesets/Blocks.tres" id="2_hbbmf"]
-[ext_resource type="PackedScene" uid="uid://dyg1q4cxppdey" path="res://scenes/ui/PlayerTestingUI.tscn" id="3_f4m1s"]
+[ext_resource type="PackedScene" uid="uid://dyg1q4cxppdey" path="res://scenes/debug/PlayerTestingUI.tscn" id="3_f4m1s"]
 [ext_resource type="PackedScene" uid="uid://cgexvf3ochgd8" path="res://scenes/areas/EndArea.tscn" id="4_hbbmf"]
 [ext_resource type="PackedScene" uid="uid://mfaxiu15banr" path="res://scenes/ui/TitleScreen.tscn" id="5_f4m1s"]
 

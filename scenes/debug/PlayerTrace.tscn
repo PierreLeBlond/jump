@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dw0kh2l3vb0he"]
+
+[ext_resource type="Script" uid="uid://dkmdt0rkg5sm2" path="res://scripts/debug/PlayerTrace.gd" id="1_rowfa"]
+
+[node name="PlayerTrace" type="Node2D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_rowfa")
+player = NodePath("")

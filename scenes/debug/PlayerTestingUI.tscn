@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dyg1q4cxppdey"]
 
-[ext_resource type="Script" uid="uid://dk1ynvkwrugj4" path="res://scripts/ui/PlayerTestingUi.gd" id="1_aopwm"]
-[ext_resource type="PackedScene" uid="uid://csvt6mnke156n" path="res://scenes/ui/TestingSlider.tscn" id="2_tu04i"]
-[ext_resource type="Script" uid="uid://dgxsxhus4yac6" path="res://scripts/ui/TestingSlider.gd" id="3_mp2dh"]
-[ext_resource type="Script" uid="uid://db1swkjxmss6u" path="res://scripts/ui/JumpCurve.gd" id="4_mp2dh"]
+[ext_resource type="Script" uid="uid://dk1ynvkwrugj4" path="res://scripts/debug/PlayerTestingUi.gd" id="1_aopwm"]
+[ext_resource type="PackedScene" uid="uid://csvt6mnke156n" path="res://scenes/debug/TestingSlider.tscn" id="2_tu04i"]
+[ext_resource type="Script" uid="uid://dgxsxhus4yac6" path="res://scripts/debug/TestingSlider.gd" id="3_mp2dh"]
+[ext_resource type="Script" uid="uid://db1swkjxmss6u" path="res://scripts/debug/JumpCurve.gd" id="4_mp2dh"]
 
 [node name="PlayerTestingUi" type="Control"]
 layout_mode = 3

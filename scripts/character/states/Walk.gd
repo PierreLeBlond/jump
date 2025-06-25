@@ -20,21 +20,16 @@ func get_next_state(_delta: float) -> State:
     if (parent.movement_controller.wants_to_jump() && parent.unlocked_keys.has_unlocked_jump()):
         return jump
 
-    if (parent.movement_controller.get_direction() == 0 && parent.velocity.x == 0):
+    if (!parent.movement_controller.wants_to_move()):
         return idle
 
     return null
 
-func get_velocity(delta: float) -> Vector2:
-    maximum_lateral_velocity = parent.projectile_parameters.maximum_velocity
-
-    return Vector2(
-        get_lateral_velocity(
-            delta,
-            parent.velocity.x,
-            maximum_lateral_velocity,
-            parent.projectile_parameters.acceleration_time,
-            parent.projectile_parameters.deceleration_time
-        ),
-        0
-    )
+func get_parameters() -> Dictionary:
+    return {
+        "jump_height": parent.projectile_parameters.jump_height,
+        "jump_time": parent.projectile_parameters.fall_time,
+        "maximum_lateral_velocity": parent.projectile_parameters.maximum_velocity,
+        "acceleration_factor": parent.projectile_parameters.acceleration_factor,
+        "deceleration_factor": parent.projectile_parameters.deceleration_factor
+    }

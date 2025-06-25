@@ -70,19 +70,11 @@ func update(delta: float) -> void:
     if (parent.movement_controller.wants_to_jump()):
         buffered_jump_remaining_frames = parent.projectile_parameters.buffered_jump_frames
 
-func get_velocity(delta: float) -> Vector2:
-    return Vector2(
-        get_lateral_velocity(
-                delta,
-                parent.velocity.x,
-                maximum_lateral_velocity,
-                parent.projectile_parameters.air_acceleration_time,
-                parent.projectile_parameters.air_deceleration_time
-            ),
-        get_vertical_velocity(
-            delta,
-            parent.velocity.y,
-            parent.projectile_parameters.jump_height,
-            parent.projectile_parameters.fall_time
-        )
-    )
+func get_parameters() -> Dictionary:
+    return {
+        "jump_height": parent.projectile_parameters.jump_height,
+        "jump_time": parent.projectile_parameters.fall_time,
+        "maximum_lateral_velocity": maximum_lateral_velocity,
+        "acceleration_factor": parent.projectile_parameters.air_acceleration_factor,
+        "deceleration_factor": parent.projectile_parameters.air_deceleration_factor
+    }

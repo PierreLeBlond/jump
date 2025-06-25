@@ -10,3 +10,5 @@ func _ready() -> void:
 
 func on_player_captured(player: ProjectileCharacter) -> void:
     player.global_position = respawn_position.global_position
+    player.set_collision_mask_value(1, true)
+    player.scale = Vector2(1, 1)
