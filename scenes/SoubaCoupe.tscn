@@ -26,6 +26,8 @@ gradient = SubResource("Gradient_5ujc0")
 [node name="SoubaCoupe" type="Node2D" node_paths=PackedStringArray("left_corner_marker", "right_corner_marker")]
 script = ExtResource("1_8lxm5")
 cone_angle = 0.475
+min_ray_gravity_factor = 1.001
+max_ray_gravity_factor = 1.05
 cone_height = 412.0
 left_corner_marker = NodePath("LeftCornerMarker2D")
 right_corner_marker = NodePath("RightCornerMarker2D")

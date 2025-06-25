@@ -4,7 +4,8 @@ extends Node2D
 
 class_name SoubaCoupe
 
-signal captured_player(player: ProjectileCharacter)
+signal captured_player()
+signal ray_captured_player()
 
 @export var player: ProjectileCharacter
 
@@ -14,6 +15,9 @@ signal captured_player(player: ProjectileCharacter)
     update_cone_polygon()
   get:
     return cone_angle
+
+@export_range(1, 1.05) var min_ray_gravity_factor: float = 1.0001
+@export_range(1, 1.05) var max_ray_gravity_factor: float = 1.02
 
 @export var cone_height: float:
   set(value):
@@ -60,7 +64,7 @@ func on_body_entered(body: Node2D) -> void:
     if (body != player):
         return
 
-    captured_player.emit(body)
+    captured_player.emit()
 
 func on_ray_area_body_entered(body: Node2D) -> void:
     if (body != player):
@@ -70,6 +74,7 @@ func on_ray_area_body_entered(body: Node2D) -> void:
     player.set_collision_mask_value(1, false)
     var tween = create_tween()
     tween.tween_property(player, "scale", Vector2(0.8, 0.8), 0.2)
+    ray_captured_player.emit()
 
 func get_angle_from_cone(point: Vector2) -> float:
     if point.x < left_corner_marker.global_position.x:
@@ -92,11 +97,10 @@ func get_vertical_acceleration() -> float:
   if angle > cone_angle || (angle > 0 && abs(vertical_distance_to_player) > cone_height):
     return 0
 
-  print(angle)
   var gravity = 2 * player.projectile_parameters.jump_height / (player.projectile_parameters.fall_time * player.projectile_parameters.fall_time)
-  var force = clamp(1.001 * gravity * cone_angle / angle, 0, gravity * 1.1)
+  var factor = (min_ray_gravity_factor - max_ray_gravity_factor) * angle / cone_angle + max_ray_gravity_factor
 
-  return -force
+  return -gravity * factor
 
 func get_lateral_acceleration() -> float:
   if !has_captured_player_in_ray:

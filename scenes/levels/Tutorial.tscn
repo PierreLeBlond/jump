@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=4 uid="uid://dknoupu2hcn86"]
 
 [ext_resource type="Script" uid="uid://bfshhb0w7ohbq" path="res://scripts/levels/Tutorial.gd" id="1_7ktok"]
-[ext_resource type="Script" uid="uid://cik1brjqdcv0" path="res://scripts/camera/Camera.gd" id="1_8omqi"]
+[ext_resource type="Script" path="res://scripts/camera/Camera.gd" id="1_8omqi"]
 [ext_resource type="PackedScene" uid="uid://b8dorlf7ulbwy" path="res://scenes/SoubaCoupe.tscn" id="1_off5s"]
 [ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="2_dlxjb"]
 [ext_resource type="TileSet" uid="uid://yuvk2fmol82y" path="res://tilesets/Blocks.tres" id="3_dlxjb"]
@@ -28,6 +28,8 @@ script = ExtResource("1_7ktok")
 [node name="SoubaCoupe" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_off5s")]
 position = Vector2(3249, 256)
 player = NodePath("../Player")
+min_ray_gravity_factor = null
+max_ray_gravity_factor = null
 cone_height = 256.0
 
 [node name="RespawnPosition" type="Marker2D" parent="."]

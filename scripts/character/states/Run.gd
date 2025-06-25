@@ -10,6 +10,10 @@ class_name Run
 
 @export var idle: State
 
+func enter(previous_state: State, delta: float) -> void:
+    super (previous_state, delta)
+    maximum_lateral_velocity = parent.projectile_parameters.maximum_velocity * parent.projectile_parameters.run_factor
+
 func get_next_state(_delta: float) -> State:
     if (!parent.is_on_floor()):
         return fall
@@ -26,8 +30,6 @@ func get_next_state(_delta: float) -> State:
     return null
 
 func get_parameters() -> Dictionary:
-    var maximum_lateral_velocity = parent.projectile_parameters.maximum_velocity * parent.projectile_parameters.run_factor
-
     return {
         "jump_height": parent.projectile_parameters.jump_height,
         "jump_time": parent.projectile_parameters.jump_time,

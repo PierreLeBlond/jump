@@ -16,6 +16,8 @@ sources/0 = SubResource("TileSetScenesCollectionSource_if3ul")
 position = Vector2(-384, 0)
 player = NodePath("../Player")
 cone_angle = 0.372
+min_ray_gravity_factor = null
+max_ray_gravity_factor = null
 cone_height = 224.0
 
 [node name="Player" parent="." instance=ExtResource("1_j6ea0")]
