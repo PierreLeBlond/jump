@@ -22,4 +22,3 @@ func on_body_exited(body: Node2D) -> void:
 
     var tween = get_tree().create_tween()
     tween.tween_property(camera, "zoom", Vector2(1, 1), 0.5)
-    tween.parallel().tween_property(camera, "position:y", 256, 0.5)

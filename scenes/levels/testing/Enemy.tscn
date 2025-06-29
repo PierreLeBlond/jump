@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://bgl0xp27taw8"]
 
 [ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="1_j6ea0"]
-[ext_resource type="PackedScene" uid="uid://b8dorlf7ulbwy" path="res://scenes/SoubaCoupe.tscn" id="2_sy53j"]
+[ext_resource type="PackedScene" uid="uid://b8dorlf7ulbwy" path="res://scenes/Soubalien.tscn" id="2_sy53j"]
 [ext_resource type="PackedScene" uid="uid://bml0bldhljk3n" path="res://scripts/blocks/Block.tscn" id="3_p2tik"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_if3ul"]
@@ -12,12 +12,10 @@ sources/0 = SubResource("TileSetScenesCollectionSource_if3ul")
 
 [node name="Enemy" type="Node2D"]
 
-[node name="SoubaCoupe" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_sy53j")]
+[node name="Soubalien" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_sy53j")]
 position = Vector2(-384, 0)
 player = NodePath("../Player")
 cone_angle = 0.372
-min_ray_gravity_factor = null
-max_ray_gravity_factor = null
 cone_height = 224.0
 
 [node name="Player" parent="." instance=ExtResource("1_j6ea0")]

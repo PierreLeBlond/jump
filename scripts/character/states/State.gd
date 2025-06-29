@@ -42,7 +42,7 @@ func get_lateral_velocity(delta: float, current_velocity: float, maximum_velocit
 
         # Arbitrary stop velocity if the character is moving less than 0.5 units per frame, should avoid jittering
         var epsilon = 0.5 / delta
-        if abs(current_velocity + deceleration_drag * delta) < epsilon:
+        if abs(current_velocity) < abs(deceleration_drag * delta) || abs(current_velocity + deceleration_drag * delta) < epsilon:
             return 0
 
         return current_velocity + deceleration_drag * delta

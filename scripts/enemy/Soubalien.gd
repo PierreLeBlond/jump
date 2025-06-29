@@ -2,7 +2,7 @@
 
 extends Node2D
 
-class_name SoubaCoupe
+class_name Soubalien
 
 signal captured_player()
 signal ray_captured_player()
@@ -26,10 +26,10 @@ signal ray_captured_player()
   get:
     return cone_height
 
-@onready var area: Area2D = $Area2D
-@onready var ray_area: Area2D = $RayArea2D
+@export var area: Area2D
+@export var ray_area: Area2D
 
-@onready var cone_polygon: Polygon2D = $ConePolygon2D
+@export var cone_polygon: Polygon2D
 
 var has_captured_player_in_ray: bool = false
 
@@ -43,12 +43,10 @@ func update_cone_polygon() -> void:
     var left_cone_corner = left_corner_marker.position
     var right_cone_corner = right_corner_marker.position
 
-    cone_polygon.polygon[0] = left_cone_corner
-    cone_polygon.polygon[1] = right_cone_corner
-    cone_polygon.polygon[2].y = right_cone_corner.y + cone_height
-    cone_polygon.polygon[2].x = right_cone_corner.x + cone_height * tan(cone_angle)
-    cone_polygon.polygon[3].y = left_cone_corner.y + cone_height
-    cone_polygon.polygon[3].x = left_cone_corner.x - cone_height * tan(cone_angle)
+    cone_polygon.polygon[9].y = right_cone_corner.y + cone_height
+    cone_polygon.polygon[9].x = right_cone_corner.x + cone_height * tan(cone_angle)
+    cone_polygon.polygon[10].y = left_cone_corner.y + cone_height
+    cone_polygon.polygon[10].x = left_cone_corner.x - cone_height * tan(cone_angle)
 
 
 func _ready() -> void:
@@ -64,6 +62,7 @@ func on_body_entered(body: Node2D) -> void:
     if (body != player):
         return
 
+    has_captured_player_in_ray = false
     captured_player.emit()
 
 func on_ray_area_body_entered(body: Node2D) -> void:
@@ -75,6 +74,7 @@ func on_ray_area_body_entered(body: Node2D) -> void:
     var tween = create_tween()
     tween.tween_property(player, "scale", Vector2(0.8, 0.8), 0.2)
     ray_captured_player.emit()
+
 
 func get_angle_from_cone(point: Vector2) -> float:
     if point.x < left_corner_marker.global_position.x:
@@ -112,7 +112,7 @@ func get_lateral_acceleration() -> float:
 
   var acceleration_max = 3000
 
-  var normalized_force = clamp((32 * 32) / (distance * distance + 1), 0, 1)
+  var normalized_force = clamp((32 * 32) / (distance * distance), 0.5, 1)
 
   return sign(horizontal_distance_to_player) * acceleration_max * normalized_force
 
