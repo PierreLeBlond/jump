@@ -4,7 +4,7 @@ class_name Escape
 
 @export var player: ProjectileCharacter
 
-@export var camera: Camera2D
+@export var camera: Camera
 
 @export var soubalien: Soubalien
 @export var soubalien_path_follow: PathFollow2D
@@ -12,6 +12,7 @@ class_name Escape
 
 @export var transition_mask: TransitionMask
 
+var cutscene_camera: Camera2D
 
 func _ready() -> void:
     soubalien.captured_player.connect(on_player_captured)
@@ -36,15 +37,14 @@ func on_player_captured() -> void:
 
 func on_ray_captured_player() -> void:
     soubalien_path_speed = 0
-    camera.position_smoothing_speed = 10
-    camera.drag_left_margin = 0
-    camera.drag_right_margin = 0
-    camera.drag_top_margin = 0
-    camera.drag_bottom_margin = 0
 
+    cutscene_camera = camera.switch_to_cutscene_camera()
     var zoom_tween = create_tween()
-    zoom_tween.tween_property(camera, "zoom", Vector2(2, 2), 1.0)
+    zoom_tween.tween_property(cutscene_camera, "zoom", Vector2(2, 2), 1.0)
 
 func _physics_process(delta: float) -> void:
     var direction = sign(player.global_position.x - soubalien.global_position.x)
     soubalien_path_follow.progress_ratio += direction * soubalien_path_speed * delta
+
+    if cutscene_camera != null:
+        cutscene_camera.position = lerp(cutscene_camera.position, player.global_position, delta * 3)
