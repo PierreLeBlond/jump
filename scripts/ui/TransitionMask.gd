@@ -4,7 +4,6 @@ class_name TransitionMask
 
 func _ready() -> void:
     var mask_radius = get_viewport_rect().size.length()
-    print(mask_radius)
     material.set_shader_parameter("mask_radius", mask_radius)
 
 func transition_in(target: Node2D) -> void:

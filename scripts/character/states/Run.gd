@@ -2,6 +2,8 @@ extends State
 
 class_name Run
 
+@export var gravity_field: State
+
 @export var fall: State
 
 @export var jump: State
@@ -15,6 +17,9 @@ func enter(previous_state: State, delta: float) -> void:
     maximum_lateral_velocity = parent.projectile_parameters.maximum_velocity * parent.projectile_parameters.run_factor
 
 func get_next_state(_delta: float) -> State:
+    if (parent.is_in_gravity_field):
+        return gravity_field
+
     if (!parent.is_on_floor()):
         return fall
 

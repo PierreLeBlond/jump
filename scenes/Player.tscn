@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://27vdgqlbgpml"]
+[gd_scene load_steps=25 format=3 uid="uid://27vdgqlbgpml"]
 
 [ext_resource type="Script" uid="uid://b6kdes8c5suyq" path="res://scripts/character/ProjectileCharacter.gd" id="1_lkdrv"]
 [ext_resource type="Texture2D" uid="uid://dob7ahdq57tjp" path="res://assets/spritesheets/feis.png" id="2_y7qcs"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://c5we0dutkben8" path="res://scripts/character/states/Run.gd" id="9_ebwui"]
 [ext_resource type="Script" uid="uid://d4ejg1k4w0j6n" path="res://scripts/character/states/Walk.gd" id="10_sfy4j"]
 [ext_resource type="Script" uid="uid://cx473tyk8323v" path="res://scripts/controls/PlayerController.gd" id="11_gv3ic"]
+[ext_resource type="Script" uid="uid://btq1tr1q7jasc" path="res://scripts/character/states/GravityField.gd" id="11_p7iby"]
 [ext_resource type="Script" uid="uid://dimlaqea8jyy3" path="res://scripts/character/ProjectileParameters.gd" id="12_b8lor"]
 [ext_resource type="Script" uid="uid://blh3ndwp2n1vi" path="res://scripts/character/CornerCorrector.gd" id="13_lkdrv"]
 
@@ -167,17 +168,19 @@ shape = SubResource("RectangleShape2D_18dal")
 script = ExtResource("3_lkdrv")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump", "fall", "run", "walk")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("gravity_field", "jump", "fall", "run", "walk")]
 script = ExtResource("4_p7iby")
+gravity_field = NodePath("../GravityField")
 jump = NodePath("../Jump")
 fall = NodePath("../Fall")
 run = NodePath("../Run")
 walk = NodePath("../Walk")
 animation = "Idle"
 
-[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("walk", "run", "jump", "double_jump", "wall_jump", "idle")]
+[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("walk", "gravity_field", "run", "jump", "double_jump", "wall_jump", "idle")]
 script = ExtResource("5_0rnld")
 walk = NodePath("../Walk")
+gravity_field = NodePath("../GravityField")
 run = NodePath("../Run")
 jump = NodePath("../Jump")
 double_jump = NodePath("../DoubleJump")
@@ -185,41 +188,51 @@ wall_jump = NodePath("../WallJump")
 idle = NodePath("../Idle")
 animation = "Fall"
 
-[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "double_jump", "wall_jump")]
+[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "gravity_field", "double_jump", "wall_jump")]
 script = ExtResource("6_srp4u")
 fall = NodePath("../Fall")
+gravity_field = NodePath("../GravityField")
 double_jump = NodePath("../DoubleJump")
 wall_jump = NodePath("../WallJump")
 animation = "Jump"
 
-[node name="WallJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "double_jump", "next_wall_jump")]
+[node name="WallJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "gravity_field", "double_jump", "next_wall_jump")]
 script = ExtResource("7_jfpux")
 fall = NodePath("../Fall")
+gravity_field = NodePath("../GravityField")
 double_jump = NodePath("../DoubleJump")
 next_wall_jump = NodePath(".")
 animation = "Jump"
 
-[node name="DoubleJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "wall_jump")]
+[node name="DoubleJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "wall_jump", "gravity_field")]
 script = ExtResource("8_61ith")
 fall = NodePath("../Fall")
 wall_jump = NodePath("../WallJump")
+gravity_field = NodePath("../GravityField")
 animation = "DoubleJump"
 
-[node name="Run" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "jump", "walk", "idle")]
+[node name="Run" type="Node" parent="StateMachine" node_paths=PackedStringArray("gravity_field", "fall", "jump", "walk", "idle")]
 script = ExtResource("9_ebwui")
+gravity_field = NodePath("../GravityField")
 fall = NodePath("../Fall")
 jump = NodePath("../Jump")
 walk = NodePath("../Walk")
 idle = NodePath("../Idle")
 animation = "Run"
 
-[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "run", "jump", "idle")]
+[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("gravity_field", "fall", "run", "jump", "idle")]
 script = ExtResource("10_sfy4j")
+gravity_field = NodePath("../GravityField")
 fall = NodePath("../Fall")
 run = NodePath("../Run")
 jump = NodePath("../Jump")
 idle = NodePath("../Idle")
 animation = "Walk"
+
+[node name="GravityField" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall")]
+script = ExtResource("11_p7iby")
+fall = NodePath("../Fall")
+animation = "Fall"
 
 [node name="MovementController" type="Node" parent="."]
 script = ExtResource("11_gv3ic")

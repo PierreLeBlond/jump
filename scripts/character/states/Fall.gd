@@ -4,6 +4,8 @@ class_name Fall
 
 @export var walk: State
 
+@export var gravity_field: State
+
 @export var run: State
 
 @export var jump: State
@@ -35,6 +37,9 @@ func enter(previous_state: State, delta: float) -> void:
         double_jump_count = parent.projectile_parameters.max_double_jumps
 
 func get_next_state(_delta: float) -> State:
+    if (parent.is_in_gravity_field):
+        return gravity_field
+
     if (parent.movement_controller.wants_to_jump() && is_on_wall()):
         return wall_jump
 

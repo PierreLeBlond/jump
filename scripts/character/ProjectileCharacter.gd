@@ -18,6 +18,8 @@ var unlocked_keys: UnlockedKeys = UnlockedKeys.new()
 
 var external_accelerations: Dictionary[String, Vector2] = {}
 
+var is_in_gravity_field: bool = false
+
 func _ready() -> void:
     corner_corrector.init(self)
     state_machine.init(self)

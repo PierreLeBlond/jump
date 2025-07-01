@@ -2,6 +2,8 @@ extends State
 
 class_name Walk
 
+@export var gravity_field: State
+
 @export var fall: State
 
 @export var run: State
@@ -11,6 +13,9 @@ class_name Walk
 @export var idle: State
 
 func get_next_state(_delta: float) -> State:
+    if (parent.is_in_gravity_field):
+        return gravity_field
+
     if (!parent.is_on_floor()):
         return fall
 

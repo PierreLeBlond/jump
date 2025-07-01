@@ -1,0 +1,25 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bx7hkxebggo06"]
+
+[ext_resource type="FontFile" uid="uid://cfar2mpfyh04t" path="res://assets/fonts/space age.ttf" id="1_7ql75"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afct1"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_io832"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[resource]
+Button/colors/font_color = Color(0.897363, 0.850964, 0.97058, 1)
+Button/colors/font_hover_color = Color(0.527472, 0.486608, 0.724041, 1)
+Button/colors/font_outline_color = Color(0.171397, 0.297869, 0.475624, 1)
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("1_7ql75")
+Button/styles/hover = SubResource("StyleBoxFlat_afct1")
+Button/styles/normal = SubResource("StyleBoxFlat_io832")
+Label/colors/font_color = Color(0.849228, 0.755252, 0.910869, 1)
+Label/fonts/font = ExtResource("1_7ql75")
+RichTextLabel/colors/default_color = Color(0.981351, 0.787683, 0.745894, 1)
+RichTextLabel/font_sizes/bold_font_size = 24
+RichTextLabel/font_sizes/normal_font_size = 20
+RichTextLabel/fonts/bold_font = ExtResource("1_7ql75")
+RichTextLabel/fonts/normal_font = ExtResource("1_7ql75")

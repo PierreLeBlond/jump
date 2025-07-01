@@ -95,8 +95,10 @@ func get_vertical_acceleration() -> float:
   var angle = get_angle_from_cone(player.global_position)
 
   if angle > cone_angle || (angle > 0 && abs(vertical_distance_to_player) > cone_height):
+    player.is_in_gravity_field = false
     return 0
 
+  player.is_in_gravity_field = true
   var gravity = 2 * player.projectile_parameters.jump_height / (player.projectile_parameters.fall_time * player.projectile_parameters.fall_time)
   var factor = (min_ray_gravity_factor - max_ray_gravity_factor) * angle / cone_angle + max_ray_gravity_factor
 
