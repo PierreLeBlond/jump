@@ -1,11 +1,12 @@
-extends Area2D
+extends Node2D
 
 class_name EndArea
 
 @export var next_scene: PackedScene
+@export var area: Area2D
 
 func _ready() -> void:
-    body_entered.connect(on_body_entered)
+    area.body_entered.connect(on_body_entered)
 
 func load_next_scene() -> void:
     var tree = get_tree()

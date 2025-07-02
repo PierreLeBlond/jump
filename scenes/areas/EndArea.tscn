@@ -1,21 +1,55 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgexvf3ochgd8"]
+[gd_scene load_steps=7 format=3 uid="uid://cgexvf3ochgd8"]
 
 [ext_resource type="Script" uid="uid://bjtl72th7dul5" path="res://scripts/area/EndArea.gd" id="1_6nwac"]
+[ext_resource type="Texture2D" uid="uid://dlma5b0q80mlp" path="res://assets/sprites/portal.svg" id="2_w4rj4"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sffr1"]
-size = Vector2(64, 64)
+[sub_resource type="CircleShape2D" id="CircleShape2D_1foyh"]
+radius = 14.0
 
-[node name="EndArea" type="Area2D"]
+[sub_resource type="Animation" id="Animation_w4rj4"]
+resource_name = "Float"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Portal:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 5),
+"transitions": PackedFloat32Array(0.378929, 1.6245, 1),
+"update": 0,
+"values": [Vector2(0, 4), Vector2(0, -5), Vector2(0, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_1foyh"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ofu6b"]
+_data = {
+&"Float": SubResource("Animation_w4rj4"),
+&"RESET": SubResource("Animation_1foyh")
+}
+
+[node name="EndArea" type="Node2D" node_paths=PackedStringArray("area")]
+script = ExtResource("1_6nwac")
+area = NodePath("Portal")
+
+[node name="Portal" type="Area2D" parent="."]
+position = Vector2(0, 4)
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("1_6nwac")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_sffr1")
+[node name="Sprite2D" type="Sprite2D" parent="Portal"]
+scale = Vector2(0.171875, 0.171875)
+texture = ExtResource("2_w4rj4")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -32.0
-offset_top = -32.0
-offset_right = 32.0
-offset_bottom = 32.0
-color = Color(0.499832, 0.765697, 0.426416, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
+shape = SubResource("CircleShape2D_1foyh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ofu6b")
+}
+autoplay = "Float"

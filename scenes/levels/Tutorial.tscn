@@ -299,5 +299,5 @@ offset_bottom = 512.0
 color = Color(0.0885599, 0.0885599, 0.0885599, 1)
 
 [node name="EndArea" parent="." instance=ExtResource("8_61wbf")]
-position = Vector2(4256, 159)
+position = Vector2(4256, 175)
 next_scene = ExtResource("9_elm2s")
