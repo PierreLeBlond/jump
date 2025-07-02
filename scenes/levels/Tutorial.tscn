@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://dknoupu2hcn86"]
+[gd_scene load_steps=14 format=4 uid="uid://dknoupu2hcn86"]
 
 [ext_resource type="Script" uid="uid://bfshhb0w7ohbq" path="res://scripts/levels/Tutorial.gd" id="1_7ktok"]
 [ext_resource type="PackedScene" uid="uid://b8dorlf7ulbwy" path="res://scenes/Soubalien.tscn" id="1_off5s"]
@@ -8,6 +8,7 @@
 [ext_resource type="TileSet" uid="uid://ctswl0qjf65k5" path="res://tilesets/Environment.tres" id="6_61wbf"]
 [ext_resource type="PackedScene" uid="uid://cgexvf3ochgd8" path="res://scenes/areas/EndArea.tscn" id="8_61wbf"]
 [ext_resource type="PackedScene" uid="uid://mfaxiu15banr" path="res://scenes/ui/TitleScreen.tscn" id="9_elm2s"]
+[ext_resource type="PackedScene" uid="uid://mgk4rkf8x4no" path="res://scenes/ui/TransitionMask.tscn" id="9_vvfd6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0t4of"]
 size = Vector2(256, 64.75)
@@ -21,8 +22,14 @@ size = Vector2(53, 512)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ktok"]
 size = Vector2(256, 64)
 
-[node name="Tutorial" type="Node"]
+[node name="Tutorial" type="Node" node_paths=PackedStringArray("transition_mask")]
 script = ExtResource("1_7ktok")
+transition_mask = NodePath("CanvasLayer/TransitionMask")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TransitionMask" parent="CanvasLayer" node_paths=PackedStringArray("target") instance=ExtResource("9_vvfd6")]
+target = NodePath("../../Player")
 
 [node name="Soubalien" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_off5s")]
 position = Vector2(3223, 277)
@@ -260,7 +267,7 @@ position = Vector2(0, 480)
 shape = SubResource("RectangleShape2D_7ktok")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(190, 383)
+position = Vector2(163, 363)
 limit_left = 0
 limit_right = 4352
 limit_bottom = 512
@@ -272,17 +279,9 @@ drag_bottom_margin = 1.0
 editor_draw_drag_margin = true
 
 [node name="Player" parent="." instance=ExtResource("2_dlxjb")]
-position = Vector2(190, 383)
+position = Vector2(163, 363)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
-remote_path = NodePath("../../Camera2D")
-update_rotation = false
-update_scale = false
-
-[node name="Player2" parent="." instance=ExtResource("2_dlxjb")]
-position = Vector2(190, 383)
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player2"]
 remote_path = NodePath("../../Camera2D")
 update_rotation = false
 update_scale = false

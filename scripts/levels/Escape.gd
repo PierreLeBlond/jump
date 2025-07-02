@@ -17,7 +17,7 @@ var cutscene_camera: Camera2D
 func _ready() -> void:
     soubalien.captured_player.connect(on_player_captured)
     soubalien.ray_captured_player.connect(on_ray_captured_player)
-    transition_mask.transition_out(player)
+    transition_mask.transition_out()
 
 func end_game() -> void:
     var tree = get_tree()
@@ -29,7 +29,7 @@ func play_death_transition() -> void:
     var tween = create_tween()
     tween.tween_property(player, "scale", Vector2(0, 0), 1.0)
 
-    await transition_mask.transition_in(player)
+    await transition_mask.transition_in()
     end_game()
 
 func on_player_captured() -> void:
