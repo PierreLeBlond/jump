@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://dknoupu2hcn86"]
+[gd_scene load_steps=13 format=4 uid="uid://dknoupu2hcn86"]
 
 [ext_resource type="Script" uid="uid://bfshhb0w7ohbq" path="res://scripts/levels/Tutorial.gd" id="1_7ktok"]
 [ext_resource type="PackedScene" uid="uid://b8dorlf7ulbwy" path="res://scenes/Soubalien.tscn" id="1_off5s"]
@@ -6,8 +6,7 @@
 [ext_resource type="Script" uid="uid://k5d6a3o16mgt" path="res://scripts/ui/TextRevealArea.gd" id="4_af4br"]
 [ext_resource type="Script" uid="uid://d3gg6d2i1ygp5" path="res://scripts/area/UnlockArea.gd" id="5_0t4of"]
 [ext_resource type="TileSet" uid="uid://ctswl0qjf65k5" path="res://tilesets/Environment.tres" id="6_61wbf"]
-[ext_resource type="PackedScene" uid="uid://cgexvf3ochgd8" path="res://scenes/areas/EndArea.tscn" id="8_61wbf"]
-[ext_resource type="PackedScene" uid="uid://mfaxiu15banr" path="res://scenes/ui/TitleScreen.tscn" id="9_elm2s"]
+[ext_resource type="PackedScene" uid="uid://cgexvf3ochgd8" path="res://scenes/contraptions/Portal.tscn" id="8_61wbf"]
 [ext_resource type="PackedScene" uid="uid://mgk4rkf8x4no" path="res://scenes/ui/TransitionMask.tscn" id="9_vvfd6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0t4of"]
@@ -22,9 +21,11 @@ size = Vector2(53, 512)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ktok"]
 size = Vector2(256, 64)
 
-[node name="Tutorial" type="Node" node_paths=PackedStringArray("transition_mask")]
+[node name="Tutorial" type="Node" node_paths=PackedStringArray("transition_mask", "endPortal", "spawnPortal")]
 script = ExtResource("1_7ktok")
 transition_mask = NodePath("CanvasLayer/TransitionMask")
+endPortal = NodePath("EndPortal")
+spawnPortal = NodePath("SpawnPortal")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -222,12 +223,12 @@ script = ExtResource("4_af4br")
 
 [node name="Text" type="RichTextLabel" parent="TextRevealAreas/10"]
 z_index = -10
-offset_left = 177.0
-offset_top = 97.0
-offset_right = 618.0
-offset_bottom = 151.0
+offset_left = 169.0
+offset_top = 48.0
+offset_right = 610.0
+offset_bottom = 102.0
 bbcode_enabled = true
-text = "Reach the zone :"
+text = "Reach the portal :"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/10"]
 position = Vector2(0, 256)
@@ -267,7 +268,7 @@ position = Vector2(0, 480)
 shape = SubResource("RectangleShape2D_7ktok")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(163, 363)
+position = Vector2(3054, 403)
 limit_left = 0
 limit_right = 4352
 limit_bottom = 512
@@ -277,14 +278,6 @@ drag_vertical_enabled = true
 drag_top_margin = 1.0
 drag_bottom_margin = 1.0
 editor_draw_drag_margin = true
-
-[node name="Player" parent="." instance=ExtResource("2_dlxjb")]
-position = Vector2(163, 363)
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
-remote_path = NodePath("../../Camera2D")
-update_rotation = false
-update_scale = false
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 scale = Vector2(0.25, 0.25)
@@ -298,6 +291,18 @@ offset_right = 4352.0
 offset_bottom = 512.0
 color = Color(0.0885599, 0.0885599, 0.0885599, 1)
 
-[node name="EndArea" parent="." instance=ExtResource("8_61wbf")]
+[node name="EndPortal" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_61wbf")]
 position = Vector2(4256, 175)
-next_scene = ExtResource("9_elm2s")
+player = NodePath("../Player")
+
+[node name="SpawnPortal" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_61wbf")]
+position = Vector2(256, 384)
+player = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("2_dlxjb")]
+position = Vector2(3054, 403)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+update_rotation = false
+update_scale = false

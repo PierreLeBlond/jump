@@ -11,24 +11,26 @@ class_name Escape
 @export var soubalien_path_speed: float = 1.0 / 30.0
 
 @export var transition_mask: TransitionMask
+@export var endPortal: Portal
+@export var spawnPortal: Portal
 
 var cutscene_camera: Camera2D
 
 func _ready() -> void:
     soubalien.captured_player.connect(on_player_captured)
     soubalien.ray_captured_player.connect(on_ray_captured_player)
+
+    endPortal.spawn()
+    endPortal.player_captured.connect(on_player_captured)
+
     transition_mask.transition_out()
+    spawnPortal.release_player()
 
 func end_game() -> void:
     var tree = get_tree()
     tree.change_scene_to_file("res://scenes/ui/TitleScreen.tscn")
 
 func play_death_transition() -> void:
-    player.process_mode = Node.PROCESS_MODE_DISABLED
-
-    var tween = create_tween()
-    tween.tween_property(player, "scale", Vector2(0, 0), 1.0)
-
     await transition_mask.transition_in()
     end_game()
 

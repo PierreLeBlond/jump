@@ -16,7 +16,7 @@ func transition_in() -> void:
     material.set_shader_parameter("mask_radius", mask_radius)
 
     var tween = create_tween()
-    tween.tween_property(material, "shader_parameter/mask_radius", 0, 1.0)
+    tween.tween_property(material, "shader_parameter/mask_radius", 0, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
     await tween.finished
 
 func transition_out() -> void:
@@ -24,7 +24,7 @@ func transition_out() -> void:
 
     var mask_radius = get_viewport_rect().size.length()
     var tween = create_tween()
-    tween.tween_property(material, "shader_parameter/mask_radius", mask_radius, 1.0)
+    tween.tween_property(material, "shader_parameter/mask_radius", mask_radius, 1.0).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
     await tween.finished
 
 func _process(delta: float) -> void:

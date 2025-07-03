@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Template</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #fff;
+    "
+  >
+    <canvas
+      id="canvas"
+      style="box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5)"
+    ></canvas>
+    <script src="$GODOT_URL"></script>
+    <script>
+      var engine = new Engine($GODOT_CONFIG);
+      engine.startGame();
+    </script>
+  </body>
+</html>

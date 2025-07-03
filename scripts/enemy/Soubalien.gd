@@ -31,7 +31,13 @@ signal ray_captured_player()
 
 @export var cone_polygon: Polygon2D
 
-var has_captured_player_in_ray: bool = false
+enum SoubalienState {
+  IDLE,
+  CAPTURING_PLAYER,
+  CAPTURING_PLAYER_IN_RAY,
+}
+
+var state: SoubalienState = SoubalienState.IDLE
 
 @export var left_corner_marker: Node2D
 @export var right_corner_marker: Node2D
@@ -62,14 +68,30 @@ func on_body_entered(body: Node2D) -> void:
     if (body != player):
         return
 
-    has_captured_player_in_ray = false
+    if (state != SoubalienState.CAPTURING_PLAYER_IN_RAY):
+      return
+
+    state = SoubalienState.CAPTURING_PLAYER
+
+    player.is_externally_controlled = true
+    var tween = create_tween()
+    tween.tween_property(player, "scale", Vector2(0, 0), 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+    tween.parallel().tween_property(player, "modulate:a", 0.0, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+
+    await tween.finished
+
     captured_player.emit()
+
 
 func on_ray_area_body_entered(body: Node2D) -> void:
     if (body != player):
         return
 
-    has_captured_player_in_ray = true
+    if (state != SoubalienState.IDLE):
+        return
+
+    state = SoubalienState.CAPTURING_PLAYER_IN_RAY
+
     player.set_collision_mask_value(1, false)
     var tween = create_tween()
     tween.tween_property(player, "scale", Vector2(0.8, 0.8), 0.2)
@@ -87,7 +109,20 @@ func get_angle_from_cone(point: Vector2) -> float:
 
     return 0
 
+
+func restore_player() -> void:
+    player.is_externally_controlled = false
+    player.external_accelerations = {}
+    player.set_collision_mask_value(1, true)
+    player.scale = Vector2(1, 1)
+    player.modulate.a = 1
+
+    state = SoubalienState.IDLE
+
 func get_vertical_acceleration() -> float:
+  if state == SoubalienState.CAPTURING_PLAYER:
+    return 0
+
   var vertical_distance_to_player = global_position.y - player.global_position.y
   if vertical_distance_to_player > 0:
     return 0
@@ -105,7 +140,7 @@ func get_vertical_acceleration() -> float:
   return -gravity * factor
 
 func get_lateral_acceleration() -> float:
-  if !has_captured_player_in_ray:
+  if state != SoubalienState.CAPTURING_PLAYER_IN_RAY:
     return 0
 
   var horizontal_distance_to_player = global_position.x - player.global_position.x
@@ -123,3 +158,6 @@ func _physics_process(_delta: float) -> void:
     return
 
   player.external_accelerations["gravity_pull"] = Vector2(get_lateral_acceleration(), get_vertical_acceleration())
+
+  if state == SoubalienState.CAPTURING_PLAYER:
+    player.global_position = lerp(player.global_position, area.global_position, 0.01)

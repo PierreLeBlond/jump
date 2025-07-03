@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=4 uid="uid://3cc4lk5a24vf"]
+
+[ext_resource type="Script" uid="uid://njqbyshx66uo" path="res://scripts/levels/tests/PortalTest.gd" id="1_05k20"]
+[ext_resource type="PackedScene" uid="uid://cgexvf3ochgd8" path="res://scenes/contraptions/Portal.tscn" id="2_ft4vw"]
+[ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="3_ghhoq"]
+[ext_resource type="TileSet" uid="uid://ctswl0qjf65k5" path="res://tilesets/Environment.tres" id="4_wjd5r"]
+
+[node name="PortalScene" type="Node2D" node_paths=PackedStringArray("portal")]
+script = ExtResource("1_05k20")
+portal = NodePath("Portal")
+
+[node name="Portal" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_ft4vw")]
+position = Vector2(519, 287)
+player = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("3_ghhoq")]
+position = Vector2(361, 318)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAMAAAAFAAAAAAABAAMAAAAFAAAAAAACAAMAAAAFAAAAAAADAAMAAAAFAAAAAAAEAAMAAAAFAAAAAAAFAAMAAAAFAAAAAAAGAAMAAAAFAAAAAAAHAAMAAAAFAAAAAAA=")
+tile_set = ExtResource("4_wjd5r")
