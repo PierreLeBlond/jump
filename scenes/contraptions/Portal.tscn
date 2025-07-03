@@ -35,6 +35,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_f8kse"]
 resource_name = "Disappear"
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -42,8 +43,8 @@ tracks/0/path = NodePath("AnimatedPortal:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.85, 1),
-"transitions": PackedFloat32Array(0.153893, 1, 1),
+"times": PackedFloat32Array(0, 0.666667, 0.8),
+"transitions": PackedFloat32Array(0.307786, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.4, 1.4), Vector2(1e-05, 1e-05)]
 }

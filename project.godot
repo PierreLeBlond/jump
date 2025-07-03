@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Jump"
-run/main_scene="uid://dknoupu2hcn86"
+run/main_scene="uid://mfaxiu15banr"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/image="uid://c4jco17wov1w7"
 config/icon="res://icon.svg"
