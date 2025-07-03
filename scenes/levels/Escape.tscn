@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://du3h5s2qmlptu"]
+[gd_scene load_steps=21 format=4 uid="uid://du3h5s2qmlptu"]
 
 [ext_resource type="Script" uid="uid://bhswxscxn2py5" path="res://scripts/levels/Escape.gd" id="1_2duye"]
 [ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="1_ij67t"]
@@ -12,6 +12,43 @@
 [ext_resource type="Script" uid="uid://bbujjd3t0eg6e" path="res://scripts/camera/Camera.gd" id="10_aanwh"]
 [ext_resource type="Texture2D" uid="uid://brr6cvf8hvs5y" path="res://assets/spritesheets/note/0012.png" id="10_i654n"]
 [ext_resource type="Script" uid="uid://juvvajbrsiyg" path="res://scripts/ui/hud/CollectorLabel.gd" id="12_i654n"]
+
+[sub_resource type="Animation" id="Animation_i654n"]
+resource_name = "pulse"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1.8025, 1, 1),
+"update": 0,
+"values": [Vector2(46, 46), Vector2(52, 52), Vector2(46, 46)]
+}
+
+[sub_resource type="Animation" id="Animation_gyw86"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(46, 46)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gyw86"]
+_data = {
+&"RESET": SubResource("Animation_gyw86"),
+&"pulse": SubResource("Animation_i654n")
+}
 
 [sub_resource type="Curve2D" id="Curve2D_i654n"]
 _data = {
@@ -43,20 +80,25 @@ spawnPortal = NodePath("SpawnPortal")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD" node_paths=PackedStringArray("animation_player", "count_label", "collector")]
 offset_left = 856.0
 offset_top = 27.0
 offset_right = 969.0
 offset_bottom = 67.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+script = ExtResource("12_i654n")
+animation_player = NodePath("AnimationPlayer")
+count_label = NodePath("CollectorLabel")
+collector = NodePath("../../Player/NoteCollectorArea2D")
 
 [node name="TextureRect" type="TextureRect" parent="HUD/HBoxContainer"]
 texture_filter = 4
+custom_minimum_size = Vector2(46, 46)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("10_i654n")
-expand_mode = 2
+expand_mode = 1
 
 [node name="EgalLabel" type="Label" parent="HUD/HBoxContainer"]
 layout_mode = 2
@@ -65,14 +107,17 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "="
 
-[node name="CollectorLabel" type="Label" parent="HUD/HBoxContainer" node_paths=PackedStringArray("collector")]
+[node name="CollectorLabel" type="Label" parent="HUD/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "00"
-script = ExtResource("12_i654n")
-collector = NodePath("../../../Player/NoteCollectorArea2D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/HBoxContainer"]
+libraries = {
+&"": SubResource("AnimationLibrary_gyw86")
+}
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
