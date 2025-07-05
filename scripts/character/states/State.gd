@@ -34,7 +34,7 @@ func flip_sprite(direction: int) -> void:
     )
 
 func get_lateral_velocity(delta: float, current_velocity: float, maximum_velocity: float, acceleration_factor: float, deceleration_factor: float) -> float:
-    var direction = parent.movement_controller.get_direction()
+    var direction = parent.movement_controller.get_direction() if parent.unlocked_keys.has_unlocked_move() else 0
 
     # Deceleration
     if (direction == 0):
@@ -99,6 +99,9 @@ func enter(_previous_state: State, _delta: float) -> void:
 
 func get_next_state(_delta: float) -> State:
     return null
+
+func is_allowed() -> bool:
+    return true
 
 func update(_delta: float) -> void:
     pass

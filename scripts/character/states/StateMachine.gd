@@ -27,7 +27,7 @@ func _ready() -> void:
 func handle_physics(delta: float) -> void:
     var new_state = current_state.get_next_state(delta)
 
-    if (new_state != null):
+    if (new_state != null && new_state.is_allowed()):
         change_state(new_state, delta)
 
     current_state.update(delta)

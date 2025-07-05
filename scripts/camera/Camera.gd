@@ -32,6 +32,9 @@ func move_to(value: Vector2, duration: float, lock: bool) -> void:
 
   position_tween = create_tween()
   position_tween.tween_property(self, "position", value, duration)
+
+  await position_tween.finished
+
   if lock:
     is_position_locked = true
     position_tween.tween_callback(func(): is_position_locked = false)
@@ -44,7 +47,7 @@ func switch_to_cutscene_camera() -> Camera2D:
     cutscene_camera = Camera2D.new()
     cutscene_camera.position = get_screen_center_position()
     cutscene_camera.zoom = zoom
-    cutscene_camera.limit_bottom = limit_bottom
+    # cutscene_camera.limit_bottom = limit_bottom
 
     # TODO: Should the cutscene camera be put elsewhere in the tree?
     get_parent().add_child(cutscene_camera)
@@ -56,11 +59,14 @@ func switch_to_main_camera() -> void:
   if cutscene_camera == null:
     return
 
+  var target_position = get_screen_center_position()
+
   var tween = create_tween()
-  tween.tween_property(cutscene_camera, "position", position, 1.0)
-  tween.tween_property(cutscene_camera, "zoom", zoom, 1.0)
+  tween.tween_property(cutscene_camera, "position", target_position, 1.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+  tween.parallel().tween_property(cutscene_camera, "zoom", zoom, 1.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
   tween.tween_callback(func():
     cutscene_camera.queue_free()
     cutscene_camera = null
     make_current()
   )
+  await tween.finished

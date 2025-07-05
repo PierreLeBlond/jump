@@ -1,0 +1,111 @@
+[gd_scene load_steps=6 format=3 uid="uid://dmuqgr6qb2s3b"]
+
+[ext_resource type="Script" uid="uid://bpagtnyyanxun" path="res://scripts/ui/CinematicBars.gd" id="1_ijgtr"]
+
+[sub_resource type="Animation" id="Animation_t1rdm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpperBar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -40)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LowerBar:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 512)]
+}
+
+[sub_resource type="Animation" id="Animation_wyyb8"]
+resource_name = "reveal"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpperBar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -40), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LowerBar:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 512), Vector2(0, 472)]
+}
+
+[sub_resource type="Animation" id="Animation_7rfev"]
+resource_name = "unreveal"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LowerBar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 472), Vector2(0, 512)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UpperBar:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -40)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6u7lj"]
+_data = {
+&"RESET": SubResource("Animation_t1rdm"),
+&"reveal": SubResource("Animation_wyyb8"),
+&"unreveal": SubResource("Animation_7rfev")
+}
+
+[node name="BlackBars" type="CanvasLayer" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("1_ijgtr")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="UpperBar" type="ColorRect" parent="."]
+offset_right = 1024.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
+[node name="LowerBar" type="ColorRect" parent="."]
+offset_top = 472.0
+offset_right = 1024.0
+offset_bottom = 512.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6u7lj")
+}

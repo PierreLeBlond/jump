@@ -51,9 +51,9 @@ script = ExtResource("4_af4br")
 [node name="Text" type="RichTextLabel" parent="TextRevealAreas/1"]
 z_index = -10
 offset_left = -159.0
-offset_top = 190.0
+offset_top = 173.0
 offset_right = 497.0
-offset_bottom = 244.0
+offset_bottom = 227.0
 bbcode_enabled = true
 text = "Use [b]left[/b] and [b]right[/b] arrow to walk around"
 horizontal_alignment = 2
@@ -69,10 +69,10 @@ script = ExtResource("4_af4br")
 
 [node name="Text" type="RichTextLabel" parent="TextRevealAreas/2"]
 z_index = -10
-offset_left = 580.0
-offset_top = 245.0
-offset_right = 752.0
-offset_bottom = 299.0
+offset_left = 408.0
+offset_top = 241.0
+offset_right = 580.0
+offset_bottom = 295.0
 bbcode_enabled = true
 text = "Keep going"
 horizontal_alignment = 2
@@ -87,14 +87,14 @@ collision_mask = 2
 script = ExtResource("4_af4br")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/3"]
-position = Vector2(760, 256)
+position = Vector2(511, 256)
 shape = SubResource("RectangleShape2D_af4br")
 
 [node name="Text" type="RichTextLabel" parent="TextRevealAreas/3"]
 z_index = -10
-offset_left = 582.0
+offset_left = 400.0
 offset_top = 305.0
-offset_right = 754.0
+offset_right = 572.0
 offset_bottom = 359.0
 bbcode_enabled = true
 text = "Nice,"
@@ -107,16 +107,16 @@ script = ExtResource("4_af4br")
 
 [node name="Text" type="RichTextLabel" parent="TextRevealAreas/4"]
 z_index = -10
-offset_left = 602.0
+offset_left = 420.0
 offset_top = 301.0
-offset_right = 1138.0
+offset_right = 956.0
 offset_bottom = 355.0
 bbcode_enabled = true
 text = "now run by holding [b]Ctrl[/b]"
 horizontal_alignment = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/4"]
-position = Vector2(833, 256)
+position = Vector2(575, 256)
 shape = SubResource("RectangleShape2D_af4br")
 
 [node name="5" type="Area2D" parent="TextRevealAreas"]
@@ -237,7 +237,7 @@ shape = SubResource("RectangleShape2D_af4br")
 [node name="UnlockAreas" type="Node" parent="."]
 
 [node name="UnlockRunArea" type="Area2D" parent="UnlockAreas"]
-position = Vector2(833, 256)
+position = Vector2(575, 256)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("5_0t4of")
@@ -269,6 +269,7 @@ shape = SubResource("RectangleShape2D_7ktok")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(3054, 403)
+process_callback = 0
 limit_left = 0
 limit_right = 4352
 limit_bottom = 512

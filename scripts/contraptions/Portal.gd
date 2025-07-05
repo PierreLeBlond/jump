@@ -49,7 +49,7 @@ func release_player() -> void:
   player.velocity = Vector2.UP * 700
   player.is_externally_controlled = false
   is_player_captured = false
-  await disappear()
+  disappear()
 
 
 func _physics_process(delta: float) -> void:

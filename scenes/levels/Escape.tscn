@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://du3h5s2qmlptu"]
+[gd_scene load_steps=25 format=4 uid="uid://du3h5s2qmlptu"]
 
 [ext_resource type="Script" uid="uid://bhswxscxn2py5" path="res://scripts/levels/Escape.gd" id="1_2duye"]
 [ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="1_ij67t"]
@@ -12,6 +12,22 @@
 [ext_resource type="Script" uid="uid://bbujjd3t0eg6e" path="res://scripts/camera/Camera.gd" id="10_aanwh"]
 [ext_resource type="Texture2D" uid="uid://brr6cvf8hvs5y" path="res://assets/spritesheets/note/0012.png" id="10_i654n"]
 [ext_resource type="Script" uid="uid://juvvajbrsiyg" path="res://scripts/ui/hud/CollectorLabel.gd" id="12_i654n"]
+[ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/CinematicBars.tscn" id="13_gyw86"]
+
+[sub_resource type="Animation" id="Animation_gyw86"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(46, 46)]
+}
 
 [sub_resource type="Animation" id="Animation_i654n"]
 resource_name = "pulse"
@@ -27,21 +43,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1.8025, 1, 1),
 "update": 0,
 "values": [Vector2(46, 46), Vector2(52, 52), Vector2(46, 46)]
-}
-
-[sub_resource type="Animation" id="Animation_gyw86"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:custom_minimum_size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(46, 46)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gyw86"]
@@ -68,15 +69,129 @@ scenes/1/scene = ExtResource("7_u2p7o")
 [sub_resource type="TileSet" id="TileSet_t6keq"]
 sources/0 = SubResource("TileSetScenesCollectionSource_fs813")
 
-[node name="Escape" type="Node2D" node_paths=PackedStringArray("player", "camera", "soubalien", "soubalien_path_follow", "transition_mask", "endPortal", "spawnPortal")]
+[sub_resource type="Animation" id="Animation_yaos7"]
+length = 2.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Countdown/1:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.251994, 0.751994, 1.25199, 1.50199),
+"transitions": PackedFloat32Array(40, 1, 40, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Countdown/2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.251994, 0.751994, 1.25199, 1.50199, 1.75199),
+"transitions": PackedFloat32Array(40, 1, 40, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Countdown/3:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.50199, 1.75199, 2.00199),
+"transitions": PackedFloat32Array(40, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Countdown/4:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.75199, 2.00199, 2.25199),
+"transitions": PackedFloat32Array(40, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_aanwh"]
+resource_name = "countdown"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Countdown/1:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.25),
+"transitions": PackedFloat32Array(1, 40, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Countdown/2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.25, 1.5),
+"transitions": PackedFloat32Array(40, 1, 40, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Countdown/3:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.25, 1.5, 1.75),
+"transitions": PackedFloat32Array(40, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Countdown/4:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.5, 1.75, 2),
+"transitions": PackedFloat32Array(40, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_owgma"]
+_data = {
+&"RESET": SubResource("Animation_yaos7"),
+&"countdown": SubResource("Animation_aanwh")
+}
+
+[node name="Escape" type="Node2D" node_paths=PackedStringArray("player", "camera", "soubalien", "soubalien_path_follow", "transition_mask", "end_portal", "spawn_portal", "countdown_animation_player", "cinematic_bars", "hud")]
 script = ExtResource("1_2duye")
 player = NodePath("Player")
 camera = NodePath("Camera2D")
 soubalien = NodePath("Path2D/PathFollow2D/Soubalien")
 soubalien_path_follow = NodePath("Path2D/PathFollow2D")
 transition_mask = NodePath("CanvasLayer/TransitionMask")
-endPortal = NodePath("EndPortal")
-spawnPortal = NodePath("SpawnPortal")
+end_portal = NodePath("EndPortal")
+spawn_portal = NodePath("SpawnPortal")
+countdown_animation_player = NodePath("AnimationPlayer")
+cinematic_bars = NodePath("CinematicBars")
+hud = NodePath("HUD/HBoxContainer")
+
+[node name="CinematicBars" parent="." instance=ExtResource("13_gyw86")]
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -171,7 +286,8 @@ tile_set = ExtResource("5_mmd2o")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(221, 457)
-limit_left = 0
+process_callback = 0
+limit_left = -10000
 limit_bottom = 512
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
@@ -192,3 +308,82 @@ shape = SubResource("RectangleShape2D_5ax1d")
 tile_map_data = PackedByteArray("AAA4ABoAAAAAAAAAAQA5ABgAAAAAAAAAAQA0ABAAAAAAAAAAAQA0AA4AAAAAAAAAAQA2AAwAAAAAAAAAAQBuABYAAAAAAAAAAQBvABQAAAAAAAAAAQB2ABIAAAAAAAAAAQB3ABAAAAAAAAAAAQB+AA4AAAAAAAAAAQB/AAwAAAAAAAAAAQCZABkAAAAAAAAAAQCZABcAAAAAAAAAAQCZABUAAAAAAAAAAQCOABMAAAAAAAAAAQCOABEAAAAAAAAAAQCOAA8AAAAAAAAAAQCOAA0AAAAAAAAAAQCZAAcAAAAAAAAAAQCZAAUAAAAAAAAAAQCZAAMAAAAAAAAAAQCZAAEAAAAAAAAAAQCOAPv/AAAAAAAAAQCOAPn/AAAAAAAAAQCOAPf/AAAAAAAAAQCOAPX/AAAAAAAAAQCeAPn/AAAAAAAAAQCeAPz/AAAAAAAAAQCeAP//AAAAAAAAAQC2AA0AAAAAAAAAAQAXABcAAAAAAAAAAQAZABUAAAAAAAAAAQAbABYAAAAAAAAAAQAeABgAAAAAAAAAAQAjABEAAAAAAAAAAQAmABQAAAAAAAAAAQAoABYAAAAAAAAAAQA2ABwAAAAAAAAAAQA5ABUAAAAAAAAAAQA4ABIAAAAAAAAAAQA2AA8AAAAAAAAAAQA5AAkAAAAAAAAAAQA7AAwAAAAAAAAAAQBJABIAAAAAAAAAAQBHABIAAAAAAAAAAQBFABIAAAAAAAAAAQBNAAsAAAAAAAAAAQBLAA0AAAAAAAAAAQBPAA4AAAAAAAAAAQBRAA4AAAAAAAAAAQBTAA4AAAAAAAAAAQBZAAcAAAAAAAAAAQBWAAkAAAAAAAAAAQCEAAgAAAAAAAAAAQCGAAoAAAAAAAAAAQCYABIAAAAAAAAAAQCVABAAAAAAAAAAAQCTABQAAAAAAAAAAQCPAAgAAAAAAAAAAQCRAAQAAAAAAAAAAQCVAAUAAAAAAAAAAQCYAP3/AAAAAAAAAQCVAPj/AAAAAAAAAQCSAPr/AAAAAAAAAQCQAPL/AAAAAAAAAQCTAO//AAAAAAAAAQCVAPL/AAAAAAAAAQCfABwAAAAAAAAAAQCcABoAAAAAAAAAAQCcABIAAAAAAAAAAQCcABYAAAAAAAAAAQCgAA4AAAAAAAAAAQC1ABAAAAAAAAAAAQC4AAoAAAAAAAAAAQC7AAoAAAAAAAAAAQA=")
 tile_set = SubResource("TileSet_t6keq")
 collision_enabled = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_owgma")
+}
+
+[node name="Countdown" type="CanvasLayer" parent="."]
+
+[node name="1" type="Label" parent="Countdown"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.5
+offset_top = -57.0
+offset_right = 19.5
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 120
+text = "1"
+
+[node name="2" type="Label" parent="Countdown"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -53.0
+offset_top = -57.0
+offset_right = 53.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 120
+text = "2"
+
+[node name="3" type="Label" parent="Countdown"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.5
+offset_top = -57.0
+offset_right = 19.5
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 120
+text = "3"
+
+[node name="4" type="Label" parent="Countdown"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.5
+offset_top = -57.0
+offset_right = 19.5
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 120
+text = "4"

@@ -29,6 +29,9 @@ func get_next_state(_delta: float) -> State:
 
     return null
 
+func is_allowed() -> bool:
+    return parent.unlocked_keys.has_unlocked_jump()
+
 func get_parameters() -> Dictionary:
     return {
         "jump_height": parent.projectile_parameters.double_jump_height,

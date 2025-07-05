@@ -1,8 +1,172 @@
-[gd_scene load_steps=4 format=3 uid="uid://mfaxiu15banr"]
+[gd_scene load_steps=9 format=3 uid="uid://mfaxiu15banr"]
 
 [ext_resource type="Script" uid="uid://cq404dg781ufs" path="res://scripts/ui/TitleScreen.gd" id="1_ny3vc"]
 [ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/space.tres" id="2_xnmwc"]
 [ext_resource type="Texture2D" uid="uid://dj6bhubvlhssn" path="res://assets/sprites/alien.png" id="3_j2lur"]
+
+[sub_resource type="Gradient" id="Gradient_xnmwc"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j2lur"]
+gradient = SubResource("Gradient_xnmwc")
+fill_from = Vector2(0.769231, 0.452991)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="Animation" id="Animation_j2lur"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(68, 23)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VBoxContainer/TutorialButton:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VBoxContainer/EscapeLevelButton:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GradientBackground:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("TextureRect:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(668, 182)]
+}
+
+[sub_resource type="Animation" id="Animation_xnmwc"]
+resource_name = "intro"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(0.435275, 1),
+"update": 0,
+"values": [Vector2(-167, 23), Vector2(68, 23)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VBoxContainer/TutorialButton:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.266667, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VBoxContainer/EscapeLevelButton:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GradientBackground:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.266667, 1.26667),
+"transitions": PackedFloat32Array(1.7411, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("TextureRect:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.266667, 1.26667),
+"transitions": PackedFloat32Array(2.63902, 1),
+"update": 0,
+"values": [Vector2(668, 490), Vector2(668, 182)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tbfit"]
+_data = {
+&"RESET": SubResource("Animation_j2lur"),
+&"intro": SubResource("Animation_xnmwc")
+}
 
 [node name="TitleScreen" type="Control" node_paths=PackedStringArray("tutorial_button", "escape_level_button")]
 layout_mode = 3
@@ -21,12 +185,20 @@ offset_right = 1024.0
 offset_bottom = 512.0
 color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="."]
+[node name="GradientBackground" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 34.0
-offset_top = 20.0
-offset_right = 903.0
-offset_bottom = 137.0
+offset_right = 1024.0
+offset_bottom = 512.0
+texture = SubResource("GradientTexture2D_j2lur")
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -167.0
+offset_top = 23.0
+offset_right = 702.0
+offset_bottom = 140.0
 theme = ExtResource("2_xnmwc")
 theme_override_font_sizes/font_size = 60
 text = "Untitled
@@ -40,15 +212,16 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -444.0
-offset_top = -2.0
+offset_top = -74.0
 offset_right = -190.0
-offset_bottom = 175.0
+offset_bottom = 103.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 alignment = 1
 
 [node name="TutorialButton" type="Button" parent="VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("2_xnmwc")
@@ -56,6 +229,7 @@ theme_override_font_sizes/font_size = 40
 text = "Tutorial"
 
 [node name="EscapeLevelButton" type="Button" parent="VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("2_xnmwc")
@@ -64,9 +238,15 @@ text = "Play"
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 731.0
-offset_top = 162.0
-offset_right = 1045.0
-offset_bottom = 476.0
+offset_left = 668.0
+offset_top = 489.997
+offset_right = 982.0
+offset_bottom = 803.997
 texture = ExtResource("3_j2lur")
 expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tbfit")
+}
+autoplay = "intro"

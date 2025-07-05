@@ -4,6 +4,7 @@ class_name EndArea
 
 @export var next_scene: PackedScene
 @export var area: Area2D
+@export var animationPlayer: AnimationPlayer
 
 func _ready() -> void:
     area.body_entered.connect(on_body_entered)

@@ -47,6 +47,9 @@ func get_next_state(_delta: float) -> State:
 
     return null
 
+func is_allowed() -> bool:
+    return parent.unlocked_keys.has_unlocked_jump()
+
 func update(delta: float) -> void:
     jump_pressed_time += delta
 
