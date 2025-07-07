@@ -29,7 +29,7 @@ func get_next_state(_delta: float) -> State:
     if (parent.movement_controller.wants_to_jump()):
         return jump
 
-    if (!parent.movement_controller.wants_to_move() && parent.velocity.x == 0):
+    if (!parent.movement_controller.wants_to_move()):
         return idle
 
     return null

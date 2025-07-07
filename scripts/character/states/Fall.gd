@@ -52,10 +52,10 @@ func get_next_state(_delta: float) -> State:
     if (parent.is_on_floor() && buffered_jump_remaining_frames > 0):
         return jump
 
-    if (parent.is_on_floor() && parent.movement_controller.wants_to_run()):
+    if (parent.is_on_floor() && parent.movement_controller.wants_to_run() && parent.movement_controller.wants_to_move()):
         return run
 
-    if (parent.is_on_floor() && parent.velocity.x == 0):
+    if (parent.is_on_floor() && parent.movement_controller.wants_to_move()):
         return idle
 
     if (parent.is_on_floor()):

@@ -36,5 +36,5 @@ func get_parameters() -> Dictionary:
         "jump_time": parent.projectile_parameters.fall_time,
         "maximum_lateral_velocity": parent.projectile_parameters.maximum_velocity,
         "acceleration_factor": 0,
-        "deceleration_factor": 0
+        "deceleration_factor": parent.projectile_parameters.idle_deceleration_factor
     }
