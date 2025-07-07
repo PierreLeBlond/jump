@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dlma5b0q80mlp" path="res://assets/sprites/portal.svg" id="2_w4rj4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1foyh"]
-radius = 14.0
+radius = 27.0
 
 [sub_resource type="Animation" id="Animation_g3css"]
 resource_name = "Appear"
@@ -136,7 +136,6 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimatedPortal"]
-scale = Vector2(0.171875, 0.171875)
 texture = ExtResource("2_w4rj4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedPortal"]

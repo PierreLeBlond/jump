@@ -139,7 +139,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_18dal"]
-size = Vector2(21, 40.625)
+size = Vector2(54.0001, 104)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -148,7 +148,6 @@ script = ExtResource("1_lkdrv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -4)
-scale = Vector2(0.4, 0.4)
 texture = SubResource("AtlasTexture_y7qcs")
 hframes = 16
 vframes = 16
@@ -160,7 +159,7 @@ libraries = {
 speed_scale = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-5.96046e-08, 3.55271e-15)
+position = Vector2(-5.96046e-08, 4)
 scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_18dal")
 
@@ -242,26 +241,26 @@ script = ExtResource("12_b8lor")
 max_double_jumps = 0
 
 [node name="LeftRayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(-15, 0)
+target_position = Vector2(-33, 0)
 
 [node name="RightRayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(15, 0)
+target_position = Vector2(33, 0)
 
 [node name="CornerCorrector" type="Node2D" parent="."]
 script = ExtResource("13_lkdrv")
 
 [node name="InnerRightCeilingRayCast2D" type="RayCast2D" parent="CornerCorrector"]
-position = Vector2(7.2, 0)
-target_position = Vector2(0, -30)
+position = Vector2(16, 0)
+target_position = Vector2(0, -64)
 
 [node name="OuterRightCeilingRayCast2D" type="RayCast2D" parent="CornerCorrector"]
-position = Vector2(10.4, 0)
-target_position = Vector2(0, -30)
+position = Vector2(27, 0)
+target_position = Vector2(0, -64)
 
 [node name="InnerLeftCeilingRayCast2D" type="RayCast2D" parent="CornerCorrector"]
-position = Vector2(-7.2, 0)
-target_position = Vector2(0, -30)
+position = Vector2(-16, 0)
+target_position = Vector2(0, -64)
 
 [node name="OuterLeftCeilingRayCast2D" type="RayCast2D" parent="CornerCorrector"]
-position = Vector2(-10.4, 0)
-target_position = Vector2(0, -30)
+position = Vector2(-27, 0)
+target_position = Vector2(0, -64)

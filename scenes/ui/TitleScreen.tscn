@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cq404dg781ufs" path="res://scripts/ui/TitleScreen.gd" id="1_ny3vc"]
 [ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/space.tres" id="2_xnmwc"]
-[ext_resource type="Texture2D" uid="uid://dj6bhubvlhssn" path="res://assets/sprites/alien.png" id="3_j2lur"]
+[ext_resource type="Texture2D" uid="uid://b46jv5ehu7biv" path="res://assets/sprites/feis-back.png" id="3_xnmwc"]
 
 [sub_resource type="Gradient" id="Gradient_xnmwc"]
 
@@ -83,7 +83,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(668, 182)]
+"values": [Vector2(1475, 704)]
 }
 
 [sub_resource type="Animation" id="Animation_xnmwc"]
@@ -156,10 +156,10 @@ tracks/5/path = NodePath("TextureRect:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.266667, 1.26667),
-"transitions": PackedFloat32Array(2.63902, 1),
+"times": PackedFloat32Array(0.25, 1.25),
+"transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
-"values": [Vector2(668, 490), Vector2(668, 182)]
+"values": [Vector2(1558, 1118), Vector2(1558, 715)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tbfit"]
@@ -181,26 +181,26 @@ escape_level_button = NodePath("VBoxContainer/EscapeLevelButton")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_right = 1024.0
-offset_bottom = 512.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 
 [node name="GradientBackground" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_right = 1024.0
-offset_bottom = 512.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 texture = SubResource("GradientTexture2D_j2lur")
 
 [node name="Label" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = -167.0
+offset_left = 68.0
 offset_top = 23.0
-offset_right = 702.0
-offset_bottom = 140.0
+offset_right = 1807.0
+offset_bottom = 254.0
 theme = ExtResource("2_xnmwc")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 120
 text = "Untitled
 Space & Brass game"
 
@@ -225,7 +225,7 @@ modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("2_xnmwc")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 80
 text = "Tutorial"
 
 [node name="EscapeLevelButton" type="Button" parent="VBoxContainer"]
@@ -233,16 +233,16 @@ modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("2_xnmwc")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 80
 text = "Play"
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 668.0
-offset_top = 489.997
-offset_right = 982.0
-offset_bottom = 803.997
-texture = ExtResource("3_j2lur")
+offset_left = 1558.0
+offset_top = 715.0
+offset_right = 1872.0
+offset_bottom = 1029.0
+texture = ExtResource("3_xnmwc")
 expand_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

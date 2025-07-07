@@ -147,7 +147,7 @@ func get_lateral_acceleration() -> float:
 
   var distance = abs(horizontal_distance_to_player)
 
-  var acceleration_max = 3000
+  var acceleration_max = 6000
 
   var normalized_force = clamp((32 * 32) / (distance * distance), 0.5, 1)
 

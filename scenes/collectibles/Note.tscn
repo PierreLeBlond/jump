@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://c7cwxdbbsocjq" path="res://scripts/collectibles/Note.gd" id="1_evn8i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_evn8i"]
+radius = 52.0
 
 [sub_resource type="Animation" id="Animation_0aesu"]
 length = 0.001
@@ -105,7 +106,6 @@ position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_evn8i")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_ctcmp")
 hframes = 8
 vframes = 8

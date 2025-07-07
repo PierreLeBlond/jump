@@ -42,10 +42,10 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8d8sd"]
-radius = 8.0
+radius = 15.0333
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8lxm5"]
-size = Vector2(64, 1068)
+size = Vector2(64, 1088)
 
 [sub_resource type="Gradient" id="Gradient_8lxm5"]
 colors = PackedColorArray(0.898039, 0.631373, 0.933333, 0, 0.898039, 0.631373, 0.933333, 1)
@@ -64,7 +64,7 @@ gradient = SubResource("Gradient_5ujc0")
 
 [node name="Soubalien" type="Node2D" node_paths=PackedStringArray("area", "ray_area", "cone_polygon", "left_corner_marker", "right_corner_marker")]
 script = ExtResource("1_8lxm5")
-cone_angle = 0.475
+cone_angle = 0.436
 min_ray_gravity_factor = 1.001
 max_ray_gravity_factor = 1.05
 cone_height = 412.0
@@ -84,11 +84,11 @@ autoplay = "levitate"
 position = Vector2(0, 8)
 
 [node name="Area2D" type="Area2D" parent="Animated"]
+position = Vector2(0, -8)
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Animated/Area2D"]
-position = Vector2(0, 27)
 shape = SubResource("CircleShape2D_8d8sd")
 
 [node name="RayArea2D" type="Area2D" parent="Animated"]
@@ -96,29 +96,30 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Animated/RayArea2D"]
-position = Vector2(0, 554)
+position = Vector2(0, 544)
 shape = SubResource("RectangleShape2D_8lxm5")
 
 [node name="Sprite2D" type="Sprite2D" parent="Animated"]
-position = Vector2(-32, 3)
-scale = Vector2(0.129883, 0.129883)
+position = Vector2(-59, -61)
 texture = ExtResource("2_8d8sd")
 
 [node name="ConePolygon2D" type="Polygon2D" parent="Animated"]
 modulate = Color(1, 1, 1, 0.641)
+position = Vector2(0, -33)
 texture = SubResource("GradientTexture2D_sti72")
 texture_rotation = 1.5708
-polygon = PackedVector2Array(-32, 32, -24, 27, -16, 25, -8, 24, 0, 24, 8, 24, 16, 25, 24, 27, 32, 32, 243.88, 444, -243.88, 444)
+polygon = PackedVector2Array(-32, 29, -24, 27, -16, 26, -8, 25, 0, 25, 8, 25, 16, 26, 24, 27, 32, 29, 223.952, 408, -223.952, 408)
 uv = PackedVector2Array(3.8147e-06, -64, 8, -64, 16, -64, 24, -64, 32, -64, 40, -64, 48, -64, 56, -64, 64, -64, 64, 4.76837e-07, 1.49869e-06, -4.76837e-07)
 
 [node name="RayPolygon2D" type="Polygon2D" parent="Animated"]
+position = Vector2(0, -33)
 scale = Vector2(1, 1.1)
 texture = SubResource("GradientTexture2D_efyul")
-polygon = PackedVector2Array(32, 29.0909, 32, 989.091, -32, 989.091, -32, 29.0909, -24, 24.5455, -16, 22.7273, -8, 21.8182, 0, 21.8182, 8, 21.8182, 16, 22.7273, 24, 24.5455)
+polygon = PackedVector2Array(32, 26.3636, 32, 989.091, -32, 989.091, -32, 26.3636, -24, 24.5455, -16, 23.6364, -8, 22.7273, 0, 22.7273, 8, 22.7273, 16, 23.6364, 24, 24.5455)
 uv = PackedVector2Array(64, 0, 64, 64, 5.72205e-06, 64, 0, 0, 8, 0, 16, 0, 24, 0, 32, 0, 40, 0, 48, 0, 56, 0)
 
 [node name="LeftCornerMarker2D" type="Marker2D" parent="Animated"]
-position = Vector2(-32, 32)
+position = Vector2(-32, -4)
 
 [node name="RightCornerMarker2D" type="Marker2D" parent="Animated"]
-position = Vector2(32, 32)
+position = Vector2(32, -4)
