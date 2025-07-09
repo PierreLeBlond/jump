@@ -41,8 +41,7 @@ func get_next_state(_delta: float) -> State:
     if (parent.velocity.y > 0):
         return fall
 
-    if (parent.movement_controller.cancel_jump() && jump_pressed_time > parent.projectile_parameters.minimum_jump_pressed_time && jump_pressed_time < parent.projectile_parameters.maximum_jump_pressed_time):
-        # TODO: Use a CancelJumpState with a better transition curve
+    if (parent.movement_controller.cancel_jump() && jump_pressed_time > parent.projectile_parameters.minimum_jump_pressed_time):
         return fall
 
     return null

@@ -42,9 +42,7 @@ var double_jump_maximum_velocity: float = double_jump_distance / (double_jump_ti
 
 @export var wall_friction_factor: float = 0.5
 
-@export var minimum_jump_pressed_time: float = 0.01
-
-@export var maximum_jump_pressed_time: float = 0.5
+@export var minimum_jump_pressed_time: float = 0.1
 
 @export var buffered_jump_frames: int = 6
 

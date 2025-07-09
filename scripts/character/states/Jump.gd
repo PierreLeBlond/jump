@@ -10,6 +10,8 @@ class_name Jump
 
 @export var wall_jump: State
 
+@export var canceled_jump: State
+
 var jump_pressed_time: float = 0
 
 func enter(previous_state: State, delta: float) -> void:
@@ -40,9 +42,8 @@ func get_next_state(_delta: float) -> State:
     if (parent.velocity.y > 0):
         return fall
 
-    if (parent.movement_controller.cancel_jump() && jump_pressed_time > parent.projectile_parameters.minimum_jump_pressed_time && jump_pressed_time < parent.projectile_parameters.maximum_jump_pressed_time):
-        # TODO: Use a CancelJumpState with a better transition curve
-        return fall
+    if (parent.movement_controller.cancel_jump() && jump_pressed_time > parent.projectile_parameters.minimum_jump_pressed_time):
+        return canceled_jump
     
     return null
 

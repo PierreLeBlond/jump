@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://27vdgqlbgpml"]
+[gd_scene load_steps=26 format=3 uid="uid://27vdgqlbgpml"]
 
 [ext_resource type="Script" uid="uid://b6kdes8c5suyq" path="res://scripts/character/ProjectileCharacter.gd" id="1_lkdrv"]
 [ext_resource type="Texture2D" uid="uid://dob7ahdq57tjp" path="res://assets/spritesheets/feis.png" id="2_y7qcs"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://d4ejg1k4w0j6n" path="res://scripts/character/states/Walk.gd" id="10_sfy4j"]
 [ext_resource type="Script" uid="uid://cx473tyk8323v" path="res://scripts/controls/PlayerController.gd" id="11_gv3ic"]
 [ext_resource type="Script" uid="uid://btq1tr1q7jasc" path="res://scripts/character/states/GravityField.gd" id="11_p7iby"]
+[ext_resource type="Script" uid="uid://2wnddxpocco4" path="res://scripts/character/states/CanceledJump.gd" id="12_0rnld"]
 [ext_resource type="Script" uid="uid://dimlaqea8jyy3" path="res://scripts/character/ProjectileParameters.gd" id="12_b8lor"]
 [ext_resource type="Script" uid="uid://blh3ndwp2n1vi" path="res://scripts/character/CornerCorrector.gd" id="13_lkdrv"]
 
@@ -187,12 +188,13 @@ wall_jump = NodePath("../WallJump")
 idle = NodePath("../Idle")
 animation = "Fall"
 
-[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "gravity_field", "double_jump", "wall_jump")]
+[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "gravity_field", "double_jump", "wall_jump", "canceled_jump")]
 script = ExtResource("6_srp4u")
 fall = NodePath("../Fall")
 gravity_field = NodePath("../GravityField")
 double_jump = NodePath("../DoubleJump")
 wall_jump = NodePath("../WallJump")
+canceled_jump = NodePath("../CanceledJump")
 animation = "Jump"
 
 [node name="WallJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "gravity_field", "double_jump", "next_wall_jump")]
@@ -233,6 +235,14 @@ script = ExtResource("11_p7iby")
 fall = NodePath("../Fall")
 animation = "Fall"
 
+[node name="CanceledJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "gravity_field", "double_jump", "wall_jump")]
+script = ExtResource("12_0rnld")
+fall = NodePath("../Fall")
+gravity_field = NodePath("../GravityField")
+double_jump = NodePath("../DoubleJump")
+wall_jump = NodePath("../WallJump")
+animation = "Fall"
+
 [node name="MovementController" type="Node" parent="."]
 script = ExtResource("11_gv3ic")
 
@@ -250,7 +260,7 @@ target_position = Vector2(33, 0)
 script = ExtResource("13_lkdrv")
 
 [node name="InnerRightCeilingRayCast2D" type="RayCast2D" parent="CornerCorrector"]
-position = Vector2(16, 0)
+position = Vector2(8, 0)
 target_position = Vector2(0, -64)
 
 [node name="OuterRightCeilingRayCast2D" type="RayCast2D" parent="CornerCorrector"]
@@ -258,7 +268,7 @@ position = Vector2(27, 0)
 target_position = Vector2(0, -64)
 
 [node name="InnerLeftCeilingRayCast2D" type="RayCast2D" parent="CornerCorrector"]
-position = Vector2(-16, 0)
+position = Vector2(-8, 0)
 target_position = Vector2(0, -64)
 
 [node name="OuterLeftCeilingRayCast2D" type="RayCast2D" parent="CornerCorrector"]
