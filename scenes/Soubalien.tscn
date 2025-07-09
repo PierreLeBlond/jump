@@ -45,7 +45,7 @@ _data = {
 radius = 15.0333
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8lxm5"]
-size = Vector2(64, 1088)
+size = Vector2(64, 1938)
 
 [sub_resource type="Gradient" id="Gradient_8lxm5"]
 colors = PackedColorArray(0.898039, 0.631373, 0.933333, 0, 0.898039, 0.631373, 0.933333, 1)
@@ -96,7 +96,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Animated/RayArea2D"]
-position = Vector2(0, 544)
+position = Vector2(0, 969)
 shape = SubResource("RectangleShape2D_8lxm5")
 
 [node name="Sprite2D" type="Sprite2D" parent="Animated"]
@@ -112,10 +112,10 @@ polygon = PackedVector2Array(-32, 29, -24, 27, -16, 26, -8, 25, 0, 25, 8, 25, 16
 uv = PackedVector2Array(3.8147e-06, -64, 8, -64, 16, -64, 24, -64, 32, -64, 40, -64, 48, -64, 56, -64, 64, -64, 64, 4.76837e-07, 1.49869e-06, -4.76837e-07)
 
 [node name="RayPolygon2D" type="Polygon2D" parent="Animated"]
-position = Vector2(0, -33)
-scale = Vector2(1, 1.1)
+position = Vector2(0, -51.649)
+scale = Vector2(1, 1.92056)
 texture = SubResource("GradientTexture2D_efyul")
-polygon = PackedVector2Array(32, 26.3636, 32, 989.091, -32, 989.091, -32, 26.3636, -24, 24.5455, -16, 23.6364, -8, 22.7273, 0, 22.7273, 8, 22.7273, 16, 23.6364, 24, 24.5455)
+polygon = PackedVector2Array(32, 26.3636, 33, 1035.45, -31, 1035.45, -32, 26.3636, -24, 24.5455, -16, 23.6364, -8, 22.7273, 0, 22.7273, 8, 22.7273, 16, 23.6364, 24, 24.5455)
 uv = PackedVector2Array(64, 0, 64, 64, 5.72205e-06, 64, 0, 0, 8, 0, 16, 0, 24, 0, 32, 0, 40, 0, 48, 0, 56, 0)
 
 [node name="LeftCornerMarker2D" type="Marker2D" parent="Animated"]
