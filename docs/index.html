@@ -6,22 +6,34 @@
   </head>
   <body
     style="
+      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      width: 100vw;
       background-color: #fff;
     "
   >
     <canvas
       id="canvas"
-      style="box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5)"
+      style="
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+        width: 800px !important;
+        height: 450px !important;
+      "
     ></canvas>
     <script src="index.js"></script>
     <script>
-      var engine = new Engine({"args":[],"canvasResizePolicy":1,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":93311680,"index.wasm":52126319},"focusCanvas":true,"gdextensionLibs":[]});
+      var engine = new Engine({"args":[],"canvasResizePolicy":1,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":93311888,"index.wasm":52126319},"focusCanvas":true,"gdextensionLibs":[]});
       engine.startGame();
     </script>
+    <style>
+      #canvas {
+        width: 800px !important;
+        height: 450px !important;
+      }
+    </style>
   </body>
 </html>
 
