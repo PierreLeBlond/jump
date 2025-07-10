@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=4 uid="uid://dk0ex020ahy2b"]
 
 [ext_resource type="TileSet" uid="uid://d2f3f4ukvlod0" path="res://tilesets/tree.tres" id="1_5kqq7"]
-[ext_resource type="TileSet" uid="uid://dftl5pyptmafp" path="res://tilesets/godot.tres" id="1_lp8ac"]
+[ext_resource type="TileSet" uid="uid://dftl5pyptmafp" path="res://tilesets/cloud.tres" id="1_lp8ac"]
 [ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="2_5kqq7"]
 
 [node name="Textures" type="Node2D"]

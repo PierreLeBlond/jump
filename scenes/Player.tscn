@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://27vdgqlbgpml"]
 
 [ext_resource type="Script" uid="uid://b6kdes8c5suyq" path="res://scripts/character/ProjectileCharacter.gd" id="1_lkdrv"]
-[ext_resource type="Texture2D" uid="uid://dob7ahdq57tjp" path="res://assets/spritesheets/feis.png" id="2_y7qcs"]
+[ext_resource type="Texture2D" uid="uid://dob7ahdq57tjp" path="res://assets/spritesheets/player.png" id="2_y7qcs"]
 [ext_resource type="Script" uid="uid://ssril2w6enj" path="res://scripts/character/states/StateMachine.gd" id="3_lkdrv"]
 [ext_resource type="Script" uid="uid://bucbmqmbeeupx" path="res://scripts/character/states/Idle.gd" id="4_p7iby"]
 [ext_resource type="Script" uid="uid://c710qahwivjfa" path="res://scripts/character/states/Fall.gd" id="5_0rnld"]

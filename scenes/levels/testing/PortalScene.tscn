@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://njqbyshx66uo" path="res://scripts/levels/tests/PortalTest.gd" id="1_05k20"]
 [ext_resource type="PackedScene" uid="uid://cgexvf3ochgd8" path="res://scenes/contraptions/Portal.tscn" id="2_ft4vw"]
 [ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="3_ghhoq"]
-[ext_resource type="TileSet" uid="uid://dftl5pyptmafp" path="res://tilesets/godot.tres" id="4_05k20"]
+[ext_resource type="TileSet" uid="uid://dftl5pyptmafp" path="res://tilesets/cloud.tres" id="4_05k20"]
 
 [node name="PortalScene" type="Node2D" node_paths=PackedStringArray("portal")]
 script = ExtResource("1_05k20")

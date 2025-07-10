@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://du3h5s2qmlptu"]
+[gd_scene load_steps=28 format=4 uid="uid://du3h5s2qmlptu"]
 
 [ext_resource type="Script" uid="uid://bhswxscxn2py5" path="res://scripts/levels/Escape.gd" id="1_2duye"]
 [ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="1_ij67t"]
@@ -9,11 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://4wsynq3xc0sr" path="res://scenes/collectibles/Note.tscn" id="7_u2p7o"]
 [ext_resource type="PackedScene" uid="uid://cgexvf3ochgd8" path="res://scenes/contraptions/Portal.tscn" id="9_e4r20"]
 [ext_resource type="Script" uid="uid://bbujjd3t0eg6e" path="res://scripts/camera/Camera.gd" id="10_aanwh"]
-[ext_resource type="Texture2D" uid="uid://brr6cvf8hvs5y" path="res://assets/spritesheets/note/0012.png" id="10_i654n"]
-[ext_resource type="TileSet" uid="uid://dftl5pyptmafp" path="res://tilesets/godot.tres" id="10_yaos7"]
+[ext_resource type="TileSet" uid="uid://dftl5pyptmafp" path="res://tilesets/cloud.tres" id="10_yaos7"]
 [ext_resource type="TileSet" uid="uid://d2f3f4ukvlod0" path="res://tilesets/tree.tres" id="11_aanwh"]
 [ext_resource type="Script" uid="uid://juvvajbrsiyg" path="res://scripts/ui/hud/CollectorLabel.gd" id="12_i654n"]
 [ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/CinematicBars.tscn" id="13_gyw86"]
+[ext_resource type="Texture2D" uid="uid://brnfd4dyuqc63" path="res://assets/sprites/backgrounds/sky.png" id="15_fb7j5"]
+[ext_resource type="Texture2D" uid="uid://xhtisuy6uhij" path="res://assets/sprites/backgrounds/mountains.png" id="16_owgma"]
+[ext_resource type="Texture2D" uid="uid://cpeib1ym0eyic" path="res://assets/sprites/backgrounds/trees.png" id="17_fb7j5"]
 
 [sub_resource type="Animation" id="Animation_gyw86"]
 length = 0.001
@@ -214,7 +216,6 @@ texture_filter = 4
 custom_minimum_size = Vector2(92, 92)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("10_i654n")
 expand_mode = 1
 
 [node name="EgalLabel" type="Label" parent="HUD/HBoxContainer"]
@@ -393,3 +394,35 @@ size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 120
 text = "4"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+
+[node name="SkyLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/SkyLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("15_fb7j5")
+
+[node name="MountainsLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/MountainsLayer"]
+modulate = Color(0.87451, 0.952941, 1, 1)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("16_owgma")
+
+[node name="TreesLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.8, 0)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/TreesLayer"]
+modulate = Color(0.788235, 0.854902, 1, 1)
+offset_top = 200.0
+offset_right = 1920.0
+offset_bottom = 1280.0
+texture = ExtResource("17_fb7j5")

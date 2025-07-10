@@ -31,11 +31,13 @@ window/size/resizable=false
 [file_customization]
 
 folder_colors={
-"res://assets/": "gray",
+"res://assets/": "green",
 "res://docs/": "gray",
-"res://scenes/": "purple",
-"res://scripts/": "green",
-"res://tilesets/": "orange"
+"res://scenes/": "orange",
+"res://scripts/": "red",
+"res://shaders/": "blue",
+"res://themes/": "yellow",
+"res://tilesets/": "teal"
 }
 
 [gui]
