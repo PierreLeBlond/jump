@@ -15,23 +15,56 @@
       background-color: #fff;
     "
   >
-    <canvas
-      id="canvas"
+    <div
       style="
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
-        width: 800px !important;
-        height: 450px !important;
+        width: 800px;
+        height: 450px;
+        background-color: #000;
       "
-    ></canvas>
+    >
+      <div
+        id="progress-bar"
+        style="
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 64px;
+          height: 8px;
+          background-color: #222;
+          border-radius: 4px;
+        "
+      >
+        <div
+          id="progress-bar-fill"
+          style="
+            width: 0;
+            height: 100%;
+            background-color: #fff;
+            border-radius: 4px;
+          "
+        ></div>
+      </div>
+      <canvas
+        id="canvas"
+        style="position: relative; box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5)"
+      ></canvas>
+    </div>
     <script src="$GODOT_URL"></script>
     <script>
+      var progressBarFill = document.getElementById("progress-bar-fill");
+      function updateProgress(current, total) {
+        console.log("Loaded " + current + " of " + total + " bytes");
+        progressBarFill.style.width = (current / total) * 100 + "%";
+      }
       var engine = new Engine($GODOT_CONFIG);
-      engine.startGame();
+      engine.startGame({ onProgress: updateProgress });
     </script>
     <style>
       #canvas {
-        width: 800px !important;
-        height: 450px !important;
+        width: 100% !important;
+        height: 100% !important;
       }
     </style>
   </body>
