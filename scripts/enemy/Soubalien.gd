@@ -92,6 +92,7 @@ func on_ray_area_body_entered(body: Node2D) -> void:
 
     state = SoubalienState.CAPTURING_PLAYER_IN_RAY
 
+    player.velocity = Vector2.ZERO
     player.set_collision_mask_value(1, false)
     var tween = create_tween()
     tween.tween_property(player, "scale", Vector2(0.8, 0.8), 0.2)
@@ -153,11 +154,11 @@ func get_lateral_acceleration() -> float:
 
   return sign(horizontal_distance_to_player) * acceleration_max * normalized_force
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
   if Engine.is_editor_hint():
     return
 
   player.external_accelerations["gravity_pull"] = Vector2(get_lateral_acceleration(), get_vertical_acceleration())
 
   if state == SoubalienState.CAPTURING_PLAYER:
-    player.global_position = lerp(player.global_position, area.global_position, 0.01)
+    player.global_position = lerp(player.global_position, area.global_position, delta * 20)
