@@ -47,6 +47,7 @@ func switch_to_cutscene_camera() -> Camera2D:
     cutscene_camera = Camera2D.new()
     cutscene_camera.position = get_screen_center_position()
     cutscene_camera.zoom = zoom
+    cutscene_camera.limit_bottom = limit_bottom
 
     # TODO: Should the cutscene camera be put elsewhere in the tree?
     get_parent().add_child(cutscene_camera)
