@@ -2,6 +2,10 @@ extends Camera2D
 
 class_name Camera
 
+@export var player: ProjectileCharacter
+
+@export var speed: float = 2.0
+
 var is_zoom_locked = false
 var is_position_locked = false
 
@@ -9,6 +13,8 @@ var zoom_tween: Tween
 var position_tween: Tween
 
 var cutscene_camera: Camera2D
+
+var follow_position: Vector2 = Vector2.ZERO
 
 func zoom_to(value: Vector2, duration: float, lock: bool) -> void:
   if is_zoom_locked:
@@ -70,3 +76,8 @@ func switch_to_main_camera() -> void:
     make_current()
   )
   await tween.finished
+
+func _physics_process(delta: float) -> void:
+  global_position.x = lerp(global_position.x, player.global_position.x, speed * delta)
+  if player.is_on_floor() || (player.velocity.y >= 0 && global_position.y < player.global_position.y):
+    global_position.y = lerp(global_position.y, player.global_position.y, speed / 2 * delta)

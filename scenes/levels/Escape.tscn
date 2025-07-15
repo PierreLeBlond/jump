@@ -295,12 +295,7 @@ script = ExtResource("3_fs813")
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_fs813")
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
-remote_path = NodePath("../../Camera2D")
-update_rotation = false
-update_scale = false
-
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(221, 730)
 process_callback = 0
 limit_left = -10000
@@ -309,6 +304,7 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 editor_draw_drag_margin = true
 script = ExtResource("10_aanwh")
+player = NodePath("../Player")
 
 [node name="CameraOverrideArea" type="Area2D" parent="." node_paths=PackedStringArray("camera")]
 position = Vector2(4832, 159)
