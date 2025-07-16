@@ -31,7 +31,7 @@ func enter(previous_state: State, delta: float) -> void:
 
     parent.velocity.y = vertical_velocity
 
-    var run_factor = parent.projectile_parameters.run_factor if parent.movement_controller.wants_to_run() else 1.0
+    var run_factor = parent.projectile_parameters.run_factor if parent.wants_to_run() else 1.0
 
     # We should only jump to max distance if we are jumping at full speed. At speed 0, we should still be able to move to half the maximum distance.
     maximum_lateral_velocity = (abs(parent.velocity.x) + parent.projectile_parameters.maximum_velocity * run_factor) / 2 * (parent.projectile_parameters.jump_time + parent.projectile_parameters.fall_time)
@@ -40,19 +40,16 @@ func get_next_state(_delta: float) -> State:
     if (parent.is_in_gravity_field):
         return gravity_field
 
-    if (parent.movement_controller.wants_to_jump() && is_on_wall()):
+    if (parent.wants_to_jump() && is_on_wall()):
         return wall_jump
 
-    if (parent.movement_controller.wants_to_jump() && parent.projectile_parameters.max_double_jumps > 0):
+    if (parent.wants_to_jump() && parent.projectile_parameters.max_double_jumps > 0):
         return double_jump
 
     if (parent.velocity.y > 0):
         return fall
 
     return null
-
-func is_allowed() -> bool:
-    return parent.unlocked_keys.has_unlocked_jump()
 
 func get_parameters() -> Dictionary:
     return {

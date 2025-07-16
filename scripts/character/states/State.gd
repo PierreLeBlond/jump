@@ -100,9 +100,6 @@ func enter(_previous_state: State, _delta: float) -> void:
 func get_next_state(_delta: float) -> State:
     return null
 
-func is_allowed() -> bool:
-    return true
-
 func update(_delta: float) -> void:
     pass
 

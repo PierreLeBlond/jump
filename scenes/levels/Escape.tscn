@@ -256,7 +256,7 @@ position = Vector2(6208, 257)
 player = NodePath("../Player")
 
 [node name="SpawnPortal" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_e4r20")]
-position = Vector2(222, 738)
+position = Vector2(4385, 658)
 player = NodePath("../Player")
 
 [node name="CloudLayer" type="TileMapLayer" parent="."]
@@ -302,6 +302,7 @@ limit_left = -10000
 limit_bottom = 1080
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+drag_right_margin = 0.1
 editor_draw_drag_margin = true
 script = ExtResource("10_aanwh")
 player = NodePath("../Player")
@@ -312,6 +313,7 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource("6_5ax1d")
 camera = NodePath("../Camera2D")
+zoom = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraOverrideArea"]
 shape = SubResource("RectangleShape2D_5ax1d")

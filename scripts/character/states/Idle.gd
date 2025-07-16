@@ -19,13 +19,13 @@ func get_next_state(_delta: float) -> State:
     if (!parent.is_on_floor()):
         return fall
     
-    if (parent.movement_controller.wants_to_jump()):
+    if (parent.wants_to_jump()):
         return jump
 
-    if (parent.movement_controller.wants_to_run() && parent.movement_controller.wants_to_move()):
+    if (parent.wants_to_run() && parent.wants_to_move()):
         return run
 
-    if (parent.movement_controller.wants_to_move()):
+    if (parent.wants_to_move()):
         return walk
 
     return null

@@ -40,22 +40,22 @@ func get_next_state(_delta: float) -> State:
     if (parent.is_in_gravity_field):
         return gravity_field
 
-    if (parent.movement_controller.wants_to_jump() && is_on_wall()):
+    if (parent.wants_to_jump() && is_on_wall()):
         return wall_jump
 
-    if (parent.movement_controller.wants_to_jump() && coyote_jump_remaining_frames > 0):
+    if (parent.wants_to_jump() && coyote_jump_remaining_frames > 0):
         return jump
 
-    if (parent.movement_controller.wants_to_jump() && double_jump_count > 0):
+    if (parent.wants_to_jump() && double_jump_count > 0):
         return double_jump
 
     if (parent.is_on_floor() && buffered_jump_remaining_frames > 0):
         return jump
 
-    if (parent.is_on_floor() && parent.movement_controller.wants_to_run() && parent.movement_controller.wants_to_move()):
+    if (parent.is_on_floor() && parent.wants_to_run() && parent.wants_to_move()):
         return run
 
-    if (parent.is_on_floor() && parent.movement_controller.wants_to_move()):
+    if (parent.is_on_floor() && parent.wants_to_move()):
         return idle
 
     if (parent.is_on_floor()):
@@ -72,7 +72,7 @@ func update(delta: float) -> void:
     if (buffered_jump_remaining_frames > 0):
         buffered_jump_remaining_frames -= 1
 
-    if (parent.movement_controller.wants_to_jump()):
+    if (parent.wants_to_jump()):
         buffered_jump_remaining_frames = parent.projectile_parameters.buffered_jump_frames
 
 func get_parameters() -> Dictionary:

@@ -21,16 +21,13 @@ func get_next_state(_delta: float) -> State:
     if (parent.is_in_gravity_field):
         return gravity_field
 
-    if (parent.movement_controller.wants_to_jump() && is_on_wall()):
+    if (parent.wants_to_jump() && is_on_wall()):
         return wall_jump
 
     if (parent.velocity.y > 0):
         return fall
 
     return null
-
-func is_allowed() -> bool:
-    return parent.unlocked_keys.has_unlocked_jump()
 
 func get_parameters() -> Dictionary:
     return {

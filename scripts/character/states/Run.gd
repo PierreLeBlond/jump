@@ -23,19 +23,16 @@ func get_next_state(_delta: float) -> State:
     if (!parent.is_on_floor()):
         return fall
 
-    if (!parent.movement_controller.wants_to_run()):
+    if (!parent.wants_to_run()):
         return walk
 
-    if (parent.movement_controller.wants_to_jump()):
+    if (parent.wants_to_jump()):
         return jump
 
-    if (!parent.movement_controller.wants_to_move()):
+    if (!parent.wants_to_move()):
         return idle
 
     return null
-
-func is_allowed() -> bool:
-    return parent.unlocked_keys.has_unlocked_run()
 
 func get_parameters() -> Dictionary:
     return {

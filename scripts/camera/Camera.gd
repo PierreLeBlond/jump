@@ -4,46 +4,34 @@ class_name Camera
 
 @export var player: ProjectileCharacter
 
-@export var speed: float = 2.0
+@export var vertical_speed: float = 1.0
+@export var horizontal_speed: float = 2.0
 
-var is_zoom_locked = false
-var is_position_locked = false
+@export var do_not_follow_vertical_on_jump: bool = true
+
+var target: Node2D
 
 var zoom_tween: Tween
 var position_tween: Tween
 
 var cutscene_camera: Camera2D
 
-var follow_position: Vector2 = Vector2.ZERO
+func _ready() -> void:
+  target = player
 
-func zoom_to(value: Vector2, duration: float, lock: bool) -> void:
-  if is_zoom_locked:
-    return
-
+func zoom_to(value: Vector2, duration: float) -> void:
   if zoom_tween != null:
     zoom_tween.kill()
 
   zoom_tween = create_tween()
   zoom_tween.tween_property(self, "zoom", value, duration)
-  if lock:
-    is_zoom_locked = true
-    zoom_tween.tween_callback(func(): is_zoom_locked = false)
+  await zoom_tween.finished
 
-func move_to(value: Vector2, duration: float, lock: bool) -> void:
-  if is_position_locked:
-    return
+func change_target(value: Node2D) -> void:
+  target = value
 
-  if position_tween != null:
-    position_tween.kill()
-
-  position_tween = create_tween()
-  position_tween.tween_property(self, "position", value, duration)
-
-  await position_tween.finished
-
-  if lock:
-    is_position_locked = true
-    position_tween.tween_callback(func(): is_position_locked = false)
+func restore_target() -> void:
+  target = player
 
 func switch_to_cutscene_camera() -> Camera2D:
     if cutscene_camera != null:
@@ -78,6 +66,9 @@ func switch_to_main_camera() -> void:
   await tween.finished
 
 func _physics_process(delta: float) -> void:
-  global_position.x = lerp(global_position.x, player.global_position.x, speed * delta)
-  if player.is_on_floor() || (player.velocity.y >= 0 && global_position.y < player.global_position.y):
-    global_position.y = lerp(global_position.y, player.global_position.y, speed / 2 * delta)
+  global_position.x = lerp(global_position.x, target.global_position.x, horizontal_speed * delta)
+
+  if do_not_follow_vertical_on_jump && !(player.is_on_floor() || (player.velocity.y >= 0 && global_position.y < target.global_position.y)):
+    return
+
+  global_position.y = lerp(global_position.y, target.global_position.y, vertical_speed * delta)

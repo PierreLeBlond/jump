@@ -29,4 +29,3 @@ drag_vertical_enabled = true
 editor_draw_drag_margin = true
 script = ExtResource("4_lsdy2")
 player = NodePath("../Player")
-speed = 10.0
