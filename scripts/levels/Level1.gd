@@ -103,4 +103,5 @@ func on_ray_captured_player() -> void:
     camera.zoom_to(Vector2(2, 2), 1.0)
 
     camera.do_not_follow_vertical_on_jump = false
+    camera.restore_target()
     camera.vertical_speed = 3.0

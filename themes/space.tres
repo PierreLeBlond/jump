@@ -13,21 +13,24 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_afct1"]
 
 [resource]
-Button/colors/font_color = Color(0.897363, 0.850964, 0.97058, 1)
-Button/colors/font_hover_color = Color(0.527472, 0.486608, 0.724041, 1)
-Button/colors/font_outline_color = Color(0.171397, 0.297869, 0.475624, 1)
+Button/colors/font_color = Color(0.717632, 0.678553, 0.325353, 1)
+Button/colors/font_hover_color = Color(0.843183, 0.599893, 0.744991, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/constants/line_spacing = 0
+Button/constants/outline_size = 10
 Button/font_sizes/font_size = 24
 Button/fonts/font = ExtResource("1_7ql75")
 Button/styles/focus = SubResource("StyleBoxEmpty_7ql75")
 Button/styles/hover = SubResource("StyleBoxFlat_afct1")
 Button/styles/normal = SubResource("StyleBoxFlat_io832")
 Button/styles/pressed = SubResource("StyleBoxEmpty_afct1")
-Label/colors/font_color = Color(0.849228, 0.755252, 0.910869, 1)
+Label/colors/font_color = Color(0, 0, 0, 1)
 Label/colors/font_outline_color = Color(1, 1, 1, 1)
-Label/colors/font_shadow_color = Color(0.388494, 0.336312, 0.652531, 1)
-Label/constants/outline_size = 4
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 10
 Label/constants/shadow_offset_x = 3
 Label/constants/shadow_offset_y = 3
+Label/constants/shadow_outline_size = 19
 Label/fonts/font = ExtResource("1_7ql75")
 RichTextLabel/colors/default_color = Color(0.0226034, 0.0232986, 0.162061, 1)
 RichTextLabel/font_sizes/bold_font_size = 60

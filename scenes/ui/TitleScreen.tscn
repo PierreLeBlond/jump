@@ -1,172 +1,256 @@
-[gd_scene load_steps=9 format=3 uid="uid://mfaxiu15banr"]
+[gd_scene load_steps=16 format=3 uid="uid://mfaxiu15banr"]
 
 [ext_resource type="Script" uid="uid://cq404dg781ufs" path="res://scripts/ui/TitleScreen.gd" id="1_ny3vc"]
 [ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/space.tres" id="2_xnmwc"]
-[ext_resource type="Texture2D" uid="uid://b46jv5ehu7biv" path="res://assets/sprites/feis-back.png" id="3_xnmwc"]
+[ext_resource type="Texture2D" uid="uid://niglju8i3a5s" path="res://assets/sprites/title-screen-soubalien.png" id="3_j2lur"]
+[ext_resource type="Texture2D" uid="uid://d0lqdu5jxr0fi" path="res://assets/sprites/title-screen-feis.png" id="4_tbfit"]
 
 [sub_resource type="Gradient" id="Gradient_xnmwc"]
+colors = PackedColorArray(0.619367, 0.744863, 1, 1, 0.91664, 0.91664, 0.91664, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_j2lur"]
 gradient = SubResource("Gradient_xnmwc")
-fill_from = Vector2(0.769231, 0.452991)
-fill_to = Vector2(1, 1)
+fill_from = Vector2(0.910256, 0.320513)
+fill_to = Vector2(0.662393, 0.884615)
 
 [sub_resource type="Animation" id="Animation_j2lur"]
 length = 0.001
-tracks/0/type = "value"
+tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Label:position")
+tracks/0/path = NodePath("Feis:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(68, 23)]
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(879, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
-tracks/1/type = "value"
+tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Label:modulate")
+tracks/1/path = NodePath("Feis:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(44, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
-tracks/2/type = "value"
+tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("VBoxContainer/TutorialButton:modulate")
+tracks/2/path = NodePath("VBoxContainer:position:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(192, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
-tracks/3/type = "value"
+tracks/3/type = "bezier"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("VBoxContainer/Level1Button:modulate")
+tracks/3/path = NodePath("VBoxContainer:position:y")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(510, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("GradientBackground:modulate")
+tracks/4/path = NodePath("VBoxContainer:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1)]
 }
-tracks/5/type = "value"
+tracks/5/type = "bezier"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("TextureRect:position")
+tracks/5/path = NodePath("Label:position:x")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(65, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Label:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(27, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Label:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1475, 704)]
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_xnmwc"]
 resource_name = "intro"
-length = 2.0
-tracks/0/type = "value"
+tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Label:position")
+tracks/0/path = NodePath("Feis:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.266667),
-"transitions": PackedFloat32Array(0.435275, 1),
-"update": 0,
-"values": [Vector2(-167, 23), Vector2(68, 23)]
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(703, -0.25, 0, 0.25, 0, 1014, -0.614352, -3.92731, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
 }
-tracks/1/type = "value"
+tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Label:modulate")
+tracks/1/path = NodePath("Feis:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.266667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(516, -0.25, 0, 0.25, 0, 44, -0.733422, 7.78774, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
 }
-tracks/2/type = "value"
+tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("VBoxContainer/TutorialButton:modulate")
+tracks/2/path = NodePath("VBoxContainer:position:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.266667, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-545, -0.25, 0, 0.25, 0, 192, -0.262591, 364.534, 0.271, 0),
+"times": PackedFloat32Array(0, 0.733333)
 }
-tracks/3/type = "value"
+tracks/3/type = "bezier"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("VBoxContainer/Level1Button:modulate")
+tracks/3/path = NodePath("VBoxContainer:position:y")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.5, 0.75),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(510, -0.25, 0, 0.25, 0, 510, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.733333)
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("GradientBackground:modulate")
+tracks/4/path = NodePath("VBoxContainer:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.266667, 1.26667),
-"transitions": PackedFloat32Array(1.7411, 1),
+"times": PackedFloat32Array(0, 0.733333),
+"transitions": PackedFloat32Array(2.2974, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
-tracks/5/type = "value"
+tracks/5/type = "bezier"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("TextureRect:position")
+tracks/5/path = NodePath("Label:position:x")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.25, 1.25),
-"transitions": PackedFloat32Array(0.5, 1),
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-1078, -0.25, 0, 0.25, 0, 65, -0.209166, 560.932, 0.25, 0),
+"times": PackedFloat32Array(0, 0.503828)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Label:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(27, -0.25, 0, 0.25, 0, 27, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.503828)
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Label:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2.21914, 1),
 "update": 0,
-"values": [Vector2(1558, 1118), Vector2(1558, 715)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tbfit"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Feis:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1014, -0.25, 0, 0.833333, -0.00610352, 1045, -0.6, 0.11499, 0.766667, -0.320312, 1014, -0.578088, 0.500305, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 2)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Feis:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(44, -0.25, 0, 0.833333, -0.426193, 19.1129, -0.333333, 0, 0.566667, 0.179859, 44, -0.433333, -0.246346, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 2)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tbfit"]
 _data = {
 &"RESET": SubResource("Animation_j2lur"),
+&"idle": SubResource("Animation_tbfit"),
 &"intro": SubResource("Animation_xnmwc")
 }
+
+[sub_resource type="Gradient" id="Gradient_j2lur"]
+offsets = PackedFloat32Array(0, 0.613419)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tbfit"]
+gradient = SubResource("Gradient_j2lur")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xnmwc"]
+polygon = PackedVector2Array(-6, -15, 35, -10, 63, 1, 89, 18, 110, 40, 129, 68, 139, 102, 140, 138, 131, 170, 112, 199, 84, 218, 50, 228, 14, 227, -19, 219, -48, 204, -69, 186, -90, 161, -103, 138, -112, 100, -108, 67, -98, 36, -68, 5, -33, -12)
+
+[sub_resource type="Gradient" id="Gradient_j4pmt"]
+colors = PackedColorArray(0, 0, 0, 0, 0.939738, 0.666838, 0.857891, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6j5qt"]
+gradient = SubResource("Gradient_j4pmt")
+fill_from = Vector2(1, 1)
 
 [node name="TitleScreen" type="Control" node_paths=PackedStringArray("tutorial_button", "level_1_button")]
 layout_mode = 3
@@ -186,23 +270,48 @@ offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 
 [node name="GradientBackground" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 texture = SubResource("GradientTexture2D_j2lur")
 
-[node name="Label" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = 68.0
-offset_top = 23.0
-offset_right = 1807.0
-offset_bottom = 254.0
-theme = ExtResource("2_xnmwc")
-theme_override_font_sizes/font_size = 120
-text = "Untitled
-Space & Brass game"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tbfit")
+}
+autoplay = "intro"
+next/intro = &"idle"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(1585, 18)
+scale = Vector2(50.4219, 46.5156)
+color = Color(0.761295, 0.743076, 0.289112, 0.945098)
+shadow_enabled = true
+shadow_color = Color(0.4, 0.24, 0.36, 1)
+shadow_filter = 2
+shadow_filter_smooth = 0.6
+texture = SubResource("GradientTexture2D_tbfit")
+
+[node name="SoubalienContainer" type="Node2D" parent="."]
+
+[node name="Soubalien" type="TextureRect" parent="SoubalienContainer"]
+offset_left = 886.0
+offset_top = 58.0
+offset_right = 1861.0
+offset_bottom = 1033.0
+texture = ExtResource("3_j2lur")
+expand_mode = 1
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="SoubalienContainer"]
+position = Vector2(1479, 110)
+occluder = SubResource("OccluderPolygon2D_xnmwc")
+
+[node name="Polygon2D" type="Polygon2D" parent="SoubalienContainer"]
+position = Vector2(1514.67, 260.404)
+scale = Vector2(0.916667, 0.99639)
+texture = SubResource("GradientTexture2D_6j5qt")
+polygon = PackedVector2Array(162.909, 925.938, -1669.82, 1014.26, -18.1818, -85.7138, -6.18176, -89.7283, 0.363647, -88.7247, 10.1819, -83.7066, 21.0909, -70.6595, 23.2728, -63.6341, 24.3636, -57.6124)
+uv = PackedVector2Array(64, 64, 1.90735e-06, 64, 0, 0, 24, 0, 32, 0, 40, 0, 48, 0, 56, 0, 64, -2.38419e-06)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -211,17 +320,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -444.0
-offset_top = -74.0
-offset_right = -190.0
-offset_bottom = 103.0
+offset_left = -768.0
+offset_top = -30.0
+offset_right = -260.0
+offset_bottom = 147.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 alignment = 1
 
 [node name="TutorialButton" type="Button" parent="VBoxContainer"]
-modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("2_xnmwc")
@@ -229,24 +337,32 @@ theme_override_font_sizes/font_size = 80
 text = "Tutorial"
 
 [node name="Level1Button" type="Button" parent="VBoxContainer"]
-modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("2_xnmwc")
+theme_override_colors/font_color = Color(0.72, 0.5418, 0.324, 1)
 theme_override_font_sizes/font_size = 80
 text = "Level 1"
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 1475.0
-offset_top = 704.0
-offset_right = 1789.0
-offset_bottom = 1018.0
-texture = ExtResource("3_xnmwc")
-expand_mode = 1
+offset_left = 65.0
+offset_top = 27.0
+offset_right = 1804.0
+offset_bottom = 394.0
+theme = ExtResource("2_xnmwc")
+theme_override_colors/font_color = Color(0.827543, 0.588174, 0.74107, 1)
+theme_override_colors/font_shadow_color = Color(0.256292, 0.353594, 0.646436, 0.407843)
+theme_override_font_sizes/font_size = 100
+text = "Untitled
+Space & Brass
+game"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_tbfit")
-}
-autoplay = "intro"
+[node name="Feis" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 879.0
+offset_top = 44.0
+offset_right = 1854.0
+offset_bottom = 1019.0
+texture = ExtResource("4_tbfit")
+expand_mode = 1
