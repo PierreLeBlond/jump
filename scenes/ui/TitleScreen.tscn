@@ -52,7 +52,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("VBoxContainer/EscapeLevelButton:modulate")
+tracks/3/path = NodePath("VBoxContainer/Level1Button:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -128,7 +128,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("VBoxContainer/EscapeLevelButton:modulate")
+tracks/3/path = NodePath("VBoxContainer/Level1Button:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -168,7 +168,7 @@ _data = {
 &"intro": SubResource("Animation_xnmwc")
 }
 
-[node name="TitleScreen" type="Control" node_paths=PackedStringArray("tutorial_button", "escape_level_button")]
+[node name="TitleScreen" type="Control" node_paths=PackedStringArray("tutorial_button", "level_1_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -177,7 +177,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ny3vc")
 tutorial_button = NodePath("VBoxContainer/TutorialButton")
-escape_level_button = NodePath("VBoxContainer/EscapeLevelButton")
+level_1_button = NodePath("VBoxContainer/Level1Button")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -228,20 +228,20 @@ theme = ExtResource("2_xnmwc")
 theme_override_font_sizes/font_size = 80
 text = "Tutorial"
 
-[node name="EscapeLevelButton" type="Button" parent="VBoxContainer"]
+[node name="Level1Button" type="Button" parent="VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("2_xnmwc")
 theme_override_font_sizes/font_size = 80
-text = "Play"
+text = "Level 1"
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 1558.0
-offset_top = 715.0
-offset_right = 1872.0
-offset_bottom = 1029.0
+offset_left = 1475.0
+offset_top = 704.0
+offset_right = 1789.0
+offset_bottom = 1018.0
 texture = ExtResource("3_xnmwc")
 expand_mode = 1
 
