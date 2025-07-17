@@ -56,10 +56,10 @@ func get_next_state(_delta: float) -> State:
         return run
 
     if (parent.is_on_floor() && parent.wants_to_move()):
-        return idle
+        return walk
 
     if (parent.is_on_floor()):
-        return walk
+        return idle
 
     return null
 

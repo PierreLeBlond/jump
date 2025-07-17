@@ -14,7 +14,7 @@ var canceled_jump_height: float
 var canceled_jump_time: float
 
 func enter(previous_state: State, delta: float) -> void:
-    assert(previous_state is Jump or previous_state is WallJump)
+    assert(previous_state is Jump or previous_state is WallJump or previous_state is WallRun)
 
     super (previous_state, delta)
 

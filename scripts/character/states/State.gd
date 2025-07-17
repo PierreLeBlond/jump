@@ -9,28 +9,21 @@ var maximum_lateral_velocity: float
 var state_machine: StateMachine
 var parent: ProjectileCharacter
 
-var wall_sign: int = 1
-
 func init(projectile_character: ProjectileCharacter) -> void:
     self.parent = projectile_character
     self.state_machine = projectile_character.state_machine
     self.maximum_lateral_velocity = parent.projectile_parameters.maximum_velocity
 
 func is_on_wall() -> bool:
-    if (parent.left_ray_cast_2d.is_colliding()):
-        wall_sign = 1
-        return true
+    return parent.left_wall_ray.is_colliding() || parent.right_wall_ray.is_colliding()
 
-    if (parent.right_ray_cast_2d.is_colliding()):
-        wall_sign = -1
-        return true
-
-    return false
+func get_wall_sign() -> int:
+    return -1 if parent.right_wall_ray.is_colliding() else 1
 
 func flip_sprite(direction: int) -> void:
-    parent.get_node("Sprite2D").scale = Vector2(
-        direction * abs(parent.get_node("Sprite2D").scale.x) if direction != 0 else parent.get_node("Sprite2D").scale.x,
-        parent.get_node("Sprite2D").scale.y
+    parent.sprite_2d.scale = Vector2(
+        direction * abs(parent.sprite_2d.scale.x),
+        parent.sprite_2d.scale.y
     )
 
 func get_lateral_velocity(delta: float, current_velocity: float, maximum_velocity: float, acceleration_factor: float, deceleration_factor: float) -> float:
@@ -42,8 +35,9 @@ func get_lateral_velocity(delta: float, current_velocity: float, maximum_velocit
 
         # Arbitrary stop velocity if the character is moving less than 0.5 units per frame, should avoid jittering
         var epsilon = 0.5 / delta
+
         if abs(current_velocity) < abs(deceleration_drag * delta) || abs(current_velocity + deceleration_drag * delta) < epsilon:
-            return 0
+          return 0
 
         return current_velocity + deceleration_drag * delta
 
@@ -58,9 +52,6 @@ func get_lateral_velocity(delta: float, current_velocity: float, maximum_velocit
 
 func get_vertical_velocity(delta: float, current_velocity: float, jump_height: float, jump_time: float) -> float:
     var gravity = 2 * jump_height / (jump_time * jump_time)
-
-    if (is_on_wall()):
-        gravity *= parent.projectile_parameters.wall_friction_factor
 
     return current_velocity + gravity * delta
 
@@ -93,18 +84,13 @@ func get_velocity(delta: float) -> Vector2:
     )
 
 func enter(_previous_state: State, _delta: float) -> void:
-    var animation_player = parent.get_node("AnimationPlayer")
-    animation_player.current_animation = animation
-    animation_player.play()
+    parent.animation_player.play(animation)
 
 func get_next_state(_delta: float) -> State:
     return null
 
 func update(_delta: float) -> void:
     pass
-
-func update_sprite() -> void:
-    flip_sprite(parent.movement_controller.get_direction())
 
 func exit() -> void:
     pass

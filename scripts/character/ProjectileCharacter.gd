@@ -2,17 +2,24 @@ extends CharacterBody2D
 
 class_name ProjectileCharacter
 
-@onready var corner_corrector: CornerCorrector = $CornerCorrector
+signal direction_changed(direction: int)
 
-@onready var state_machine: StateMachine = $StateMachine
+@export var corner_corrector: CornerCorrector
 
-@onready var movement_controller: MovementController = $MovementController
+@export var cliff_detector: CliffDetector
 
-@onready var projectile_parameters: ProjectileParameters = $ProjectileParameters
+@export var state_machine: StateMachine
 
-@onready var left_ray_cast_2d: RayCast2D = $LeftRayCast2D
+@export var movement_controller: MovementController
 
-@onready var right_ray_cast_2d: RayCast2D = $RightRayCast2D
+@export var projectile_parameters: ProjectileParameters
+
+@export var left_wall_ray: RayCast2D
+@export var right_wall_ray: RayCast2D
+
+@export var animation_player: AnimationPlayer
+
+@export var sprite_2d: Sprite2D
 
 var unlocked_keys: UnlockedKeys = UnlockedKeys.new()
 
@@ -21,6 +28,7 @@ var external_accelerations: Dictionary[String, Vector2] = {}
 var is_in_gravity_field: bool = false
 var is_externally_controlled: bool = false
 
+var direction: int = 1
 
 func _ready() -> void:
     corner_corrector.init(self)
@@ -32,6 +40,13 @@ func _physics_process(delta: float) -> void:
 
     corner_corrector.apply_corner_correction()
     state_machine.handle_physics(delta)
+
+    var controller_direction = movement_controller.get_direction()
+    if (controller_direction == 0 || direction == controller_direction):
+        return
+
+    direction = controller_direction
+    direction_changed.emit(direction)
 
 func wants_to_move() -> bool:
     return movement_controller.wants_to_move() && unlocked_keys.has_unlocked_move()

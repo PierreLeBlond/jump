@@ -13,6 +13,10 @@ func init(projectile_character: ProjectileCharacter) -> void:
     for state in get_children():
         state.init(parent)
 
+    parent.direction_changed.connect(func(direction: int):
+        current_state.flip_sprite(direction)
+    )
+
 func change_state(new_state: State, delta: float) -> void:
     new_state.exit()
 
@@ -41,5 +45,3 @@ func handle_physics(delta: float) -> void:
 
     # Will change velocity if hitting an obstacle
     parent.move_and_slide()
-
-    current_state.update_sprite()

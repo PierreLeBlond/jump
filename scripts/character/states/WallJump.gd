@@ -17,7 +17,7 @@ func enter(previous_state: State, delta: float) -> void:
 
     var velocity = parent.velocity
     velocity.y = -2 * parent.projectile_parameters.jump_height / parent.projectile_parameters.jump_time
-    velocity.x = parent.projectile_parameters.maximum_velocity * previous_state.wall_sign * parent.projectile_parameters.run_factor
+    velocity.x = parent.projectile_parameters.maximum_velocity * get_wall_sign() * parent.projectile_parameters.run_factor
 
     parent.velocity = velocity
 

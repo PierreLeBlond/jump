@@ -2,6 +2,8 @@ extends State
 
 class_name Idle
 
+@export var cliff_hang: State
+
 @export var gravity_field: State
 
 @export var jump: State
@@ -12,6 +14,16 @@ class_name Idle
 
 @export var walk: State
 
+func enter(previous_state: State, _delta: float) -> void:
+    var animation_player = parent.animation_player
+    if (previous_state.animation == "run" || previous_state.animation == "walk"):
+        animation_player.play("stop")
+        await animation_player.animation_finished
+    elif (previous_state.animation == "fall"):
+        animation_player.play("land")
+        await animation_player.animation_finished
+    animation_player.play("idle")
+
 func get_next_state(_delta: float) -> State:
     if (parent.is_in_gravity_field):
         return gravity_field
@@ -19,6 +31,9 @@ func get_next_state(_delta: float) -> State:
     if (!parent.is_on_floor()):
         return fall
     
+    if (parent.cliff_detector.is_on_cliff()):
+        return cliff_hang
+
     if (parent.wants_to_jump()):
         return jump
 

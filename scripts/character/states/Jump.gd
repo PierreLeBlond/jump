@@ -8,6 +8,8 @@ class_name Jump
 
 @export var double_jump: State
 
+@export var wall_run: State
+
 @export var wall_jump: State
 
 @export var canceled_jump: State
@@ -32,6 +34,9 @@ func enter(previous_state: State, delta: float) -> void:
 func get_next_state(_delta: float) -> State:
     if (parent.is_in_gravity_field):
         return gravity_field
+
+    if (is_on_wall()):
+        return wall_run
 
     if (parent.wants_to_jump() && is_on_wall()):
         return wall_jump
