@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://de32o3g1w17vm"]
+[gd_scene load_steps=35 format=4 uid="uid://de32o3g1w17vm"]
 
 [ext_resource type="Script" uid="uid://ft5l0rjyxnrn" path="res://scripts/levels/Level1.gd" id="1_p5s5a"]
 [ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/CinematicBars.tscn" id="2_j7nyf"]
@@ -14,10 +14,31 @@
 [ext_resource type="Script" uid="uid://dfh6a42d2dq0n" path="res://scripts/collectibles/NoteCollector.gd" id="11_t2wor"]
 [ext_resource type="Script" uid="uid://bbujjd3t0eg6e" path="res://scripts/camera/Camera.gd" id="12_l40or"]
 [ext_resource type="PackedScene" uid="uid://4wsynq3xc0sr" path="res://scenes/collectibles/Note.tscn" id="14_86um8"]
-[ext_resource type="Texture2D" uid="uid://brnfd4dyuqc63" path="res://assets/sprites/backgrounds/sky.png" id="15_hpass"]
-[ext_resource type="Texture2D" uid="uid://xhtisuy6uhij" path="res://assets/sprites/backgrounds/mountains.png" id="16_srkvl"]
-[ext_resource type="Texture2D" uid="uid://cpeib1ym0eyic" path="res://assets/sprites/backgrounds/trees.png" id="17_pgakm"]
 [ext_resource type="Script" uid="uid://xd4woi41uhf2" path="res://scripts/camera/CameraOverrideArea.gd" id="18_j7nyf"]
+
+[sub_resource type="Gradient" id="Gradient_ukjja"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.643137)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p5s5a"]
+gradient = SubResource("Gradient_ukjja")
+fill_from = Vector2(0, 0.213675)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_p5s5a"]
+offsets = PackedFloat32Array(0, 0.996815)
+colors = PackedColorArray(1, 1, 1, 0, 0.66, 0.960333, 1, 0.341176)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_njy47"]
+gradient = SubResource("Gradient_p5s5a")
+fill_from = Vector2(0.0042735, 0.632479)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_njy47"]
+colors = PackedColorArray(1, 1, 1, 1, 5.77569e-07, 0.327346, 0.478314, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j7nyf"]
+gradient = SubResource("Gradient_njy47")
+fill_from = Vector2(1, 0.692308)
 
 [sub_resource type="Animation" id="Animation_gyw86"]
 length = 0.001
@@ -58,13 +79,13 @@ _data = {
 
 [sub_resource type="Curve2D" id="Curve2D_i654n"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -751, -1066, 0, 0, 0, 0, -750, 221, 0, 0, 0, 0, -50, 223)
+"points": PackedVector2Array(0, 0, 0, 0, -751, -1066, 0, 0, 0, 0, -750, 221, 0, 0, 0, 0, 268, 234)
 }
 point_count = 3
 
 [sub_resource type="Curve2D" id="Curve2D_p5s5a"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -51, 223, 0, 0, 0, 0, 1064, -59, 0, 0, 0, 0, 5936, -58, 0, 0, 0, 0, 8530, -441, 0, 0, 0, 0, 10348, -691, 0, 0, 0, 0, 14443, -1266)
+"points": PackedVector2Array(0, 0, 0, 0, 269, 234, 0, 0, 0, 0, 1064, -59, 0, 0, 0, 0, 5936, -58, 0, 0, 0, 0, 8530, -441, 0, 0, 0, 0, 10348, -691, 0, 0, 0, 0, 14443, -1266)
 }
 point_count = 6
 
@@ -208,6 +229,49 @@ hud = NodePath("HUD/HBoxContainer")
 soubalien_introduce_area = NodePath("Area2D")
 soubalien_introduce_focus = NodePath("SoubalienIntroductionFocus")
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -1
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 1)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="ParallaxBackground/ParallaxLayer"]
+modulate = Color(0.82, 0.82, 0.82, 0.780392)
+tile_map_data = PackedByteArray("AAAIAAYAAQAJAAMAAAAIAAUAAQAFAAEAAAAHAAUAAQAIAAAAAAAIAAQAAQAIAAAAAAAJAAQAAQAKAAAAAAAKAAQAAQAKAAAAAAALAAQAAQAKAAAAAAAMAAQAAQALAAAAAAAMAAUAAQAGAAEAAAANAAUAAQALAAAAAAAMAAYAAQAJAAMAAAALAAYAAQAJAAMAAAAKAAYAAQAJAAMAAAAJAAYAAQAJAAMAAAAJAAUAAQAJAAIAAAALAAUAAQAJAAIAAAAKAAUAAQAJAAIAAAAQAAYAAQAAAAMAAAASAAUAAQAIAAMAAAASAAQAAQAIAAAAAAATAAQAAQAKAAAAAAAUAAQAAQAKAAAAAAAVAAQAAQALAAAAAAAVAAUAAQALAAMAAAAUAAUAAQAJAAMAAAATAAUAAQAJAAMAAAANAAYAAQALAAMAAAAHAAYAAQAIAAMAAAAYAAcAAQAIAAAAAAAZAAcAAQALAAAAAAAZAAgAAQALAAMAAAAYAAgAAQAIAAMAAAAFAAYAAQAAAAMAAAA=")
+tile_set = ExtResource("7_jsker")
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_right = 1920.0
+offset_bottom = 968.0
+texture = SubResource("GradientTexture2D_p5s5a")
+
+[node name="TreesLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.8, 1)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="ParallaxBackground/TreesLayer"]
+modulate = Color(0.6314, 0.78228, 0.82, 1)
+position = Vector2(0, -28)
+tile_map_data = PackedByteArray("AAAFAA4AAQAJAAAAAAAFAA0AAQAAAAEAAAAFAAwAAQAAAAEAAAAFAAsAAQAKAAMAAAAEAAsAAQAJAAMAAAAEAAoAAQAKAAAAAAAFAAoAAQAKAAAAAAAGAAoAAQAKAAAAAAAHAAoAAQALAAAAAAAHAAsAAQALAAMAAAAGAAsAAQAJAAMAAAADAAsAAQAIAAMAAAADAAoAAQAIAAAAAAAHAA4AAQAFAAEAAAAHAA0AAQAIAAAAAAAIAA0AAQALAAAAAAAIAA4AAQAGAAEAAAAIAA8AAQAJAAMAAAAHAA8AAQAJAAMAAAAJAA4AAQAKAAAAAAAKAA4AAQAKAAAAAAALAA4AAQAFAAEAAAALAA8AAQAJAAMAAAAJAA8AAQAJAAMAAAAKAA8AAQAJAAMAAAAGAA4AAQAKAAAAAAAEAA4AAQAKAAAAAAADAA4AAQAKAAAAAAACAA4AAQAKAAAAAAABAA4AAQAKAAAAAAAAAA8AAQAJAAMAAAABAA8AAQAJAAMAAAACAA8AAQAJAAMAAAADAA8AAQAJAAMAAAAEAA8AAQAJAAMAAAAFAA8AAQAJAAMAAAAGAA8AAQAJAAMAAAAMAA4AAQAGAAEAAAANAA4AAQAKAAAAAAAOAA4AAQAKAAAAAAAPAA4AAQAKAAAAAAAQAA4AAQAJAAAAAAARAA4AAQAKAAAAAAASAA4AAQAKAAAAAAATAA4AAQAKAAAAAAAUAA4AAQAFAAEAAAAVAA4AAQAGAAEAAAAWAA4AAQAKAAAAAAAXAA4AAQAKAAAAAAAYAA4AAQAKAAAAAAAZAA4AAQAJAAAAAAAaAA4AAQAKAAAAAAAbAA4AAQAKAAAAAAAcAA4AAQAJAAAAAAAeAA4AAQAKAAAAAAAfAA4AAQALAAAAAAAfAA8AAQALAAMAAAAeAA8AAQAJAAMAAAAdAA8AAQAJAAMAAAAcAA8AAQAJAAMAAAAbAA8AAQAJAAMAAAAaAA8AAQAJAAMAAAAZAA8AAQAJAAMAAAAYAA8AAQAJAAMAAAAXABAAAQALAAMAAAAWABAAAQAJAAMAAAAVABAAAQAJAAMAAAAUABAAAQAJAAMAAAATABAAAQAJAAMAAAASABAAAQAIAAMAAAASAA8AAQAFAAIAAAARAA8AAQAJAAMAAAAPAA8AAQAJAAMAAAAQAA8AAQAJAAMAAAAOAA8AAQAJAAMAAAANAA8AAQAJAAMAAAAMAA8AAQAJAAMAAAATAA8AAQAJAAIAAAAUAA8AAQAJAAIAAAAVAA8AAQAJAAIAAAAWAA8AAQAJAAIAAAAXAA8AAQAGAAIAAAALAA0AAQAIAAEAAAALAAwAAQAIAAAAAAAMAAwAAQALAAAAAAAMAA0AAQALAAIAAAAQAA0AAQAAAAEAAAAQAAwAAQADAAEAAAAQAAsAAQAAAAEAAAAQAAoAAQAKAAMAAAAPAAoAAQAIAAMAAAAPAAkAAQAIAAEAAAAPAAgAAQAIAAAAAAAQAAgAAQAKAAAAAAARAAgAAQALAAAAAAARAAkAAQALAAIAAAARAAoAAQALAAMAAAAQAAkAAQAJAAIAAAAPAAwAAQABAAMAAAAUAA0AAQAIAAEAAAAUAAwAAQAIAAAAAAAVAAwAAQALAAAAAAAVAA0AAQALAAIAAAAZAA0AAQAAAAEAAAAZAAwAAQAAAAEAAAAZAAsAAQAKAAMAAAAYAAsAAQAIAAMAAAAaAAsAAQALAAMAAAAaAAoAAQALAAAAAAAZAAoAAQAKAAAAAAAYAAoAAQAIAAAAAAAcAA0AAQAAAAAAAAAAAA4AAQAKAAAAAAAdAA4AAQAKAAAAAAA=")
+tile_set = ExtResource("8_6ex7q")
+collision_enabled = false
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/TreesLayer"]
+offset_right = 1920.0
+offset_bottom = 965.0
+texture = SubResource("GradientTexture2D_njy47")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer2"]
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 1920.0
+offset_bottom = 1081.0
+texture = SubResource("GradientTexture2D_j7nyf")
+
 [node name="CinematicBars" parent="." instance=ExtResource("2_j7nyf")]
 
 [node name="HUD" type="CanvasLayer" parent="."]
@@ -313,7 +377,7 @@ script = ExtResource("10_njy47")
 speed = 0.025
 
 [node name="PathFollow2D" type="PathFollow2D" parent="SoubalienPaths/ChasePath"]
-position = Vector2(-51, 223)
+position = Vector2(269, 234)
 rotates = false
 loop = false
 
@@ -426,38 +490,6 @@ size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 120
 text = "4"
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scroll_ignore_camera_zoom = true
-
-[node name="SkyLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0, 0)
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/SkyLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("15_hpass")
-
-[node name="MountainsLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.2, 0)
-motion_mirroring = Vector2(1920, 0)
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/MountainsLayer"]
-modulate = Color(0.87451, 0.952941, 1, 1)
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("16_srkvl")
-
-[node name="TreesLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.8, 0)
-motion_mirroring = Vector2(1920, 0)
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/TreesLayer"]
-modulate = Color(0.788235, 0.854902, 1, 1)
-offset_top = 200.0
-offset_right = 1920.0
-offset_bottom = 1280.0
-texture = ExtResource("17_pgakm")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(6205, 0)

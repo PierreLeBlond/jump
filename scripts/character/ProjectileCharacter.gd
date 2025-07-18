@@ -16,7 +16,6 @@ signal direction_changed(direction: int)
 
 @export var projectile_parameters: ProjectileParameters
 
-
 @export var animation_player: AnimationPlayer
 
 @export var sprite_2d: Sprite2D
