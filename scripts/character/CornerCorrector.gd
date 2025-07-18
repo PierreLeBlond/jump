@@ -22,8 +22,6 @@ func apply_corner_correction() -> void:
     var outer_right = outer_right_ceiling_ray_cast
     var inner_right = inner_right_ceiling_ray_cast
 
-    # NOTE: Using ceil and floor to avoid subpixel positions can result in off by one pixel when moving away the projectile from the corner.
-
     if (outer_left.is_colliding() && !inner_left.is_colliding()):
         var x = floori(outer_left.get_collision_point().x)
         var offset = TILE_HALF_SIZE - (x % TILE_HALF_SIZE)
@@ -32,4 +30,4 @@ func apply_corner_correction() -> void:
     if (outer_right.is_colliding() && !inner_right.is_colliding()):
         var x = ceili(outer_right.get_collision_point().x)
         var offset = x % TILE_HALF_SIZE
-        parent.position = Vector2(parent.position.x - offset, parent.position.y)
+        parent.position = Vector2(ceili(parent.position.x) - offset, parent.position.y)
