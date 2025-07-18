@@ -318,7 +318,7 @@ rotates = false
 loop = false
 
 [node name="Player" parent="." instance=ExtResource("10_ijoxy")]
-position = Vector2(3577, 825)
+position = Vector2(221, 904)
 
 [node name="NoteCollectorArea2D" type="Area2D" parent="Player"]
 process_mode = 3
