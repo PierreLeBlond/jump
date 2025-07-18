@@ -14,12 +14,6 @@ func init(projectile_character: ProjectileCharacter) -> void:
     self.state_machine = projectile_character.state_machine
     self.maximum_lateral_velocity = parent.projectile_parameters.maximum_velocity
 
-func is_on_wall() -> bool:
-    return parent.left_wall_ray.is_colliding() || parent.right_wall_ray.is_colliding()
-
-func get_wall_sign() -> int:
-    return -1 if parent.right_wall_ray.is_colliding() else 1
-
 func flip_sprite(direction: int) -> void:
     parent.sprite_2d.scale = Vector2(
         direction * abs(parent.sprite_2d.scale.x),

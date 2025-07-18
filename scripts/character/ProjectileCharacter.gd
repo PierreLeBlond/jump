@@ -8,14 +8,14 @@ signal direction_changed(direction: int)
 
 @export var cliff_detector: CliffDetector
 
+@export var wall_detector: WallDetector
+
 @export var state_machine: StateMachine
 
 @export var movement_controller: MovementController
 
 @export var projectile_parameters: ProjectileParameters
 
-@export var left_wall_ray: RayCast2D
-@export var right_wall_ray: RayCast2D
 
 @export var animation_player: AnimationPlayer
 
@@ -38,7 +38,9 @@ func _physics_process(delta: float) -> void:
     if is_externally_controlled:
         return
 
-    corner_corrector.apply_corner_correction()
+    if (velocity.y < 0):
+        corner_corrector.apply_corner_correction()
+
     state_machine.handle_physics(delta)
 
     var controller_direction = movement_controller.get_direction()

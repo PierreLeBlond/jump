@@ -17,7 +17,7 @@ func enter(previous_state: State, delta: float) -> void:
 
     var velocity = parent.velocity
     velocity.y = -2 * parent.projectile_parameters.jump_height / parent.projectile_parameters.jump_time
-    velocity.x = parent.projectile_parameters.maximum_velocity * get_wall_sign() * parent.projectile_parameters.run_factor
+    velocity.x = parent.projectile_parameters.maximum_velocity * parent.wall_detector.get_wall_sign() * parent.projectile_parameters.run_factor
 
     parent.velocity = velocity
 
@@ -32,7 +32,7 @@ func get_next_state(_delta: float) -> State:
     if (parent.is_in_gravity_field):
         return gravity_field
 
-    if (parent.wants_to_jump() && is_on_wall()):
+    if (parent.wants_to_jump() && parent.wall_detector.is_on_wall()):
         return next_wall_jump
 
     if (parent.wants_to_jump()):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://27vdgqlbgpml"]
+[gd_scene load_steps=32 format=3 uid="uid://27vdgqlbgpml"]
 
 [ext_resource type="Script" uid="uid://b6kdes8c5suyq" path="res://scripts/character/ProjectileCharacter.gd" id="1_lkdrv"]
 [ext_resource type="Texture2D" uid="uid://3k4btk54cqba" path="res://assets/spritesheets/player/player.png" id="2_0rnld"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://blh3ndwp2n1vi" path="res://scripts/character/CornerCorrector.gd" id="13_lkdrv"]
 [ext_resource type="Script" uid="uid://djcf013m042qh" path="res://scripts/character/states/WallRun.gd" id="13_srp4u"]
 [ext_resource type="Script" uid="uid://n0not04aejg6" path="res://scripts/character/CliffDetector.gd" id="18_61ith"]
+[ext_resource type="Script" uid="uid://br0fm1ttogpe2" path="res://scripts/character/WallDetector.gd" id="19_ebwui"]
 
 [sub_resource type="Animation" id="Animation_gv3ic"]
 resource_name = "backcliffhang"
@@ -201,17 +202,16 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_18dal"]
 size = Vector2(56, 102)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("corner_corrector", "cliff_detector", "state_machine", "movement_controller", "projectile_parameters", "left_wall_ray", "right_wall_ray", "animation_player", "sprite_2d")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("corner_corrector", "cliff_detector", "wall_detector", "state_machine", "movement_controller", "projectile_parameters", "animation_player", "sprite_2d")]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_lkdrv")
 corner_corrector = NodePath("CornerCorrector")
 cliff_detector = NodePath("CliffDetector")
+wall_detector = NodePath("WallDetector")
 state_machine = NodePath("StateMachine")
 movement_controller = NodePath("MovementController")
 projectile_parameters = NodePath("ProjectileParameters")
-left_wall_ray = NodePath("LeftWallRay")
-right_wall_ray = NodePath("RightWallRay")
 animation_player = NodePath("AnimationPlayer")
 sprite_2d = NodePath("Sprite2D")
 
@@ -333,12 +333,6 @@ script = ExtResource("11_gv3ic")
 script = ExtResource("12_b8lor")
 max_double_jumps = 0
 
-[node name="RightWallRay" type="RayCast2D" parent="."]
-target_position = Vector2(39, 0)
-
-[node name="LeftWallRay" type="RayCast2D" parent="."]
-target_position = Vector2(-40, 0)
-
 [node name="CornerCorrector" type="Node2D" parent="." node_paths=PackedStringArray("outer_left_ceiling_ray_cast", "inner_left_ceiling_ray_cast", "outer_right_ceiling_ray_cast", "inner_right_ceiling_ray_cast", "movement_controller")]
 script = ExtResource("13_lkdrv")
 outer_left_ceiling_ray_cast = NodePath("OuterLeftCeilingRayCast2D")
@@ -385,6 +379,31 @@ target_position = Vector2(0, 80)
 [node name="OuterRightGroundRay" type="RayCast2D" parent="CliffDetector"]
 position = Vector2(28, 0)
 target_position = Vector2(0, 80)
+
+[node name="WallDetector" type="Node2D" parent="." node_paths=PackedStringArray("left_wall_rays", "right_wall_rays")]
+script = ExtResource("19_ebwui")
+left_wall_rays = [NodePath("LeftRays/TopLeftWallRay"), NodePath("LeftRays/BottomLeftWallRay")]
+right_wall_rays = [NodePath("RightRays/TopRightWallRay"), NodePath("RightRays/BottomRightWallRay")]
+
+[node name="LeftRays" type="Node2D" parent="WallDetector"]
+
+[node name="TopLeftWallRay" type="RayCast2D" parent="WallDetector/LeftRays"]
+position = Vector2(0, -24)
+target_position = Vector2(-40, 0)
+
+[node name="BottomLeftWallRay" type="RayCast2D" parent="WallDetector/LeftRays"]
+position = Vector2(0, 32)
+target_position = Vector2(-40, 0)
+
+[node name="RightRays" type="Node2D" parent="WallDetector"]
+
+[node name="TopRightWallRay" type="RayCast2D" parent="WallDetector/RightRays"]
+position = Vector2(0, -24)
+target_position = Vector2(39, 0)
+
+[node name="BottomRightWallRay" type="RayCast2D" parent="WallDetector/RightRays"]
+position = Vector2(0, 32)
+target_position = Vector2(39, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-9.53674e-06, 9.00002)
