@@ -18,11 +18,12 @@ func enter(previous_state: State, _delta: float) -> void:
     var animation_player = parent.animation_player
     if (previous_state.animation == "run" || previous_state.animation == "walk"):
         animation_player.play("stop")
-        await animation_player.animation_finished
+        animation_player.queue("idle")
     elif (previous_state.animation == "fall"):
         animation_player.play("land")
-        await animation_player.animation_finished
-    animation_player.play("idle")
+        animation_player.queue("idle")
+    else:
+        animation_player.play("idle")
 
 func get_next_state(_delta: float) -> State:
     if (parent.is_in_gravity_field):
