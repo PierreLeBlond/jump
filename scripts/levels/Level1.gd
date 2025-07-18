@@ -102,6 +102,6 @@ func on_ray_captured_player() -> void:
     soubalien_chase_path.stop()
     camera.zoom_to(Vector2(2, 2), 1.0)
 
-    camera.do_not_follow_vertical_on_jump = false
+    camera.follow_vertical_on_jump = true
     camera.restore_target()
     camera.vertical_speed = 3.0

@@ -7,7 +7,7 @@ class_name Camera
 @export var vertical_speed: float = 1.0
 @export var horizontal_speed: float = 2.0
 
-@export var do_not_follow_vertical_on_jump: bool = true
+@export var follow_vertical_on_jump: bool = false
 
 var target: Node2D
 
@@ -15,6 +15,8 @@ var zoom_tween: Tween
 var position_tween: Tween
 
 var cutscene_camera: Camera2D
+
+var target_position: Vector2
 
 func _ready() -> void:
   target = player
@@ -53,10 +55,10 @@ func switch_to_main_camera() -> void:
   if cutscene_camera == null:
     return
 
-  var target_position = get_screen_center_position()
+  var screen_center_position = get_screen_center_position()
 
   var tween = create_tween()
-  tween.tween_property(cutscene_camera, "position", target_position, 1.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+  tween.tween_property(cutscene_camera, "position", screen_center_position, 1.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
   tween.parallel().tween_property(cutscene_camera, "zoom", zoom, 1.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
   tween.tween_callback(func():
     cutscene_camera.queue_free()
@@ -66,9 +68,9 @@ func switch_to_main_camera() -> void:
   await tween.finished
 
 func _physics_process(delta: float) -> void:
-  global_position.x = lerp(global_position.x, target.global_position.x, horizontal_speed * delta)
+  target_position.x = target.global_position.x
+  if follow_vertical_on_jump || player.is_on_floor() || (player.velocity.y > 0 && global_position.y < target.global_position.y):
+    target_position.y = target.global_position.y
 
-  if do_not_follow_vertical_on_jump && !(player.is_on_floor() || (player.velocity.y >= 0 && global_position.y < target.global_position.y)):
-    return
-
-  global_position.y = lerp(global_position.y, target.global_position.y, vertical_speed * delta)
+  global_position.x = lerp(global_position.x, target_position.x, horizontal_speed * delta)
+  global_position.y = lerp(global_position.y, target_position.y, vertical_speed * delta)

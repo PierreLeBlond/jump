@@ -469,7 +469,7 @@ position = Vector2(0, 545)
 shape = SubResource("RectangleShape2D_p5s5a")
 
 [node name="SoubalienIntroductionFocus" type="Marker2D" parent="."]
-position = Vector2(5027, 516)
+position = Vector2(4677, 965)
 
 [node name="CameraOverrideArea" type="Area2D" parent="." node_paths=PackedStringArray("camera")]
 position = Vector2(17729, -192)
