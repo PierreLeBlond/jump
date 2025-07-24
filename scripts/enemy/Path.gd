@@ -20,12 +20,14 @@ func set_child(node: Node2D) -> void:
     path_follow.add_child(child)
 
 func start() -> void:
-    path_follow.progress_ratio = 0
     started = true
     await finished
 
 func stop() -> void:
     started = false
+
+func reset():
+    path_follow.progress_ratio = 0
 
 func _process(delta: float) -> void:
     if started:

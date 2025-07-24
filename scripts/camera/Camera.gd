@@ -5,6 +5,7 @@ class_name Camera
 @export var player: ProjectileCharacter
 
 @export var vertical_speed: float = 1.0
+@export var focused_vertical_speed: float = 3.0
 @export var horizontal_speed: float = 2.0
 
 @export var follow_vertical_on_jump: bool = false
@@ -75,6 +76,18 @@ func switch_to_main_camera() -> void:
     make_current()
   )
   await tween.finished
+
+func focus():
+  zoom_to(Vector2(2, 2), 1.0)
+  offset_to(Vector2(0, 0), 1.0)
+  follow_vertical_on_jump = true
+  vertical_speed = focused_vertical_speed
+
+func unfocus():
+  zoom_to(Vector2(1, 1), 1.0)
+  offset_to(Vector2(512, 0), 1.0)
+  follow_vertical_on_jump = false
+  vertical_speed = vertical_speed
 
 func _physics_process(delta: float) -> void:
   target_position.x = target.global_position.x

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://de32o3g1w17vm"]
+[gd_scene load_steps=37 format=4 uid="uid://de32o3g1w17vm"]
 
 [ext_resource type="Script" uid="uid://ft5l0rjyxnrn" path="res://scripts/levels/Level1.gd" id="1_p5s5a"]
 [ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/CinematicBars.tscn" id="2_j7nyf"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://dfh6a42d2dq0n" path="res://scripts/collectibles/NoteCollector.gd" id="11_t2wor"]
 [ext_resource type="Script" uid="uid://bbujjd3t0eg6e" path="res://scripts/camera/Camera.gd" id="12_l40or"]
 [ext_resource type="PackedScene" uid="uid://4wsynq3xc0sr" path="res://scenes/collectibles/Note.tscn" id="14_86um8"]
+[ext_resource type="Script" uid="uid://qqha1uw625f8" path="res://scripts/contraptions/Checkpoint.gd" id="16_p5s5a"]
 [ext_resource type="Script" uid="uid://xd4woi41uhf2" path="res://scripts/camera/CameraOverrideArea.gd" id="18_j7nyf"]
 
 [sub_resource type="Gradient" id="Gradient_ukjja"]
@@ -213,7 +214,10 @@ size = Vector2(127, 1088)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j7nyf"]
 size = Vector2(2452, 1049)
 
-[node name="Level1" type="Node2D" node_paths=PackedStringArray("player", "camera", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "transition_mask", "end_portal", "spawn_portal", "countdown_animation_player", "cinematic_bars", "hud", "soubalien_introduce_area", "soubalien_introduce_focus")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_njy47"]
+size = Vector2(126, 1086)
+
+[node name="Level1" type="Node2D" node_paths=PackedStringArray("player", "camera", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "transition_mask", "end_portal", "spawn_portal", "checkpoint", "countdown_animation_player", "cinematic_bars", "hud", "soubalien_introduce_area", "soubalien_introduce_focus")]
 script = ExtResource("1_p5s5a")
 player = NodePath("Player")
 camera = NodePath("Camera2D")
@@ -223,10 +227,11 @@ soubalien_chase_path = NodePath("SoubalienPaths/ChasePath")
 transition_mask = NodePath("CanvasLayer/TransitionMask")
 end_portal = NodePath("EndPortal")
 spawn_portal = NodePath("SpawnPortal")
+checkpoint = NodePath("Checkpoint")
 countdown_animation_player = NodePath("AnimationPlayer")
 cinematic_bars = NodePath("CinematicBars")
 hud = NodePath("HUD/HBoxContainer")
-soubalien_introduce_area = NodePath("Area2D")
+soubalien_introduce_area = NodePath("SoubalienIntroductionArea")
 soubalien_introduce_focus = NodePath("SoubalienIntroductionFocus")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -491,12 +496,12 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 120
 text = "4"
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="SoubalienIntroductionArea" type="Area2D" parent="."]
 position = Vector2(6205, 0)
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SoubalienIntroductionArea"]
 position = Vector2(0, 545)
 shape = SubResource("RectangleShape2D_p5s5a")
 
@@ -515,3 +520,20 @@ metadata/_custom_type_script = "uid://xd4woi41uhf2"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraOverrideArea"]
 position = Vector2(273, -77.5)
 shape = SubResource("RectangleShape2D_j7nyf")
+
+[node name="Checkpoint" type="Area2D" parent="." node_paths=PackedStringArray("player", "portal", "note_collector")]
+position = Vector2(6077, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("16_p5s5a")
+player = NodePath("../Player")
+portal = NodePath("CheckpointPortal")
+note_collector = NodePath("../Player/NoteCollectorArea2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint"]
+position = Vector2(0, 543)
+shape = SubResource("RectangleShape2D_njy47")
+
+[node name="CheckpointPortal" parent="Checkpoint" node_paths=PackedStringArray("player") instance=ExtResource("6_usw5k")]
+position = Vector2(0, 735)
+player = NodePath("../../Player")

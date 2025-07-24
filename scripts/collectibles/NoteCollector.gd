@@ -2,7 +2,7 @@ extends Area2D
 
 class_name NoteCollector
 
-var collected_note_count: int = 0
+var collected_notes: Array[Note]
 
 signal note_collected(count: int)
 
@@ -13,12 +13,17 @@ func on_area_entered(note: Note) -> void:
     if (note is not Note):
         return
 
-    note.set_collision_layer_value(4, false)
+    collected_notes.append(note)
+    note_collected.emit(collected_notes.size())
+    note.capture()
 
-    collected_note_count += 1
-    note_collected.emit(collected_note_count)
 
-    note.animation_player.play("fly")
-    await note.animation_player.animation_finished
+func restore(restored_index: int):
+    print(collected_notes.size(), " ", restored_index)
+    var notes_to_restore = collected_notes.slice(restored_index, collected_notes.size())
+    for note in notes_to_restore:
+        note.restore()
 
-    note.queue_free()
+    collected_notes = collected_notes.slice(0, restored_index)
+    print(collected_notes.size(), " ", restored_index)
+    note_collected.emit(collected_notes.size())
