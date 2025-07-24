@@ -101,6 +101,7 @@ func on_player_captured() -> void:
 func on_ray_captured_player() -> void:
     soubalien_chase_path.stop()
     camera.zoom_to(Vector2(2, 2), 1.0)
+    camera.offset_to(Vector2(0, 0), 1.0)
 
     camera.follow_vertical_on_jump = true
     camera.restore_target()

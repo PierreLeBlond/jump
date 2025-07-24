@@ -202,7 +202,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_18dal"]
 size = Vector2(56, 102)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("corner_corrector", "cliff_detector", "wall_detector", "state_machine", "movement_controller", "projectile_parameters", "animation_player", "dust_animation_player", "sprite_2d")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("corner_corrector", "cliff_detector", "wall_detector", "state_machine", "movement_controller", "projectile_parameters", "animation_player", "sprite_2d")]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_lkdrv")
@@ -213,7 +213,6 @@ state_machine = NodePath("StateMachine")
 movement_controller = NodePath("MovementController")
 projectile_parameters = NodePath("ProjectileParameters")
 animation_player = NodePath("AnimationPlayer")
-dust_animation_player = NodePath("")
 sprite_2d = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -332,7 +331,9 @@ script = ExtResource("11_gv3ic")
 
 [node name="ProjectileParameters" type="Node" parent="."]
 script = ExtResource("12_b8lor")
+fall_time = 0.35
 max_double_jumps = 0
+acceleration_factor = 2000.0
 
 [node name="CornerCorrector" type="Node2D" parent="." node_paths=PackedStringArray("outer_left_ceiling_ray_cast", "inner_left_ceiling_ray_cast", "outer_right_ceiling_ray_cast", "inner_right_ceiling_ray_cast", "movement_controller")]
 script = ExtResource("13_lkdrv")

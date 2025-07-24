@@ -780,72 +780,63 @@ expand_mode = 1
 
 [node name="TextureRect" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1920.0
-offset_right = 3873.72
+offset_right = 1953.72
 offset_bottom = 127.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect2" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1920.0
 offset_top = 127.0
-offset_right = 3873.72
+offset_right = 1953.72
 offset_bottom = 319.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect9" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1920.0
 offset_top = 319.0
-offset_right = 3873.72
+offset_right = 1953.72
 offset_bottom = 382.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect8" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1920.0
 offset_top = 382.0
-offset_right = 3873.72
+offset_right = 1953.72
 offset_bottom = 574.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect3" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1920.0
 offset_top = 704.0
-offset_right = 3873.72
+offset_right = 1953.72
 offset_bottom = 769.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect6" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1920.0
 offset_top = 639.0
-offset_right = 3873.72
+offset_right = 1953.72
 offset_bottom = 704.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect7" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1920.0
 offset_top = 574.0
-offset_right = 3873.72
+offset_right = 1953.72
 offset_bottom = 639.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect4" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1920.0
 offset_top = 769.0
-offset_right = 3873.72
+offset_right = 1953.72
 offset_bottom = 896.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect5" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1920.0
 offset_top = 896.0
-offset_right = 3873.72
+offset_right = 1953.72
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 

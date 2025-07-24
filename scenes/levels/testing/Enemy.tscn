@@ -1,14 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://bgl0xp27taw8"]
+[gd_scene load_steps=4 format=4 uid="uid://bgl0xp27taw8"]
 
 [ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="1_j6ea0"]
 [ext_resource type="PackedScene" uid="uid://b8dorlf7ulbwy" path="res://scenes/Soubalien.tscn" id="2_sy53j"]
-[ext_resource type="PackedScene" uid="uid://bml0bldhljk3n" path="res://scripts/blocks/Block.tscn" id="3_p2tik"]
-
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_if3ul"]
-scenes/1/scene = ExtResource("3_p2tik")
-
-[sub_resource type="TileSet" id="TileSet_8k7ik"]
-sources/0 = SubResource("TileSetScenesCollectionSource_if3ul")
+[ext_resource type="TileSet" uid="uid://d2f3f4ukvlod0" path="res://tilesets/tree.tres" id="3_j6ea0"]
 
 [node name="Enemy" type="Node2D"]
 
@@ -24,5 +18,5 @@ position = Vector2(-215, 203)
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AADg/w8AAAAAAAAAAQDh/w8AAAAAAAAAAQDi/w8AAAAAAAAAAQDj/w8AAAAAAAAAAQDk/w8AAAAAAAAAAQDl/w8AAAAAAAAAAQDm/w8AAAAAAAAAAQDn/w8AAAAAAAAAAQDo/w8AAAAAAAAAAQDp/w8AAAAAAAAAAQDq/w8AAAAAAAAAAQDr/w8AAAAAAAAAAQDs/w8AAAAAAAAAAQDt/w8AAAAAAAAAAQDu/w8AAAAAAAAAAQDv/w8AAAAAAAAAAQDw/w8AAAAAAAAAAQDx/w8AAAAAAAAAAQDy/w8AAAAAAAAAAQDz/w8AAAAAAAAAAQD0/w8AAAAAAAAAAQD1/w8AAAAAAAAAAQD2/w8AAAAAAAAAAQD3/w8AAAAAAAAAAQD4/w8AAAAAAAAAAQD5/w8AAAAAAAAAAQD6/w8AAAAAAAAAAQD7/w8AAAAAAAAAAQD8/w8AAAAAAAAAAQD9/w8AAAAAAAAAAQD+/w8AAAAAAAAAAQD//w8AAAAAAAAAAQAAAA8AAAAAAAAAAQABAA8AAAAAAAAAAQACAA8AAAAAAAAAAQADAA8AAAAAAAAAAQAEAA8AAAAAAAAAAQAFAA8AAAAAAAAAAQAGAA8AAAAAAAAAAQAHAA8AAAAAAAAAAQAIAA8AAAAAAAAAAQA=")
-tile_set = SubResource("TileSet_8k7ik")
+tile_map_data = PackedByteArray("AAD3/wcAAQABAAMAAAD4/wcAAQACAAMAAAD5/wcAAQACAAMAAAD6/wcAAQACAAMAAAD7/wcAAQACAAMAAAD8/wcAAQACAAMAAAD9/wcAAQACAAMAAAD+/wcAAQACAAMAAAD//wcAAQACAAMAAAAAAAcAAQACAAMAAAABAAcAAQACAAMAAAACAAcAAQACAAMAAAADAAcAAQACAAMAAAAEAAcAAQACAAMAAAAFAAcAAQADAAMAAAA=")
+tile_set = ExtResource("3_j6ea0")

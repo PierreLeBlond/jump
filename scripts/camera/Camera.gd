@@ -12,6 +12,7 @@ class_name Camera
 var target: Node2D
 
 var zoom_tween: Tween
+var offset_tween: Tween
 var position_tween: Tween
 
 var cutscene_camera: Camera2D
@@ -28,6 +29,14 @@ func zoom_to(value: Vector2, duration: float) -> void:
   zoom_tween = create_tween()
   zoom_tween.tween_property(self, "zoom", value, duration)
   await zoom_tween.finished
+
+func offset_to(value: Vector2, duration: float) -> void:
+  if offset_tween != null:
+    offset_tween.kill()
+
+  offset_tween = create_tween()
+  offset_tween.tween_property(self, "offset", value, duration)
+  await offset_tween.finished
 
 func change_target(value: Node2D) -> void:
   target = value
