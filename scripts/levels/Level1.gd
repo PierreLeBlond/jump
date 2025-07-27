@@ -6,6 +6,8 @@ class_name Level1
 
 @export var camera: Camera
 
+@export var camera_manager: CameraManager
+
 @export var soubalien: Soubalien
 @export var soubalien_introduce_path: Path
 @export var soubalien_chase_path: Path
@@ -13,7 +15,6 @@ class_name Level1
 @export var transition_mask: TransitionMask
 
 @export var end_portal: Portal
-@export var spawn_portal: Portal
 
 @export var checkpoint: Checkpoint
 
@@ -23,10 +24,8 @@ class_name Level1
 
 @export var hud: Control
 
-@export var soubalien_introduce_area: Area2D
-@export var soubalien_introduce_focus: Node2D
-
-var cutscene_camera: Camera2D
+@export var race_introduction_area: Area2D
+@export var race_introduction_camera: Camera
 
 func _ready() -> void:
 	transition_mask.transition_out()
@@ -36,7 +35,7 @@ func _ready() -> void:
 
 	soubalien.visible = false
 	soubalien.process_mode = Node.PROCESS_MODE_DISABLED
-	soubalien_introduce_area.body_entered.connect(introduce_soubalien)
+	race_introduction_area.body_entered.connect(introduce_race)
 
 func show_hud() -> void:
 	var tween = create_tween()
@@ -46,8 +45,8 @@ func hide_hud() -> void:
 	var tween = create_tween()
 	tween.tween_property(hud, "modulate:a", 0.0, 0.5)
 
-func introduce_soubalien(_body: Node2D) -> void:
-	soubalien_introduce_area.body_entered.disconnect(introduce_soubalien)
+func introduce_race(_body: Node2D) -> void:
+	race_introduction_area.body_entered.disconnect(introduce_race)
 
 	player.unlocked_keys.keys[Globals.MOVE_UNLOCKED_KEY] = false
 	# TODO : Play surprise animation
@@ -60,9 +59,11 @@ func introduce_soubalien(_body: Node2D) -> void:
 	soubalien.visible = true
 	soubalien.process_mode = Node.PROCESS_MODE_INHERIT
 
-	camera.change_target(soubalien_introduce_focus)
+	camera_manager.jump_to(race_introduction_camera)
 	soubalien_introduce_path.call_deferred("set_child", soubalien)
 	await soubalien_introduce_path.start()
+
+	camera.zoom_to(Vector2(1, 1), 0.5)
 
 	start_chase()
 
@@ -83,8 +84,6 @@ func start_chase() -> void:
 
 	show_hud()
 
-	camera.zoom_to(Vector2(1, 1), 0.5)
-
 	player.unlocked_keys.keys[Globals.MOVE_UNLOCKED_KEY] = true
 
 	soubalien_chase_path.start()
@@ -96,10 +95,11 @@ func end_game() -> void:
 
 func load_checkpoint():
 	soubalien.restore_player()
-	camera.unfocus()
 	checkpoint.load()
-	await transition_mask.transition_out()
+	camera.unfocus(0.0)
+	camera.jump_to_target()
 	start_chase()
+	await transition_mask.transition_out()
 
 func play_death_transition() -> void:
 	await transition_mask.transition_in()
@@ -116,4 +116,4 @@ func on_ray_captured_player() -> void:
 	player.unlocked_keys.keys[Globals.MOVE_UNLOCKED_KEY] = false
 	soubalien_chase_path.stop()
 	camera.restore_target()
-	camera.focus()
+	camera.focus(1.0)

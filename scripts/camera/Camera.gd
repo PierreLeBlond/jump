@@ -4,9 +4,11 @@ class_name Camera
 
 @export var player: ProjectileCharacter
 
-@export var vertical_speed: float = 1.0
+@export var default_vertical_speed: float = 1.0
 @export var focused_vertical_speed: float = 3.0
 @export var horizontal_speed: float = 2.0
+
+var vertical_speed: float = default_vertical_speed
 
 @export var follow_vertical_on_jump: bool = false
 
@@ -45,21 +47,6 @@ func change_target(value: Node2D) -> void:
 func restore_target() -> void:
   target = player
 
-func switch_to_cutscene_camera() -> Camera2D:
-    if cutscene_camera != null:
-      return cutscene_camera
-
-    # TODO: Add properties to copy as needed
-    cutscene_camera = Camera2D.new()
-    cutscene_camera.position = get_screen_center_position()
-    cutscene_camera.zoom = zoom
-    cutscene_camera.limit_bottom = limit_bottom
-
-    # TODO: Should the cutscene camera be put elsewhere in the tree?
-    get_parent().add_child(cutscene_camera)
-    cutscene_camera.make_current()
-
-    return cutscene_camera
 
 func switch_to_main_camera() -> void:
   if cutscene_camera == null:
@@ -77,17 +64,20 @@ func switch_to_main_camera() -> void:
   )
   await tween.finished
 
-func focus():
-  zoom_to(Vector2(2, 2), 1.0)
-  offset_to(Vector2(0, 0), 1.0)
+func focus(duration: float):
+  zoom_to(Vector2(2, 2), duration)
+  offset_to(Vector2(0, 0), duration)
   follow_vertical_on_jump = true
   vertical_speed = focused_vertical_speed
 
-func unfocus():
-  zoom_to(Vector2(1, 1), 1.0)
-  offset_to(Vector2(512, 0), 1.0)
+func unfocus(duration: float):
+  zoom_to(Vector2(1, 1), duration)
+  offset_to(Vector2(512, 0), duration)
   follow_vertical_on_jump = false
-  vertical_speed = vertical_speed
+  vertical_speed = default_vertical_speed
+
+func jump_to_target():
+  global_position = target.global_position
 
 func _physics_process(delta: float) -> void:
   target_position.x = target.global_position.x

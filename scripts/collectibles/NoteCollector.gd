@@ -19,11 +19,9 @@ func on_area_entered(note: Note) -> void:
 
 
 func restore(restored_index: int):
-    print(collected_notes.size(), " ", restored_index)
     var notes_to_restore = collected_notes.slice(restored_index, collected_notes.size())
     for note in notes_to_restore:
         note.restore()
 
     collected_notes = collected_notes.slice(0, restored_index)
-    print(collected_notes.size(), " ", restored_index)
     note_collected.emit(collected_notes.size())
