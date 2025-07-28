@@ -22,5 +22,8 @@ func is_on_right_wall() -> bool:
 func is_on_wall() -> bool:
     return is_on_left_wall() or is_on_right_wall()
 
+func is_facing_wall(direction: int) -> bool:
+    return is_on_left_wall() if direction == -1 else is_on_right_wall()
+
 func get_wall_sign() -> int:
     return 1 if is_on_left_wall() else -1

@@ -35,11 +35,11 @@ func get_next_state(_delta: float) -> State:
     if (parent.wants_to_jump()):
         return jump
 
-    if (parent.wants_to_run() && parent.wants_to_move()):
-        return run
+    if (parent.wants_to_walk() && parent.wants_to_move()):
+        return walk
 
     if (parent.wants_to_move()):
-        return walk
+        return run
 
     return null
 

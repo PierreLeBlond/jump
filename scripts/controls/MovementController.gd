@@ -11,7 +11,7 @@ func wants_to_move() -> bool:
 func wants_to_jump() -> bool:
     return false
 
-func wants_to_run() -> bool:
+func wants_to_walk() -> bool:
     return false
 
 func cancel_jump() -> bool:

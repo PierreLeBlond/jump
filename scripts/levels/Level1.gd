@@ -27,6 +27,10 @@ class_name Level1
 
 @export var race_introduction_area: Area2D
 
+@export var note_collector: NoteCollector
+
+var collected_notes_index: int
+
 func _ready() -> void:
     camera_manager.jump_to(player_camera)
 
@@ -38,6 +42,9 @@ func _ready() -> void:
     soubalien.visible = false
     soubalien.process_mode = Node.PROCESS_MODE_DISABLED
     race_introduction_area.body_entered.connect(introduce_race)
+
+    checkpoint.checkpoint_saved.connect(func(_checkpoint: Checkpoint): collected_notes_index = note_collector.collected_notes.size())
+    checkpoint.checkpoint_loaded.connect(func(_checkpoint: Checkpoint): note_collector.restore(collected_notes_index))
 
 func show_hud() -> void:
     var tween = create_tween()
@@ -92,7 +99,7 @@ func start_chase() -> void:
 
 func end_game() -> void:
     var tree = get_tree()
-    tree.change_scene_to_file("res://scenes/ui/TitleScreen.tscn")
+    tree.change_scene_to_file("res://scenes/levels/TitleScreen.tscn")
 
 func load_checkpoint():
     soubalien.restore_player()

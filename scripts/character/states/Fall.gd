@@ -25,22 +25,25 @@ var double_jump_count: int = 0
 func enter(previous_state: State, delta: float) -> void:
     super (previous_state, delta)
 
+    maximum_lateral_velocity = previous_state.maximum_lateral_velocity
+
     if (previous_state == run):
         coyote_jump_remaining_frames = parent.projectile_parameters.coyote_jump_frames
     else:
         coyote_jump_remaining_frames = 0
-        maximum_lateral_velocity = previous_state.maximum_lateral_velocity
 
     if (previous_state == double_jump):
         double_jump_count -= 1
     else:
         double_jump_count = parent.projectile_parameters.max_double_jumps
 
+    buffered_jump_remaining_frames = 0
+
 func get_next_state(_delta: float) -> State:
     if (parent.is_in_gravity_field):
         return gravity_field
 
-    if (parent.wants_to_jump() && parent.wall_detector.is_on_wall()):
+    if (parent.wall_detector.is_on_wall() && buffered_jump_remaining_frames > 0):
         return wall_jump
 
     if (parent.wants_to_jump() && coyote_jump_remaining_frames > 0):
@@ -52,11 +55,11 @@ func get_next_state(_delta: float) -> State:
     if (parent.is_on_floor() && buffered_jump_remaining_frames > 0):
         return jump
 
-    if (parent.is_on_floor() && parent.wants_to_run() && parent.wants_to_move()):
-        return run
+    if (parent.is_on_floor() && parent.wants_to_walk() && parent.wants_to_move()):
+        return walk
 
     if (parent.is_on_floor() && parent.wants_to_move()):
-        return walk
+        return run
 
     if (parent.is_on_floor()):
         return idle

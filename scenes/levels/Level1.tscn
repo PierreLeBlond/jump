@@ -218,7 +218,7 @@ size = Vector2(127, 1088)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j7nyf"]
 size = Vector2(3226, 1049)
 
-[node name="Level1" type="Node2D" node_paths=PackedStringArray("player", "camera_manager", "player_camera", "race_introduction_camera", "player_focus_camera", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "transition_mask", "end_portal", "checkpoint", "countdown_animation_player", "cinematic_bars", "hud", "race_introduction_area")]
+[node name="Level1" type="Node2D" node_paths=PackedStringArray("player", "camera_manager", "player_camera", "race_introduction_camera", "player_focus_camera", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "transition_mask", "end_portal", "checkpoint", "countdown_animation_player", "cinematic_bars", "hud", "race_introduction_area", "note_collector")]
 script = ExtResource("1_p5s5a")
 player = NodePath("Player")
 camera_manager = NodePath("CameraManager")
@@ -235,6 +235,7 @@ countdown_animation_player = NodePath("AnimationPlayer")
 cinematic_bars = NodePath("CinematicBars")
 hud = NodePath("HUD/HBoxContainer")
 race_introduction_area = NodePath("RaceIntroductionArea")
+note_collector = NodePath("Player/NoteCollectorArea2D")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -1
@@ -384,14 +385,13 @@ loop = false
 position = Vector2(18689, -448)
 player = NodePath("../Player")
 
-[node name="Checkpoint" type="Area2D" parent="." node_paths=PackedStringArray("player", "portal", "note_collector")]
+[node name="Checkpoint" type="Area2D" parent="." node_paths=PackedStringArray("player", "portal")]
 position = Vector2(6077, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("16_p5s5a")
 player = NodePath("../Player")
 portal = NodePath("CheckpointPortal")
-note_collector = NodePath("../Player/NoteCollectorArea2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint"]
 position = Vector2(0, 543)
@@ -402,7 +402,7 @@ position = Vector2(128, 735)
 player = NodePath("../../Player")
 
 [node name="Player" parent="." instance=ExtResource("10_ijoxy")]
-position = Vector2(5717, 904)
+position = Vector2(204, 904)
 
 [node name="NoteCollectorArea2D" type="Area2D" parent="Player"]
 process_mode = 3

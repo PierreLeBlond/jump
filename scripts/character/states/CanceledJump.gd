@@ -31,7 +31,7 @@ func enter(previous_state: State, delta: float) -> void:
 
     parent.velocity.y = vertical_velocity
 
-    var run_factor = parent.projectile_parameters.run_factor if parent.wants_to_run() else 1.0
+    var run_factor = parent.projectile_parameters.run_factor if !parent.wants_to_walk() else 1.0
 
     # We should only jump to max distance if we are jumping at full speed. At speed 0, we should still be able to move to half the maximum distance.
     maximum_lateral_velocity = (abs(parent.velocity.x) + parent.projectile_parameters.maximum_velocity * run_factor) / 2 * (parent.projectile_parameters.jump_time + parent.projectile_parameters.fall_time)

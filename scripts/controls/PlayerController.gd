@@ -19,8 +19,8 @@ func wants_to_move() -> bool:
 func wants_to_jump() -> bool:
     return Input.is_action_just_pressed("jump")
 
-func wants_to_run() -> bool:
-    return Input.is_action_pressed("run")
+func wants_to_walk() -> bool:
+    return Input.is_action_pressed("walk")
 
 func cancel_jump() -> bool:
     return !Input.is_action_pressed("jump")

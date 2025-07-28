@@ -55,8 +55,8 @@ func wants_to_move() -> bool:
 func wants_to_jump() -> bool:
     return movement_controller.wants_to_jump() && unlocked_keys.has_unlocked_jump()
 
-func wants_to_run() -> bool:
-    return movement_controller.wants_to_run() && unlocked_keys.has_unlocked_run()
+func wants_to_walk() -> bool:
+    return movement_controller.wants_to_walk()
 
 func cancel_jump() -> bool:
     return movement_controller.cancel_jump()

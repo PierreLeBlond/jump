@@ -33,8 +33,8 @@ func handle_physics(delta: float) -> void:
 
     if (new_state != null):
         change_state(new_state, delta)
-
-    current_state.update(delta)
+    else:
+        current_state.update(delta)
 
     var controlled_velocity = current_state.get_velocity(delta)
     var external_velocity = Vector2.ZERO
