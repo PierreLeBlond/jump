@@ -12,6 +12,8 @@ func _ready() -> void:
     screen_position = target.get_global_transform_with_canvas().origin
 
 func transition_in() -> void:
+    visible = true
+
     var mask_radius = get_viewport_rect().size.length()
     material.set_shader_parameter("mask_radius", mask_radius)
 
@@ -26,6 +28,7 @@ func transition_out() -> void:
     var tween = create_tween()
     tween.tween_property(material, "shader_parameter/mask_radius", mask_radius, 1.0).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
     await tween.finished
+    visible = false
 
 func _process(delta: float) -> void:
     var target_screen_position = target.get_global_transform_with_canvas().origin

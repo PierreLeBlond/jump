@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://de32o3g1w17vm"]
+[gd_scene load_steps=38 format=4 uid="uid://de32o3g1w17vm"]
 
 [ext_resource type="Script" uid="uid://ft5l0rjyxnrn" path="res://scripts/levels/Level1.gd" id="1_p5s5a"]
 [ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/CinematicBars.tscn" id="2_j7nyf"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://c8b0g0enel70w" path="res://scripts/enemy/Path.gd" id="10_njy47"]
 [ext_resource type="Script" uid="uid://dfh6a42d2dq0n" path="res://scripts/collectibles/NoteCollector.gd" id="11_t2wor"]
 [ext_resource type="Script" uid="uid://bbujjd3t0eg6e" path="res://scripts/camera/Camera.gd" id="12_l40or"]
+[ext_resource type="Script" uid="uid://dm275lbjrus7p" path="res://scripts/camera/CameraManager.gd" id="13_njy47"]
 [ext_resource type="PackedScene" uid="uid://4wsynq3xc0sr" path="res://scenes/collectibles/Note.tscn" id="14_86um8"]
 [ext_resource type="Script" uid="uid://qqha1uw625f8" path="res://scripts/contraptions/Checkpoint.gd" id="16_p5s5a"]
 [ext_resource type="Script" uid="uid://xd4woi41uhf2" path="res://scripts/camera/CameraOverrideArea.gd" id="18_j7nyf"]
@@ -80,15 +81,18 @@ _data = {
 
 [sub_resource type="Curve2D" id="Curve2D_i654n"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -751, -1066, 0, 0, 0, 0, -750, 221, 0, 0, 0, 0, 268, 234)
+"points": PackedVector2Array(0, 0, 0, 0, -751, -1066, 0, 0, 0, 0, -750, 221, 0, 0, 0, 0, 140, 232)
 }
 point_count = 3
 
 [sub_resource type="Curve2D" id="Curve2D_p5s5a"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 269, 234, 0, 0, 0, 0, 1064, -59, 0, 0, 0, 0, 5936, -58, 0, 0, 0, 0, 8530, -441, 0, 0, 0, 0, 10348, -691, 0, 0, 0, 0, 14443, -1266)
+"points": PackedVector2Array(0, 0, 0, 0, 141, 232, 0, 0, 0, 0, 1064, -59, 0, 0, 0, 0, 5936, -58, 0, 0, 0, 0, 8530, -441, 0, 0, 0, 0, 10348, -691, 0, 0, 0, 0, 14443, -1266)
 }
 point_count = 6
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_njy47"]
+size = Vector2(126, 1086)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fs813"]
 size = Vector2(54, 104)
@@ -212,15 +216,15 @@ _data = {
 size = Vector2(127, 1088)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j7nyf"]
-size = Vector2(2452, 1049)
+size = Vector2(3226, 1049)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_njy47"]
-size = Vector2(126, 1086)
-
-[node name="Level1" type="Node2D" node_paths=PackedStringArray("player", "camera", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "transition_mask", "end_portal", "checkpoint", "countdown_animation_player", "cinematic_bars", "hud")]
+[node name="Level1" type="Node2D" node_paths=PackedStringArray("player", "camera_manager", "player_camera", "race_introduction_camera", "player_focus_camera", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "transition_mask", "end_portal", "checkpoint", "countdown_animation_player", "cinematic_bars", "hud", "race_introduction_area")]
 script = ExtResource("1_p5s5a")
 player = NodePath("Player")
-camera = NodePath("Camera2D")
+camera_manager = NodePath("CameraManager")
+player_camera = NodePath("PlayerCamera")
+race_introduction_camera = NodePath("RaceIntroduceCamera")
+player_focus_camera = NodePath("PlayerFocusCamera")
 soubalien = NodePath("Soubalien")
 soubalien_introduce_path = NodePath("SoubalienPaths/IntroducePath")
 soubalien_chase_path = NodePath("SoubalienPaths/ChasePath")
@@ -230,6 +234,7 @@ checkpoint = NodePath("Checkpoint")
 countdown_animation_player = NodePath("AnimationPlayer")
 cinematic_bars = NodePath("CinematicBars")
 hud = NodePath("HUD/HBoxContainer")
+race_introduction_area = NodePath("RaceIntroductionArea")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -1
@@ -337,12 +342,8 @@ libraries = {
 [node name="TransitionMask" parent="CanvasLayer" node_paths=PackedStringArray("target") instance=ExtResource("5_dqba7")]
 target = NodePath("../../Player")
 
-[node name="EndPortal" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_usw5k")]
-position = Vector2(18496, -448)
-player = NodePath("../Player")
-
 [node name="CloudLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAANAQEAAQADAAMAAAAMAQEAAQACAAMAAAALAQEAAQACAAMAAAAKAQEAAQABAAMAAAAUAf//AQADAAMAAAATAf//AQACAAMAAAASAf//AQACAAMAAAARAf//AQABAAMAAAAbAf3/AQADAAMAAAAaAf3/AQACAAMAAAAZAf3/AQACAAMAAAAYAf3/AQABAAMAAAAiAfv/AQADAAMAAAAhAfv/AQACAAMAAAAgAfv/AQACAAMAAAAfAfv/AQABAAMAAAA=")
+tile_map_data = PackedByteArray("AAAiAfv/AQABAAMAAAAjAfv/AQACAAMAAAAkAfv/AQACAAMAAAAlAfv/AQADAAMAAAAfAf3/AQADAAMAAAAeAf3/AQACAAMAAAAdAf3/AQACAAMAAAAcAf3/AQABAAMAAAAZAf//AQADAAMAAAAYAf//AQACAAMAAAAXAf//AQACAAMAAAAWAf//AQACAAMAAAAVAf//AQABAAMAAAASAQEAAQADAAMAAAARAQEAAQACAAMAAAAQAQEAAQACAAMAAAAPAQEAAQACAAMAAAAOAQEAAQABAAMAAAA=")
 tile_set = ExtResource("7_jsker")
 
 [node name="TreeLayer" type="TileMapLayer" parent="."]
@@ -375,9 +376,30 @@ script = ExtResource("10_njy47")
 speed = 0.025
 
 [node name="PathFollow2D" type="PathFollow2D" parent="SoubalienPaths/ChasePath"]
-position = Vector2(269, 234)
+position = Vector2(141, 232)
 rotates = false
 loop = false
+
+[node name="EndPortal" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_usw5k")]
+position = Vector2(18689, -448)
+player = NodePath("../Player")
+
+[node name="Checkpoint" type="Area2D" parent="." node_paths=PackedStringArray("player", "portal", "note_collector")]
+position = Vector2(6077, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("16_p5s5a")
+player = NodePath("../Player")
+portal = NodePath("CheckpointPortal")
+note_collector = NodePath("../Player/NoteCollectorArea2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint"]
+position = Vector2(0, 543)
+shape = SubResource("RectangleShape2D_njy47")
+
+[node name="CheckpointPortal" parent="Checkpoint" node_paths=PackedStringArray("player") instance=ExtResource("6_usw5k")]
+position = Vector2(128, 735)
+player = NodePath("../../Player")
 
 [node name="Player" parent="." instance=ExtResource("10_ijoxy")]
 position = Vector2(5717, 904)
@@ -392,19 +414,10 @@ script = ExtResource("11_t2wor")
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_fs813")
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
-position = Vector2(221, 730)
-offset = Vector2(512, 0)
-process_callback = 0
-limit_left = -10000
-limit_bottom = 1080
-drag_horizontal_enabled = true
-drag_left_margin = 0.0
-editor_draw_drag_margin = true
-script = ExtResource("12_l40or")
-player = NodePath("../Player")
+[node name="CameraManager" type="Node" parent="."]
+script = ExtResource("13_njy47")
 
-[node name="Camera2D2" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+[node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 position = Vector2(221, 730)
 offset = Vector2(512, 0)
 process_callback = 0
@@ -414,10 +427,33 @@ drag_horizontal_enabled = true
 drag_left_margin = 0.0
 editor_draw_drag_margin = true
 script = ExtResource("12_l40or")
-player = NodePath("../Player")
+target = NodePath("../Player")
+
+[node name="PlayerFocusCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(221, 730)
+zoom = Vector2(2, 2)
+process_callback = 0
+limit_bottom = 1080
+editor_draw_drag_margin = true
+script = ExtResource("12_l40or")
+vertical_speed = 3.0
+follow_vertical_on_jump = true
+target = NodePath("../Player")
+
+[node name="RaceIntroduceCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(221, 730)
+zoom = Vector2(0.9, 0.9)
+process_callback = 0
+limit_left = -10000
+limit_bottom = 1080
+editor_draw_drag_margin = true
+script = ExtResource("12_l40or")
+vertical_speed = 2.0
+follow_vertical_on_jump = true
+target = NodePath("../Player")
 
 [node name="NoteLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AABBADMAAAAAAAAAAQBhADMAAAAAAAAAAQCIACsAAAAAAAAAAQCcACMAAAAAAAAAAQC0ABcAAAAAAAAAAQDcAB8AAAAAAAAAAQC0AS8AAAAAAAAAAQDwASsAAAAAAAAAAQBAAicAAAAAAAAAAQCZAi8AAAAAAAAAAQC9Ai8AAAAAAAAAAQARAx8AAAAAAAAAAQD9AicAAAAAAAAAAQAlAxcAAAAAAAAAAQB5AwsAAAAAAAAAAQCJAwsAAAAAAAAAAQCZAwsAAAAAAAAAAQDMAx8AAAAAAAAAAQAwBPv/AAAAAAAAAQBMBPP/AAAAAAAAAQBoBOv/AAAAAAAAAQA=")
+tile_map_data = PackedByteArray("AABBADMAAAAAAAAAAQBhADMAAAAAAAAAAQCIACsAAAAAAAAAAQCcACMAAAAAAAAAAQC0ABcAAAAAAAAAAQDcAB8AAAAAAAAAAQC0AS8AAAAAAAAAAQDwASsAAAAAAAAAAQBAAicAAAAAAAAAAQCZAi8AAAAAAAAAAQC9Ai8AAAAAAAAAAQARAx8AAAAAAAAAAQD9AicAAAAAAAAAAQAlAxcAAAAAAAAAAQB5AwsAAAAAAAAAAQCJAwsAAAAAAAAAAQCZAwsAAAAAAAAAAQDMAx8AAAAAAAAAAQBDBPv/AAAAAAAAAQBgBPP/AAAAAAAAAQB8BOv/AAAAAAAAAQA=")
 tile_set = SubResource("TileSet_t6keq")
 collision_enabled = false
 
@@ -500,44 +536,34 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 120
 text = "4"
 
-[node name="SoubalienIntroductionArea" type="Area2D" parent="."]
+[node name="RaceIntroductionArea" type="Area2D" parent="."]
 position = Vector2(6205, 0)
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SoubalienIntroductionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RaceIntroductionArea"]
 position = Vector2(0, 545)
 shape = SubResource("RectangleShape2D_p5s5a")
 
-[node name="SoubalienIntroductionFocus" type="Marker2D" parent="."]
-position = Vector2(4677, 965)
-
-[node name="CameraOverrideArea" type="Area2D" parent="." node_paths=PackedStringArray("camera")]
+[node name="CameraOverrideArea" type="Area2D" parent="." node_paths=PackedStringArray("camera_manager", "restore_camera", "override_camera")]
 position = Vector2(17729, -192)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("18_j7nyf")
-camera = NodePath("../Camera2D")
-zoom = 0.5
+camera_manager = NodePath("../CameraManager")
+restore_camera = NodePath("../PlayerCamera")
+override_camera = NodePath("FinishCamera")
 metadata/_custom_type_script = "uid://xd4woi41uhf2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraOverrideArea"]
-position = Vector2(273, -77.5)
+position = Vector2(528, -77.5)
 shape = SubResource("RectangleShape2D_j7nyf")
 
-[node name="Checkpoint" type="Area2D" parent="." node_paths=PackedStringArray("player", "portal", "note_collector")]
-position = Vector2(6077, 0)
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("16_p5s5a")
-player = NodePath("../Player")
-portal = NodePath("CheckpointPortal")
-note_collector = NodePath("../Player/NoteCollectorArea2D")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint"]
-position = Vector2(0, 543)
-shape = SubResource("RectangleShape2D_njy47")
-
-[node name="CheckpointPortal" parent="Checkpoint" node_paths=PackedStringArray("player") instance=ExtResource("6_usw5k")]
-position = Vector2(0, 735)
-player = NodePath("../../Player")
+[node name="FinishCamera" type="Camera2D" parent="CameraOverrideArea" node_paths=PackedStringArray("target")]
+position = Vector2(528, -72)
+zoom = Vector2(0.5, 0.5)
+script = ExtResource("12_l40or")
+vertical_speed = 2.0
+follow_vertical_on_jump = true
+target = NodePath("../CollisionShape2D")
+metadata/_custom_type_script = "uid://bbujjd3t0eg6e"

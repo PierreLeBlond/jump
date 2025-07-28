@@ -2,9 +2,10 @@ extends Area2D
 
 class_name CameraOverrideArea
 
-@export var camera: Camera
+@export var camera_manager: CameraManager
 
-@export var zoom: float = 1.0
+@export var restore_camera: Camera
+@export var override_camera: Camera
 
 var tween: Tween
 
@@ -16,12 +17,10 @@ func on_body_entered(body: Node2D) -> void:
     if (body is not ProjectileCharacter):
         return
 
-    camera.change_target(self)
-    camera.zoom_to(Vector2(zoom, zoom), 0.5)
+    camera_manager.fly_to(override_camera)
 
 func on_body_exited(body: Node2D) -> void:
     if (body is not ProjectileCharacter):
         return
 
-    camera.restore_target()
-    camera.zoom_to(Vector2(1, 1), 0.5)
+    camera_manager.fly_to(restore_camera)
