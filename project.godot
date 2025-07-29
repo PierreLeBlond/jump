@@ -20,6 +20,8 @@ config/icon="res://icon.svg"
 
 Reload="*res://scripts/debug/Reloader.gd"
 World="*res://scripts/World.gd"
+PlayerAccounts="*res://addons/quiver_player_accounts/player_accounts.tscn"
+Leaderboards="*res://addons/quiver_leaderboards/leaderboards.tscn"
 
 [display]
 
@@ -27,6 +29,10 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/initial_position_type=3
 window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/quiver_leaderboards/plugin.cfg", "res://addons/quiver_player_accounts/plugin.cfg")
 
 [file_customization]
 
@@ -83,6 +89,10 @@ menu={
 2d_physics/layer_2="player"
 2d_physics/layer_3="enemies"
 2d_physics/layer_4="collectibles"
+
+[quiver]
+
+general/auth_token="FTUaJG5fcIvjDOQcTWI5C7DXR3DHUet9l8A5Ka0x"
 
 [rendering]
 

@@ -1,13 +1,14 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://bx7hkxebggo06"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://bx7hkxebggo06"]
 
 [ext_resource type="FontFile" uid="uid://cfar2mpfyh04t" path="res://assets/fonts/space age.ttf" id="1_7ql75"]
+[ext_resource type="FontFile" uid="uid://opncn7fhpnq3" path="res://assets/fonts/Coda-ExtraBold.ttf" id="2_io832"]
+[ext_resource type="FontFile" uid="uid://bcflnxt0l3xid" path="res://assets/fonts/Coda-Regular.ttf" id="3_3b1co"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_io832"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ql75"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afct1"]
-draw_center = false
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3b1co"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_io832"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -16,8 +17,12 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [resource]
 Button/colors/font_color = Color(0.717632, 0.678553, 0.325353, 1)
-Button/colors/font_hover_color = Color(0.843183, 0.599893, 0.744991, 1)
+Button/colors/font_disabled_color = Color(0.717647, 0.678431, 0.32549, 1)
+Button/colors/font_focus_color = Color(0.717647, 0.678431, 0.32549, 1)
+Button/colors/font_hover_color = Color(0.717647, 0.678431, 0.32549, 1)
+Button/colors/font_hover_pressed_color = Color(0.717647, 0.678431, 0.32549, 1)
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0.717647, 0.678431, 0.32549, 1)
 Button/colors/icon_disabled_color = Color(1, 1, 1, 0)
 Button/constants/line_spacing = 0
 Button/constants/outline_size = 10
@@ -25,7 +30,7 @@ Button/font_sizes/font_size = 24
 Button/fonts/font = ExtResource("1_7ql75")
 Button/styles/disabled = SubResource("StyleBoxEmpty_io832")
 Button/styles/focus = SubResource("StyleBoxEmpty_7ql75")
-Button/styles/hover = SubResource("StyleBoxFlat_afct1")
+Button/styles/hover = SubResource("StyleBoxEmpty_3b1co")
 Button/styles/normal = SubResource("StyleBoxFlat_io832")
 Button/styles/pressed = SubResource("StyleBoxEmpty_afct1")
 Label/colors/font_color = Color(0, 0, 0, 1)
@@ -39,5 +44,5 @@ Label/fonts/font = ExtResource("1_7ql75")
 RichTextLabel/colors/default_color = Color(0.0226034, 0.0232986, 0.162061, 1)
 RichTextLabel/font_sizes/bold_font_size = 60
 RichTextLabel/font_sizes/normal_font_size = 40
-RichTextLabel/fonts/bold_font = ExtResource("1_7ql75")
-RichTextLabel/fonts/normal_font = ExtResource("1_7ql75")
+RichTextLabel/fonts/bold_font = ExtResource("2_io832")
+RichTextLabel/fonts/normal_font = ExtResource("3_3b1co")
