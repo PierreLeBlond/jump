@@ -28,7 +28,7 @@ func _ready() -> void:
     endPortal.spawn()
     endPortal.player_captured.connect(end_game)
 
-    transition_mask.transition_out()
+    transition_mask.transition_out(player)
     last_checkpoint = start_checkpoint
     last_checkpoint.load()
 
@@ -36,7 +36,7 @@ func set_last_checkpoint(checkpoint: Checkpoint) -> void:
     last_checkpoint = checkpoint
 
 func end_game() -> void:
-    await transition_mask.transition_in()
+    await transition_mask.transition_in(player)
 
     var tree = get_tree()
     tree.change_scene_to_file("res://scenes/levels/TitleScreen.tscn")

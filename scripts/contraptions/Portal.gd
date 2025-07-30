@@ -38,11 +38,13 @@ func capture_player() -> void:
   area.body_entered.disconnect(on_body_entered)
   await disappear()
 
-func release_player() -> void:
+func hold_player() -> void:
   player.is_externally_controlled = true
   player.global_position = global_position
   player.scale = Vector2(1, 1)
   player.modulate.a = 0
+
+func release_player() -> void:
   await appear()
   var tween = create_tween()
   tween.tween_property(player, "modulate:a", 1, 0.5)

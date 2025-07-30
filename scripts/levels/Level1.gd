@@ -17,8 +17,6 @@ class_name Level1
 
 @export var end_portal: Portal
 
-@export var checkpoint: Checkpoint
-
 @export var countdown_animation_player: AnimationPlayer
 
 @export var cinematic_bars: CinematicBars
@@ -31,10 +29,19 @@ class_name Level1
 
 var collected_notes_index: int
 
+@export var checkpoint_manager: CheckpointManager
+@export var race_introduction_checkpoint: Checkpoint
+
 func _ready() -> void:
+    checkpoint_manager.checkpoint_saved.connect(func(): collected_notes_index = note_collector.collected_notes.size())
+    checkpoint_manager.checkpoint_loaded.connect(func(): note_collector.restore(collected_notes_index))
+
+    race_introduction_checkpoint.checkpoint_pre_loaded.connect(race_introduction_checkpoint_preload)
+    race_introduction_checkpoint.checkpoint_loaded.connect(race_introduction_checkpoint_load)
+
     camera_manager.jump_to(player_camera)
 
-    transition_mask.transition_out()
+    transition_mask.transition_out(player)
 
     end_portal.spawn()
     end_portal.player_captured.connect(on_player_finished)
@@ -42,9 +49,6 @@ func _ready() -> void:
     soubalien.visible = false
     soubalien.process_mode = Node.PROCESS_MODE_DISABLED
     race_introduction_area.body_entered.connect(introduce_race)
-
-    checkpoint.checkpoint_saved.connect(func(_checkpoint: Checkpoint): collected_notes_index = note_collector.collected_notes.size())
-    checkpoint.checkpoint_loaded.connect(func(_checkpoint: Checkpoint): note_collector.restore(collected_notes_index))
 
 func show_hud() -> void:
     var tween = create_tween()
@@ -101,25 +105,24 @@ func end_game() -> void:
     var tree = get_tree()
     tree.change_scene_to_file("res://scenes/levels/TitleScreen.tscn")
 
-func load_checkpoint():
-    soubalien.restore_player()
-    checkpoint.load()
-    camera_manager.jump_to(race_introduction_camera)
-    race_introduction_camera.jump_to_target()
-    start_chase()
+func race_introduction_checkpoint_preload() -> void:
+    race_introduction_camera.set_target(player)
+    await camera_manager.jump_to(race_introduction_camera)
+    transition_mask.transition_out(race_introduction_checkpoint.portal)
 
-    transition_mask.target = checkpoint.portal
-    await transition_mask.transition_out()
-    transition_mask.target = player
+func race_introduction_checkpoint_load() -> void:
+    start_chase()
 
 func on_player_captured() -> void:
     soubalien.captured_player.disconnect(on_player_captured)
     soubalien.ray_captured_player.disconnect(on_ray_captured_player)
-    await transition_mask.transition_in()
-    load_checkpoint()
+    await transition_mask.transition_in(player)
+    soubalien_chase_path.reset()
+    soubalien.restore_player()
+    checkpoint_manager.load()
 
 func on_player_finished() -> void:
-    await transition_mask.transition_in()
+    await transition_mask.transition_in(player)
     end_game()
 
 func on_ray_captured_player() -> void:

@@ -3,7 +3,8 @@ extends Area2D
 class_name Checkpoint
 
 signal checkpoint_saved(checkpoint: Checkpoint)
-signal checkpoint_loaded(checkpoint: Checkpoint)
+signal checkpoint_pre_loaded()
+signal checkpoint_loaded()
 
 @export var player: ProjectileCharacter
 @export var portal: Portal
@@ -19,5 +20,7 @@ func save():
   checkpoint_saved.emit(self)
 
 func load():
-  checkpoint_loaded.emit(self)
+  portal.hold_player()
+  checkpoint_pre_loaded.emit()
   await portal.release_player()
+  checkpoint_loaded.emit()

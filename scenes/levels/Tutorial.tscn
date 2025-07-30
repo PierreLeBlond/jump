@@ -51,10 +51,9 @@ soubalien_checkpoint = NodePath("SoubalienCheckpoint")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="TransitionMask" parent="CanvasLayer" node_paths=PackedStringArray("target") instance=ExtResource("9_vvfd6")]
+[node name="TransitionMask" parent="CanvasLayer" instance=ExtResource("9_vvfd6")]
 scale = Vector2(1.4, 1.4)
 pivot_offset = Vector2(960, 540)
-target = NodePath("../../Player")
 
 [node name="Soubalien" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_off5s")]
 position = Vector2(8426, 597)
@@ -297,7 +296,7 @@ position = Vector2(0, 896)
 shape = SubResource("RectangleShape2D_7ktok")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(449, 543)
+position = Vector2(533, 543)
 offset = Vector2(512, 0)
 process_callback = 0
 limit_left = -512
