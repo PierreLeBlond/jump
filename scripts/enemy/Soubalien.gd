@@ -10,21 +10,21 @@ signal ray_captured_player()
 @export var player: ProjectileCharacter
 
 @export_range(0, PI / 2) var cone_angle: float:
-  set(value):
-    cone_angle = value
-    update_cone_polygon()
-  get:
-    return cone_angle
+    set(value):
+        cone_angle = value
+        update_cone_polygon()
+    get:
+        return cone_angle
 
 @export_range(1, 1.05) var min_ray_gravity_factor: float = 1.0001
 @export_range(1, 1.05) var max_ray_gravity_factor: float = 1.02
 
 @export var cone_height: float:
-  set(value):
-    cone_height = value
-    update_cone_polygon()
-  get:
-    return cone_height
+    set(value):
+        cone_height = value
+        update_cone_polygon()
+    get:
+        return cone_height
 
 @export var area: Area2D
 @export var ray_area: Area2D
@@ -32,9 +32,9 @@ signal ray_captured_player()
 @export var cone_polygon: Polygon2D
 
 enum SoubalienState {
-  IDLE,
-  CAPTURING_PLAYER,
-  CAPTURING_PLAYER_IN_RAY,
+    IDLE,
+    CAPTURING_PLAYER,
+    CAPTURING_PLAYER_IN_RAY,
 }
 
 var state: SoubalienState = SoubalienState.IDLE
@@ -44,7 +44,7 @@ var state: SoubalienState = SoubalienState.IDLE
 
 func update_cone_polygon() -> void:
     if !left_corner_marker || !right_corner_marker || !cone_polygon:
-      return
+        return
 
     var left_cone_corner = left_corner_marker.position
     var right_cone_corner = right_corner_marker.position
@@ -69,7 +69,7 @@ func on_body_entered(body: Node2D) -> void:
         return
 
     if (state != SoubalienState.CAPTURING_PLAYER_IN_RAY):
-      return
+        return
 
     state = SoubalienState.CAPTURING_PLAYER
 
@@ -121,44 +121,44 @@ func restore_player() -> void:
     state = SoubalienState.IDLE
 
 func get_vertical_acceleration() -> float:
-  if state == SoubalienState.CAPTURING_PLAYER:
-    return 0
+    if state == SoubalienState.CAPTURING_PLAYER:
+        return 0
 
-  var vertical_distance_to_player = global_position.y - player.global_position.y
-  if vertical_distance_to_player > 0:
-    return 0
+    var vertical_distance_to_player = global_position.y - player.global_position.y
+    if vertical_distance_to_player > 0:
+        return 0
 
   var angle = get_angle_from_cone(player.global_position)
 
-  if angle > cone_angle || (angle > 0 && abs(vertical_distance_to_player) > cone_height):
-    player.is_in_gravity_field = false
-    return 0
+    if angle > cone_angle || (angle > 0 && abs(vertical_distance_to_player) > cone_height):
+        player.is_in_gravity_field = false
+        return 0
 
-  player.is_in_gravity_field = true
-  var gravity = 2 * player.projectile_parameters.jump_height / (player.projectile_parameters.fall_time * player.projectile_parameters.fall_time)
-  var factor = (min_ray_gravity_factor - max_ray_gravity_factor) * angle / cone_angle + max_ray_gravity_factor
+    player.is_in_gravity_field = true
+    var gravity = 2 * player.projectile_parameters.jump_height / (player.projectile_parameters.fall_time * player.projectile_parameters.fall_time)
+    var factor = (min_ray_gravity_factor - max_ray_gravity_factor) * angle / cone_angle + max_ray_gravity_factor
 
-  return -gravity * factor
+    return -gravity * factor
 
 func get_lateral_acceleration() -> float:
-  if state != SoubalienState.CAPTURING_PLAYER_IN_RAY:
-    return 0
+    if state != SoubalienState.CAPTURING_PLAYER_IN_RAY:
+        return 0
 
-  var horizontal_distance_to_player = global_position.x - player.global_position.x
+    var horizontal_distance_to_player = global_position.x - player.global_position.x
 
-  var distance = abs(horizontal_distance_to_player)
+    var distance = abs(horizontal_distance_to_player)
 
-  var acceleration_max = 6000
+    var acceleration_max = 6000
 
-  var normalized_force = clamp((32 * 32) / (distance * distance), 0.5, 1)
+    var normalized_force = clamp((32 * 32) / (distance * distance), 0.5, 1)
 
-  return sign(horizontal_distance_to_player) * acceleration_max * normalized_force
+    return sign(horizontal_distance_to_player) * acceleration_max * normalized_force
 
 func _physics_process(delta: float) -> void:
-  if Engine.is_editor_hint():
-    return
+    if Engine.is_editor_hint():
+        return
 
-  player.external_accelerations["gravity_pull"] = Vector2(get_lateral_acceleration(), get_vertical_acceleration())
+    player.external_accelerations["gravity_pull"] = Vector2(get_lateral_acceleration(), get_vertical_acceleration())
 
-  if state == SoubalienState.CAPTURING_PLAYER:
-    player.global_position = lerp(player.global_position, area.global_position, delta * 20)
+    if state == SoubalienState.CAPTURING_PLAYER:
+        player.global_position = lerp(player.global_position, area.global_position, delta * 20)

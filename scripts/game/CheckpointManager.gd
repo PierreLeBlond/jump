@@ -12,8 +12,8 @@ var current_checkpoint: Checkpoint = null
 
 func _ready() -> void:
     for child in get_tree().current_scene.find_children("*", "Checkpoint"):
-      if child is Checkpoint:
-        checkpoints.append(child)
+        if child is Checkpoint:
+            checkpoints.append(child)
 
     for checkpoint in checkpoints:
         checkpoint.checkpoint_saved.connect(on_checkpoint_saved)
@@ -24,7 +24,7 @@ func on_checkpoint_saved(checkpoint: Checkpoint) -> void:
 
 func load() -> void:
     if (current_checkpoint == null):
-      return
+        return
 
     await current_checkpoint.load()
     checkpoint_loaded.emit()
