@@ -76,7 +76,6 @@ func update(delta: float) -> void:
         buffered_jump_remaining_frames -= 1
 
     if (parent.wants_to_jump()):
-        print("buffered jump")
         buffered_jump_remaining_frames = parent.projectile_parameters.buffered_jump_frames
 
 func get_parameters() -> Dictionary:

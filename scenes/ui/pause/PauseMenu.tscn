@@ -64,7 +64,7 @@ _data = {
 &"open": SubResource("Animation_u3r1v")
 }
 
-[node name="PauseMenu" type="Node" node_paths=PackedStringArray("animation_player", "resume_button", "load_checkpoint_button", "restart_button", "quit_to_main_menu_button")]
+[node name="PauseMenu" type="CanvasLayer" node_paths=PackedStringArray("animation_player", "resume_button", "load_checkpoint_button", "restart_button", "quit_to_main_menu_button")]
 process_mode = 3
 script = ExtResource("1_33nyv")
 animation_player = NodePath("AnimationPlayer")
@@ -81,6 +81,7 @@ offset_bottom = 40.0
 theme = ExtResource("2_82qxy")
 
 [node name="Background" type="ColorRect" parent="Control"]
+layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 0.458824)

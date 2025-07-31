@@ -23,8 +23,6 @@ func activate_checkpoints(node: Node) -> void:
     for checkpoint in checkpoints:
         checkpoint.checkpoint_saved.connect(on_checkpoint_saved)
     
-    print(checkpoints)
-
 func on_checkpoint_saved(checkpoint: Checkpoint) -> void:
     current_checkpoint = checkpoint
     checkpoint_saved.emit()
