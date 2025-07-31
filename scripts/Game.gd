@@ -14,10 +14,6 @@ var current_level: Node = null
 func _ready() -> void:
     load_level("MainMenu")
 
-    game_run.life_changed.connect(func(value: int): hud.life_counter.update_counter(value))
-    game_run.score_changed.connect(func(value: int): hud.score_counter.update_counter(value))
-    game_run.time_changed.connect(func(value: int): hud.time_counter.update_counter(value))
-
     pause_menu.opened.connect(pause)
     pause_menu.closed.connect(resume)
 
@@ -75,6 +71,7 @@ func die() -> void:
 func start_new_game() -> void:
     game_run.reset()
     load_level("Level1")
+    resume()
 
 func quit_to_main_menu() -> void:
     game_run.reset()
@@ -85,9 +82,11 @@ func open_game_over() -> void:
 
 func pause() -> void:
     get_tree().paused = true
+    game_run.pause()
 
 func resume() -> void:
     get_tree().paused = false
+    game_run.play()
 
 func _input(event: InputEvent) -> void:
     if !event.is_action_pressed("pause") || !current_level.process_mode == Node.PROCESS_MODE_PAUSABLE:

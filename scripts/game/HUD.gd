@@ -6,14 +6,14 @@ class_name HUD
 
 @export var life_counter: Counter
 @export var score_counter: Counter
-@export var time_counter: Counter
+@export var time_counter: TimeCounter
 
 @export var game_run: GameRun
 
 func _ready() -> void:
     game_run.life_changed.connect(life_counter.update_counter)
     game_run.score_changed.connect(score_counter.update_counter)
-    game_run.time_changed.connect(time_counter.update_counter)
+    game_run.time_changed.connect(time_counter.update_time_counter)
 
 func reveal() -> void:
     animation_player.play("reveal")

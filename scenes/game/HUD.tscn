@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://82tigqg507ba"]
+[gd_scene load_steps=13 format=3 uid="uid://82tigqg507ba"]
 
 [ext_resource type="Script" uid="uid://cbyph1udid6vi" path="res://scripts/game/HUD.gd" id="1_f4fii"]
 [ext_resource type="Script" uid="uid://be7ric8odntpy" path="res://scripts/ui/hud/Counter.gd" id="2_x328j"]
 [ext_resource type="Texture2D" uid="uid://b7yga0pu0e4fy" path="res://assets/sprites/note.png" id="3_x328j"]
 [ext_resource type="Texture2D" uid="uid://bntjuemh2bca1" path="res://assets/sprites/heart.png" id="4_x328j"]
 [ext_resource type="Texture2D" uid="uid://dwmx02woptjx6" path="res://assets/sprites/clock.png" id="5_2jm8r"]
+[ext_resource type="Script" uid="uid://cqfhfvfoiscye" path="res://scripts/ui/hud/TimeCounter.gd" id="5_t01tj"]
 
 [sub_resource type="Animation" id="Animation_gyw86"]
 length = 0.001
@@ -259,16 +260,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 656.0
+offset_left = 492.0
 offset_top = -491.0
-offset_right = 886.0
+offset_right = 722.0
 offset_bottom = -399.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(115, 46)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("2_x328j")
+script = ExtResource("5_t01tj")
 animation_player = NodePath("AnimationPlayer")
 counter_label = NodePath("Label")
 
@@ -302,7 +303,7 @@ offset_bottom = 69.0
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 48
-text = "00"
+text = "00:00:00"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TimeCounter"]
 libraries = {
