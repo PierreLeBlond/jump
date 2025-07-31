@@ -39,10 +39,10 @@ func get_next_state(_delta: float) -> State:
     if (parent.is_in_gravity_field):
         return gravity_field
 
-    if (parent.wall_detector.is_on_wall() && buffered_jump_remaining_frames > 0):
+    if (parent.wall_detector.is_close_to_wall(parent.direction) && buffered_jump_remaining_frames > 0):
         return wall_jump
 
-    if (parent.wall_detector.is_facing_wall(parent.direction)):
+    if (parent.wall_detector.is_hugging_wall(parent.direction)):
         return wall_run
 
     if (parent.wants_to_jump() && parent.projectile_parameters.max_double_jumps > 0):

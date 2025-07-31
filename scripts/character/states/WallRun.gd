@@ -25,14 +25,14 @@ func enter(previous_state: State, delta: float) -> void:
 func update(delta: float) -> void:
     jump_pressed_time += delta
 
-    if (!parent.wall_detector.is_on_wall()):
+    if (!parent.wall_detector.is_hugging_wall(parent.direction)):
         wall_friction_factor = 1.0
 
 func get_next_state(_delta: float) -> State:
     if (parent.is_in_gravity_field):
         return gravity_field
 
-    if (parent.wants_to_jump() && parent.wall_detector.is_on_wall()):
+    if (parent.wants_to_jump() && parent.wall_detector.is_close_to_wall(parent.direction)):
         return wall_jump
 
     if (parent.wants_to_jump() && parent.projectile_parameters.max_double_jumps > 0):

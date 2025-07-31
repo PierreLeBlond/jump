@@ -43,7 +43,7 @@ func get_next_state(_delta: float) -> State:
     if (parent.is_in_gravity_field):
         return gravity_field
 
-    if (parent.wall_detector.is_on_wall() && buffered_jump_remaining_frames > 0):
+    if (parent.wall_detector.is_close_to_wall(parent.direction) && buffered_jump_remaining_frames > 0):
         return wall_jump
 
     if (parent.wants_to_jump() && coyote_jump_remaining_frames > 0):
@@ -76,6 +76,7 @@ func update(delta: float) -> void:
         buffered_jump_remaining_frames -= 1
 
     if (parent.wants_to_jump()):
+        print("buffered jump")
         buffered_jump_remaining_frames = parent.projectile_parameters.buffered_jump_frames
 
 func get_parameters() -> Dictionary:

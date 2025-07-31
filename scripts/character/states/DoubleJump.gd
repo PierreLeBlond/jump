@@ -21,7 +21,7 @@ func get_next_state(_delta: float) -> State:
     if (parent.is_in_gravity_field):
         return gravity_field
 
-    if (parent.wants_to_jump() && parent.wall_detector.is_on_wall()):
+    if (parent.wants_to_jump() && parent.wall_detector.is_close_to_wall(parent.direction)):
         return wall_jump
 
     if (parent.velocity.y > 0):

@@ -382,30 +382,56 @@ target_position = Vector2(0, 80)
 position = Vector2(28, 0)
 target_position = Vector2(0, 80)
 
-[node name="WallDetector" type="Node2D" parent="." node_paths=PackedStringArray("left_wall_rays", "right_wall_rays")]
+[node name="WallDetector" type="Node2D" parent="." node_paths=PackedStringArray("left_wall_hugging_rays", "right_wall_hugging_rays", "left_wall_close_rays", "right_wall_close_rays")]
 script = ExtResource("19_ebwui")
-left_wall_rays = [NodePath("LeftRays/TopLeftWallRay"), NodePath("LeftRays/BottomLeftWallRay")]
-right_wall_rays = [NodePath("RightRays/TopRightWallRay"), NodePath("RightRays/BottomRightWallRay")]
+left_wall_hugging_rays = [NodePath("HuggingRays/LeftRays/TopLeftWallRay"), NodePath("HuggingRays/LeftRays/BottomLeftWallRay")]
+right_wall_hugging_rays = [NodePath("HuggingRays/RightRays/TopRightWallRay"), NodePath("HuggingRays/RightRays/BottomRightWallRay")]
+left_wall_close_rays = [NodePath("CloseRays/LeftRays/TopLeftWallRay"), NodePath("CloseRays/LeftRays/BottomLeftWallRay")]
+right_wall_close_rays = [NodePath("CloseRays/RightRays/TopRightWallRay"), NodePath("CloseRays/RightRays/BottomRightWallRay")]
 
-[node name="LeftRays" type="Node2D" parent="WallDetector"]
+[node name="HuggingRays" type="Node2D" parent="WallDetector"]
 
-[node name="TopLeftWallRay" type="RayCast2D" parent="WallDetector/LeftRays"]
+[node name="LeftRays" type="Node2D" parent="WallDetector/HuggingRays"]
+
+[node name="TopLeftWallRay" type="RayCast2D" parent="WallDetector/HuggingRays/LeftRays"]
 position = Vector2(0, -24)
-target_position = Vector2(-40, 0)
+target_position = Vector2(-31, 0)
 
-[node name="BottomLeftWallRay" type="RayCast2D" parent="WallDetector/LeftRays"]
+[node name="BottomLeftWallRay" type="RayCast2D" parent="WallDetector/HuggingRays/LeftRays"]
 position = Vector2(0, 32)
-target_position = Vector2(-40, 0)
+target_position = Vector2(-31, 0)
 
-[node name="RightRays" type="Node2D" parent="WallDetector"]
+[node name="RightRays" type="Node2D" parent="WallDetector/HuggingRays"]
 
-[node name="TopRightWallRay" type="RayCast2D" parent="WallDetector/RightRays"]
+[node name="TopRightWallRay" type="RayCast2D" parent="WallDetector/HuggingRays/RightRays"]
 position = Vector2(0, -24)
-target_position = Vector2(39, 0)
+target_position = Vector2(31, 0)
 
-[node name="BottomRightWallRay" type="RayCast2D" parent="WallDetector/RightRays"]
+[node name="BottomRightWallRay" type="RayCast2D" parent="WallDetector/HuggingRays/RightRays"]
 position = Vector2(0, 32)
-target_position = Vector2(39, 0)
+target_position = Vector2(31, 0)
+
+[node name="CloseRays" type="Node2D" parent="WallDetector"]
+
+[node name="LeftRays" type="Node2D" parent="WallDetector/CloseRays"]
+
+[node name="TopLeftWallRay" type="RayCast2D" parent="WallDetector/CloseRays/LeftRays"]
+position = Vector2(0, -24)
+target_position = Vector2(-50, 0)
+
+[node name="BottomLeftWallRay" type="RayCast2D" parent="WallDetector/CloseRays/LeftRays"]
+position = Vector2(0, 32)
+target_position = Vector2(-50, 0)
+
+[node name="RightRays" type="Node2D" parent="WallDetector/CloseRays"]
+
+[node name="TopRightWallRay" type="RayCast2D" parent="WallDetector/CloseRays/RightRays"]
+position = Vector2(0, -24)
+target_position = Vector2(50, 0)
+
+[node name="BottomRightWallRay" type="RayCast2D" parent="WallDetector/CloseRays/RightRays"]
+position = Vector2(0, 32)
+target_position = Vector2(50, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-9.53674e-06, 9.00002)
