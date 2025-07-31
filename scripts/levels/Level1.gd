@@ -1,4 +1,4 @@
-extends Node
+extends Level
 
 class_name Level1
 
@@ -21,20 +21,23 @@ class_name Level1
 
 @export var cinematic_bars: CinematicBars
 
-@export var hud: Control
-
 @export var race_introduction_area: Area2D
 
 @export var note_collector: NoteCollector
 
 var collected_notes_index: int
 
-@export var checkpoint_manager: CheckpointManager
 @export var race_introduction_checkpoint: Checkpoint
 
 func _ready() -> void:
+    super._ready()
+
+    reveal_hud()
+
     checkpoint_manager.checkpoint_saved.connect(func(): collected_notes_index = note_collector.collected_notes.size())
     checkpoint_manager.checkpoint_loaded.connect(func(): note_collector.restore(collected_notes_index))
+
+    note_collector.note_collected.connect(func(value: int): add_score(value))
 
     race_introduction_checkpoint.checkpoint_pre_loaded.connect(race_introduction_checkpoint_preload)
     race_introduction_checkpoint.checkpoint_loaded.connect(race_introduction_checkpoint_load)
@@ -50,14 +53,6 @@ func _ready() -> void:
     soubalien.process_mode = Node.PROCESS_MODE_DISABLED
     race_introduction_area.body_entered.connect(introduce_race)
 
-func show_hud() -> void:
-    var tween = create_tween()
-    tween.tween_property(hud, "modulate:a", 1.0, 0.5)
-
-func hide_hud() -> void:
-    var tween = create_tween()
-    tween.tween_property(hud, "modulate:a", 0.0, 0.5)
-
 func introduce_race(_body: Node2D) -> void:
     race_introduction_area.body_entered.disconnect(introduce_race)
 
@@ -65,7 +60,7 @@ func introduce_race(_body: Node2D) -> void:
     # TODO : Play surprise animation
     await get_tree().create_timer(1.0).timeout
 
-    hide_hud()
+    unreveal_hud()
     cinematic_bars.reveal()
     camera_manager.fly_to(race_introduction_camera)
 
@@ -95,17 +90,17 @@ func start_chase() -> void:
     await countdown_animation_player.animation_finished
 
     camera_manager.fly_to(player_camera)
-    show_hud()
+    reveal_hud()
 
     player.unlocked_keys.keys[Globals.MOVE_UNLOCKED_KEY] = true
 
     soubalien_chase_path.start()
 
 func end_game() -> void:
-    var tree = get_tree()
-    tree.change_scene_to_file("res://scenes/levels/TitleScreen.tscn")
+    wants_to_load_level.emit("TitleScreen")
 
 func race_introduction_checkpoint_preload() -> void:
+    soubalien_chase_path.reset()
     race_introduction_camera.set_target(player)
     await camera_manager.jump_to(race_introduction_camera)
     transition_mask.transition_out(race_introduction_checkpoint.portal)
@@ -117,7 +112,6 @@ func on_player_captured() -> void:
     soubalien.captured_player.disconnect(on_player_captured)
     soubalien.ray_captured_player.disconnect(on_ray_captured_player)
     await transition_mask.transition_in(player)
-    soubalien_chase_path.reset()
     soubalien.restore_player()
     checkpoint_manager.load()
 
@@ -126,6 +120,7 @@ func on_player_finished() -> void:
     end_game()
 
 func on_ray_captured_player() -> void:
+    unreveal_hud()
     cinematic_bars.reveal()
     player.unlocked_keys.keys[Globals.MOVE_UNLOCKED_KEY] = false
     soubalien_chase_path.stop()

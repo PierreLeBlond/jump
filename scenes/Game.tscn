@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dayu043kaonhh"]
+
+[ext_resource type="Script" uid="uid://d7xk4vlngnl8" path="res://scripts/game/GameRun.gd" id="1_ibkli"]
+[ext_resource type="Script" uid="uid://dt8yydmrctvxa" path="res://scripts/Game.gd" id="1_qbsmt"]
+[ext_resource type="PackedScene" uid="uid://o7syijl1i4vb" path="res://scenes/ui/pause/PauseMenu.tscn" id="2_78awf"]
+[ext_resource type="PackedScene" uid="uid://82tigqg507ba" path="res://scenes/game/HUD.tscn" id="3_cpr0p"]
+
+[node name="Game" type="Node" node_paths=PackedStringArray("hud", "pause_menu", "game_run")]
+process_mode = 3
+script = ExtResource("1_qbsmt")
+hud = NodePath("CanvasLayer/Hud")
+pause_menu = NodePath("CanvasLayer/PauseMenu")
+game_run = NodePath("GameRun")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="CanvasLayer" node_paths=PackedStringArray("game_run") instance=ExtResource("3_cpr0p")]
+game_run = NodePath("../../GameRun")
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("2_78awf")]
+
+[node name="GameRun" type="Node" parent="."]
+script = ExtResource("1_ibkli")
+metadata/_custom_type_script = "uid://d7xk4vlngnl8"

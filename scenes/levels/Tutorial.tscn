@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=4 uid="uid://dknoupu2hcn86"]
+[gd_scene load_steps=20 format=4 uid="uid://dknoupu2hcn86"]
 
 [ext_resource type="Script" uid="uid://bfshhb0w7ohbq" path="res://scripts/levels/Tutorial.gd" id="1_7ktok"]
 [ext_resource type="PackedScene" uid="uid://b8dorlf7ulbwy" path="res://scenes/Soubalien.tscn" id="1_off5s"]
 [ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="2_dlxjb"]
+[ext_resource type="Script" uid="uid://calrwlxq3l0el" path="res://scripts/game/CheckpointManager.gd" id="2_vvfd6"]
 [ext_resource type="Script" uid="uid://k5d6a3o16mgt" path="res://scripts/ui/TextRevealArea.gd" id="4_af4br"]
 [ext_resource type="Script" uid="uid://d3gg6d2i1ygp5" path="res://scripts/area/UnlockArea.gd" id="5_0t4of"]
 [ext_resource type="TileSet" uid="uid://dftl5pyptmafp" path="res://tilesets/cloud.tres" id="6_61wbf"]
@@ -38,7 +39,8 @@ size = Vector2(137.5, 1048)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_elm2s"]
 size = Vector2(575, 121)
 
-[node name="Tutorial" type="Node" node_paths=PackedStringArray("player", "hole", "soubalien", "transition_mask", "endPortal", "start_checkpoint", "hole_checkpoint", "soubalien_checkpoint")]
+[node name="Tutorial" type="Node" node_paths=PackedStringArray("player", "hole", "soubalien", "transition_mask", "endPortal", "start_checkpoint", "hole_checkpoint", "soubalien_checkpoint", "checkpoint_manager")]
+process_mode = 1
 script = ExtResource("1_7ktok")
 player = NodePath("Player")
 hole = NodePath("Hole")
@@ -48,6 +50,13 @@ endPortal = NodePath("EndPortal")
 start_checkpoint = NodePath("StartCheckpoint")
 hole_checkpoint = NodePath("HoleCheckpoint")
 soubalien_checkpoint = NodePath("SoubalienCheckpoint")
+checkpoint_manager = NodePath("CheckpointManager")
+
+[node name="CheckpointManager" type="Node" parent="." node_paths=PackedStringArray("transition_mask", "start_checkpoint")]
+script = ExtResource("2_vvfd6")
+transition_mask = NodePath("../CanvasLayer/TransitionMask")
+start_checkpoint = NodePath("../StartCheckpoint")
+metadata/_custom_type_script = "uid://calrwlxq3l0el"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

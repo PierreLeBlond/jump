@@ -1,10 +1,8 @@
-[gd_scene load_steps=38 format=4 uid="uid://de32o3g1w17vm"]
+[gd_scene load_steps=33 format=4 uid="uid://de32o3g1w17vm"]
 
 [ext_resource type="Script" uid="uid://ft5l0rjyxnrn" path="res://scripts/levels/Level1.gd" id="1_p5s5a"]
 [ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/CinematicBars.tscn" id="2_j7nyf"]
 [ext_resource type="Script" uid="uid://calrwlxq3l0el" path="res://scripts/game/CheckpointManager.gd" id="2_xbvxr"]
-[ext_resource type="Script" uid="uid://juvvajbrsiyg" path="res://scripts/ui/hud/CollectorLabel.gd" id="3_xbvxr"]
-[ext_resource type="Texture2D" uid="uid://b7yga0pu0e4fy" path="res://assets/sprites/note.png" id="4_bspq0"]
 [ext_resource type="PackedScene" uid="uid://mgk4rkf8x4no" path="res://scenes/ui/TransitionMask.tscn" id="5_dqba7"]
 [ext_resource type="PackedScene" uid="uid://cgexvf3ochgd8" path="res://scenes/contraptions/Portal.tscn" id="6_usw5k"]
 [ext_resource type="TileSet" uid="uid://dftl5pyptmafp" path="res://tilesets/cloud.tres" id="7_jsker"]
@@ -42,43 +40,6 @@ colors = PackedColorArray(1, 1, 1, 1, 5.77569e-07, 0.327346, 0.478314, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_j7nyf"]
 gradient = SubResource("Gradient_njy47")
 fill_from = Vector2(1, 0.692308)
-
-[sub_resource type="Animation" id="Animation_gyw86"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control/TextureRect:custom_minimum_size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(92, 92)]
-}
-
-[sub_resource type="Animation" id="Animation_i654n"]
-resource_name = "pulse"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control/TextureRect:custom_minimum_size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3),
-"transitions": PackedFloat32Array(1.8025, 1, 1),
-"update": 0,
-"values": [Vector2(92, 92), Vector2(128, 128), Vector2(92, 92)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gyw86"]
-_data = {
-&"RESET": SubResource("Animation_gyw86"),
-&"pulse": SubResource("Animation_i654n")
-}
 
 [sub_resource type="Curve2D" id="Curve2D_i654n"]
 _data = {
@@ -216,7 +177,8 @@ size = Vector2(127, 1088)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j7nyf"]
 size = Vector2(3226, 1049)
 
-[node name="Level1" type="Node2D" node_paths=PackedStringArray("player", "camera_manager", "player_camera", "race_introduction_camera", "player_focus_camera", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "transition_mask", "end_portal", "countdown_animation_player", "cinematic_bars", "hud", "race_introduction_area", "note_collector", "checkpoint_manager", "race_introduction_checkpoint")]
+[node name="Level1" type="Node2D" node_paths=PackedStringArray("player", "camera_manager", "player_camera", "race_introduction_camera", "player_focus_camera", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "transition_mask", "end_portal", "countdown_animation_player", "cinematic_bars", "race_introduction_area", "note_collector", "race_introduction_checkpoint", "checkpoint_manager")]
+process_mode = 1
 script = ExtResource("1_p5s5a")
 player = NodePath("Player")
 camera_manager = NodePath("CameraManager")
@@ -230,15 +192,15 @@ transition_mask = NodePath("CanvasLayer/TransitionMask")
 end_portal = NodePath("EndPortal")
 countdown_animation_player = NodePath("AnimationPlayer")
 cinematic_bars = NodePath("CinematicBars")
-hud = NodePath("HUD/HBoxContainer")
 race_introduction_area = NodePath("RaceIntroductionArea")
 note_collector = NodePath("Player/NoteCollectorArea2D")
-checkpoint_manager = NodePath("CheckpointManager")
 race_introduction_checkpoint = NodePath("Checkpoint")
+checkpoint_manager = NodePath("CheckpointManager")
 
-[node name="CheckpointManager" type="Node" parent="." node_paths=PackedStringArray("transition_mask")]
+[node name="CheckpointManager" type="Node" parent="." node_paths=PackedStringArray("transition_mask", "start_checkpoint")]
 script = ExtResource("2_xbvxr")
 transition_mask = NodePath("../CanvasLayer/TransitionMask")
+start_checkpoint = NodePath("../StartCheckpoint")
 metadata/_custom_type_script = "uid://calrwlxq3l0el"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -286,62 +248,6 @@ texture = SubResource("GradientTexture2D_j7nyf")
 
 [node name="CinematicBars" parent="." instance=ExtResource("2_j7nyf")]
 
-[node name="HUD" type="CanvasLayer" parent="."]
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD" node_paths=PackedStringArray("animation_player", "count_label", "collector")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -115.0
-offset_top = -491.0
-offset_right = 115.0
-offset_bottom = -399.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-script = ExtResource("3_xbvxr")
-animation_player = NodePath("AnimationPlayer")
-count_label = NodePath("CollectorLabel")
-collector = NodePath("../../Player/NoteCollectorArea2D")
-
-[node name="Control" type="Control" parent="HUD/HBoxContainer"]
-custom_minimum_size = Vector2(92, 92)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/HBoxContainer/Control"]
-texture_filter = 4
-custom_minimum_size = Vector2(92, 92)
-layout_mode = 2
-offset_left = 17.5
-offset_top = -8.0
-offset_right = 109.5
-offset_bottom = 84.0
-size_flags_horizontal = 4
-texture = ExtResource("4_bspq0")
-expand_mode = 1
-
-[node name="EgalLabel" type="Label" parent="HUD/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 48
-text = "x"
-
-[node name="CollectorLabel" type="Label" parent="HUD/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 48
-text = "00"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/HBoxContainer"]
-libraries = {
-&"": SubResource("AnimationLibrary_gyw86")
-}
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="TransitionMask" parent="CanvasLayer" instance=ExtResource("5_dqba7")]
@@ -387,6 +293,15 @@ loop = false
 [node name="EndPortal" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_usw5k")]
 position = Vector2(18689, -448)
 player = NodePath("../Player")
+
+[node name="StartCheckpoint" parent="." node_paths=PackedStringArray("player", "portal") instance=ExtResource("11_njy47")]
+position = Vector2(219, 0)
+player = NodePath("../Player")
+portal = NodePath("StartCheckpointPortal")
+
+[node name="StartCheckpointPortal" parent="StartCheckpoint" node_paths=PackedStringArray("player") instance=ExtResource("6_usw5k")]
+position = Vector2(2, 730)
+player = NodePath("../../Player")
 
 [node name="Checkpoint" parent="." node_paths=PackedStringArray("player", "portal") instance=ExtResource("11_njy47")]
 position = Vector2(6077, 0)

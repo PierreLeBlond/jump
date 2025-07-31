@@ -4,19 +4,26 @@ class_name CheckpointManager
 
 @export var transition_mask: TransitionMask
 
+@export var start_checkpoint: Checkpoint
+
 signal checkpoint_saved()
 signal checkpoint_loaded()
 
 var checkpoints: Array[Checkpoint] = []
 var current_checkpoint: Checkpoint = null
 
-func _ready() -> void:
-    for child in get_tree().current_scene.find_children("*", "Checkpoint"):
-        if child is Checkpoint:
+func activate_checkpoints(node: Node) -> void:
+    current_checkpoint = start_checkpoint
+    start_checkpoint.save()
+
+    for child in node.find_children("*"):
+        if child is Checkpoint && child != start_checkpoint:
             checkpoints.append(child)
 
     for checkpoint in checkpoints:
         checkpoint.checkpoint_saved.connect(on_checkpoint_saved)
+    
+    print(checkpoints)
 
 func on_checkpoint_saved(checkpoint: Checkpoint) -> void:
     current_checkpoint = checkpoint

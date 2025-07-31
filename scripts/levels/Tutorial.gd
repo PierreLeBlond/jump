@@ -1,4 +1,4 @@
-extends Node
+extends Level
 
 class_name Tutorial
 
@@ -15,11 +15,10 @@ class_name Tutorial
 @export var hole_checkpoint: Checkpoint
 @export var soubalien_checkpoint: Checkpoint
 
-var last_checkpoint: Checkpoint
-
 func _ready() -> void:
-    hole_checkpoint.checkpoint_saved.connect(set_last_checkpoint)
-    soubalien_checkpoint.checkpoint_saved.connect(set_last_checkpoint)
+    super._ready()
+
+    hide_hud()
 
     hole.body_entered.connect(on_hole_body_entered)
 
@@ -29,21 +28,15 @@ func _ready() -> void:
     endPortal.player_captured.connect(end_game)
 
     transition_mask.transition_out(player)
-    last_checkpoint = start_checkpoint
-    last_checkpoint.load()
-
-func set_last_checkpoint(checkpoint: Checkpoint) -> void:
-    last_checkpoint = checkpoint
 
 func end_game() -> void:
     await transition_mask.transition_in(player)
 
-    var tree = get_tree()
-    tree.change_scene_to_file("res://scenes/levels/TitleScreen.tscn")
+    wants_to_quit_to_main_menu.emit()
 
 func on_hole_body_entered(_body: Node2D) -> void:
-    last_checkpoint.load()
+    load_checkpoint()
 
 func on_player_captured() -> void:
     soubalien.restore_player()
-    last_checkpoint.load()
+    load_checkpoint()

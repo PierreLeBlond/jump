@@ -2,6 +2,10 @@ extends Node
 
 class_name GameRun
 
+signal life_changed(value: int)
+signal score_changed(value: int)
+signal time_changed(value: int)
+
 var life: int = 3
 var score: int = 0
 
@@ -23,6 +27,7 @@ func accumulate_time() -> void:
     var time_now = Time.get_unix_time_from_system()
     accumulated_time += time_now - last_time
     last_time = time_now
+    time_changed.emit(accumulated_time)
 
 func play() -> void:
     is_playing = true
@@ -31,6 +36,14 @@ func play() -> void:
 func pause() -> void:
     accumulate_time()
     is_playing = false
+
+func add_life(value: int) -> void:
+    life += value
+    life_changed.emit(life)
+
+func add_score(value: int) -> void:
+    score += value
+    score_changed.emit(score)
 
 func _process(_delta: float) -> void:
     if !is_playing:

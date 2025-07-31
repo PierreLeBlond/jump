@@ -14,7 +14,7 @@ func on_area_entered(note: Note) -> void:
         return
 
     collected_notes.append(note)
-    note_collected.emit(collected_notes.size())
+    note_collected.emit(1)
     note.capture()
 
 
@@ -24,4 +24,4 @@ func restore(restored_index: int):
         note.restore()
 
     collected_notes = collected_notes.slice(0, restored_index)
-    note_collected.emit(collected_notes.size())
+    note_collected.emit(-notes_to_restore.size())

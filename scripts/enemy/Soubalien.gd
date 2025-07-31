@@ -128,7 +128,7 @@ func get_vertical_acceleration() -> float:
     if vertical_distance_to_player > 0:
         return 0
 
-  var angle = get_angle_from_cone(player.global_position)
+    var angle = get_angle_from_cone(player.global_position)
 
     if angle > cone_angle || (angle > 0 && abs(vertical_distance_to_player) > cone_height):
         player.is_in_gravity_field = false
