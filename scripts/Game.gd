@@ -48,11 +48,19 @@ func load_level(level_name: String) -> void:
     current_level.wants_to_start_new_game.connect(start_new_game)
     current_level.wants_to_quit_to_main_menu.connect(quit_to_main_menu)
 
+    current_level.died.connect(die)
     current_level.score_added.connect(func(value: int): game_run.add_score(value))
     current_level.life_added.connect(func(value: int): game_run.add_life(value))
 
 func load_checkpoint() -> void:
     current_level.load_checkpoint()
+
+func die() -> void:
+    game_run.add_life(-1)
+    if (game_run.life > 0):
+        load_checkpoint()
+    else:
+        quit_to_main_menu()
 
 func start_new_game() -> void:
     game_run.reset()

@@ -11,10 +11,6 @@ class_name Tutorial
 @export var transition_mask: TransitionMask
 @export var endPortal: Portal
 
-@export var start_checkpoint: Checkpoint
-@export var hole_checkpoint: Checkpoint
-@export var soubalien_checkpoint: Checkpoint
-
 func _ready() -> void:
     super._ready()
 
@@ -28,6 +24,7 @@ func _ready() -> void:
     endPortal.player_captured.connect(end_game)
 
     transition_mask.transition_out(player)
+    load_checkpoint()
 
 func end_game() -> void:
     await transition_mask.transition_in(player)

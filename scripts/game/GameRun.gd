@@ -6,7 +6,9 @@ signal life_changed(value: int)
 signal score_changed(value: int)
 signal time_changed(value: int)
 
-var life: int = 3
+const MAX_LIFE: int = 3
+
+var life: int = 0
 var score: int = 0
 
 var accumulated_time: float = 0.0
@@ -18,10 +20,12 @@ func _ready() -> void:
     reset()
 
 func reset() -> void:
-    life = 3
+    life = 0
     score = 0
     accumulated_time = 0.0
     last_time = Time.get_unix_time_from_system()
+
+    add_life(MAX_LIFE)
 
 func accumulate_time() -> void:
     var time_now = Time.get_unix_time_from_system()

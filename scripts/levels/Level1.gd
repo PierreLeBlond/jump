@@ -96,9 +96,6 @@ func start_chase() -> void:
 
     soubalien_chase_path.start()
 
-func end_game() -> void:
-    wants_to_load_level.emit("TitleScreen")
-
 func race_introduction_checkpoint_preload() -> void:
     soubalien_chase_path.reset()
     race_introduction_camera.set_target(player)
@@ -113,11 +110,11 @@ func on_player_captured() -> void:
     soubalien.ray_captured_player.disconnect(on_ray_captured_player)
     await transition_mask.transition_in(player)
     soubalien.restore_player()
-    checkpoint_manager.load()
+    die()
 
 func on_player_finished() -> void:
     await transition_mask.transition_in(player)
-    end_game()
+    quit_to_main_menu()
 
 func on_ray_captured_player() -> void:
     unreveal_hud()

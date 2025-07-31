@@ -6,6 +6,7 @@ signal wants_to_load_level(level_name: String)
 signal wants_to_quit_to_main_menu()
 signal wants_to_start_new_game()
 
+signal died()
 signal score_added(value: int)
 signal life_added(value: int)
 
@@ -42,6 +43,9 @@ func show_hud() -> void:
 
 func hide_hud() -> void:
     hud.immediate_unreveal()
+
+func die() -> void:
+    died.emit()
 
 func add_score(value: int) -> void:
     score_added.emit(value)
