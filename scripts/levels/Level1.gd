@@ -32,7 +32,7 @@ var collected_notes_index: int
 func _ready() -> void:
     super._ready()
 
-    reveal_hud()
+    hud.hide()
 
     checkpoint_manager.checkpoint_saved.connect(func(): collected_notes_index = note_collector.collected_notes.size())
     checkpoint_manager.checkpoint_loaded.connect(func(): note_collector.restore(collected_notes_index))
@@ -44,7 +44,6 @@ func _ready() -> void:
 
     camera_manager.jump_to(player_camera)
 
-    transition_mask.transition_out(player)
 
     end_portal.spawn()
     end_portal.player_captured.connect(on_player_finished)
@@ -52,6 +51,10 @@ func _ready() -> void:
     soubalien.visible = false
     soubalien.process_mode = Node.PROCESS_MODE_DISABLED
     race_introduction_area.body_entered.connect(introduce_race)
+
+    await transition_mask.transition_out(player)
+
+    reveal_hud()
 
 func introduce_race(_body: Node2D) -> void:
     race_introduction_area.body_entered.disconnect(introduce_race)

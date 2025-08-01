@@ -21,14 +21,14 @@ func _ready() -> void:
     pause_menu.wants_to_load_checkpoint.connect(load_checkpoint)
     pause_menu.wants_to_restart.connect(start_new_game)
     pause_menu.wants_to_quit_to_main_menu.connect(quit_to_main_menu)
-    pause_menu.immediately_close()
+    pause_menu.hide()
 
     game_over.opened.connect(pause)
     game_over.closed.connect(resume)
 
     game_over.wants_to_restart.connect(start_new_game)
     game_over.wants_to_quit_to_main_menu.connect(quit_to_main_menu)
-    game_over.immediately_close()
+    game_over.hide()
 
 func unload_current_level() -> void:
     if !current_level:

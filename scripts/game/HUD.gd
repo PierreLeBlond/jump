@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 class_name HUD
 
@@ -17,14 +17,10 @@ func _ready() -> void:
 
 func reveal() -> void:
     animation_player.play("reveal")
+    animation_player.seek(0.0, true)
+    show()
 
 func unreveal() -> void:
     animation_player.play_backwards("reveal")
-
-func immediate_reveal() -> void:
-    animation_player.play("reveal")
-    animation_player.seek(animation_player.get_animation("reveal").get_length())
-
-func immediate_unreveal() -> void:
-    animation_player.play_backwards("reveal")
-    animation_player.seek(0.0)
+    await animation_player.animation_finished
+    hide()

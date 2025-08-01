@@ -23,13 +23,8 @@ func _ready() -> void:
     restart_button.pressed.connect(on_restart_button_pressed)
     quit_to_main_menu_button.pressed.connect(on_quit_to_main_menu_button_pressed)
 
-func immediately_close() -> void:
-    animation_player.play_backwards("open")
-    animation_player.seek(0.0)
-    visible = false
-
 func open() -> void:
-    visible = true
+    show()
     resume_button.grab_focus()
     animation_player.play("open")
     opened.emit()
@@ -41,7 +36,7 @@ func close() -> void:
     await animation_player.animation_finished
     closed.emit()
     process_mode = Node.PROCESS_MODE_DISABLED
-    visible = false
+    hide()
 
 func on_resume_button_pressed() -> void:
     wants_to_resume.emit()

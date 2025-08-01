@@ -9,16 +9,14 @@
 [node name="Game" type="Node" node_paths=PackedStringArray("hud", "pause_menu", "game_over", "game_run", "level_wrapper")]
 process_mode = 3
 script = ExtResource("1_qbsmt")
-hud = NodePath("CanvasLayer/Hud")
+hud = NodePath("Hud")
 pause_menu = NodePath("PauseMenu")
 game_over = NodePath("GameOver")
 game_run = NodePath("GameRun")
 level_wrapper = NodePath("LevelWrapper")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Hud" parent="CanvasLayer" node_paths=PackedStringArray("game_run") instance=ExtResource("3_cpr0p")]
-game_run = NodePath("../../GameRun")
+[node name="Hud" parent="." node_paths=PackedStringArray("game_run") instance=ExtResource("3_cpr0p")]
+game_run = NodePath("../GameRun")
 
 [node name="GameOver" parent="." instance=ExtResource("4_s0nni")]
 layer = 2

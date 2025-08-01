@@ -39,10 +39,10 @@ func unreveal_hud() -> void:
     hud.unreveal()
 
 func show_hud() -> void:
-    hud.immediate_reveal()
+    hud.show()
 
 func hide_hud() -> void:
-    hud.immediate_unreveal()
+    hud.hide()
 
 func die() -> void:
     died.emit()
