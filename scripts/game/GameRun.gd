@@ -6,7 +6,7 @@ signal life_changed(value: int)
 signal score_changed(value: int)
 signal time_changed(value: int)
 
-const MAX_LIFE: int = 0
+const MAX_LIFE: int = 3
 
 var life: int = 0
 var score: int = 0

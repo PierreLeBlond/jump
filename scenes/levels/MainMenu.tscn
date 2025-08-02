@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cq404dg781ufs" path="res://scripts/levels/MainMenu.gd" id="1_ue4lf"]
 [ext_resource type="Texture2D" uid="uid://niglju8i3a5s" path="res://assets/sprites/title-screen-soubalien.png" id="2_7rblo"]
-[ext_resource type="PackedScene" uid="uid://dq60ki67ddsx" path="res://scenes/ui/components/AnimatedButton.tscn" id="3_ov3pg"]
+[ext_resource type="PackedScene" uid="uid://dq60ki67ddsx" path="res://scenes/ui/components/PulseButton.tscn" id="3_ov3pg"]
 [ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/space.tres" id="4_81rgk"]
 [ext_resource type="Texture2D" uid="uid://d0lqdu5jxr0fi" path="res://assets/sprites/title-screen-feis.png" id="5_a6001"]
 
@@ -601,8 +601,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ue4lf")
-tutorial_button = NodePath("TutorialControl/TutorialButton")
-level_1_button = NodePath("PlayControl/PlayButton")
+tutorial_button = NodePath("Tutorial/PulseButton/Button")
+level_1_button = NodePath("Play/PulseButton/Button")
 fade_in_animation = NodePath("ScreenTransition/AnimationPlayer")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -655,72 +655,68 @@ texture = SubResource("GradientTexture2D_6j5qt")
 polygon = PackedVector2Array(162.909, 925.938, -1669.82, 1014.26, -18.1818, -85.7138, -6.18176, -89.7283, 0.363647, -88.7247, 10.1819, -83.7066, 21.0909, -70.6595, 23.2728, -63.6341, 24.3636, -57.6124)
 uv = PackedVector2Array(64, 64, 1.90735e-06, 64, 0, 0, 24, 0, 32, 0, 40, 0, 48, 0, 56, 0, 64, -2.38419e-06)
 
-[node name="TutorialControl" type="Control" parent="."]
+[node name="Tutorial" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 125.0
-offset_top = 512.0
-offset_right = 165.0
-offset_bottom = 552.0
+offset_left = 80.0
+offset_top = 414.0
+offset_right = 120.0
+offset_bottom = 454.0
 
-[node name="TutorialButton" parent="TutorialControl" instance=ExtResource("3_ov3pg")]
+[node name="PulseButton" parent="Tutorial" node_paths=PackedStringArray("button") instance=ExtResource("3_ov3pg")]
+button = NodePath("Button")
+
+[node name="Button" type="Button" parent="Tutorial/PulseButton"]
 layout_mode = 0
-offset_left = 0.0
-offset_right = 517.0
-offset_bottom = 86.0
-focus_neighbor_left = NodePath("../../PlayControl/PlayButton")
-focus_neighbor_top = NodePath("../../PlayControl/PlayButton")
-focus_neighbor_right = NodePath("../../PlayControl/PlayButton")
-focus_neighbor_bottom = NodePath("../../PlayControl/PlayButton")
-focus_next = NodePath("../../PlayControl/PlayButton")
-focus_previous = NodePath("../../PlayControl/PlayButton")
+offset_right = 128.0
+offset_bottom = 16.0
+focus_neighbor_left = NodePath("../../../Play/PulseButton/Button")
+focus_neighbor_top = NodePath("../../../Play/PulseButton/Button")
+focus_neighbor_right = NodePath("../../../Play/PulseButton/Button")
+focus_neighbor_bottom = NodePath("../../../Play/PulseButton/Button")
+focus_next = NodePath("../../../Play/PulseButton/Button")
+focus_previous = NodePath("../../../Play/PulseButton/Button")
+text = "Tutorial"
 
-[node name="PlayControl" type="Control" parent="."]
+[node name="Play" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 125.0
-offset_top = 669.0
-offset_right = 165.0
-offset_bottom = 709.0
+offset_left = 80.0
+offset_top = 638.0
+offset_right = 120.0
+offset_bottom = 678.0
 
-[node name="PlayButton" parent="PlayControl" instance=ExtResource("3_ov3pg")]
+[node name="PulseButton" parent="Play" node_paths=PackedStringArray("button") instance=ExtResource("3_ov3pg")]
+button = NodePath("Button")
+
+[node name="Button" type="Button" parent="Play/PulseButton"]
 layout_mode = 0
-offset_left = 0.0
-offset_right = 362.0
-focus_neighbor_left = NodePath("../../TutorialControl/TutorialButton")
-focus_neighbor_top = NodePath("../../TutorialControl/TutorialButton")
-focus_neighbor_right = NodePath("../../TutorialControl/TutorialButton")
-focus_neighbor_bottom = NodePath("../../TutorialControl/TutorialButton")
-focus_next = NodePath("../../TutorialControl/TutorialButton")
-focus_previous = NodePath("../../TutorialControl/TutorialButton")
-theme_override_colors/font_disabled_color = Color(0.845563, 0.554266, 0.306365, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.847059, 0.552941, 0.305882, 1)
-theme_override_colors/font_hover_color = Color(0.847059, 0.552941, 0.305882, 1)
-theme_override_colors/font_color = Color(0.847059, 0.552941, 0.305882, 1)
-theme_override_colors/font_focus_color = Color(0.847059, 0.552941, 0.305882, 1)
-theme_override_colors/font_pressed_color = Color(0.847059, 0.552941, 0.305882, 1)
+offset_right = 128.0
+offset_bottom = 16.0
+focus_neighbor_left = NodePath("../../../Tutorial/PulseButton/Button")
+focus_neighbor_top = NodePath("../../../Tutorial/PulseButton/Button")
+focus_neighbor_right = NodePath("../../../Tutorial/PulseButton/Button")
+focus_neighbor_bottom = NodePath("../../../Tutorial/PulseButton/Button")
+focus_next = NodePath("../../../Tutorial/PulseButton/Button")
+focus_previous = NodePath("../../../Tutorial/PulseButton/Button")
 text = "Jouer"
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
 offset_left = 65.0
-offset_top = 27.0
+offset_top = 43.0
 offset_right = 3670.0
-offset_bottom = 498.0
+offset_bottom = 514.0
 theme = ExtResource("4_81rgk")
-theme_override_colors/font_color = Color(0.749053, 0.466357, 0.651813, 1)
-theme_override_colors/font_shadow_color = Color(0.26, 0.3575, 0.65, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 80
-text = "Prenez garde 
-à l'espace 
-entre la terre 
-et Arkab Posterior"
+theme_override_font_sizes/font_size = 70
+text = "Prenez garde à l'espace 
+entre la terre et 
+Arkab Posterior"
 
 [node name="Feis" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 879.0
-offset_top = 44.0
-offset_right = 1854.0
-offset_bottom = 1019.0
+offset_left = 962.409
+offset_top = 103.807
+offset_right = 1937.41
+offset_bottom = 1078.81
 texture = ExtResource("5_a6001")
 expand_mode = 1
 
@@ -728,72 +724,72 @@ expand_mode = 1
 
 [node name="TextureRect" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1920.0
-offset_right = 3873.72
+offset_left = 1687.55
+offset_right = 3641.27
 offset_bottom = 127.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect2" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1920.0
+offset_left = 1893.18
 offset_top = 127.0
-offset_right = 3873.72
+offset_right = 3846.9
 offset_bottom = 319.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect9" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1920.0
+offset_left = 1771.03
 offset_top = 319.0
-offset_right = 3873.72
+offset_right = 3724.75
 offset_bottom = 382.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect8" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1920.0
+offset_left = 1876.17
 offset_top = 382.0
-offset_right = 3873.72
+offset_right = 3829.89
 offset_bottom = 574.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect3" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1920.0
+offset_left = 1748.69
 offset_top = 704.0
-offset_right = 3873.72
+offset_right = 3702.41
 offset_bottom = 769.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect6" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1920.0
+offset_left = 1802.76
 offset_top = 639.0
-offset_right = 3873.72
+offset_right = 3756.48
 offset_bottom = 704.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect7" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1920.0
+offset_left = 1834.29
 offset_top = 574.0
-offset_right = 3873.72
+offset_right = 3788.01
 offset_bottom = 639.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect4" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1920.0
+offset_left = 1796.96
 offset_top = 769.0
-offset_right = 3873.72
+offset_right = 3750.68
 offset_bottom = 896.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect5" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1920.0
+offset_left = 1852.2
 offset_top = 896.0
-offset_right = 3873.72
+offset_right = 3805.92
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 

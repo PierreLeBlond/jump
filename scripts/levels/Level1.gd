@@ -32,8 +32,6 @@ var collected_notes_index: int
 func _ready() -> void:
     super._ready()
 
-    hud.hide()
-
     checkpoint_manager.checkpoint_saved.connect(func(): collected_notes_index = note_collector.collected_notes.size())
     checkpoint_manager.checkpoint_loaded.connect(func(): note_collector.restore(collected_notes_index))
 
@@ -54,7 +52,7 @@ func _ready() -> void:
 
     await transition_mask.transition_out(player)
 
-    reveal_hud()
+    show_hud()
 
 func introduce_race(_body: Node2D) -> void:
     race_introduction_area.body_entered.disconnect(introduce_race)
@@ -63,7 +61,7 @@ func introduce_race(_body: Node2D) -> void:
     # TODO : Play surprise animation
     await get_tree().create_timer(1.0).timeout
 
-    unreveal_hud()
+    hide_hud()
     cinematic_bars.reveal()
     camera_manager.fly_to(race_introduction_camera)
 
@@ -93,7 +91,7 @@ func start_chase() -> void:
     await countdown_animation_player.animation_finished
 
     camera_manager.fly_to(player_camera)
-    reveal_hud()
+    show_hud()
 
     player.unlocked_keys.keys[Globals.MOVE_UNLOCKED_KEY] = true
 
@@ -117,10 +115,10 @@ func on_player_captured() -> void:
 
 func on_player_finished() -> void:
     await transition_mask.transition_in(player)
-    quit_to_main_menu()
+    finish()
 
 func on_ray_captured_player() -> void:
-    unreveal_hud()
+    hide_hud()
     cinematic_bars.reveal()
     player.unlocked_keys.keys[Globals.MOVE_UNLOCKED_KEY] = false
     soubalien_chase_path.stop()

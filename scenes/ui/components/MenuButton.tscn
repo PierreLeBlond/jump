@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://dkfv3a1bt122x"]
+
+[ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/space.tres" id="1_1qykt"]
+[ext_resource type="Script" uid="uid://d2kv0dvtjt31f" path="res://scripts/ui/components/AnimatedButton.gd" id="2_kahtu"]
+
+[sub_resource type="Animation" id="Animation_xi27m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8g1ql"]
+resource_name = "focus"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(128, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ahloe"]
+resource_name = "pressed"
+length = 0.33
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.33),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(128, 0), Vector2(150, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nsqi1"]
+_data = {
+&"RESET": SubResource("Animation_xi27m"),
+&"focus": SubResource("Animation_8g1ql"),
+&"pressed": SubResource("Animation_ahloe")
+}
+
+[node name="TutorialButton" type="Button" node_paths=PackedStringArray("animation_player")]
+offset_right = 515.0
+offset_bottom = 130.0
+size_flags_horizontal = 0
+focus_next = NodePath("../PlayButton")
+focus_previous = NodePath("../PlayButton")
+theme = ExtResource("1_1qykt")
+text = "Tutoriel"
+alignment = 2
+script = ExtResource("2_kahtu")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_nsqi1")
+}

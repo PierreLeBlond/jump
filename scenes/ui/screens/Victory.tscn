@@ -1,0 +1,211 @@
+[gd_scene load_steps=10 format=3 uid="uid://ka3icxdhn46e"]
+
+[ext_resource type="Script" uid="uid://fkka7gaonjq5" path="res://scripts/ui/screens/Victory.gd" id="1_og3yy"]
+[ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/space.tres" id="2_6vdng"]
+[ext_resource type="FontFile" uid="uid://opncn7fhpnq3" path="res://assets/fonts/Coda-ExtraBold.ttf" id="3_3r8fr"]
+[ext_resource type="PackedScene" uid="uid://dq60ki67ddsx" path="res://scenes/ui/components/PulseButton.tscn" id="4_6vdng"]
+
+[sub_resource type="Animation" id="Animation_pxa5g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Background:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/VBoxContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(538, 444.004)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/VBoxContainer:theme_override_constants/separation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [128]
+}
+
+[sub_resource type="Animation" id="Animation_05upv"]
+resource_name = "open"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Background:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/VBoxContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1, 1.5),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(148, 1101), Vector2(148, 444.004)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/VBoxContainer:theme_override_constants/separation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [256, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tnwko"]
+_data = {
+&"RESET": SubResource("Animation_pxa5g"),
+&"open": SubResource("Animation_05upv")
+}
+
+[sub_resource type="Gradient" id="Gradient_nhrd6"]
+colors = PackedColorArray(1, 0.94, 0.7, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_og3yy"]
+gradient = SubResource("Gradient_nhrd6")
+fill_to = Vector2(0, 1)
+
+[node name="Victory" type="CanvasLayer" node_paths=PackedStringArray("animation_player", "restart_button", "quit_to_main_menu_button")]
+script = ExtResource("1_og3yy")
+animation_player = NodePath("AnimationPlayer")
+restart_button = NodePath("Control/VBoxContainer/RestartControl/RestartButton/Button")
+quit_to_main_menu_button = NodePath("Control/VBoxContainer/QuitToMainMenuControl/QuitToMainMenuButton/Button")
+
+[node name="Black" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tnwko")
+}
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme = ExtResource("2_6vdng")
+
+[node name="Background" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("GradientTexture2D_og3yy")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -314.0
+offset_top = -387.0
+offset_right = 314.0
+offset_bottom = -205.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(1, 0.941176, 0.701961, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("3_3r8fr")
+theme_override_font_sizes/font_size = 128
+text = "VICTOIRE"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -812.0
+offset_top = -95.9943
+offset_right = 33.0
+offset_bottom = 328.006
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 128
+
+[node name="RestartControl" type="Control" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RestartButton" parent="Control/VBoxContainer/RestartControl" node_paths=PackedStringArray("button") instance=ExtResource("4_6vdng")]
+button = NodePath("Button")
+
+[node name="Button" type="Button" parent="Control/VBoxContainer/RestartControl/RestartButton"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 16.0
+text = "Recommencer"
+
+[node name="QuitToMainMenuControl" type="Control" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="QuitToMainMenuButton" parent="Control/VBoxContainer/QuitToMainMenuControl" node_paths=PackedStringArray("button") instance=ExtResource("4_6vdng")]
+button = NodePath("Button")
+
+[node name="Button" type="Button" parent="Control/VBoxContainer/QuitToMainMenuControl/QuitToMainMenuButton"]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 16.0
+text = "Menu principal"

@@ -4,12 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://b8dorlf7ulbwy" path="res://scenes/Soubalien.tscn" id="1_off5s"]
 [ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="2_dlxjb"]
 [ext_resource type="Script" uid="uid://calrwlxq3l0el" path="res://scripts/game/CheckpointManager.gd" id="2_vvfd6"]
-[ext_resource type="Script" uid="uid://k5d6a3o16mgt" path="res://scripts/ui/TextRevealArea.gd" id="4_af4br"]
+[ext_resource type="Script" uid="uid://k5d6a3o16mgt" path="res://scripts/ui/components/TextRevealArea.gd" id="4_af4br"]
 [ext_resource type="Script" uid="uid://d3gg6d2i1ygp5" path="res://scripts/area/UnlockArea.gd" id="5_0t4of"]
 [ext_resource type="TileSet" uid="uid://dftl5pyptmafp" path="res://tilesets/cloud.tres" id="6_61wbf"]
 [ext_resource type="PackedScene" uid="uid://cgexvf3ochgd8" path="res://scenes/contraptions/Portal.tscn" id="8_61wbf"]
 [ext_resource type="Script" uid="uid://qqha1uw625f8" path="res://scripts/contraptions/Checkpoint.gd" id="8_elm2s"]
-[ext_resource type="PackedScene" uid="uid://mgk4rkf8x4no" path="res://scenes/ui/TransitionMask.tscn" id="9_vvfd6"]
+[ext_resource type="PackedScene" uid="uid://mgk4rkf8x4no" path="res://scenes/ui/transitions/TransitionMask.tscn" id="9_vvfd6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0t4of"]
 size = Vector2(512, 128)

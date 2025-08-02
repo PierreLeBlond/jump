@@ -5,6 +5,7 @@ class_name Game
 @export var hud: HUD
 @export var pause_menu: PauseMenu
 @export var game_over: GameOver
+@export var victory: Victory
 @export var game_run: GameRun
 
 @export var level_wrapper: Node
@@ -30,6 +31,13 @@ func _ready() -> void:
     game_over.wants_to_quit_to_main_menu.connect(quit_to_main_menu)
     game_over.hide()
 
+    victory.opened.connect(pause)
+    victory.closed.connect(resume)
+
+    victory.wants_to_restart.connect(start_new_game)
+    victory.wants_to_quit_to_main_menu.connect(quit_to_main_menu)
+    victory.hide()
+
 func unload_current_level() -> void:
     if !current_level:
         return
@@ -47,14 +55,18 @@ func load_level(level_name: String) -> void:
         return
 
     current_level = level_resource.instantiate()
-    current_level.initialize(hud)
     level_wrapper.add_child(current_level)
 
     current_level.wants_to_load_level.connect(load_level)
     current_level.wants_to_start_new_game.connect(start_new_game)
     current_level.wants_to_quit_to_main_menu.connect(quit_to_main_menu)
 
+    hud.hide()
+    current_level.wants_to_show_hud.connect(func(): hud.reveal())
+    current_level.wants_to_hide_hud.connect(func(): hud.unreveal())
+
     current_level.died.connect(die)
+    current_level.finished.connect(finish)
     current_level.score_added.connect(func(value: int): game_run.add_score(value))
     current_level.life_added.connect(func(value: int): game_run.add_life(value))
 
@@ -67,6 +79,9 @@ func die() -> void:
         load_checkpoint()
     else:
         open_game_over()
+
+func finish() -> void:
+    victory.open()
 
 func start_new_game() -> void:
     game_run.reset()

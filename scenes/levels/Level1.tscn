@@ -1,9 +1,9 @@
 [gd_scene load_steps=33 format=4 uid="uid://de32o3g1w17vm"]
 
 [ext_resource type="Script" uid="uid://ft5l0rjyxnrn" path="res://scripts/levels/Level1.gd" id="1_p5s5a"]
-[ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/CinematicBars.tscn" id="2_j7nyf"]
+[ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/components/CinematicBars.tscn" id="2_j7nyf"]
 [ext_resource type="Script" uid="uid://calrwlxq3l0el" path="res://scripts/game/CheckpointManager.gd" id="2_xbvxr"]
-[ext_resource type="PackedScene" uid="uid://mgk4rkf8x4no" path="res://scenes/ui/TransitionMask.tscn" id="5_dqba7"]
+[ext_resource type="PackedScene" uid="uid://mgk4rkf8x4no" path="res://scenes/ui/transitions/TransitionMask.tscn" id="5_dqba7"]
 [ext_resource type="PackedScene" uid="uid://cgexvf3ochgd8" path="res://scenes/contraptions/Portal.tscn" id="6_usw5k"]
 [ext_resource type="TileSet" uid="uid://dftl5pyptmafp" path="res://tilesets/cloud.tres" id="7_jsker"]
 [ext_resource type="TileSet" uid="uid://d2f3f4ukvlod0" path="res://tilesets/tree.tres" id="8_6ex7q"]
@@ -390,7 +390,6 @@ offset_bottom = 57.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 120
 text = "1"
 
@@ -408,7 +407,6 @@ offset_bottom = 57.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 120
 text = "2"
 
@@ -426,7 +424,6 @@ offset_bottom = 57.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 120
 text = "3"
 
@@ -444,7 +441,6 @@ offset_bottom = 57.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 120
 text = "4"
 

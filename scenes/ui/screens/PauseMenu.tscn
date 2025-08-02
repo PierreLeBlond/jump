@@ -1,0 +1,223 @@
+[gd_scene load_steps=9 format=3 uid="uid://o7syijl1i4vb"]
+
+[ext_resource type="Script" uid="uid://tno2l180o6ki" path="res://scripts/ui/screens/PauseMenu.gd" id="1_33nyv"]
+[ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/space.tres" id="2_r7mit"]
+[ext_resource type="PackedScene" uid="uid://dq60ki67ddsx" path="res://scenes/ui/components/PulseButton.tscn" id="3_5jeec"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7mit"]
+bg_color = Color(0, 0, 0, 0.513726)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5jeec"]
+bg_color = Color(0.732526, 0.78569, 0.950287, 1)
+corner_radius_top_left = 128
+corner_radius_bottom_left = 128
+
+[sub_resource type="Animation" id="Animation_33nyv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainContainer/MarginContainer/MenuContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainContainer/MarginContainer:theme_override_constants/margin_left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1920]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MainContainer:theme_override_styles/panel:bg_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.513726)]
+}
+
+[sub_resource type="Animation" id="Animation_u3r1v"]
+resource_name = "open"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainContainer/MarginContainer/MenuContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1217, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainContainer/MarginContainer:theme_override_constants/margin_left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [1920, 512]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MainContainer:theme_override_styles/panel:bg_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0.513726)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_82qxy"]
+_data = {
+&"RESET": SubResource("Animation_33nyv"),
+&"open": SubResource("Animation_u3r1v")
+}
+
+[node name="PauseMenu" type="CanvasLayer" node_paths=PackedStringArray("animation_player", "resume_button", "load_checkpoint_button", "restart_button", "quit_to_main_menu_button")]
+process_mode = 3
+script = ExtResource("1_33nyv")
+animation_player = NodePath("AnimationPlayer")
+resume_button = NodePath("MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/Resume/ResumePulseButton/ResumeButton")
+load_checkpoint_button = NodePath("MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/LoadCheckpoint/LoadCheckpointPulseButton/LoadCheckpointButton")
+restart_button = NodePath("MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/Restart/RestartPulseButton/RestartButton")
+quit_to_main_menu_button = NodePath("MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/QuitToMainMenu/QuitToMainMenuPulseButton/QuitToMainMenuButton")
+
+[node name="MainContainer" type="PanelContainer" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme = ExtResource("2_r7mit")
+theme_override_styles/panel = SubResource("StyleBoxFlat_r7mit")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 1920
+
+[node name="MenuContainer" type="PanelContainer" parent="MainContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5jeec")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/MarginContainer/MenuContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 256
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 128
+
+[node name="Resume" type="Control" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResumePulseButton" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/Resume" node_paths=PackedStringArray("button") instance=ExtResource("3_5jeec")]
+layout_mode = 2
+size_flags_vertical = 0
+button = NodePath("ResumeButton")
+
+[node name="ResumeButton" type="Button" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/Resume/ResumePulseButton"]
+layout_mode = 2
+offset_right = 415.0
+offset_bottom = 85.0
+size_flags_horizontal = 0
+focus_neighbor_left = NodePath("../../../QuitToMainMenu/QuitToMainMenuPulseButton/QuitToMainMenuButton")
+focus_neighbor_top = NodePath("../../../QuitToMainMenu/QuitToMainMenuPulseButton/QuitToMainMenuButton")
+focus_neighbor_right = NodePath("../../../LoadCheckpoint/LoadCheckpointPulseButton/LoadCheckpointButton")
+focus_neighbor_bottom = NodePath("../../../LoadCheckpoint/LoadCheckpointPulseButton/LoadCheckpointButton")
+focus_next = NodePath("../../../LoadCheckpoint/LoadCheckpointPulseButton/LoadCheckpointButton")
+focus_previous = NodePath("../../../QuitToMainMenu/QuitToMainMenuPulseButton/QuitToMainMenuButton")
+theme_override_font_sizes/font_size = 48
+text = "Reprendre"
+
+[node name="LoadCheckpoint" type="Control" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LoadCheckpointPulseButton" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/LoadCheckpoint" node_paths=PackedStringArray("button") instance=ExtResource("3_5jeec")]
+layout_mode = 2
+button = NodePath("LoadCheckpointButton")
+
+[node name="LoadCheckpointButton" type="Button" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/LoadCheckpoint/LoadCheckpointPulseButton"]
+layout_mode = 2
+offset_right = 683.0
+offset_bottom = 85.0
+size_flags_horizontal = 0
+focus_neighbor_left = NodePath("../../../Resume/ResumePulseButton/ResumeButton")
+focus_neighbor_top = NodePath("../../../Resume/ResumePulseButton/ResumeButton")
+focus_neighbor_right = NodePath("../../../Restart/RestartPulseButton/RestartButton")
+focus_neighbor_bottom = NodePath("../../../Restart/RestartPulseButton/RestartButton")
+focus_next = NodePath("../../../Restart/RestartPulseButton/RestartButton")
+focus_previous = NodePath("../../../Resume/ResumePulseButton/ResumeButton")
+theme_override_font_sizes/font_size = 48
+text = "Point de sauvegarde"
+
+[node name="Restart" type="Control" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="RestartPulseButton" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/Restart" node_paths=PackedStringArray("button") instance=ExtResource("3_5jeec")]
+layout_mode = 2
+button = NodePath("RestartButton")
+
+[node name="RestartButton" type="Button" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/Restart/RestartPulseButton"]
+layout_mode = 2
+offset_right = 764.0
+offset_bottom = 85.0
+size_flags_horizontal = 0
+focus_neighbor_left = NodePath("../../../LoadCheckpoint/LoadCheckpointPulseButton/LoadCheckpointButton")
+focus_neighbor_top = NodePath("../../../LoadCheckpoint/LoadCheckpointPulseButton/LoadCheckpointButton")
+focus_neighbor_right = NodePath("../../../QuitToMainMenu/QuitToMainMenuPulseButton/QuitToMainMenuButton")
+focus_neighbor_bottom = NodePath("../../../QuitToMainMenu/QuitToMainMenuPulseButton/QuitToMainMenuButton")
+focus_next = NodePath("../../../QuitToMainMenu/QuitToMainMenuPulseButton/QuitToMainMenuButton")
+focus_previous = NodePath("../../../LoadCheckpoint/LoadCheckpointPulseButton/LoadCheckpointButton")
+theme_override_font_sizes/font_size = 48
+text = "Recommencer la partie"
+
+[node name="QuitToMainMenu" type="Control" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="QuitToMainMenuPulseButton" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/QuitToMainMenu" node_paths=PackedStringArray("button") instance=ExtResource("3_5jeec")]
+layout_mode = 2
+button = NodePath("QuitToMainMenuButton")
+
+[node name="QuitToMainMenuButton" type="Button" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/QuitToMainMenu/QuitToMainMenuPulseButton"]
+layout_mode = 2
+offset_right = 837.0
+offset_bottom = 85.0
+size_flags_horizontal = 0
+focus_neighbor_left = NodePath("../../../Restart/RestartPulseButton/RestartButton")
+focus_neighbor_top = NodePath("../../../Restart/RestartPulseButton/RestartButton")
+focus_neighbor_right = NodePath("../../../Resume/ResumePulseButton/ResumeButton")
+focus_neighbor_bottom = NodePath("../../../Resume/ResumePulseButton/ResumeButton")
+focus_next = NodePath("../../../Resume/ResumePulseButton/ResumeButton")
+focus_previous = NodePath("../../../Restart/RestartPulseButton/RestartButton")
+theme_override_font_sizes/font_size = 48
+text = "Revenir au menu principal"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_82qxy")
+}
