@@ -2,14 +2,11 @@ extends CanvasLayer
 
 class_name PauseMenu
 
-@export var animation_player: AnimationPlayer
-
 signal wants_to_resume()
 signal wants_to_load_checkpoint()
 signal wants_to_restart()
 signal wants_to_quit_to_main_menu()
 
-signal opened()
 signal closed()
 
 @export var resume_button: Button
@@ -23,20 +20,16 @@ func _ready() -> void:
     restart_button.pressed.connect(on_restart_button_pressed)
     quit_to_main_menu_button.pressed.connect(on_quit_to_main_menu_button_pressed)
 
-func open() -> void:
-    show()
+func focus() -> void:
     resume_button.grab_focus()
-    animation_player.play("open")
-    opened.emit()
-    process_mode = Node.PROCESS_MODE_ALWAYS
-    await animation_player.animation_finished
 
 func close() -> void:
-    animation_player.play_backwards("open")
-    await animation_player.animation_finished
+    var parent = get_parent()
+
+    if parent:
+        parent.remove_child(self)
+
     closed.emit()
-    process_mode = Node.PROCESS_MODE_DISABLED
-    hide()
 
 func on_resume_button_pressed() -> void:
     wants_to_resume.emit()

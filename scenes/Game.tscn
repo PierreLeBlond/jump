@@ -1,33 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dayu043kaonhh"]
+[gd_scene load_steps=3 format=3 uid="uid://dayu043kaonhh"]
 
 [ext_resource type="Script" uid="uid://d7xk4vlngnl8" path="res://scripts/game/GameRun.gd" id="1_ibkli"]
 [ext_resource type="Script" uid="uid://dt8yydmrctvxa" path="res://scripts/Game.gd" id="1_qbsmt"]
-[ext_resource type="PackedScene" uid="uid://o7syijl1i4vb" path="res://scenes/ui/screens/PauseMenu.tscn" id="2_78awf"]
-[ext_resource type="PackedScene" uid="uid://ka3icxdhn46e" path="res://scenes/ui/screens/Victory.tscn" id="3_aug50"]
-[ext_resource type="PackedScene" uid="uid://82tigqg507ba" path="res://scenes/ui/hud/HUD.tscn" id="3_cpr0p"]
-[ext_resource type="PackedScene" uid="uid://c1n0bd0dkvmhw" path="res://scenes/ui/screens/GameOver.tscn" id="4_s0nni"]
 
-[node name="Game" type="Node" node_paths=PackedStringArray("hud", "pause_menu", "game_over", "victory", "game_run", "level_wrapper")]
+[node name="Game" type="Node" node_paths=PackedStringArray("game_run", "level_wrapper")]
 process_mode = 3
 script = ExtResource("1_qbsmt")
-hud = NodePath("Hud")
-pause_menu = NodePath("PauseMenu")
-game_over = NodePath("GameOver")
-victory = NodePath("Victory")
 game_run = NodePath("GameRun")
 level_wrapper = NodePath("LevelWrapper")
-
-[node name="Hud" parent="." node_paths=PackedStringArray("game_run") instance=ExtResource("3_cpr0p")]
-game_run = NodePath("../GameRun")
-
-[node name="Victory" parent="." instance=ExtResource("3_aug50")]
-layer = 2
-
-[node name="GameOver" parent="." instance=ExtResource("4_s0nni")]
-layer = 2
-
-[node name="PauseMenu" parent="." instance=ExtResource("2_78awf")]
-layer = 3
 
 [node name="GameRun" type="Node" parent="."]
 script = ExtResource("1_ibkli")

@@ -14,8 +14,6 @@ class_name Tutorial
 func _ready() -> void:
     super._ready()
 
-    hide_hud()
-
     hole.body_entered.connect(on_hole_body_entered)
 
     soubalien.captured_player.connect(on_player_captured)

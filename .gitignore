@@ -3,3 +3,7 @@
 /android/
 
 /ressources/
+
+.env
+
+override.cfg

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cq404dg781ufs" path="res://scripts/levels/MainMenu.gd" id="1_ue4lf"]
 [ext_resource type="Texture2D" uid="uid://niglju8i3a5s" path="res://assets/sprites/title-screen-soubalien.png" id="2_7rblo"]
-[ext_resource type="PackedScene" uid="uid://dq60ki67ddsx" path="res://scenes/ui/components/PulseButton.tscn" id="3_ov3pg"]
+[ext_resource type="Script" uid="uid://cuhhm5ieqpgf0" path="res://scripts/ui/transitions/Fly.gd" id="3_ue4lf"]
 [ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/space.tres" id="4_81rgk"]
 [ext_resource type="Texture2D" uid="uid://d0lqdu5jxr0fi" path="res://assets/sprites/title-screen-feis.png" id="5_a6001"]
 
@@ -38,40 +38,6 @@ tracks/1/keys = {
 "points": PackedFloat32Array(44, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Label:position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(65, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Label:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(27, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Label:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_tbfit"]
 resource_name = "idle"
@@ -85,7 +51,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(1014, -0.25, 0, 0.833333, -0.00610352, 1045, -0.6, 0.11499, 0.766667, -0.320312, 1014, -0.578088, 0.500305, 0.25, 0),
+"points": PackedFloat32Array(959, -0.25, 0, 0.833333, -0.00610352, 959, -0.6, 0.11499, 0.766667, -0.320312, 959, -0.578088, 0.500305, 0.25, 0),
 "times": PackedFloat32Array(0, 1, 2)
 }
 tracks/1/type = "bezier"
@@ -96,7 +62,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(44, -0.25, 0, 0.833333, -0.426193, 19.1129, -0.333333, 0, 0.566667, 0.179859, 44, -0.433333, -0.246346, 0.25, 0),
+"points": PackedFloat32Array(527, -0.25, 0, 0.833333, -0.426193, 477.975, -0.333333, 0, 0.566667, 0.179859, 527, -0.433333, -0.246346, 0.25, 0),
 "times": PackedFloat32Array(0, 1, 2)
 }
 
@@ -110,7 +76,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(703, -0.25, 0, 0.25, 0, 1014, -0.614352, -3.92731, 0.25, 0),
+"points": PackedFloat32Array(672, -0.25, 0, 0.25, 0, 959, -0.614352, -3.92731, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
 tracks/1/type = "bezier"
@@ -121,42 +87,8 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(516, -0.25, 0, 0.25, 0, 44, -0.733422, 7.78774, 0.25, 0),
+"points": PackedFloat32Array(1010, -0.25, 0, 0.25, 0, 527, -0.733422, 7.78774, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Label:position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-1078, -0.25, 0, 0.25, 0, 65, -0.209166, 560.932, 0.25, 0),
-"times": PackedFloat32Array(0, 0.503828)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Label:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(27, -0.25, 0, 0.25, 0, 27, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.503828)
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Label:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(2.21914, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tbfit"]
@@ -593,7 +525,7 @@ _data = {
 &"reveal": SubResource("Animation_j4pmt")
 }
 
-[node name="TitleScreen" type="Control" node_paths=PackedStringArray("tutorial_button", "level_1_button", "fade_in_animation")]
+[node name="TitleScreen" type="Control" node_paths=PackedStringArray("tutorial_button", "level_1_button", "leaderboard_button", "fade_in_animation")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -601,8 +533,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ue4lf")
-tutorial_button = NodePath("Tutorial/PulseButton/Button")
-level_1_button = NodePath("Play/PulseButton/Button")
+tutorial_button = NodePath("VBoxContainer/Tutorial")
+level_1_button = NodePath("VBoxContainer/Play")
+leaderboard_button = NodePath("VBoxContainer/Leaderboard")
 fade_in_animation = NodePath("ScreenTransition/AnimationPlayer")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -637,10 +570,11 @@ texture = SubResource("GradientTexture2D_tbfit")
 [node name="SoubalienContainer" type="Node2D" parent="."]
 
 [node name="Soubalien" type="TextureRect" parent="SoubalienContainer"]
-offset_left = 886.0
-offset_top = 58.0
-offset_right = 1861.0
-offset_bottom = 1033.0
+light_mask = 0
+offset_left = 1356.0
+offset_top = 68.0
+offset_right = 1838.0
+offset_bottom = 550.0
 texture = ExtResource("2_7rblo")
 expand_mode = 1
 
@@ -655,68 +589,79 @@ texture = SubResource("GradientTexture2D_6j5qt")
 polygon = PackedVector2Array(162.909, 925.938, -1669.82, 1014.26, -18.1818, -85.7138, -6.18176, -89.7283, 0.363647, -88.7247, 10.1819, -83.7066, 21.0909, -70.6595, 23.2728, -63.6341, 24.3636, -57.6124)
 uv = PackedVector2Array(64, 64, 1.90735e-06, 64, 0, 0, 24, 0, 32, 0, 40, 0, 48, 0, 56, 0, 64, -2.38419e-06)
 
-[node name="Tutorial" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 80.0
-offset_top = 414.0
-offset_right = 120.0
-offset_bottom = 454.0
-
-[node name="PulseButton" parent="Tutorial" node_paths=PackedStringArray("button") instance=ExtResource("3_ov3pg")]
-button = NodePath("Button")
-
-[node name="Button" type="Button" parent="Tutorial/PulseButton"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 128.0
-offset_bottom = 16.0
-focus_neighbor_left = NodePath("../../../Play/PulseButton/Button")
-focus_neighbor_top = NodePath("../../../Play/PulseButton/Button")
-focus_neighbor_right = NodePath("../../../Play/PulseButton/Button")
-focus_neighbor_bottom = NodePath("../../../Play/PulseButton/Button")
-focus_next = NodePath("../../../Play/PulseButton/Button")
-focus_previous = NodePath("../../../Play/PulseButton/Button")
-text = "Tutorial"
+offset_left = 196.0
+offset_top = 529.0
+offset_right = 775.0
+offset_bottom = 983.0
+theme_override_constants/separation = 32
 
-[node name="Play" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 80.0
-offset_top = 638.0
-offset_right = 120.0
-offset_bottom = 678.0
+[node name="Tutorial" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Leaderboard")
+focus_neighbor_top = NodePath("../Leaderboard")
+focus_neighbor_right = NodePath("../Play")
+focus_neighbor_bottom = NodePath("../Play")
+focus_next = NodePath("../Play")
+focus_previous = NodePath("../Leaderboard")
+text = "tutoriel"
 
-[node name="PulseButton" parent="Play" node_paths=PackedStringArray("button") instance=ExtResource("3_ov3pg")]
-button = NodePath("Button")
+[node name="Fly" type="Node" parent="VBoxContainer/Tutorial"]
+script = ExtResource("3_ue4lf")
+y = 800.0
 
-[node name="Button" type="Button" parent="Play/PulseButton"]
-layout_mode = 0
-offset_right = 128.0
-offset_bottom = 16.0
-focus_neighbor_left = NodePath("../../../Tutorial/PulseButton/Button")
-focus_neighbor_top = NodePath("../../../Tutorial/PulseButton/Button")
-focus_neighbor_right = NodePath("../../../Tutorial/PulseButton/Button")
-focus_neighbor_bottom = NodePath("../../../Tutorial/PulseButton/Button")
-focus_next = NodePath("../../../Tutorial/PulseButton/Button")
-focus_previous = NodePath("../../../Tutorial/PulseButton/Button")
-text = "Jouer"
+[node name="Play" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Tutorial")
+focus_neighbor_top = NodePath("../Tutorial")
+focus_neighbor_right = NodePath("../Leaderboard")
+focus_neighbor_bottom = NodePath("../Leaderboard")
+focus_next = NodePath("../Leaderboard")
+focus_previous = NodePath("../Tutorial")
+text = "jouer"
+
+[node name="Fly" type="Node" parent="VBoxContainer/Play"]
+script = ExtResource("3_ue4lf")
+y = 800.0
+delay = 0.1
+
+[node name="Leaderboard" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Play")
+focus_neighbor_top = NodePath("../Play")
+focus_neighbor_right = NodePath("../Tutorial")
+focus_neighbor_bottom = NodePath("../Tutorial")
+focus_next = NodePath("../Tutorial")
+focus_previous = NodePath("../Play")
+text = "scores"
+
+[node name="Fly" type="Node" parent="VBoxContainer/Leaderboard"]
+script = ExtResource("3_ue4lf")
+y = 800.0
+delay = 0.2
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 65.0
-offset_top = 43.0
-offset_right = 3670.0
-offset_bottom = 514.0
+offset_left = 196.0
+offset_top = 110.0
+offset_right = 1324.0
+offset_bottom = 458.0
 theme = ExtResource("4_81rgk")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 80
 text = "Prenez garde à l'espace 
 entre la terre et 
 Arkab Posterior"
 
+[node name="Fly" type="Node" parent="Label"]
+script = ExtResource("3_ue4lf")
+
 [node name="Feis" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 962.409
-offset_top = 103.807
-offset_right = 1937.41
-offset_bottom = 1078.81
+offset_left = 672.0
+offset_top = 1010.0
+offset_right = 1112.0
+offset_bottom = 1450.0
 texture = ExtResource("5_a6001")
 expand_mode = 1
 
@@ -724,72 +669,72 @@ expand_mode = 1
 
 [node name="TextureRect" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1687.55
-offset_right = 3641.27
+offset_left = 1920.0
+offset_right = 3873.72
 offset_bottom = 127.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect2" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1893.18
+offset_left = 1920.0
 offset_top = 127.0
-offset_right = 3846.9
+offset_right = 3873.72
 offset_bottom = 319.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect9" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1771.03
+offset_left = 1920.0
 offset_top = 319.0
-offset_right = 3724.75
+offset_right = 3873.72
 offset_bottom = 382.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect8" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1876.17
+offset_left = 1920.0
 offset_top = 382.0
-offset_right = 3829.89
+offset_right = 3873.72
 offset_bottom = 574.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect3" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1748.69
+offset_left = 1920.0
 offset_top = 704.0
-offset_right = 3702.41
+offset_right = 3873.72
 offset_bottom = 769.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect6" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1802.76
+offset_left = 1920.0
 offset_top = 639.0
-offset_right = 3756.48
+offset_right = 3873.72
 offset_bottom = 704.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect7" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1834.29
+offset_left = 1920.0
 offset_top = 574.0
-offset_right = 3788.01
+offset_right = 3873.72
 offset_bottom = 639.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect4" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1796.96
+offset_left = 1920.0
 offset_top = 769.0
-offset_right = 3750.68
+offset_right = 3873.72
 offset_bottom = 896.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect5" type="ColorRect" parent="ScreenTransition"]
 light_mask = 2
-offset_left = 1852.2
+offset_left = 1920.0
 offset_top = 896.0
-offset_right = 3805.92
+offset_right = 3873.72
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 

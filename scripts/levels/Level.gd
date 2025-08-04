@@ -4,6 +4,7 @@ class_name Level
 
 signal wants_to_load_level(level_name: String)
 signal wants_to_quit_to_main_menu()
+signal wants_to_open_leaderboard()
 signal wants_to_start_new_game()
 signal wants_to_show_hud()
 signal wants_to_hide_hud()
@@ -29,6 +30,9 @@ func quit_to_main_menu() -> void:
 
 func start_new_game() -> void:
     wants_to_start_new_game.emit()
+
+func open_leaderboard() -> void:
+    wants_to_open_leaderboard.emit()
 
 func show_hud() -> void:
     wants_to_show_hud.emit()
