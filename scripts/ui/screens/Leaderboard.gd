@@ -1,10 +1,7 @@
-extends CanvasLayer
+extends Screen
 
 class_name Leaderboard
 
-signal wants_to_quit_to_main_menu()
-
-signal closed()
 
 @export var quit_to_main_menu_button: Button
 
@@ -57,15 +54,3 @@ func update() -> void:
         var value_label = Label.new()
         value_label.text = Utils.format_time(-time.score)
         time_values_container.add_child(value_label)
-
-func close() -> void:
-    var parent = get_parent()
-
-    if parent:
-        parent.remove_child(self)
-
-    closed.emit()
-
-func quit_to_main_menu() -> void:
-    wants_to_quit_to_main_menu.emit()
-    close()

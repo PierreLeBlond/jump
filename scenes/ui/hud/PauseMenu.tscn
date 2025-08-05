@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://o7syijl1i4vb"]
 
-[ext_resource type="Script" uid="uid://tno2l180o6ki" path="res://scripts/ui/screens/PauseMenu.gd" id="1_33nyv"]
-[ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/space.tres" id="2_r7mit"]
-[ext_resource type="Script" uid="uid://cuhhm5ieqpgf0" path="res://scripts/ui/transitions/Fly.gd" id="3_5jeec"]
+[ext_resource type="Script" uid="uid://tno2l180o6ki" path="res://scripts/ui/hud/PauseMenu.gd" id="1_ksjry"]
+[ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/space.tres" id="2_70ys4"]
+[ext_resource type="Script" uid="uid://cuhhm5ieqpgf0" path="res://scripts/ui/transitions/Fly.gd" id="3_e5dlb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7mit"]
 bg_color = Color(0, 0, 0, 0.513726)
@@ -19,7 +19,8 @@ corner_radius_bottom_left = 128
 
 [node name="PauseMenu" type="CanvasLayer" node_paths=PackedStringArray("resume_button", "load_checkpoint_button", "restart_button", "quit_to_main_menu_button")]
 process_mode = 3
-script = ExtResource("1_33nyv")
+layer = 3
+script = ExtResource("1_ksjry")
 resume_button = NodePath("MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/ResumeButton")
 load_checkpoint_button = NodePath("MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/LoadCheckpointButton")
 restart_button = NodePath("MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/RestartButton")
@@ -28,11 +29,11 @@ quit_to_main_menu_button = NodePath("MainContainer/MarginContainer/MenuContainer
 [node name="MainContainer" type="PanelContainer" parent="."]
 offset_right = 1920.0
 offset_bottom = 1080.0
-theme = ExtResource("2_r7mit")
+theme = ExtResource("2_70ys4")
 theme_override_styles/panel = SubResource("StyleBoxFlat_r7mit")
 
 [node name="Fly" type="Node" parent="MainContainer"]
-script = ExtResource("3_5jeec")
+script = ExtResource("3_e5dlb")
 duration = 0.3
 metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
 
@@ -45,7 +46,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5jeec")
 
 [node name="Fly" type="Node" parent="MainContainer/MarginContainer/MenuContainer"]
-script = ExtResource("3_5jeec")
+script = ExtResource("3_e5dlb")
 x = 1920.0
 duration = 0.4
 metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
@@ -75,7 +76,7 @@ theme_override_font_sizes/font_size = 48
 text = "reprendre"
 
 [node name="Fly" type="Node" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/ResumeButton"]
-script = ExtResource("3_5jeec")
+script = ExtResource("3_e5dlb")
 x = 512.0
 duration = 0.4
 metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
@@ -92,7 +93,7 @@ theme_override_font_sizes/font_size = 48
 text = "dernier point de sauvegarde"
 
 [node name="Fly" type="Node" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/LoadCheckpointButton"]
-script = ExtResource("3_5jeec")
+script = ExtResource("3_e5dlb")
 x = 512.0
 duration = 0.4
 delay = 0.1
@@ -110,7 +111,7 @@ theme_override_font_sizes/font_size = 48
 text = "recommencer la partie"
 
 [node name="Fly" type="Node" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/RestartButton"]
-script = ExtResource("3_5jeec")
+script = ExtResource("3_e5dlb")
 x = 512.0
 duration = 0.4
 delay = 0.2
@@ -128,7 +129,7 @@ theme_override_font_sizes/font_size = 48
 text = "revenir au menu principal"
 
 [node name="Fly" type="Node" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/QuitToMainMenuButton"]
-script = ExtResource("3_5jeec")
+script = ExtResource("3_e5dlb")
 x = 512.0
 duration = 0.4
 delay = 0.3

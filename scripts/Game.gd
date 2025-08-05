@@ -2,77 +2,93 @@ extends Node
 
 class_name Game
 
-var hud: HUD
-var pause_menu: PauseMenu
-var game_over: GameOver
-var victory: Victory
-var leaderboard: Leaderboard
+var left_bar_transition: SceneTransition
+var right_bar_transition: SceneTransition
 
+@export var pause_manager: PauseManager
 @export var game_run: GameRun
-
 @export var level_wrapper: Node
 
-var current_level: Node = null
+var current_scene: Node = null
+var current_level: Level = null
+var current_screen: Screen = null
 
 func _ready() -> void:
-    hud = load("res://scenes/ui/hud/HUD.tscn").instantiate()
-    pause_menu = load("res://scenes/ui/screens/PauseMenu.tscn").instantiate()
-    game_over = load("res://scenes/ui/screens/GameOver.tscn").instantiate()
-    victory = load("res://scenes/ui/screens/Victory.tscn").instantiate()
-    leaderboard = load("res://scenes/ui/screens/Leaderboard.tscn").instantiate()
+    left_bar_transition = load("res://scenes/ui/transitions/scenes/LeftBarTransition.tscn").instantiate()
+    add_child(left_bar_transition)
+    left_bar_transition.hide()
+    right_bar_transition = load("res://scenes/ui/transitions/scenes/RightBarTransition.tscn").instantiate()
+    add_child(right_bar_transition)
+    right_bar_transition.hide()
 
-    pause_menu.closed.connect(resume)
+    pause_manager.paused.connect(pause)
+    pause_manager.resumed.connect(resume)
 
-    pause_menu.wants_to_resume.connect(resume)
-    pause_menu.wants_to_load_checkpoint.connect(load_checkpoint)
-    pause_menu.wants_to_restart.connect(start_new_game)
-    pause_menu.wants_to_quit_to_main_menu.connect(quit_to_main_menu)
+    load_screen("MainMenu")
 
-    game_over.closed.connect(resume)
-
-    game_over.wants_to_restart.connect(start_new_game)
-    game_over.wants_to_quit_to_main_menu.connect(quit_to_main_menu)
-
-    victory.closed.connect(resume)
-
-    victory.wants_to_restart.connect(start_new_game)
-    victory.wants_to_quit_to_main_menu.connect(quit_to_main_menu)
-
-    leaderboard.wants_to_quit_to_main_menu.connect(quit_to_main_menu)
-
-    load_level("MainMenu")
-
-func unload_current_level() -> void:
-    if !current_level:
+func unload_current_scene() -> void:
+    if !current_scene:
         return
 
-    current_level.queue_free()
-    current_level = null
+    current_scene.queue_free()
+    current_scene = null
 
-func load_level(level_name: String) -> void:
-    unload_current_level()
+func load_scene(scene_name: String) -> Node:
+    unload_current_scene()
 
-    var level_resource = load("res://scenes/levels/" + level_name + ".tscn")
-
-    if !level_resource:
-        print("Level resource not found: ", level_name)
+    var scene_resource = load(scene_name)
+    if !scene_resource:
+        print("Scene resource not found: ", scene_name)
         return
 
-    current_level = level_resource.instantiate()
-    level_wrapper.add_child(current_level)
+    current_scene = scene_resource.instantiate()
+    level_wrapper.add_child(current_scene)
+
+    return current_scene
+
+func load_screen(screen_name: String) -> Screen:
+    if current_scene:
+        await left_bar_transition.transition_out()
+
+    current_screen = load_scene("res://scenes/ui/screens/" + screen_name + ".tscn")
+
+    current_screen.wants_to_load_level.connect(load_level)
+    current_screen.wants_to_start_new_game.connect(start_new_game)
+    current_screen.wants_to_quit_to_main_menu.connect(quit_to_main_menu)
+    current_screen.wants_to_open_leaderboard.connect(open_leaderboard)
+
+    current_screen.focus()
+
+    pause_manager.level = null
+
+    left_bar_transition.hide()
+    await right_bar_transition.transition_in()
+    return current_screen
+
+func load_level(level_name: String) -> Level:
+    await right_bar_transition.transition_out()
+
+    current_level = load_scene("res://scenes/levels/" + level_name + ".tscn")
 
     current_level.wants_to_load_level.connect(load_level)
     current_level.wants_to_start_new_game.connect(start_new_game)
     current_level.wants_to_quit_to_main_menu.connect(quit_to_main_menu)
-    current_level.wants_to_open_leaderboard.connect(open_leaderboard)
-
-    current_level.wants_to_show_hud.connect(func(): hud.reveal())
-    current_level.wants_to_hide_hud.connect(func(): hud.unreveal())
 
     current_level.died.connect(die)
     current_level.finished.connect(finish)
     current_level.score_added.connect(func(value: int): game_run.add_score(value))
     current_level.life_added.connect(func(value: int): game_run.add_life(value))
+
+    current_level.game_run = game_run
+
+    pause_manager.level = current_level
+
+    resume()
+
+    right_bar_transition.hide()
+    await left_bar_transition.transition_in()
+
+    return current_level
 
 func load_checkpoint() -> void:
     current_level.load_checkpoint()
@@ -85,49 +101,31 @@ func die() -> void:
         open_game_over()
 
 func finish() -> void:
-    victory.score = game_run.score
-    victory.time = game_run.accumulated_time
-    add_child(victory)
-    victory.focus()
+    pause()
+    var victory_screen = await load_screen("Victory")
+    victory_screen.score = game_run.score
+    victory_screen.time = game_run.accumulated_time
+    victory_screen.focus()
 
 func start_new_game() -> void:
     game_run.reset()
     load_level("Level1")
-    resume()
 
 func quit_to_main_menu() -> void:
     game_run.reset()
-    load_level("MainMenu")
+    load_screen("MainMenu")
 
 func open_game_over() -> void:
-    pause()
-    add_child(game_over)
-    game_over.focus()
+    var game_over_screen = await load_screen("GameOver")
+    game_over_screen.focus()
 
 func open_leaderboard() -> void:
-    pause()
-    leaderboard.update()
-    add_child(leaderboard)
-    leaderboard.focus()
-
-func open_pause_menu() -> void:
-    pause()
-    add_child(pause_menu)
-    pause_menu.focus()
+    var leaderboard_screen = await load_screen("Leaderboard")
+    leaderboard_screen.update()
+    leaderboard_screen.focus()
 
 func pause() -> void:
-    get_tree().paused = true
     game_run.pause()
 
 func resume() -> void:
-    get_tree().paused = false
     game_run.play()
-
-func _input(event: InputEvent) -> void:
-    if !event.is_action_pressed("pause") || current_level.process_mode != Node.PROCESS_MODE_PAUSABLE:
-        return
-
-    if get_tree().paused:
-        pause_menu.close()
-    else:
-        open_pause_menu()

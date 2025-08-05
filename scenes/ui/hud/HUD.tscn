@@ -130,6 +130,7 @@ _data = {
 }
 
 [node name="Hud" type="CanvasLayer" node_paths=PackedStringArray("animation_player", "life_counter", "score_counter", "time_counter")]
+layer = 2
 script = ExtResource("1_f4fii")
 animation_player = NodePath("AnimationPlayer")
 life_counter = NodePath("LifeCounter")

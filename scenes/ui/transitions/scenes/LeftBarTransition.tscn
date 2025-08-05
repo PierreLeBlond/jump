@@ -1,121 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://mfaxiu15banr"]
+[gd_scene load_steps=5 format=3 uid="uid://3hxqd1v7r23k"]
 
-[ext_resource type="Script" uid="uid://cq404dg781ufs" path="res://scripts/levels/MainMenu.gd" id="1_ue4lf"]
-[ext_resource type="Texture2D" uid="uid://niglju8i3a5s" path="res://assets/sprites/title-screen-soubalien.png" id="2_7rblo"]
-[ext_resource type="Script" uid="uid://cuhhm5ieqpgf0" path="res://scripts/ui/transitions/Fly.gd" id="3_ue4lf"]
-[ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/space.tres" id="4_81rgk"]
-[ext_resource type="Texture2D" uid="uid://d0lqdu5jxr0fi" path="res://assets/sprites/title-screen-feis.png" id="5_a6001"]
-
-[sub_resource type="Gradient" id="Gradient_xnmwc"]
-colors = PackedColorArray(0.619367, 0.744863, 1, 1, 0.91664, 0.91664, 0.91664, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_j2lur"]
-gradient = SubResource("Gradient_xnmwc")
-fill_from = Vector2(0.910256, 0.320513)
-fill_to = Vector2(0.662393, 0.884615)
-
-[sub_resource type="Animation" id="Animation_j2lur"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Feis:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(879, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Feis:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(44, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
-[sub_resource type="Animation" id="Animation_tbfit"]
-resource_name = "idle"
-length = 2.0
-loop_mode = 1
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Feis:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(959, -0.25, 0, 0.833333, -0.00610352, 959, -0.6, 0.11499, 0.766667, -0.320312, 959, -0.578088, 0.500305, 0.25, 0),
-"times": PackedFloat32Array(0, 1, 2)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Feis:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(527, -0.25, 0, 0.833333, -0.426193, 477.975, -0.333333, 0, 0.566667, 0.179859, 527, -0.433333, -0.246346, 0.25, 0),
-"times": PackedFloat32Array(0, 1, 2)
-}
-
-[sub_resource type="Animation" id="Animation_xnmwc"]
-resource_name = "intro"
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Feis:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(672, -0.25, 0, 0.25, 0, 959, -0.614352, -3.92731, 0.25, 0),
-"times": PackedFloat32Array(0, 1)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Feis:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1010, -0.25, 0, 0.25, 0, 527, -0.733422, 7.78774, 0.25, 0),
-"times": PackedFloat32Array(0, 1)
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_tbfit"]
-_data = {
-&"RESET": SubResource("Animation_j2lur"),
-&"idle": SubResource("Animation_tbfit"),
-&"intro": SubResource("Animation_xnmwc")
-}
-
-[sub_resource type="Gradient" id="Gradient_j2lur"]
-offsets = PackedFloat32Array(0, 0.613419)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_tbfit"]
-gradient = SubResource("Gradient_j2lur")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xnmwc"]
-polygon = PackedVector2Array(-6, -15, 35, -10, 63, 1, 89, 18, 110, 40, 129, 68, 139, 102, 140, 138, 131, 170, 112, 199, 84, 218, 50, 228, 14, 227, -19, 219, -48, 204, -69, 186, -90, 161, -103, 138, -112, 100, -108, 67, -98, 36, -68, 5, -33, -12)
-
-[sub_resource type="Gradient" id="Gradient_j4pmt"]
-colors = PackedColorArray(0, 0, 0, 0, 0.939738, 0.666838, 0.857891, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_6j5qt"]
-gradient = SubResource("Gradient_j4pmt")
-fill_from = Vector2(1, 1)
+[ext_resource type="Script" uid="uid://b5056ouwbaql8" path="res://scripts/ui/transitions/SceneTransition.gd" id="1_plrh2"]
 
 [sub_resource type="Animation" id="Animation_6j5qt"]
 length = 0.001
@@ -319,7 +204,7 @@ tracks/17/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_j4pmt"]
-resource_name = "reveal"
+resource_name = "transition"
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -328,7 +213,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-28, -0.25, 0, 0.25, 0, 1920, -0.035, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -1920, -0.035, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
 tracks/1/type = "bezier"
@@ -350,7 +235,7 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-28, -0.25, 0, 0.25, 0, 1920, -0.53, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -1920, -0.53, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
 tracks/3/type = "bezier"
@@ -372,7 +257,7 @@ tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-28, -0.25, 0, 0.25, 0, 1920, -0.135, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -1920, -0.135, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
 tracks/5/type = "bezier"
@@ -394,7 +279,7 @@ tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-28, -0.25, 0, 0.25, 0, 1920, -0.4, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -1920, -0.4, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
 tracks/7/type = "bezier"
@@ -416,7 +301,7 @@ tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-28, -0.25, 0, 0.25, 0, 1920, -0.105, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -1920, -0.105, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
 tracks/9/type = "bezier"
@@ -438,7 +323,7 @@ tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-28, -0.25, 0, 0.25, 0, 1920, -0.185, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -1920, -0.185, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
 tracks/11/type = "bezier"
@@ -460,7 +345,7 @@ tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-28, -0.25, 0, 0.25, 0, 1920, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -1920, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
 tracks/13/type = "bezier"
@@ -482,7 +367,7 @@ tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-28, -0.25, 0, 0.25, 0, 1920, -0.175, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -1920, -0.175, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
 tracks/15/type = "bezier"
@@ -504,7 +389,7 @@ tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-28, -0.25, 0, 0.25, 0, 1920, -0.3, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -1920, -0.3, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
 tracks/17/type = "bezier"
@@ -522,226 +407,80 @@ tracks/17/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p52wy"]
 _data = {
 &"RESET": SubResource("Animation_6j5qt"),
-&"reveal": SubResource("Animation_j4pmt")
+&"transition": SubResource("Animation_j4pmt")
 }
 
-[node name="TitleScreen" type="Control" node_paths=PackedStringArray("tutorial_button", "level_1_button", "leaderboard_button", "fade_in_animation")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_ue4lf")
-tutorial_button = NodePath("VBoxContainer/Tutorial")
-level_1_button = NodePath("VBoxContainer/Play")
-leaderboard_button = NodePath("VBoxContainer/Leaderboard")
-fade_in_animation = NodePath("ScreenTransition/AnimationPlayer")
+[node name="LeftBarTransition" type="CanvasLayer" node_paths=PackedStringArray("animation_player")]
+layer = 3
+script = ExtResource("1_plrh2")
+animation_player = NodePath("AnimationPlayer")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-color = Color(0, 0, 0, 1)
-
-[node name="GradientBackground" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-texture = SubResource("GradientTexture2D_j2lur")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_tbfit")
-}
-autoplay = "intro"
-next/intro = &"idle"
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(1585, 18)
-scale = Vector2(50.4219, 46.5156)
-color = Color(0.761295, 0.743076, 0.289112, 0.945098)
-shadow_enabled = true
-shadow_color = Color(0.4, 0.24, 0.36, 1)
-shadow_filter = 2
-shadow_filter_smooth = 0.6
-texture = SubResource("GradientTexture2D_tbfit")
-
-[node name="SoubalienContainer" type="Node2D" parent="."]
-
-[node name="Soubalien" type="TextureRect" parent="SoubalienContainer"]
-light_mask = 0
-offset_left = 1356.0
-offset_top = 68.0
-offset_right = 1838.0
-offset_bottom = 550.0
-texture = ExtResource("2_7rblo")
-expand_mode = 1
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="SoubalienContainer"]
-position = Vector2(1479, 110)
-occluder = SubResource("OccluderPolygon2D_xnmwc")
-
-[node name="Polygon2D" type="Polygon2D" parent="SoubalienContainer"]
-position = Vector2(1514.67, 260.404)
-scale = Vector2(0.916667, 0.99639)
-texture = SubResource("GradientTexture2D_6j5qt")
-polygon = PackedVector2Array(162.909, 925.938, -1669.82, 1014.26, -18.1818, -85.7138, -6.18176, -89.7283, 0.363647, -88.7247, 10.1819, -83.7066, 21.0909, -70.6595, 23.2728, -63.6341, 24.3636, -57.6124)
-uv = PackedVector2Array(64, 64, 1.90735e-06, 64, 0, 0, 24, 0, 32, 0, 40, 0, 48, 0, 56, 0, 64, -2.38419e-06)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 196.0
-offset_top = 529.0
-offset_right = 775.0
-offset_bottom = 983.0
-theme_override_constants/separation = 32
-
-[node name="Tutorial" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-focus_neighbor_left = NodePath("../Leaderboard")
-focus_neighbor_top = NodePath("../Leaderboard")
-focus_neighbor_right = NodePath("../Play")
-focus_neighbor_bottom = NodePath("../Play")
-focus_next = NodePath("../Play")
-focus_previous = NodePath("../Leaderboard")
-text = "tutoriel"
-
-[node name="Fly" type="Node" parent="VBoxContainer/Tutorial"]
-script = ExtResource("3_ue4lf")
-y = 800.0
-
-[node name="Play" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-focus_neighbor_left = NodePath("../Tutorial")
-focus_neighbor_top = NodePath("../Tutorial")
-focus_neighbor_right = NodePath("../Leaderboard")
-focus_neighbor_bottom = NodePath("../Leaderboard")
-focus_next = NodePath("../Leaderboard")
-focus_previous = NodePath("../Tutorial")
-text = "jouer"
-
-[node name="Fly" type="Node" parent="VBoxContainer/Play"]
-script = ExtResource("3_ue4lf")
-y = 800.0
-delay = 0.1
-
-[node name="Leaderboard" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-focus_neighbor_left = NodePath("../Play")
-focus_neighbor_top = NodePath("../Play")
-focus_neighbor_right = NodePath("../Tutorial")
-focus_neighbor_bottom = NodePath("../Tutorial")
-focus_next = NodePath("../Tutorial")
-focus_previous = NodePath("../Play")
-text = "scores"
-
-[node name="Fly" type="Node" parent="VBoxContainer/Leaderboard"]
-script = ExtResource("3_ue4lf")
-y = 800.0
-delay = 0.2
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 196.0
-offset_top = 110.0
-offset_right = 1324.0
-offset_bottom = 458.0
-theme = ExtResource("4_81rgk")
-theme_override_font_sizes/font_size = 80
-text = "Prenez garde à l'espace 
-entre la terre et 
-Arkab Posterior"
-
-[node name="Fly" type="Node" parent="Label"]
-script = ExtResource("3_ue4lf")
-
-[node name="Feis" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 672.0
-offset_top = 1010.0
-offset_right = 1112.0
-offset_bottom = 1450.0
-texture = ExtResource("5_a6001")
-expand_mode = 1
-
-[node name="ScreenTransition" type="Node" parent="."]
-
-[node name="TextureRect" type="ColorRect" parent="ScreenTransition"]
+[node name="TextureRect" type="ColorRect" parent="."]
 light_mask = 2
-offset_left = 1920.0
-offset_right = 3873.72
+offset_right = 1926.0
 offset_bottom = 127.0
 color = Color(0, 0, 0, 1)
 
-[node name="TextureRect2" type="ColorRect" parent="ScreenTransition"]
+[node name="TextureRect2" type="ColorRect" parent="."]
 light_mask = 2
-offset_left = 1920.0
 offset_top = 127.0
-offset_right = 3873.72
+offset_right = 1926.0
 offset_bottom = 319.0
 color = Color(0, 0, 0, 1)
 
-[node name="TextureRect9" type="ColorRect" parent="ScreenTransition"]
+[node name="TextureRect9" type="ColorRect" parent="."]
 light_mask = 2
-offset_left = 1920.0
 offset_top = 319.0
-offset_right = 3873.72
+offset_right = 1926.0
 offset_bottom = 382.0
 color = Color(0, 0, 0, 1)
 
-[node name="TextureRect8" type="ColorRect" parent="ScreenTransition"]
+[node name="TextureRect8" type="ColorRect" parent="."]
 light_mask = 2
-offset_left = 1920.0
 offset_top = 382.0
-offset_right = 3873.72
+offset_right = 1926.0
 offset_bottom = 574.0
 color = Color(0, 0, 0, 1)
 
-[node name="TextureRect3" type="ColorRect" parent="ScreenTransition"]
+[node name="TextureRect3" type="ColorRect" parent="."]
 light_mask = 2
-offset_left = 1920.0
 offset_top = 704.0
-offset_right = 3873.72
+offset_right = 1926.0
 offset_bottom = 769.0
 color = Color(0, 0, 0, 1)
 
-[node name="TextureRect6" type="ColorRect" parent="ScreenTransition"]
+[node name="TextureRect6" type="ColorRect" parent="."]
 light_mask = 2
-offset_left = 1920.0
 offset_top = 639.0
-offset_right = 3873.72
+offset_right = 1926.0
 offset_bottom = 704.0
 color = Color(0, 0, 0, 1)
 
-[node name="TextureRect7" type="ColorRect" parent="ScreenTransition"]
+[node name="TextureRect7" type="ColorRect" parent="."]
 light_mask = 2
-offset_left = 1920.0
 offset_top = 574.0
-offset_right = 3873.72
+offset_right = 1926.0
 offset_bottom = 639.0
 color = Color(0, 0, 0, 1)
 
-[node name="TextureRect4" type="ColorRect" parent="ScreenTransition"]
+[node name="TextureRect4" type="ColorRect" parent="."]
 light_mask = 2
-offset_left = 1920.0
 offset_top = 769.0
-offset_right = 3873.72
+offset_right = 1926.0
 offset_bottom = 896.0
 color = Color(0, 0, 0, 1)
 
-[node name="TextureRect5" type="ColorRect" parent="ScreenTransition"]
+[node name="TextureRect5" type="ColorRect" parent="."]
 light_mask = 2
-offset_left = 1920.0
 offset_top = 896.0
-offset_right = 3873.72
+offset_right = 1926.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenTransition"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../TextureRect")
 libraries = {
 &"": SubResource("AnimationLibrary_p52wy")
 }
-autoplay = "reveal"
+autoplay = "transition"
 speed_scale = 2.0

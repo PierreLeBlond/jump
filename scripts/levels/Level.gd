@@ -4,10 +4,7 @@ class_name Level
 
 signal wants_to_load_level(level_name: String)
 signal wants_to_quit_to_main_menu()
-signal wants_to_open_leaderboard()
 signal wants_to_start_new_game()
-signal wants_to_show_hud()
-signal wants_to_hide_hud()
 
 signal died()
 signal finished()
@@ -16,7 +13,28 @@ signal life_added(value: int)
 
 @export var checkpoint_manager: CheckpointManager
 
+var hud: HUD
+
+var game_run: GameRun:
+    get:
+        return game_run
+    set(value):
+        if game_run:
+            game_run.life_changed.disconnect(hud.life_counter.update_counter)
+            game_run.score_changed.disconnect(hud.score_counter.update_counter)
+            game_run.time_changed.disconnect(hud.time_counter.update_time_counter)
+
+        game_run = value
+        game_run.life_changed.connect(hud.life_counter.update_counter)
+        game_run.score_changed.connect(hud.score_counter.update_counter)
+        game_run.time_changed.connect(hud.time_counter.update_time_counter)
+
+        hud.life_counter.update_counter(game_run.life)
+        hud.score_counter.update_counter(game_run.score)
+        hud.time_counter.update_time_counter(game_run.accumulated_time)
+
 func _ready() -> void:
+    hud = load("res://scenes/ui/hud/HUD.tscn").instantiate()
     checkpoint_manager.activate_checkpoints(self)
 
 func load_level(level_name: String) -> void:
@@ -31,14 +49,11 @@ func quit_to_main_menu() -> void:
 func start_new_game() -> void:
     wants_to_start_new_game.emit()
 
-func open_leaderboard() -> void:
-    wants_to_open_leaderboard.emit()
-
 func show_hud() -> void:
-    wants_to_show_hud.emit()
+    add_child(hud)
 
 func hide_hud() -> void:
-    wants_to_hide_hud.emit()
+    remove_child(hud)
 
 func die() -> void:
     died.emit()
