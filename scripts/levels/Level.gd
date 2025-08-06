@@ -50,9 +50,15 @@ func start_new_game() -> void:
     wants_to_start_new_game.emit()
 
 func show_hud() -> void:
+    if hud.get_parent():
+        return
+
     add_child(hud)
 
 func hide_hud() -> void:
+    if !hud.get_parent():
+        return
+
     remove_child(hud)
 
 func die() -> void:

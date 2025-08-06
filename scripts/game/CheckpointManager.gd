@@ -2,7 +2,7 @@ extends Node
 
 class_name CheckpointManager
 
-@export var transition_mask: TransitionMask
+@export var transition_mask: CircleTransition
 
 @export var start_checkpoint: Checkpoint
 

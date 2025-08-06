@@ -8,7 +8,7 @@ class_name Tutorial
 
 @export var soubalien: Soubalien
 
-@export var transition_mask: TransitionMask
+@export var transition_mask: CircleTransition
 @export var endPortal: Portal
 
 func _ready() -> void:

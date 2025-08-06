@@ -13,7 +13,7 @@ class_name Level1
 @export var soubalien_introduce_path: Path
 @export var soubalien_chase_path: Path
 
-@export var transition_mask: TransitionMask
+@export var transition_mask: CircleTransition
 
 @export var end_portal: Portal
 
@@ -58,7 +58,6 @@ func introduce_race(_body: Node2D) -> void:
     race_introduction_area.body_entered.disconnect(introduce_race)
 
     player.unlocked_keys.keys[Globals.MOVE_UNLOCKED_KEY] = false
-    # TODO : Play surprise animation
     await get_tree().create_timer(1.0).timeout
 
     hide_hud()
@@ -82,8 +81,11 @@ func start_chase() -> void:
 
     await get_tree().create_timer(1.5).timeout
 
-    soubalien.captured_player.connect(on_player_captured)
-    soubalien.ray_captured_player.connect(on_ray_captured_player)
+    if !soubalien.captured_player.is_connected(on_player_captured):
+        soubalien.captured_player.connect(on_player_captured)
+
+    if !soubalien.ray_captured_player.is_connected(on_ray_captured_player):
+        soubalien.ray_captured_player.connect(on_ray_captured_player)
 
     cinematic_bars.unreveal()
 
@@ -98,7 +100,11 @@ func start_chase() -> void:
     soubalien_chase_path.start()
 
 func race_introduction_checkpoint_preload() -> void:
+    hide_hud()
+    cinematic_bars.reveal()
     soubalien_chase_path.reset()
+    player.unlocked_keys.keys[Globals.MOVE_UNLOCKED_KEY] = false
+    soubalien_chase_path.stop()
     race_introduction_camera.set_target(player)
     await camera_manager.jump_to(race_introduction_camera)
     transition_mask.transition_out(race_introduction_checkpoint.portal)

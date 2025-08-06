@@ -1,6 +1,6 @@
 extends CanvasItem
 
-class_name TransitionMask
+class_name CircleTransition
 
 var screen_position: Vector2
 
