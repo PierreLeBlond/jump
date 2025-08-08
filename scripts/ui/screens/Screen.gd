@@ -2,7 +2,6 @@ extends CanvasLayer
 
 class_name Screen
 
-signal wants_to_restart()
 signal wants_to_quit_to_main_menu()
 signal wants_to_load_level(level_name: String)
 signal wants_to_start_new_game()
@@ -10,9 +9,6 @@ signal wants_to_open_leaderboard()
 
 func focus() -> void:
     pass
-
-func restart() -> void:
-    wants_to_restart.emit()
 
 func quit_to_main_menu() -> void:
     wants_to_quit_to_main_menu.emit()

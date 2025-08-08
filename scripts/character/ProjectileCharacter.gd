@@ -20,6 +20,8 @@ signal direction_changed(direction: int)
 
 @export var sprite_2d: Sprite2D
 
+@export var note_collector: NoteCollector
+
 var unlocked_keys: UnlockedKeys = UnlockedKeys.new()
 
 var external_accelerations: Dictionary[String, Vector2] = {}

@@ -1,6 +1,6 @@
 extends Level
 
-class_name Level1
+class_name Level2
 
 @export var race_introduction_camera: Camera
 @export var player_focus_camera: Camera
@@ -8,6 +8,8 @@ class_name Level1
 @export var soubalien: Soubalien
 @export var soubalien_introduce_path: Path
 @export var soubalien_chase_path: Path
+
+@export var void_zone: Void
 
 @export var end_portal: Portal
 
@@ -22,6 +24,8 @@ class_name Level1
 func _ready() -> void:
     super._ready()
 
+    void_zone.target_entered.connect(on_void_entered)
+
     race_introduction_checkpoint.checkpoint_pre_loaded.connect(race_introduction_checkpoint_preload)
     race_introduction_checkpoint.checkpoint_loaded.connect(race_introduction_checkpoint_load)
 
@@ -34,8 +38,7 @@ func _ready() -> void:
     soubalien.process_mode = Node.PROCESS_MODE_DISABLED
     race_introduction_area.body_entered.connect(introduce_race)
 
-    var release = await Transition.create_circle_transition_in(get_tree().root, player)
-    release.call_deferred()
+    await Transition.create_circle_transition_in(get_tree().root, player)
 
     show_hud()
 
@@ -90,16 +93,15 @@ func race_introduction_checkpoint_preload() -> void:
     soubalien_chase_path.reset()
     player.unlocked_keys.keys[Globals.MOVE_UNLOCKED_KEY] = false
     soubalien_chase_path.stop()
+    race_introduction_camera.set_target(player)
+    await camera_manager.jump_to(race_introduction_camera)
 
 func race_introduction_checkpoint_load() -> void:
-    race_introduction_camera.set_target(player)
-    await camera_manager.fly_to(race_introduction_camera)
     start_chase()
 
 func on_player_captured() -> void:
     soubalien.captured_player.disconnect(on_player_captured)
     soubalien.ray_captured_player.disconnect(on_ray_captured_player)
-
     var release = await Transition.create_circle_transition_out(get_tree().root, player)
 
     soubalien.restore_player()
@@ -108,7 +110,7 @@ func on_player_captured() -> void:
 
 func on_player_finished() -> void:
     var release = await Transition.create_circle_transition_out(get_tree().root, player)
-    load_level("Level2")
+    finish()
     release.call_deferred()
 
 func on_ray_captured_player() -> void:
@@ -117,3 +119,8 @@ func on_ray_captured_player() -> void:
     player.unlocked_keys.keys[Globals.MOVE_UNLOCKED_KEY] = false
     soubalien_chase_path.stop()
     camera_manager.fly_to(player_focus_camera)
+
+func on_void_entered(_body: Node2D) -> void:
+    var release = await Transition.create_fall_transition_out(get_tree().root)
+    die()
+    release.call_deferred()

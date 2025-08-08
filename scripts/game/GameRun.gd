@@ -8,7 +8,7 @@ signal time_changed(value: int)
 
 const MAX_LIFE: int = 3
 
-var life: int = 0
+var life: int = MAX_LIFE
 var score: int = 0
 
 var accumulated_time: float = 0.0

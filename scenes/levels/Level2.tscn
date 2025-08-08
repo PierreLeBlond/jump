@@ -1,0 +1,479 @@
+[gd_scene load_steps=33 format=4 uid="uid://w1bd5j3aj5ht"]
+
+[ext_resource type="Script" uid="uid://b642cgu7gfurl" path="res://scripts/levels/Level2.gd" id="1_o6ptl"]
+[ext_resource type="Script" uid="uid://calrwlxq3l0el" path="res://scripts/game/CheckpointManager.gd" id="2_mctl7"]
+[ext_resource type="TileSet" uid="uid://dftl5pyptmafp" path="res://tilesets/cloud.tres" id="3_fpd7d"]
+[ext_resource type="TileSet" uid="uid://d2f3f4ukvlod0" path="res://tilesets/tree.tres" id="4_nkm7c"]
+[ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/components/CinematicBars.tscn" id="5_uh3oe"]
+[ext_resource type="PackedScene" uid="uid://b8dorlf7ulbwy" path="res://scenes/Soubalien.tscn" id="7_hmwnr"]
+[ext_resource type="Script" uid="uid://c8b0g0enel70w" path="res://scripts/enemy/Path.gd" id="8_4ao78"]
+[ext_resource type="PackedScene" uid="uid://cgexvf3ochgd8" path="res://scenes/contraptions/Portal.tscn" id="9_pi6sb"]
+[ext_resource type="PackedScene" uid="uid://dpr11d1q2xb3x" path="res://scenes/contraptions/Checkpoint.tscn" id="10_8tmga"]
+[ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="11_eim73"]
+[ext_resource type="Script" uid="uid://dfh6a42d2dq0n" path="res://scripts/collectibles/NoteCollector.gd" id="12_d2rr3"]
+[ext_resource type="Script" uid="uid://dm275lbjrus7p" path="res://scripts/camera/CameraManager.gd" id="13_rjd1d"]
+[ext_resource type="Script" uid="uid://bbujjd3t0eg6e" path="res://scripts/camera/Camera.gd" id="14_8n7ay"]
+[ext_resource type="PackedScene" uid="uid://4wsynq3xc0sr" path="res://scenes/collectibles/Note.tscn" id="15_o163v"]
+[ext_resource type="PackedScene" uid="uid://ch5wtdl1u6yo3" path="res://scenes/enemies/Void.tscn" id="16_o6ptl"]
+[ext_resource type="Script" uid="uid://xd4woi41uhf2" path="res://scripts/camera/CameraOverrideArea.gd" id="16_uie84"]
+
+[sub_resource type="Gradient" id="Gradient_ukjja"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.643137)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p5s5a"]
+gradient = SubResource("Gradient_ukjja")
+fill_from = Vector2(0, 0.213675)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_p5s5a"]
+offsets = PackedFloat32Array(0, 0.996815)
+colors = PackedColorArray(1, 1, 1, 0, 0.66, 0.960333, 1, 0.341176)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_njy47"]
+gradient = SubResource("Gradient_p5s5a")
+fill_from = Vector2(0.0042735, 0.632479)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_njy47"]
+colors = PackedColorArray(0.1512, 0.20664, 0.27, 1, 5.77569e-07, 0.327346, 0.478314, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j7nyf"]
+gradient = SubResource("Gradient_njy47")
+fill_from = Vector2(1, 0.0555556)
+fill_to = Vector2(1, 0.205128)
+
+[sub_resource type="Curve2D" id="Curve2D_i654n"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -751, -1066, 0, 0, 0, 0, -750, 221, 0, 0, 0, 0, 140, 232)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_p5s5a"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 141, 232, 0, 0, 0, 0, 1064, -59, 0, 0, 0, 0, 5936, -58, 0, 0, 0, 0, 8530, -441, 0, 0, 0, 0, 10348, -691, 0, 0, 0, 0, 14443, -1266)
+}
+point_count = 6
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fs813"]
+size = Vector2(54, 104)
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_fs813"]
+scenes/1/scene = ExtResource("15_o163v")
+
+[sub_resource type="TileSet" id="TileSet_t6keq"]
+sources/0 = SubResource("TileSetScenesCollectionSource_fs813")
+
+[sub_resource type="Animation" id="Animation_yaos7"]
+length = 2.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Countdown/1:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.251994, 0.751994, 1.25199, 1.50199),
+"transitions": PackedFloat32Array(40, 1, 40, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Countdown/2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.251994, 0.751994, 1.25199, 1.50199, 1.75199),
+"transitions": PackedFloat32Array(40, 1, 40, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Countdown/3:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.50199, 1.75199, 2.00199),
+"transitions": PackedFloat32Array(40, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Countdown/4:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.75199, 2.00199, 2.25199),
+"transitions": PackedFloat32Array(40, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_aanwh"]
+resource_name = "countdown"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Countdown/1:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.25),
+"transitions": PackedFloat32Array(1, 40, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Countdown/2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.25, 1.5),
+"transitions": PackedFloat32Array(40, 1, 40, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Countdown/3:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.25, 1.5, 1.75),
+"transitions": PackedFloat32Array(40, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Countdown/4:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.5, 1.75, 2),
+"transitions": PackedFloat32Array(40, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_owgma"]
+_data = {
+&"RESET": SubResource("Animation_yaos7"),
+&"countdown": SubResource("Animation_aanwh")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p5s5a"]
+size = Vector2(127, 1088)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7nyf"]
+size = Vector2(3226, 1049)
+
+[node name="Level2" type="Node2D" node_paths=PackedStringArray("race_introduction_camera", "player_focus_camera", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "void_zone", "end_portal", "countdown_animation_player", "cinematic_bars", "race_introduction_area", "race_introduction_checkpoint", "player", "player_camera", "camera_manager", "checkpoint_manager")]
+process_mode = 1
+script = ExtResource("1_o6ptl")
+race_introduction_camera = NodePath("RaceIntroduceCamera")
+player_focus_camera = NodePath("PlayerFocusCamera")
+soubalien = NodePath("Soubalien")
+soubalien_introduce_path = NodePath("SoubalienPaths/IntroducePath")
+soubalien_chase_path = NodePath("SoubalienPaths/ChasePath")
+void_zone = NodePath("Void")
+end_portal = NodePath("EndPortal")
+countdown_animation_player = NodePath("AnimationPlayer")
+cinematic_bars = NodePath("CinematicBars")
+race_introduction_area = NodePath("RaceIntroductionArea")
+race_introduction_checkpoint = NodePath("Checkpoint")
+player = NodePath("Player")
+player_camera = NodePath("PlayerCamera")
+camera_manager = NodePath("CameraManager")
+checkpoint_manager = NodePath("CheckpointManager")
+
+[node name="CheckpointManager" type="Node" parent="." node_paths=PackedStringArray("start_checkpoint")]
+script = ExtResource("2_mctl7")
+start_checkpoint = NodePath("../StartCheckpoint")
+metadata/_custom_type_script = "uid://calrwlxq3l0el"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -1
+
+[node name="CloudLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 1)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="ParallaxBackground/CloudLayer"]
+modulate = Color(0.82, 0.82, 0.82, 0.780392)
+tile_map_data = PackedByteArray("AAAFAAoAAQAAAAMAAAAHAAkAAQAIAAAAAAAHAAoAAQAIAAMAAAAIAAgAAQAIAAAAAAAIAAkAAQAFAAEAAAAIAAoAAQAJAAMAAAAJAAgAAQAKAAAAAAAJAAkAAQAJAAIAAAAJAAoAAQAJAAMAAAAKAAgAAQAKAAAAAAAKAAkAAQAJAAIAAAAKAAoAAQAJAAMAAAALAAgAAQAKAAAAAAALAAkAAQAJAAIAAAALAAoAAQAJAAMAAAAMAAgAAQALAAAAAAAMAAkAAQAGAAEAAAAMAAoAAQAJAAMAAAANAAkAAQALAAAAAAANAAoAAQALAAMAAAAQAAoAAQAAAAMAAAASAAgAAQAIAAAAAAASAAkAAQAIAAMAAAATAAgAAQAKAAAAAAATAAkAAQAJAAMAAAAUAAgAAQAKAAAAAAAUAAkAAQAJAAMAAAAVAAgAAQALAAAAAAAVAAkAAQALAAMAAAAYAAsAAQAIAAAAAAAYAAwAAQAIAAMAAAAZAAsAAQALAAAAAAAZAAwAAQALAAMAAAA=")
+tile_set = ExtResource("3_fpd7d")
+collision_enabled = false
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/CloudLayer"]
+offset_right = 1920.0
+offset_bottom = 1081.0
+texture = SubResource("GradientTexture2D_p5s5a")
+
+[node name="TreesLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
+motion_scale = Vector2(0.8, 1)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="ParallaxBackground/TreesLayer"]
+modulate = Color(0.6314, 0.78228, 0.82, 1)
+position = Vector2(0, -28)
+tile_map_data = PackedByteArray("AAAFAA4AAQAJAAAAAAAFAA0AAQAAAAEAAAAFAAwAAQAAAAEAAAAFAAsAAQAKAAMAAAAEAAsAAQAJAAMAAAAEAAoAAQAKAAAAAAAFAAoAAQAKAAAAAAAGAAoAAQAKAAAAAAAHAAoAAQALAAAAAAAHAAsAAQALAAMAAAAGAAsAAQAJAAMAAAADAAsAAQAIAAMAAAADAAoAAQAIAAAAAAAHAA4AAQAFAAEAAAAHAA0AAQAIAAAAAAAIAA0AAQALAAAAAAAIAA4AAQAGAAEAAAAIAA8AAQAJAAMAAAAHAA8AAQAJAAMAAAAJAA4AAQAKAAAAAAAKAA4AAQAKAAAAAAALAA4AAQAFAAEAAAALAA8AAQAJAAMAAAAJAA8AAQAJAAMAAAAKAA8AAQAJAAMAAAAGAA4AAQAKAAAAAAAEAA4AAQAKAAAAAAADAA4AAQAKAAAAAAACAA4AAQAKAAAAAAABAA4AAQAKAAAAAAAAAA8AAQAJAAMAAAABAA8AAQAJAAMAAAACAA8AAQAJAAMAAAADAA8AAQAJAAMAAAAEAA8AAQAJAAMAAAAFAA8AAQAJAAMAAAAGAA8AAQAJAAMAAAAMAA4AAQAGAAEAAAANAA4AAQAKAAAAAAAOAA4AAQAKAAAAAAAPAA4AAQAKAAAAAAAQAA4AAQAJAAAAAAARAA4AAQAKAAAAAAASAA4AAQAKAAAAAAATAA4AAQAKAAAAAAAUAA4AAQAFAAEAAAAVAA4AAQAGAAEAAAAWAA4AAQAKAAAAAAAXAA4AAQAKAAAAAAAYAA4AAQAKAAAAAAAZAA4AAQAJAAAAAAAaAA4AAQAKAAAAAAAbAA4AAQAKAAAAAAAcAA4AAQAJAAAAAAAeAA4AAQAKAAAAAAAfAA4AAQALAAAAAAAfAA8AAQALAAMAAAAeAA8AAQAJAAMAAAAdAA8AAQAJAAMAAAAcAA8AAQAJAAMAAAAbAA8AAQAJAAMAAAAaAA8AAQAJAAMAAAAZAA8AAQAJAAMAAAAYAA8AAQAJAAMAAAAXABAAAQALAAMAAAAWABAAAQAJAAMAAAAVABAAAQAJAAMAAAAUABAAAQAJAAMAAAATABAAAQAJAAMAAAASABAAAQAIAAMAAAASAA8AAQAFAAIAAAARAA8AAQAJAAMAAAAPAA8AAQAJAAMAAAAQAA8AAQAJAAMAAAAOAA8AAQAJAAMAAAANAA8AAQAJAAMAAAAMAA8AAQAJAAMAAAATAA8AAQAJAAIAAAAUAA8AAQAJAAIAAAAVAA8AAQAJAAIAAAAWAA8AAQAJAAIAAAAXAA8AAQAGAAIAAAALAA0AAQAIAAEAAAALAAwAAQAIAAAAAAAMAAwAAQALAAAAAAAMAA0AAQALAAIAAAAQAA0AAQAAAAEAAAAQAAwAAQADAAEAAAAQAAsAAQAAAAEAAAAQAAoAAQAKAAMAAAAPAAoAAQAIAAMAAAAPAAkAAQAIAAEAAAAPAAgAAQAIAAAAAAAQAAgAAQAKAAAAAAARAAgAAQALAAAAAAARAAkAAQALAAIAAAARAAoAAQALAAMAAAAQAAkAAQAJAAIAAAAPAAwAAQABAAMAAAAUAA0AAQAIAAEAAAAUAAwAAQAIAAAAAAAVAAwAAQALAAAAAAAVAA0AAQALAAIAAAAZAA0AAQAAAAEAAAAZAAwAAQAAAAEAAAAZAAsAAQAKAAMAAAAYAAsAAQAIAAMAAAAaAAsAAQALAAMAAAAaAAoAAQALAAAAAAAZAAoAAQAKAAAAAAAYAAoAAQAIAAAAAAAcAA0AAQAAAAAAAAAAAA4AAQAKAAAAAAAdAA4AAQAKAAAAAAA=")
+tile_set = ExtResource("4_nkm7c")
+collision_enabled = false
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/TreesLayer"]
+offset_right = 1920.0
+offset_bottom = 965.0
+texture = SubResource("GradientTexture2D_njy47")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer2"]
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 1920.0
+offset_bottom = 1081.0
+texture = SubResource("GradientTexture2D_j7nyf")
+
+[node name="CinematicBars" parent="." instance=ExtResource("5_uh3oe")]
+
+[node name="CloudLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAiAfv/AQABAAMAAAAjAfv/AQACAAMAAAAkAfv/AQACAAMAAAAlAfv/AQADAAMAAAAfAf3/AQADAAMAAAAeAf3/AQACAAMAAAAdAf3/AQACAAMAAAAcAf3/AQABAAMAAAAZAf//AQADAAMAAAAYAf//AQACAAMAAAAXAf//AQACAAMAAAAWAf//AQACAAMAAAAVAf//AQABAAMAAAASAQEAAQADAAMAAAARAQEAAQACAAMAAAAQAQEAAQACAAMAAAAPAQEAAQACAAMAAAAOAQEAAQABAAMAAAAKAA4AAQABAAMAAAALAA4AAQACAAMAAAAMAA4AAQACAAMAAAANAA4AAQACAAMAAAAOAA4AAQACAAMAAAAPAA4AAQACAAMAAAAQAA4AAQADAAMAAAAQAAwAAQABAAMAAAARAAwAAQACAAMAAAASAAwAAQACAAMAAAATAAwAAQACAAMAAAAUAAwAAQADAAMAAAAUAA4AAQABAAMAAAAVAA4AAQACAAMAAAAWAA4AAQACAAMAAAAXAA4AAQACAAMAAAAYAA4AAQACAAMAAAAZAA4AAQACAAMAAAAaAA4AAQADAAMAAAAcAAwAAQABAAMAAAAdAAwAAQACAAMAAAAeAAwAAQACAAMAAAAfAAwAAQACAAMAAAAgAAwAAQADAAMAAAAiAAoAAQABAAMAAAAjAAoAAQACAAMAAAAkAAoAAQACAAMAAAAlAAoAAQACAAMAAAAmAAoAAQACAAMAAAAnAAoAAQADAAMAAAAmAA4AAQABAAMAAAAnAA4AAQACAAMAAAAoAA4AAQAFAAAAAAApAA4AAQAKAAAAAAAqAA4AAQAKAAAAAAArAA4AAQAKAAAAAAAsAA4AAQAKAAAAAAAyAAoAAQALAAMAAAAxAAoAAQAJAAMAAAAwAAoAAQAJAAMAAAAvAAoAAQAFAAMAAAAvAAkAAQAIAAEAAAAvAAgAAQAIAAAAAAAwAAgAAQAKAAAAAAAxAAgAAQAKAAAAAAAyAAgAAQALAAAAAAAyAAkAAQALAAIAAAAwAAkAAQAJAAIAAAAxAAkAAQAJAAIAAAAuAAoAAQABAAMAAAAtAA4AAQAKAAAAAAAuAA4AAQAKAAAAAAAvAA4AAQAKAAAAAAAwAA4AAQAKAAAAAAAxAA4AAQAKAAAAAAAyAA4AAQAKAAAAAAAzAA4AAQAKAAAAAAA0AA4AAQAKAAAAAAA1AA4AAQAKAAAAAAA2AA4AAQAKAAAAAAA3AA4AAQAFAAEAAAA3AA0AAQAIAAEAAAA3AAwAAQAIAAEAAAA3AAsAAQAIAAEAAAA3AAoAAQAIAAEAAAA3AAkAAQAIAAEAAAA3AAgAAQAIAAEAAAA3AAcAAQAIAAEAAAA3AAYAAQAIAAAAAAA4AAYAAQAKAAAAAAA5AAYAAQALAAAAAAA5AAcAAQALAAIAAAA5AAgAAQAGAAEAAAA5AAkAAQAJAAIAAAA5AAoAAQAJAAIAAAA5AAsAAQAJAAIAAAA5AAwAAQAJAAIAAAA6AAwAAQAJAAIAAAA6AA0AAQAJAAIAAAA5AA0AAQAJAAIAAAA5AA4AAQAJAAIAAAA4AA4AAQAJAAIAAAA4AA0AAQAJAAIAAAA4AAwAAQAJAAIAAAA4AAsAAQAJAAIAAAA4AAoAAQAJAAIAAAA4AAkAAQAJAAIAAAA4AAgAAQAJAAIAAAA4AAcAAQAJAAIAAAA6AAgAAQALAAAAAAA6AAkAAQALAAIAAAA6AAoAAQALAAIAAAA6AAsAAQAGAAEAAAA7AAsAAQALAAAAAAA7AAwAAQALAAIAAAA7AA0AAQALAAIAAAA7AA4AAQAGAAMAAAA8AA4AAQADAAMAAAA6AA4AAQAGAAIAAAAoAA8AAQAIAAMAAAApAA8AAQAJAAMAAAAqAA8AAQAJAAMAAAArABAAAQAIAAMAAAAsABAAAQAJAAMAAAAtABAAAQAJAAMAAAAuABAAAQAJAAMAAAAvABAAAQAJAAMAAAAwABAAAQAJAAMAAAAxABAAAQAJAAMAAAAyABAAAQAJAAMAAAAzABAAAQAJAAMAAAA0ABAAAQAJAAMAAAA1ABAAAQAJAAMAAAA2ABAAAQAJAAMAAAA3ABAAAQAJAAMAAAA4ABAAAQAJAAMAAAA5ABAAAQALAAMAAAA6AA8AAQALAAMAAAA5AA8AAQAGAAIAAAA4AA8AAQAJAAIAAAA3AA8AAQAJAAIAAAA2AA8AAQAJAAIAAAA1AA8AAQAJAAIAAAA0AA8AAQAJAAIAAAAzAA8AAQAJAAIAAAAyAA8AAQAJAAIAAAAxAA8AAQAJAAIAAAAwAA8AAQAJAAIAAAAvAA8AAQAJAAIAAAAuAA8AAQAJAAIAAAAtAA8AAQAJAAIAAAAsAA8AAQAJAAIAAAArAA8AAQAFAAIAAAA=")
+tile_set = ExtResource("3_fpd7d")
+
+[node name="TreeLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD//w8AAQAAAAEAAAD//xAAAQAAAAEAAAD//xEAAQAAAAEAAAD//w4AAQABAAEAAAD//w0AAQAAAAEAAAD//wwAAQAAAAEAAAD//wsAAQADAAEAAAD//woAAQAAAAEAAAD//wkAAQAAAAEAAAD//wgAAQAAAAEAAAD//wcAAQAAAAEAAAD//wYAAQAAAAEAAAD//wUAAQAAAAEAAAD//wQAAQAAAAEAAAD//wMAAQAKAAMAAAD//wIAAQAJAAIAAAD//wEAAQAKAAAAAAD+/wIAAQAJAAIAAAD+/wEAAQAKAAAAAAAAAAMAAQAJAAMAAAAAAAIAAQAJAAIAAAAAAAEAAQAKAAAAAAABAAEAAQAKAAAAAAACAAEAAQAKAAAAAAADAAEAAQAKAAAAAAAEAAEAAQALAAAAAAAEAAIAAQALAAIAAAAEAAMAAQALAAMAAAADAAMAAQAJAAMAAAACAAMAAQAJAAMAAAABAAMAAQAJAAMAAAABAAIAAQAJAAIAAAACAAIAAQAJAAIAAAADAAIAAQAJAAIAAAD9/wIAAQAJAAIAAAD8/wIAAQAJAAIAAAD7/wIAAQAJAAIAAAD7/wEAAQAKAAAAAAD8/wEAAQAKAAAAAAD9/wEAAQAKAAAAAAD+/wMAAQAJAAMAAAD9/wMAAQAJAAMAAAD8/wMAAQAJAAMAAAD7/wMAAQAJAAMAAAD6/wMAAQAIAAMAAAD6/wIAAQAIAAEAAAD6/wEAAQAIAAAAAAAAAA4AAQACAAMAAAABAA4AAQACAAMAAAACAA4AAQACAAMAAAADAA4AAQACAAMAAAD//xIAAQAAAAEAAAD//xMAAQAAAAEAAAD//xQAAQAAAAEAAAD//xUAAQAAAAEAAAD//xYAAQAAAAEAAAD//xcAAQAAAAIAAAAEAA4AAQACAAMAAAAFAA4AAQACAAMAAAAGAA4AAQACAAMAAAAHAA4AAQACAAMAAAAIAA4AAQADAAMAAAD+/wsAAQACAAMAAAD9/wsAAQABAAMAAAA=")
+tile_set = ExtResource("4_nkm7c")
+
+[node name="Soubalien" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_hmwnr")]
+texture_filter = 2
+player = NodePath("../Player")
+cone_angle = 0.42
+cone_height = 800.0
+
+[node name="SoubalienPaths" type="Node" parent="."]
+
+[node name="IntroducePath" type="Path2D" parent="SoubalienPaths"]
+position = Vector2(5428, 312)
+curve = SubResource("Curve2D_i654n")
+script = ExtResource("8_4ao78")
+speed = 0.3
+
+[node name="PathFollow2D" type="PathFollow2D" parent="SoubalienPaths/IntroducePath"]
+position = Vector2(-751, -1066)
+rotates = false
+loop = false
+
+[node name="ChasePath" type="Path2D" parent="SoubalienPaths"]
+position = Vector2(5427, 312)
+curve = SubResource("Curve2D_p5s5a")
+script = ExtResource("8_4ao78")
+speed = 0.025
+
+[node name="PathFollow2D" type="PathFollow2D" parent="SoubalienPaths/ChasePath"]
+position = Vector2(141, 232)
+rotates = false
+loop = false
+
+[node name="EndPortal" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_pi6sb")]
+position = Vector2(3618, 217)
+player = NodePath("../Player")
+
+[node name="StartCheckpoint" parent="." node_paths=PackedStringArray("player", "portal") instance=ExtResource("10_8tmga")]
+position = Vector2(219, 0)
+player = NodePath("../Player")
+portal = NodePath("StartCheckpointPortal")
+
+[node name="StartCheckpointPortal" parent="StartCheckpoint" node_paths=PackedStringArray("player") instance=ExtResource("9_pi6sb")]
+position = Vector2(2, 730)
+player = NodePath("../../Player")
+
+[node name="Checkpoint" parent="." node_paths=PackedStringArray("player", "portal") instance=ExtResource("10_8tmga")]
+position = Vector2(6077, 0)
+player = NodePath("../Player")
+portal = NodePath("CheckpointPortal")
+
+[node name="CheckpointPortal" parent="Checkpoint" node_paths=PackedStringArray("player") instance=ExtResource("9_pi6sb")]
+position = Vector2(128, 735)
+player = NodePath("../../Player")
+
+[node name="Player" parent="." instance=ExtResource("11_eim73")]
+position = Vector2(221, 840)
+
+[node name="NoteCollectorArea2D" type="Area2D" parent="Player"]
+process_mode = 3
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("12_d2rr3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/NoteCollectorArea2D"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_fs813")
+
+[node name="CameraManager" type="Node" parent="."]
+script = ExtResource("13_rjd1d")
+
+[node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(221, 730)
+offset = Vector2(512, 0)
+process_callback = 0
+limit_left = -10000
+limit_bottom = 1080
+drag_horizontal_enabled = true
+drag_left_margin = 0.0
+editor_draw_drag_margin = true
+script = ExtResource("14_8n7ay")
+target = NodePath("../Player")
+
+[node name="PlayerFocusCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(221, 730)
+zoom = Vector2(2, 2)
+process_callback = 0
+limit_bottom = 1080
+editor_draw_drag_margin = true
+script = ExtResource("14_8n7ay")
+vertical_speed = 3.0
+follow_vertical_on_jump = true
+target = NodePath("../Player")
+
+[node name="RaceIntroduceCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(221, 730)
+zoom = Vector2(0.9, 0.9)
+process_callback = 0
+limit_left = -10000
+limit_bottom = 1080
+editor_draw_drag_margin = true
+script = ExtResource("14_8n7ay")
+vertical_speed = 3.0
+horizontal_speed = 3.0
+follow_vertical_on_jump = true
+target = NodePath("../Player")
+
+[node name="NoteLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAwADAAAAAAAAAAAQA3ACgAAAAAAAAAAQA/ACMAAAAAAAAAAQBJACIAAAAAAAAAAQBSACUAAAAAAAAAAQBZACoAAAAAAAAAAQBgADIAAAAAAAAAAQA=")
+tile_set = SubResource("TileSet_t6keq")
+collision_enabled = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_owgma")
+}
+
+[node name="Countdown" type="CanvasLayer" parent="."]
+
+[node name="1" type="Label" parent="Countdown"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.5
+offset_top = -57.0
+offset_right = 19.5
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 120
+text = "1"
+
+[node name="2" type="Label" parent="Countdown"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -53.0
+offset_top = -57.0
+offset_right = 53.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 120
+text = "2"
+
+[node name="3" type="Label" parent="Countdown"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.5
+offset_top = -57.0
+offset_right = 19.5
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 120
+text = "3"
+
+[node name="4" type="Label" parent="Countdown"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.5
+offset_top = -57.0
+offset_right = 19.5
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 120
+text = "4"
+
+[node name="RaceIntroductionArea" type="Area2D" parent="."]
+position = Vector2(6205, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RaceIntroductionArea"]
+position = Vector2(0, 545)
+shape = SubResource("RectangleShape2D_p5s5a")
+
+[node name="CameraOverrideArea" type="Area2D" parent="." node_paths=PackedStringArray("camera_manager", "restore_camera", "override_camera")]
+position = Vector2(17729, -192)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("16_uie84")
+camera_manager = NodePath("../CameraManager")
+restore_camera = NodePath("../PlayerCamera")
+override_camera = NodePath("FinishCamera")
+metadata/_custom_type_script = "uid://xd4woi41uhf2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraOverrideArea"]
+position = Vector2(528, -77.5)
+shape = SubResource("RectangleShape2D_j7nyf")
+
+[node name="FinishCamera" type="Camera2D" parent="CameraOverrideArea" node_paths=PackedStringArray("target")]
+position = Vector2(528, -72)
+zoom = Vector2(0.5, 0.5)
+script = ExtResource("14_8n7ay")
+vertical_speed = 2.0
+zoom_speed = 2.0
+follow_vertical_on_jump = true
+target = NodePath("../CollisionShape2D")
+metadata/_custom_type_script = "uid://bbujjd3t0eg6e"
+
+[node name="Void" parent="." node_paths=PackedStringArray("target") instance=ExtResource("16_o6ptl")]
+position = Vector2(0, 1222)
+target = NodePath("../Player")

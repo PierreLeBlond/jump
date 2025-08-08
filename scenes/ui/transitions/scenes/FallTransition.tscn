@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://ck8gse7pigipv"]
+
+[ext_resource type="Script" uid="uid://b5056ouwbaql8" path="res://scripts/ui/transitions/SceneTransition.gd" id="1_fqqfj"]
+
+[sub_resource type="Animation" id="Animation_6j5qt"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_j4pmt"]
+resource_name = "transition"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.035, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -1080, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p52wy"]
+_data = {
+&"RESET": SubResource("Animation_6j5qt"),
+&"transition": SubResource("Animation_j4pmt")
+}
+
+[node name="FallTransition" type="CanvasLayer" node_paths=PackedStringArray("animation_player")]
+process_mode = 3
+layer = 3
+script = ExtResource("1_fqqfj")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="TextureRect" type="ColorRect" parent="."]
+light_mask = 2
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../TextureRect")
+libraries = {
+&"": SubResource("AnimationLibrary_p52wy")
+}
+autoplay = "transition"
+speed_scale = 2.0

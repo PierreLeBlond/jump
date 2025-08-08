@@ -8,8 +8,8 @@ const note_layer = 4
 
 func _ready() -> void:
     # Should offset animation based on horizontal position, for a wave effect
-    var offset = floori(global_position.x / 32.0) % 20
-    var time = float(offset) / 20.0
+    var offset = floori(global_position.x) % 1024
+    var time = float(offset) / 1024 * animation_player.get_animation("bounce").length
     animation_player.play("bounce")
     animation_player.seek(time)
 

@@ -28,10 +28,8 @@ func _input(event: InputEvent) -> void:
         return
 
     if get_tree().paused:
-        print("close_pause_menu")
         close_pause_menu()
     else:
-        print("open_pause_menu")
         open_pause_menu()
 
 func open_pause_menu() -> void:
@@ -49,10 +47,13 @@ func load_checkpoint() -> void:
     if !level:
         return
 
+    var release = await Transition.create_right_bar_transition_out(get_tree().root)
+
     if get_tree().paused:
         close_pause_menu()
 
     level.load_checkpoint()
+    release.call_deferred()
 
 func start_new_game() -> void:
     if !level:

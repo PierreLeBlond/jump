@@ -1,9 +1,8 @@
-[gd_scene load_steps=33 format=4 uid="uid://de32o3g1w17vm"]
+[gd_scene load_steps=32 format=4 uid="uid://de32o3g1w17vm"]
 
 [ext_resource type="Script" uid="uid://ft5l0rjyxnrn" path="res://scripts/levels/Level1.gd" id="1_p5s5a"]
 [ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/components/CinematicBars.tscn" id="2_j7nyf"]
 [ext_resource type="Script" uid="uid://calrwlxq3l0el" path="res://scripts/game/CheckpointManager.gd" id="2_xbvxr"]
-[ext_resource type="PackedScene" uid="uid://mgk4rkf8x4no" path="res://scenes/ui/transitions/scenes/CircleTransition.tscn" id="5_dqba7"]
 [ext_resource type="PackedScene" uid="uid://cgexvf3ochgd8" path="res://scenes/contraptions/Portal.tscn" id="6_usw5k"]
 [ext_resource type="TileSet" uid="uid://dftl5pyptmafp" path="res://tilesets/cloud.tres" id="7_jsker"]
 [ext_resource type="TileSet" uid="uid://d2f3f4ukvlod0" path="res://tilesets/tree.tres" id="8_6ex7q"]
@@ -177,29 +176,26 @@ size = Vector2(127, 1088)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j7nyf"]
 size = Vector2(3226, 1049)
 
-[node name="Level1" type="Node2D" node_paths=PackedStringArray("player", "camera_manager", "player_camera", "race_introduction_camera", "player_focus_camera", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "transition_mask", "end_portal", "countdown_animation_player", "cinematic_bars", "race_introduction_area", "note_collector", "race_introduction_checkpoint", "checkpoint_manager")]
+[node name="Level1" type="Node2D" node_paths=PackedStringArray("race_introduction_camera", "player_focus_camera", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "end_portal", "countdown_animation_player", "cinematic_bars", "race_introduction_area", "race_introduction_checkpoint", "player", "player_camera", "camera_manager", "checkpoint_manager")]
 process_mode = 1
 script = ExtResource("1_p5s5a")
-player = NodePath("Player")
-camera_manager = NodePath("CameraManager")
-player_camera = NodePath("PlayerCamera")
 race_introduction_camera = NodePath("RaceIntroduceCamera")
 player_focus_camera = NodePath("PlayerFocusCamera")
 soubalien = NodePath("Soubalien")
 soubalien_introduce_path = NodePath("SoubalienPaths/IntroducePath")
 soubalien_chase_path = NodePath("SoubalienPaths/ChasePath")
-transition_mask = NodePath("CanvasLayer/TransitionMask")
 end_portal = NodePath("EndPortal")
 countdown_animation_player = NodePath("AnimationPlayer")
 cinematic_bars = NodePath("CinematicBars")
 race_introduction_area = NodePath("RaceIntroductionArea")
-note_collector = NodePath("Player/NoteCollectorArea2D")
 race_introduction_checkpoint = NodePath("Checkpoint")
+player = NodePath("Player")
+player_camera = NodePath("PlayerCamera")
+camera_manager = NodePath("CameraManager")
 checkpoint_manager = NodePath("CheckpointManager")
 
-[node name="CheckpointManager" type="Node" parent="." node_paths=PackedStringArray("transition_mask", "start_checkpoint")]
+[node name="CheckpointManager" type="Node" parent="." node_paths=PackedStringArray("start_checkpoint")]
 script = ExtResource("2_xbvxr")
-transition_mask = NodePath("../CanvasLayer/TransitionMask")
 start_checkpoint = NodePath("../StartCheckpoint")
 metadata/_custom_type_script = "uid://calrwlxq3l0el"
 
@@ -214,6 +210,7 @@ motion_mirroring = Vector2(1920, 0)
 modulate = Color(0.82, 0.82, 0.82, 0.780392)
 tile_map_data = PackedByteArray("AAAIAAYAAQAJAAMAAAAIAAUAAQAFAAEAAAAHAAUAAQAIAAAAAAAIAAQAAQAIAAAAAAAJAAQAAQAKAAAAAAAKAAQAAQAKAAAAAAALAAQAAQAKAAAAAAAMAAQAAQALAAAAAAAMAAUAAQAGAAEAAAANAAUAAQALAAAAAAAMAAYAAQAJAAMAAAALAAYAAQAJAAMAAAAKAAYAAQAJAAMAAAAJAAYAAQAJAAMAAAAJAAUAAQAJAAIAAAALAAUAAQAJAAIAAAAKAAUAAQAJAAIAAAAQAAYAAQAAAAMAAAASAAUAAQAIAAMAAAASAAQAAQAIAAAAAAATAAQAAQAKAAAAAAAUAAQAAQAKAAAAAAAVAAQAAQALAAAAAAAVAAUAAQALAAMAAAAUAAUAAQAJAAMAAAATAAUAAQAJAAMAAAANAAYAAQALAAMAAAAHAAYAAQAIAAMAAAAYAAcAAQAIAAAAAAAZAAcAAQALAAAAAAAZAAgAAQALAAMAAAAYAAgAAQAIAAMAAAAFAAYAAQAAAAMAAAA=")
 tile_set = ExtResource("7_jsker")
+collision_enabled = false
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
 offset_right = 1920.0
@@ -247,10 +244,6 @@ offset_bottom = 1081.0
 texture = SubResource("GradientTexture2D_j7nyf")
 
 [node name="CinematicBars" parent="." instance=ExtResource("2_j7nyf")]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="TransitionMask" parent="CanvasLayer" instance=ExtResource("5_dqba7")]
 
 [node name="CloudLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAiAfv/AQABAAMAAAAjAfv/AQACAAMAAAAkAfv/AQACAAMAAAAlAfv/AQADAAMAAAAfAf3/AQADAAMAAAAeAf3/AQACAAMAAAAdAf3/AQACAAMAAAAcAf3/AQABAAMAAAAZAf//AQADAAMAAAAYAf//AQACAAMAAAAXAf//AQACAAMAAAAWAf//AQACAAMAAAAVAf//AQABAAMAAAASAQEAAQADAAMAAAARAQEAAQACAAMAAAAQAQEAAQACAAMAAAAPAQEAAQACAAMAAAAOAQEAAQABAAMAAAA=")
@@ -392,6 +385,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 120
 text = "1"
+horizontal_alignment = 1
 
 [node name="2" type="Label" parent="Countdown"]
 modulate = Color(1, 1, 1, 0)
@@ -409,6 +403,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 120
 text = "2"
+horizontal_alignment = 1
 
 [node name="3" type="Label" parent="Countdown"]
 modulate = Color(1, 1, 1, 0)
@@ -426,6 +421,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 120
 text = "3"
+horizontal_alignment = 1
 
 [node name="4" type="Label" parent="Countdown"]
 modulate = Color(1, 1, 1, 0)
@@ -443,6 +439,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 120
 text = "4"
+horizontal_alignment = 1
 
 [node name="RaceIntroductionArea" type="Area2D" parent="."]
 position = Vector2(6205, 0)

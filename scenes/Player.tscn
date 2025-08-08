@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://27vdgqlbgpml"]
+[gd_scene load_steps=34 format=3 uid="uid://27vdgqlbgpml"]
 
 [ext_resource type="Script" uid="uid://b6kdes8c5suyq" path="res://scripts/character/ProjectileCharacter.gd" id="1_lkdrv"]
 [ext_resource type="Texture2D" uid="uid://3k4btk54cqba" path="res://assets/spritesheets/player/player.png" id="2_0rnld"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://djcf013m042qh" path="res://scripts/character/states/WallRun.gd" id="13_srp4u"]
 [ext_resource type="Script" uid="uid://n0not04aejg6" path="res://scripts/character/CliffDetector.gd" id="18_61ith"]
 [ext_resource type="Script" uid="uid://br0fm1ttogpe2" path="res://scripts/character/WallDetector.gd" id="19_ebwui"]
+[ext_resource type="Script" uid="uid://dfh6a42d2dq0n" path="res://scripts/collectibles/NoteCollector.gd" id="20_sfy4j"]
 
 [sub_resource type="Animation" id="Animation_gv3ic"]
 resource_name = "backcliffhang"
@@ -202,7 +203,10 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_18dal"]
 size = Vector2(56, 102)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("corner_corrector", "cliff_detector", "wall_detector", "state_machine", "movement_controller", "projectile_parameters", "animation_player", "sprite_2d")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gv3ic"]
+size = Vector2(54, 104)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("corner_corrector", "cliff_detector", "wall_detector", "state_machine", "movement_controller", "projectile_parameters", "animation_player", "sprite_2d", "note_collector")]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_lkdrv")
@@ -214,6 +218,7 @@ movement_controller = NodePath("MovementController")
 projectile_parameters = NodePath("ProjectileParameters")
 animation_player = NodePath("AnimationPlayer")
 sprite_2d = NodePath("Sprite2D")
+note_collector = NodePath("NoteCollector")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_0rnld")
@@ -437,3 +442,13 @@ target_position = Vector2(50, 0)
 position = Vector2(-9.53674e-06, 9.00002)
 scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_18dal")
+
+[node name="NoteCollector" type="Area2D" parent="."]
+process_mode = 3
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("20_sfy4j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoteCollector"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_gv3ic")

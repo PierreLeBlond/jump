@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://65qdwytb08uv"]
+
+[ext_resource type="Shader" uid="uid://bdd5te31jhu67" path="res://shaders/death.gdshader" id="1_b3mc0"]
+
+[resource]
+shader = ExtResource("1_b3mc0")
+shader_parameter/target_screen_position = Vector2(0, 0)
+shader_parameter/mask_radius = 1024.0
