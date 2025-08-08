@@ -22,7 +22,7 @@ func on_body_entered(_body: Node2D):
 func save():
     body_entered.disconnect(on_body_entered)
 
-    collected_notes_index = player.note_collector.collected_notes.size()
+    collected_notes_index = player.collector.collected_notes.size()
 
     if game_run:
         saved_time = game_run.accumulated_time
@@ -33,7 +33,7 @@ func load():
     if game_run:
         game_run.accumulated_time = saved_time
 
-    player.note_collector.restore(collected_notes_index)
+    player.collector.restore(collected_notes_index)
 
     portal.hold_player()
     checkpoint_pre_loaded.emit()

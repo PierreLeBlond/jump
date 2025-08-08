@@ -39,7 +39,8 @@ func _ready() -> void:
 
     checkpoint_manager.activate_checkpoints(self, game_run)
 
-    player.note_collector.note_collected.connect(add_score)
+    player.collector.note_collected.connect(add_score)
+    player.collector.life_collected.connect(add_life)
 
 
 func load_level(level_name: String) -> void:

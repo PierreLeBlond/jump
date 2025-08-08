@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://de32o3g1w17vm"]
+[gd_scene load_steps=30 format=4 uid="uid://de32o3g1w17vm"]
 
 [ext_resource type="Script" uid="uid://ft5l0rjyxnrn" path="res://scripts/levels/Level1.gd" id="1_p5s5a"]
 [ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/components/CinematicBars.tscn" id="2_j7nyf"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="10_ijoxy"]
 [ext_resource type="Script" uid="uid://c8b0g0enel70w" path="res://scripts/enemy/Path.gd" id="10_njy47"]
 [ext_resource type="PackedScene" uid="uid://dpr11d1q2xb3x" path="res://scenes/contraptions/Checkpoint.tscn" id="11_njy47"]
-[ext_resource type="Script" uid="uid://dfh6a42d2dq0n" path="res://scripts/collectibles/NoteCollector.gd" id="11_t2wor"]
 [ext_resource type="Script" uid="uid://bbujjd3t0eg6e" path="res://scripts/camera/Camera.gd" id="12_l40or"]
 [ext_resource type="Script" uid="uid://dm275lbjrus7p" path="res://scripts/camera/CameraManager.gd" id="13_njy47"]
 [ext_resource type="PackedScene" uid="uid://4wsynq3xc0sr" path="res://scenes/collectibles/Note.tscn" id="14_86um8"]
@@ -51,9 +50,6 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 141, 232, 0, 0, 0, 0, 1064, -59, 0, 0, 0, 0, 5936, -58, 0, 0, 0, 0, 8530, -441, 0, 0, 0, 0, 10348, -691, 0, 0, 0, 0, 14443, -1266)
 }
 point_count = 6
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fs813"]
-size = Vector2(54, 104)
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_fs813"]
 scenes/1/scene = ExtResource("14_86um8")
@@ -307,16 +303,6 @@ player = NodePath("../../Player")
 
 [node name="Player" parent="." instance=ExtResource("10_ijoxy")]
 position = Vector2(221, 904)
-
-[node name="NoteCollectorArea2D" type="Area2D" parent="Player"]
-process_mode = 3
-collision_layer = 0
-collision_mask = 8
-script = ExtResource("11_t2wor")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/NoteCollectorArea2D"]
-position = Vector2(0, 4)
-shape = SubResource("RectangleShape2D_fs813")
 
 [node name="CameraManager" type="Node" parent="."]
 script = ExtResource("13_njy47")

@@ -20,7 +20,7 @@ signal direction_changed(direction: int)
 
 @export var sprite_2d: Sprite2D
 
-@export var note_collector: NoteCollector
+@export var collector: Collector
 
 var unlocked_keys: UnlockedKeys = UnlockedKeys.new()
 

@@ -26,8 +26,8 @@ func _ready() -> void:
 
     void_zone.target_entered.connect(on_void_entered)
 
-    race_introduction_checkpoint.checkpoint_pre_loaded.connect(race_introduction_checkpoint_preload)
-    race_introduction_checkpoint.checkpoint_loaded.connect(race_introduction_checkpoint_load)
+    # race_introduction_checkpoint.checkpoint_pre_loaded.connect(race_introduction_checkpoint_preload)
+    # race_introduction_checkpoint.checkpoint_loaded.connect(race_introduction_checkpoint_load)
 
     camera_manager.jump_to(player_camera)
 
