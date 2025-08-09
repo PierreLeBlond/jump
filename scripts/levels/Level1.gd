@@ -118,7 +118,8 @@ func on_player_finished() -> void:
     event_dispatcher.race_ends.emit()
 
     var release = await Transition.create_circle_transition_out(get_tree().root, player)
-    load_level("Level2")
+    # load_level("Level2")
+    finish()
     release.call_deferred()
 
 func on_ray_captured_player() -> void:
