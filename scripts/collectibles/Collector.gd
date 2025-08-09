@@ -5,6 +5,7 @@ class_name Collector
 var collected_notes: Array[Note]
 
 signal note_collected(count: int)
+signal note_restored(count: int)
 signal life_collected(count: int)
 
 func _ready() -> void:
@@ -31,4 +32,4 @@ func restore(restored_index: int):
         note.restore()
 
     collected_notes = collected_notes.slice(0, restored_index)
-    note_collected.emit(-notes_to_restore.size())
+    note_restored.emit(collected_notes.size())

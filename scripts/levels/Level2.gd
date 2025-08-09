@@ -26,8 +26,8 @@ func _ready() -> void:
 
     void_zone.target_entered.connect(on_void_entered)
 
-    # race_introduction_checkpoint.checkpoint_pre_loaded.connect(race_introduction_checkpoint_preload)
-    # race_introduction_checkpoint.checkpoint_loaded.connect(race_introduction_checkpoint_load)
+    race_introduction_checkpoint.checkpoint_pre_loaded.connect(race_introduction_checkpoint_preload)
+    race_introduction_checkpoint.checkpoint_loaded.connect(race_introduction_checkpoint_load)
 
     camera_manager.jump_to(player_camera)
 
@@ -38,7 +38,8 @@ func _ready() -> void:
     soubalien.process_mode = Node.PROCESS_MODE_DISABLED
     race_introduction_area.body_entered.connect(introduce_race)
 
-    await Transition.create_circle_transition_in(get_tree().root, player)
+    var release = await Transition.create_circle_transition_in(get_tree().root, player)
+    release.call_deferred()
 
     show_hud()
 

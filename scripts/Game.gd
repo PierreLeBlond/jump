@@ -73,8 +73,6 @@ func load_level(level_name: String) -> Level:
 
     current_level.game_over.connect(open_game_over)
     current_level.victory.connect(open_victory)
-    current_level.score_added.connect(func(value: int): game_run.add_score(value))
-    current_level.life_added.connect(func(value: int): game_run.add_life(value))
 
     pause_manager.level = current_level
 

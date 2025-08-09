@@ -8,8 +8,6 @@ signal wants_to_start_new_game()
 
 signal game_over()
 signal victory()
-signal score_added(value: int)
-signal life_added(value: int)
 
 @export var player: ProjectileCharacter
 @export var player_camera: Camera
@@ -40,6 +38,7 @@ func _ready() -> void:
     checkpoint_manager.activate_checkpoints(self, game_run)
 
     player.collector.note_collected.connect(add_score)
+    player.collector.note_restored.connect(set_score)
     player.collector.life_collected.connect(add_life)
 
 
@@ -81,7 +80,10 @@ func finish() -> void:
     victory.emit()
 
 func add_score(value: int) -> void:
-    score_added.emit(value)
+    game_run.add_score(value)
+
+func set_score(value: int) -> void:
+    game_run.set_score(value)
 
 func add_life(value: int) -> void:
-    life_added.emit(value)
+    game_run.add_life(value)

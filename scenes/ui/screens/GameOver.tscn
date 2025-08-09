@@ -4,10 +4,10 @@
 [ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/space.tres" id="2_nhrd6"]
 [ext_resource type="Script" uid="uid://cuhhm5ieqpgf0" path="res://scripts/ui/transitions/Fly.gd" id="3_nuotj"]
 
-[node name="GameOver" type="CanvasLayer" node_paths=PackedStringArray("restart_button", "quit_to_main_menu_button")]
+[node name="GameOver" type="CanvasLayer" node_paths=PackedStringArray("start_new_game_button", "quit_to_main_menu_button")]
 layer = 2
 script = ExtResource("2_05upv")
-restart_button = NodePath("PanelContainer/VBoxContainer/VBoxContainer/Restart")
+start_new_game_button = NodePath("PanelContainer/VBoxContainer/VBoxContainer/StartNewGame")
 quit_to_main_menu_button = NodePath("PanelContainer/VBoxContainer/VBoxContainer/QuitToMainMenu")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -36,12 +36,12 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 64
 
-[node name="Restart" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+[node name="StartNewGame" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Réessayer ?"
 
-[node name="Fly" type="Node" parent="PanelContainer/VBoxContainer/VBoxContainer/Restart"]
+[node name="Fly" type="Node" parent="PanelContainer/VBoxContainer/VBoxContainer/StartNewGame"]
 script = ExtResource("3_nuotj")
 y = 800.0
 metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"

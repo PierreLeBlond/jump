@@ -1,0 +1,8 @@
+extends Node
+
+class_name EventDispatcher
+
+signal soubalien_appears
+signal race_starts
+signal race_ends
+signal note_collected

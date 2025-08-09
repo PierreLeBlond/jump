@@ -11,13 +11,15 @@ class_name Level1
 
 @export var end_portal: Portal
 
-@export var countdown_animation_player: AnimationPlayer
+@export var countdown: Countdown
 
 @export var cinematic_bars: CinematicBars
 
 @export var race_introduction_area: Area2D
 
 @export var race_introduction_checkpoint: Checkpoint
+
+@export var event_dispatcher: EventDispatcher
 
 func _ready() -> void:
     super._ready()
@@ -29,6 +31,8 @@ func _ready() -> void:
 
     end_portal.spawn()
     end_portal.player_captured.connect(on_player_finished)
+
+    player.collector.note_collected.connect(func(_count: int): event_dispatcher.note_collected.emit())
 
     soubalien.visible = false
     soubalien.process_mode = Node.PROCESS_MODE_DISABLED
@@ -54,13 +58,14 @@ func introduce_race(_body: Node2D) -> void:
 
     soubalien_introduce_path.call_deferred("set_child", soubalien)
     race_introduction_camera.set_target(soubalien)
+    event_dispatcher.soubalien_appears.emit()
     await soubalien_introduce_path.start()
-
-    race_introduction_camera.set_target(player)
 
     start_chase()
 
 func start_chase() -> void:
+    race_introduction_camera.set_target(player)
+
     soubalien_chase_path.call_deferred("set_child", soubalien)
     soubalien_chase_path.reset()
 
@@ -74,8 +79,8 @@ func start_chase() -> void:
 
     cinematic_bars.unreveal()
 
-    countdown_animation_player.play("countdown")
-    await countdown_animation_player.animation_finished
+    event_dispatcher.race_starts.emit()
+    await countdown.play()
 
     camera_manager.fly_to(player_camera)
     show_hud()
@@ -92,13 +97,13 @@ func race_introduction_checkpoint_preload() -> void:
     soubalien_chase_path.stop()
 
 func race_introduction_checkpoint_load() -> void:
-    race_introduction_camera.set_target(player)
     await camera_manager.fly_to(race_introduction_camera)
     start_chase()
 
 func on_player_captured() -> void:
     soubalien.captured_player.disconnect(on_player_captured)
     soubalien.ray_captured_player.disconnect(on_ray_captured_player)
+    event_dispatcher.race_ends.emit()
 
     var release = await Transition.create_circle_transition_out(get_tree().root, player)
 
@@ -107,6 +112,11 @@ func on_player_captured() -> void:
     release.call_deferred()
 
 func on_player_finished() -> void:
+    soubalien_chase_path.stop()
+    soubalien.captured_player.disconnect(on_player_captured)
+    soubalien.ray_captured_player.disconnect(on_ray_captured_player)
+    event_dispatcher.race_ends.emit()
+
     var release = await Transition.create_circle_transition_out(get_tree().root, player)
     load_level("Level2")
     release.call_deferred()

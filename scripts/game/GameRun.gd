@@ -49,6 +49,10 @@ func add_score(value: int) -> void:
     score += value
     score_changed.emit(score)
 
+func set_score(value: int) -> void:
+    score = value
+    score_changed.emit(score)
+
 func _process(_delta: float) -> void:
     if !is_playing:
       return
