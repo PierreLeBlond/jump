@@ -2,6 +2,9 @@ extends Level
 
 class_name Level1
 
+const NOTE_COMBO_DURATION: float = 1.0
+const RACE_NOTE_COMBO_DURATION: float = 3.0
+
 @export var race_introduction_camera: Camera
 @export var player_focus_camera: Camera
 
@@ -12,6 +15,8 @@ class_name Level1
 @export var end_portal: Portal
 
 @export var countdown: Countdown
+
+@export var combo_note: ComboNote
 
 @export var cinematic_bars: CinematicBars
 
@@ -32,7 +37,9 @@ func _ready() -> void:
     end_portal.spawn()
     end_portal.player_captured.connect(on_player_finished)
 
+    player.collector.combo_duration = NOTE_COMBO_DURATION
     player.collector.note_collected.connect(func(_count: int): event_dispatcher.note_collected.emit())
+    player.collector.combo_updated.connect(func(duration: float, count: int): event_dispatcher.combo_updated.emit(duration, count))
 
     soubalien.visible = false
     soubalien.process_mode = Node.PROCESS_MODE_DISABLED
@@ -60,6 +67,8 @@ func introduce_race(_body: Node2D) -> void:
     race_introduction_camera.set_target(soubalien)
     event_dispatcher.soubalien_appears.emit()
     await soubalien_introduce_path.start()
+
+    player.collector.combo_duration = RACE_NOTE_COMBO_DURATION
 
     start_chase()
 

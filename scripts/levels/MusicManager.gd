@@ -3,7 +3,6 @@ extends Node
 class_name MusicManager
 
 const RACE_MUSIC_DELAY: float = 0.25
-
 const INAUDIBLE_VOLUME_DB: float = -80.0
 
 @export var forest_audio_stream_player: AudioStreamPlayer
@@ -19,12 +18,13 @@ const INAUDIBLE_VOLUME_DB: float = -80.0
 var note_collected_tween: Tween
 
 var current_note_audio_stream_player: AudioStreamPlayer
+var current_note_duration: float = 0.0
 
 func _ready() -> void:
     event_dispatcher.soubalien_appears.connect(on_soubalien_appears)
     event_dispatcher.race_starts.connect(on_race_starts)
     event_dispatcher.race_ends.connect(on_race_ends)
-    event_dispatcher.note_collected.connect(on_note_collected)
+    event_dispatcher.combo_updated.connect(on_combo_updated)
 
     current_note_audio_stream_player = note_audio_stream_player
     current_note_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
@@ -73,7 +73,7 @@ func on_race_ends() -> void:
     fade_out(race_audio_stream_player)
     fade_out_2d(soubalien_race_audio_stream_player)
 
-func on_note_collected() -> void:
+func on_combo_updated(duration: float, _count: int) -> void:
     if note_collected_tween:
         note_collected_tween.stop()
         note_collected_tween = null
@@ -82,7 +82,7 @@ func on_note_collected() -> void:
     tween.tween_property(current_note_audio_stream_player, "volume_db", 10.0, 0.2)
     note_collected_tween = tween
     await tween.finished
-    await get_tree().create_timer(0.6).timeout
+    await get_tree().create_timer(duration).timeout
 
     if note_collected_tween != tween:
         return
@@ -90,7 +90,7 @@ func on_note_collected() -> void:
     tween.stop()
 
     tween = create_tween()
-    tween.tween_property(current_note_audio_stream_player, "volume_db", INAUDIBLE_VOLUME_DB, 0.5)
+    tween.tween_property(current_note_audio_stream_player, "volume_db", INAUDIBLE_VOLUME_DB, 1.0)
     note_collected_tween = tween
 
     await tween.finished

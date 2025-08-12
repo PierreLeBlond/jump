@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5ujunl53hshx"]
+
+[ext_resource type="Texture2D" uid="uid://dqmuothieoafl" path="res://assets/sprites/circle.svg" id="1_3jh0w"]
+[ext_resource type="Script" uid="uid://cr42wdikh5snv" path="res://scripts/ui/components/ComboNote.gd" id="1_n837y"]
+[ext_resource type="Texture2D" uid="uid://b7yga0pu0e4fy" path="res://assets/sprites/note.png" id="2_n837y"]
+
+[node name="ComboNote" type="Control" node_paths=PackedStringArray("combo_label", "texture_range")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1920.0
+offset_bottom = -1080.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n837y")
+combo_label = NodePath("Label")
+texture_range = NodePath("TextureProgressBar")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 61.0
+fill_mode = 5
+texture_under = ExtResource("1_3jh0w")
+texture_progress = ExtResource("1_3jh0w")
+tint_under = Color(0.61, 0.61, 0.61, 0.882353)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -29.0
+offset_right = 67.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_n837y")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -47.0
+offset_right = 15.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 22
+text = "00"

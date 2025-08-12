@@ -90,7 +90,6 @@ text = "Ton nom :"
 custom_minimum_size = Vector2(512, 0)
 layout_mode = 2
 caret_blink = true
-caret_force_displayed = true
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

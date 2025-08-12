@@ -110,6 +110,10 @@ func on_player_captured() -> void:
     release.call_deferred()
 
 func on_player_finished() -> void:
+    soubalien_chase_path.stop()
+    soubalien.captured_player.disconnect(on_player_captured)
+    soubalien.ray_captured_player.disconnect(on_ray_captured_player)
+
     var release = await Transition.create_circle_transition_out(get_tree().root, player)
     finish()
     release.call_deferred()
