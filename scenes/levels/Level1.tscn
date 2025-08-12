@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://de32o3g1w17vm"]
+[gd_scene load_steps=38 format=4 uid="uid://de32o3g1w17vm"]
 
 [ext_resource type="Script" uid="uid://ft5l0rjyxnrn" path="res://scripts/levels/Level1.gd" id="1_p5s5a"]
 [ext_resource type="Script" uid="uid://b1qlks4lid3un" path="res://scripts/levels/EventDispatcher.gd" id="2_dqba7"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://c1f16ms5h14r6" path="res://scenes/ui/components/Countdown.tscn" id="16_p5s5a"]
 [ext_resource type="Script" uid="uid://xd4woi41uhf2" path="res://scripts/camera/CameraOverrideArea.gd" id="18_j7nyf"]
 [ext_resource type="PackedScene" uid="uid://c5ujunl53hshx" path="res://scenes/ui/components/ComboNote.tscn" id="24_6ex7q"]
+[ext_resource type="PackedScene" uid="uid://cbchcmt1re0ym" path="res://scenes/ui/controls/MobileControls.tscn" id="25_ijfg6"]
 
 [sub_resource type="Gradient" id="Gradient_ukjja"]
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.643137)
@@ -341,3 +342,5 @@ offset_bottom = 761.0
 target = NodePath("../Player")
 offset = Vector2(0, -128)
 event_dispatcher = NodePath("../EventDispatcher")
+
+[node name="MobileControls" parent="." instance=ExtResource("25_ijfg6")]

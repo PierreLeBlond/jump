@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Untitled Space & Brass Game</title>
+    <title>Prenez garde à l'espace entre la Terre & Arkab Posterior</title>
     <meta charset="UTF-8" />
   </head>
   <body
@@ -55,10 +55,9 @@
     <script>
       var progressBarFill = document.getElementById("progress-bar-fill");
       function updateProgress(current, total) {
-        console.log("Loaded " + current + " of " + total + " bytes");
         progressBarFill.style.width = (current / total) * 100 + "%";
       }
-      var engine = new Engine({"args":[],"canvasResizePolicy":1,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":78225952,"index.wasm":52126319},"focusCanvas":true,"gdextensionLibs":[]});
+      var engine = new Engine({"args":[],"canvasResizePolicy":1,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":78798432,"index.wasm":43699190},"focusCanvas":true,"gdextensionLibs":[]});
       engine.startGame({ onProgress: updateProgress });
     </script>
     <style>
