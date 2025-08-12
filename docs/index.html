@@ -57,7 +57,16 @@
       function updateProgress(current, total) {
         progressBarFill.style.width = (current / total) * 100 + "%";
       }
-      var engine = new Engine({"args":[],"canvasResizePolicy":1,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":78798432,"index.wasm":43699190},"focusCanvas":true,"gdextensionLibs":[]});
+      var engine = new Engine({
+        args: [],
+        canvasResizePolicy: 1,
+        ensureCrossOriginIsolationHeaders: true,
+        executable: "index",
+        experimentalVK: false,
+        fileSizes: { "index.pck": 78804304, "index.wasm": 43699190 },
+        focusCanvas: true,
+        gdextensionLibs: [],
+      });
       engine.startGame({ onProgress: updateProgress });
     </script>
     <style>
@@ -68,4 +77,3 @@
     </style>
   </body>
 </html>
-

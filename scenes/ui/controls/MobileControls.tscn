@@ -1,25 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbchcmt1re0ym"]
+[gd_scene load_steps=7 format=3 uid="uid://cbchcmt1re0ym"]
 
 [ext_resource type="Texture2D" uid="uid://bbx1hbadjc56h" path="res://assets/sprites/left.png" id="1_rmi53"]
 [ext_resource type="Texture2D" uid="uid://d3y0v3k7xghvb" path="res://assets/sprites/right.png" id="2_ta785"]
 [ext_resource type="Texture2D" uid="uid://pq6rthlkswdw" path="res://assets/sprites/jump.png" id="3_rmi53"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_rmi53"]
+radius = 200.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ta785"]
+radius = 200.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_51jbw"]
+radius = 200.0
+
 [node name="MobileControls" type="CanvasLayer"]
 
 [node name="Left" type="TouchScreenButton" parent="."]
-position = Vector2(126, 818)
+position = Vector2(137, 923)
 texture_normal = ExtResource("1_rmi53")
+shape = SubResource("CircleShape2D_rmi53")
 action = "move_left"
 visibility_mode = 1
 
 [node name="Right" type="TouchScreenButton" parent="."]
-position = Vector2(368, 818)
+position = Vector2(545, 923)
 texture_normal = ExtResource("2_ta785")
+shape = SubResource("CircleShape2D_ta785")
 action = "move_right"
 visibility_mode = 1
 
 [node name="Jump" type="TouchScreenButton" parent="."]
-position = Vector2(1650, 818)
+position = Vector2(1656, 923)
 texture_normal = ExtResource("3_rmi53")
+shape = SubResource("CircleShape2D_51jbw")
 action = "jump"
 visibility_mode = 1
