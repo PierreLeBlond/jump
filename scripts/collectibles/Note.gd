@@ -2,8 +2,10 @@ extends Area2D
 
 class_name Note
 
+const DEFAULT_BPM: float = 60.0
 const note_layer = 4
 
+@export var bpm: float = DEFAULT_BPM
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
@@ -11,6 +13,7 @@ func _ready() -> void:
     var offset = floori(global_position.x) % 1024
     var time = float(offset) / 1024 * animation_player.get_animation("bounce").length
     animation_player.play("bounce")
+    animation_player.speed_scale = bpm / DEFAULT_BPM
     animation_player.seek(time)
 
 func capture():

@@ -100,6 +100,7 @@ _data = {
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_evn8i")
+bpm = 108.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
