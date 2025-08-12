@@ -14,3 +14,9 @@ func _enter_tree() -> void:
 
 func unreveal() -> void:
     animation_player.play_backwards("reveal")
+
+func hide_time_counter() -> void:
+    time_counter.hide()
+
+func show_time_counter() -> void:
+    time_counter.show()

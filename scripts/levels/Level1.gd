@@ -48,6 +48,7 @@ func _ready() -> void:
     var release = await Transition.create_circle_transition_in(get_tree().root, player)
     release.call_deferred()
 
+    hud.hide_time_counter()
     show_hud()
 
 func introduce_race(_body: Node2D) -> void:
@@ -90,6 +91,10 @@ func start_chase() -> void:
 
     event_dispatcher.race_starts.emit()
     await countdown.play()
+
+    game_run.reset_time()
+    game_run.play()
+    hud.show_time_counter()
 
     camera_manager.fly_to(player_camera)
     show_hud()

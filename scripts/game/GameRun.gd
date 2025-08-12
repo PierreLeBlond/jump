@@ -22,8 +22,7 @@ func _ready() -> void:
 func reset() -> void:
     life = 0
     score = 0
-    accumulated_time = 0.0
-    last_time = Time.get_unix_time_from_system()
+    reset_time()
 
     add_life(MAX_LIFE)
 
@@ -32,6 +31,10 @@ func accumulate_time() -> void:
     accumulated_time += time_now - last_time
     last_time = time_now
     time_changed.emit(accumulated_time)
+
+func reset_time() -> void:
+    accumulated_time = 0.0
+    last_time = Time.get_unix_time_from_system()
 
 func play() -> void:
     is_playing = true
