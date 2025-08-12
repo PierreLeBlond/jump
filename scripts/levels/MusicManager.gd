@@ -79,7 +79,7 @@ func on_combo_updated(duration: float, _count: int) -> void:
         note_collected_tween = null
 
     var tween = create_tween()
-    tween.tween_property(current_note_audio_stream_player, "volume_db", 10.0, 0.2)
+    tween.tween_property(current_note_audio_stream_player, "volume_db", 0.0, 0.2)
     note_collected_tween = tween
     await tween.finished
     await get_tree().create_timer(duration).timeout

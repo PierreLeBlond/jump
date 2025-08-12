@@ -11,8 +11,8 @@
 [ext_resource type="TileSet" uid="uid://dftl5pyptmafp" path="res://tilesets/cloud.tres" id="7_jsker"]
 [ext_resource type="TileSet" uid="uid://d2f3f4ukvlod0" path="res://tilesets/tree.tres" id="8_6ex7q"]
 [ext_resource type="AudioStream" uid="uid://k67ywhq5ev6b" path="res://assets/sounds/note-race.mp3" id="8_usw5k"]
+[ext_resource type="AudioStream" uid="uid://b7ek2ej3vlbbg" path="res://assets/sounds/note.mp3" id="9_6ex7q"]
 [ext_resource type="PackedScene" uid="uid://b8dorlf7ulbwy" path="res://scenes/Soubalien.tscn" id="9_ijfg6"]
-[ext_resource type="AudioStream" uid="uid://l018aisr7yat" path="res://assets/sounds/note.ogg" id="9_jsker"]
 [ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="10_ijoxy"]
 [ext_resource type="Script" uid="uid://c8b0g0enel70w" path="res://scripts/enemy/Path.gd" id="10_njy47"]
 [ext_resource type="PackedScene" uid="uid://dpr11d1q2xb3x" path="res://scenes/contraptions/Checkpoint.tscn" id="11_njy47"]
@@ -129,7 +129,7 @@ stream = ExtResource("8_usw5k")
 parameters/looping = false
 
 [node name="NoteAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
-stream = ExtResource("9_jsker")
+stream = ExtResource("9_6ex7q")
 playback_type = 1
 parameters/looping = true
 
@@ -198,6 +198,7 @@ cone_height = 800.0
 stream = ExtResource("7_j7nyf")
 volume_db = 10.0
 max_distance = 1920.0
+attenuation = 1.2
 
 [node name="SoubalienPaths" type="Node2D" parent="."]
 
