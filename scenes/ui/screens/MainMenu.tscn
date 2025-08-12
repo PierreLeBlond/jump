@@ -238,9 +238,9 @@ entre la Terre
 script = ExtResource("3_y7cv1")
 
 [node name="Feis" type="TextureRect" parent="."]
-offset_left = 879.0
-offset_top = 44.0
-offset_right = 1319.0
-offset_bottom = 484.0
+offset_left = 672.0
+offset_top = 1010.0
+offset_right = 1112.0
+offset_bottom = 1450.0
 texture = ExtResource("5_qi40j")
 expand_mode = 1

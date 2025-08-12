@@ -11,6 +11,9 @@ class_name Leaderboard
 @export var time_names_container: Control
 @export var time_values_container: Control
 
+@export var score_skeleton: Control
+@export var time_skeleton: Control
+
 func _ready() -> void:
     quit_to_main_menu_button.pressed.connect(quit_to_main_menu)
 
@@ -35,6 +38,10 @@ func update() -> void:
 
     var scores_result = await SilentWolf.Scores.get_scores().sw_get_scores_complete
 
+    if score_skeleton:
+        score_skeleton.queue_free()
+        score_skeleton = null
+
     for score in scores_result.scores:
         var name_label = Label.new()
         name_label.text = score.player_name
@@ -45,6 +52,10 @@ func update() -> void:
         score_values_container.add_child(value_label)
 
     var times_result = await SilentWolf.Scores.get_scores(10, "time").sw_get_scores_complete
+
+    if time_skeleton:
+        time_skeleton.queue_free()
+        time_skeleton = null
 
     for time in times_result.scores:
         var name_label = Label.new()

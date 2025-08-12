@@ -1,8 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://cub4cv5wltn7t"]
+[gd_scene load_steps=4 format=3 uid="uid://cub4cv5wltn7t"]
 
 [ext_resource type="Script" uid="uid://catntlu6a1pdi" path="res://scripts/ui/screens/Leaderboard.gd" id="1_kjnvl"]
+[ext_resource type="Script" uid="uid://dl412mksknwgh" path="res://scripts/ui/transitions/Pulse.gd" id="2_dikb6"]
 
-[node name="Leaderboard" type="CanvasLayer" node_paths=PackedStringArray("quit_to_main_menu_button", "score_names_container", "score_values_container", "time_names_container", "time_values_container")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kjnvl"]
+bg_color = Color(0.0235294, 0.0235294, 0.160784, 1)
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="Leaderboard" type="CanvasLayer" node_paths=PackedStringArray("quit_to_main_menu_button", "score_names_container", "score_values_container", "time_names_container", "time_values_container", "score_skeleton", "time_skeleton")]
 layer = 2
 script = ExtResource("1_kjnvl")
 quit_to_main_menu_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Button")
@@ -10,6 +19,8 @@ score_names_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/H
 score_values_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2")
 time_names_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer")
 time_values_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer/VBoxContainer2")
+score_skeleton = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/SkeletonMarginContainer")
+time_skeleton = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/SkeletonMarginContainer")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 15
@@ -49,6 +60,50 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Score"
 
+[node name="SkeletonMarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/SkeletonMarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Panel" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/SkeletonMarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kjnvl")
+
+[node name="Pulse" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/SkeletonMarginContainer/HBoxContainer/Panel"]
+script = ExtResource("2_dikb6")
+duration = 0.7
+metadata/_custom_type_script = "uid://dl412mksknwgh"
+
+[node name="Panel2" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/SkeletonMarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kjnvl")
+
+[node name="Pulse" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/SkeletonMarginContainer/HBoxContainer/Panel2"]
+script = ExtResource("2_dikb6")
+duration = 0.7
+delay = 0.1
+metadata/_custom_type_script = "uid://dl412mksknwgh"
+
+[node name="Panel3" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/SkeletonMarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kjnvl")
+
+[node name="Pulse" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/SkeletonMarginContainer/HBoxContainer/Panel3"]
+script = ExtResource("2_dikb6")
+duration = 0.7
+delay = 0.2
+metadata/_custom_type_script = "uid://dl412mksknwgh"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 32
@@ -76,6 +131,51 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Temps"
+
+[node name="SkeletonMarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/SkeletonMarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Panel" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/SkeletonMarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kjnvl")
+
+[node name="Pulse" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/SkeletonMarginContainer/HBoxContainer/Panel"]
+script = ExtResource("2_dikb6")
+duration = 0.7
+delay = 0.4
+metadata/_custom_type_script = "uid://dl412mksknwgh"
+
+[node name="Panel2" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/SkeletonMarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kjnvl")
+
+[node name="Pulse" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/SkeletonMarginContainer/HBoxContainer/Panel2"]
+script = ExtResource("2_dikb6")
+duration = 0.7
+delay = 0.5
+metadata/_custom_type_script = "uid://dl412mksknwgh"
+
+[node name="Panel3" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/SkeletonMarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kjnvl")
+
+[node name="Pulse" type="Node" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/SkeletonMarginContainer/HBoxContainer/Panel3"]
+script = ExtResource("2_dikb6")
+duration = 0.7
+delay = 0.6
+metadata/_custom_type_script = "uid://dl412mksknwgh"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
