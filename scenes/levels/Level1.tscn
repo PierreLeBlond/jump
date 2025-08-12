@@ -199,7 +199,7 @@ stream = ExtResource("7_j7nyf")
 volume_db = 10.0
 max_distance = 1920.0
 
-[node name="SoubalienPaths" type="Node" parent="."]
+[node name="SoubalienPaths" type="Node2D" parent="."]
 
 [node name="IntroducePath" type="Path2D" parent="SoubalienPaths"]
 position = Vector2(5428, 312)
@@ -333,6 +333,10 @@ metadata/_custom_type_script = "uid://bbujjd3t0eg6e"
 bpm = 108
 
 [node name="ComboNote" parent="." node_paths=PackedStringArray("target", "event_dispatcher") instance=ExtResource("24_6ex7q")]
+offset_left = 224.0
+offset_top = 761.0
+offset_right = 224.0
+offset_bottom = 761.0
 target = NodePath("../Player")
 offset = Vector2(0, -128)
 event_dispatcher = NodePath("../EventDispatcher")
