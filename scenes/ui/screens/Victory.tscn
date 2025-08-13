@@ -5,14 +5,20 @@
 [ext_resource type="Script" uid="uid://cuhhm5ieqpgf0" path="res://scripts/ui/transitions/Fly.gd" id="3_6vdng"]
 [ext_resource type="PackedScene" uid="uid://de35stn53inu6" path="res://scenes/ui/components/ScoreSubmit.tscn" id="5_3r8fr"]
 
-[node name="Victory" type="CanvasLayer" node_paths=PackedStringArray("start_new_game_button", "quit_to_main_menu_button", "score_submit")]
-layer = 2
+[node name="Victory" type="Control" node_paths=PackedStringArray("start_new_game_button", "quit_to_main_menu_button", "score_submit")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_og3yy")
 start_new_game_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/StartNewGame")
 quit_to_main_menu_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/QuitToMainMenu")
 score_submit = NodePath("PanelContainer/VBoxContainer/HBoxContainer/ScoreSubmit")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -2,7 +2,6 @@ extends Screen
 
 class_name Leaderboard
 
-
 @export var quit_to_main_menu_button: Button
 
 @export var score_names_container: Control

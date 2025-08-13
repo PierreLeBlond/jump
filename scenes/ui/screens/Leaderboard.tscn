@@ -11,8 +11,13 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[node name="Leaderboard" type="CanvasLayer" node_paths=PackedStringArray("quit_to_main_menu_button", "score_names_container", "score_values_container", "time_names_container", "time_values_container", "score_skeleton", "time_skeleton")]
-layer = 2
+[node name="Leaderboard" type="Control" node_paths=PackedStringArray("quit_to_main_menu_button", "score_names_container", "score_values_container", "time_names_container", "time_values_container", "score_skeleton", "time_skeleton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_kjnvl")
 quit_to_main_menu_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Button")
 score_names_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer")
@@ -23,6 +28,7 @@ score_skeleton = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxCont
 time_skeleton = NodePath("PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer/SkeletonMarginContainer")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

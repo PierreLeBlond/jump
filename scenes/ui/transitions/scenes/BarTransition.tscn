@@ -1,0 +1,82 @@
+[gd_scene load_steps=2 format=3 uid="uid://3hxqd1v7r23k"]
+
+[ext_resource type="Script" uid="uid://cvkvu5o8ru0my" path="res://scripts/ui/transitions/BarTransition.gd" id="1_gf8mi"]
+
+[node name="BarTransition" type="CanvasLayer" node_paths=PackedStringArray("bars")]
+process_mode = 3
+script = ExtResource("1_gf8mi")
+bars = [NodePath("TextureRect"), NodePath("TextureRect2"), NodePath("TextureRect9"), NodePath("TextureRect8"), NodePath("TextureRect3"), NodePath("TextureRect6"), NodePath("TextureRect7"), NodePath("TextureRect4"), NodePath("TextureRect5")]
+bar_delays = Array[float]([0.15, 0.1, 0.05, 0.25, 0.1, 0.2, 0.0, 0.3, 0.35])
+duration = 0.5
+
+[node name="TextureRect" type="ColorRect" parent="."]
+light_mask = 2
+custom_minimum_size = Vector2(0, 128)
+anchors_preset = -1
+anchor_right = 1.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect2" type="ColorRect" parent="."]
+light_mask = 2
+custom_minimum_size = Vector2(0, 192)
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 128.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect9" type="ColorRect" parent="."]
+light_mask = 2
+custom_minimum_size = Vector2(0, 64)
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 320.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect8" type="ColorRect" parent="."]
+light_mask = 2
+custom_minimum_size = Vector2(0, 192)
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 384.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect3" type="ColorRect" parent="."]
+light_mask = 2
+custom_minimum_size = Vector2(0, 64)
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 704.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect6" type="ColorRect" parent="."]
+light_mask = 2
+custom_minimum_size = Vector2(0, 64)
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 640.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect7" type="ColorRect" parent="."]
+light_mask = 2
+custom_minimum_size = Vector2(0, 64)
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 576.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect4" type="ColorRect" parent="."]
+light_mask = 2
+custom_minimum_size = Vector2(0, 128)
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 768.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect5" type="ColorRect" parent="."]
+light_mask = 2
+custom_minimum_size = Vector2(0, 192)
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 896.0
+color = Color(0, 0, 0, 1)

@@ -4,8 +4,13 @@
 [ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/space.tres" id="2_nhrd6"]
 [ext_resource type="Script" uid="uid://cuhhm5ieqpgf0" path="res://scripts/ui/transitions/Fly.gd" id="3_nuotj"]
 
-[node name="GameOver" type="CanvasLayer" node_paths=PackedStringArray("start_new_game_button", "quit_to_main_menu_button")]
-layer = 2
+[node name="GameOver" type="Control" node_paths=PackedStringArray("start_new_game_button", "quit_to_main_menu_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("2_05upv")
 start_new_game_button = NodePath("PanelContainer/VBoxContainer/VBoxContainer/StartNewGame")
 quit_to_main_menu_button = NodePath("PanelContainer/VBoxContainer/VBoxContainer/QuitToMainMenu")

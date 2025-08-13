@@ -19,34 +19,34 @@ static func create_circle_transition_out(parent: Node, target: Node2D) -> Callab
         transition.queue_free()
 
 static func create_left_bar_transition_out(parent: Node) -> Callable:
-    var resource = load("res://scenes/ui/transitions/scenes/LeftBarTransition.tscn")
+    var resource = load("res://scenes/ui/transitions/scenes/BarTransition.tscn")
     var transition = resource.instantiate()
     parent.add_child(transition)
-    await transition.transition_out()
+    await transition.transition_left_out()
     return func():
         transition.queue_free()
 
 static func create_right_bar_transition_in(parent: Node) -> Callable:
-    var resource = load("res://scenes/ui/transitions/scenes/RightBarTransition.tscn")
+    var resource = load("res://scenes/ui/transitions/scenes/BarTransition.tscn")
     var transition = resource.instantiate()
     parent.add_child(transition)
-    await transition.transition_in()
+    await transition.transition_right_in()
     return func():
         transition.queue_free()
 
 static func create_left_bar_transition_in(parent: Node) -> Callable:
-    var resource = load("res://scenes/ui/transitions/scenes/LeftBarTransition.tscn")
+    var resource = load("res://scenes/ui/transitions/scenes/BarTransition.tscn")
     var transition = resource.instantiate()
     parent.add_child(transition)
-    await transition.transition_in()
+    await transition.transition_left_in()
     return func():
         transition.queue_free()
 
 static func create_right_bar_transition_out(parent: Node) -> Callable:
-    var resource = load("res://scenes/ui/transitions/scenes/RightBarTransition.tscn")
+    var resource = load("res://scenes/ui/transitions/scenes/BarTransition.tscn")
     var transition = resource.instantiate()
     parent.add_child(transition)
-    await transition.transition_out()
+    await transition.transition_right_out()
     return func():
         transition.queue_free()
 
