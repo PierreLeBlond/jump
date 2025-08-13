@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cbchcmt1re0ym"]
+[gd_scene load_steps=8 format=3 uid="uid://cbchcmt1re0ym"]
 
 [ext_resource type="Texture2D" uid="uid://bbx1hbadjc56h" path="res://assets/sprites/left.png" id="1_rmi53"]
 [ext_resource type="Texture2D" uid="uid://d3y0v3k7xghvb" path="res://assets/sprites/right.png" id="2_ta785"]
 [ext_resource type="Texture2D" uid="uid://pq6rthlkswdw" path="res://assets/sprites/jump.png" id="3_rmi53"]
+[ext_resource type="Texture2D" uid="uid://dtgddq7h6e3ua" path="res://assets/sprites/pause.png" id="4_ta785"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rmi53"]
 radius = 200.0
@@ -34,4 +35,11 @@ position = Vector2(1656, 923)
 texture_normal = ExtResource("3_rmi53")
 shape = SubResource("CircleShape2D_51jbw")
 action = "jump"
+visibility_mode = 1
+
+[node name="Pause" type="TouchScreenButton" parent="."]
+position = Vector2(1110, 923)
+texture_normal = ExtResource("4_ta785")
+shape = SubResource("CircleShape2D_51jbw")
+action = "pause"
 visibility_mode = 1
