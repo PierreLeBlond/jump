@@ -2,7 +2,7 @@ extends Level
 
 class_name Level1
 
-const NOTE_COMBO_DURATION: float = 1.0
+const NOTE_COMBO_DURATION: float = 0.7
 const RACE_NOTE_COMBO_DURATION: float = 3.0
 
 @export var race_introduction_camera: Camera
