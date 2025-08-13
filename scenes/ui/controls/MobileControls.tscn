@@ -16,30 +16,72 @@ radius = 200.0
 
 [node name="MobileControls" type="CanvasLayer"]
 
-[node name="Left" type="TouchScreenButton" parent="."]
-position = Vector2(137, 923)
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="Left" type="TouchScreenButton" parent="Control/Control"]
+position = Vector2(137, -224)
 texture_normal = ExtResource("1_rmi53")
 shape = SubResource("CircleShape2D_rmi53")
 action = "move_left"
 visibility_mode = 1
 
-[node name="Right" type="TouchScreenButton" parent="."]
-position = Vector2(545, 923)
+[node name="Right" type="TouchScreenButton" parent="Control/Control"]
+position = Vector2(539, -224)
 texture_normal = ExtResource("2_ta785")
 shape = SubResource("CircleShape2D_ta785")
 action = "move_right"
 visibility_mode = 1
 
-[node name="Jump" type="TouchScreenButton" parent="."]
-position = Vector2(1656, 923)
-texture_normal = ExtResource("3_rmi53")
-shape = SubResource("CircleShape2D_51jbw")
-action = "jump"
-visibility_mode = 1
+[node name="Control2" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
 
-[node name="Pause" type="TouchScreenButton" parent="."]
-position = Vector2(1110, 923)
+[node name="Pause" type="TouchScreenButton" parent="Control/Control2"]
+position = Vector2(226, -226)
 texture_normal = ExtResource("4_ta785")
 shape = SubResource("CircleShape2D_51jbw")
 action = "pause"
+visibility_mode = 1
+
+[node name="Control3" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Jump" type="TouchScreenButton" parent="Control/Control3"]
+position = Vector2(-223, -223)
+texture_normal = ExtResource("3_rmi53")
+shape = SubResource("CircleShape2D_51jbw")
+action = "jump"
 visibility_mode = 1
