@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://dknoupu2hcn86"]
+[gd_scene load_steps=26 format=4 uid="uid://dknoupu2hcn86"]
 
 [ext_resource type="Script" uid="uid://bfshhb0w7ohbq" path="res://scripts/levels/Tutorial.gd" id="1_7ktok"]
 [ext_resource type="PackedScene" uid="uid://b8dorlf7ulbwy" path="res://scenes/Soubalien.tscn" id="1_off5s"]
@@ -7,10 +7,14 @@
 [ext_resource type="Script" uid="uid://calrwlxq3l0el" path="res://scripts/game/CheckpointManager.gd" id="2_vvfd6"]
 [ext_resource type="Script" uid="uid://k5d6a3o16mgt" path="res://scripts/ui/components/TextRevealArea.gd" id="4_af4br"]
 [ext_resource type="Script" uid="uid://d3gg6d2i1ygp5" path="res://scripts/area/UnlockArea.gd" id="5_0t4of"]
+[ext_resource type="Texture2D" uid="uid://bbx1hbadjc56h" path="res://assets/sprites/left.png" id="6_8y1sg"]
 [ext_resource type="TileSet" uid="uid://dftl5pyptmafp" path="res://tilesets/cloud.tres" id="6_61wbf"]
 [ext_resource type="Script" uid="uid://bbujjd3t0eg6e" path="res://scripts/camera/Camera.gd" id="7_eohpo"]
+[ext_resource type="Texture2D" uid="uid://d3y0v3k7xghvb" path="res://assets/sprites/right.png" id="7_pvt5t"]
 [ext_resource type="PackedScene" uid="uid://cgexvf3ochgd8" path="res://scenes/contraptions/Portal.tscn" id="8_61wbf"]
 [ext_resource type="Script" uid="uid://qqha1uw625f8" path="res://scripts/contraptions/Checkpoint.gd" id="8_elm2s"]
+[ext_resource type="Texture2D" uid="uid://pq6rthlkswdw" path="res://assets/sprites/jump.png" id="8_engsw"]
+[ext_resource type="Texture2D" uid="uid://dtgddq7h6e3ua" path="res://assets/sprites/pause.png" id="9_i3gn5"]
 [ext_resource type="PackedScene" uid="uid://ch5wtdl1u6yo3" path="res://scenes/enemies/Void.tscn" id="12_7v0t1"]
 [ext_resource type="PackedScene" uid="uid://cbchcmt1re0ym" path="res://scenes/ui/controls/MobileControls.tscn" id="13_oo8y7"]
 
@@ -68,11 +72,17 @@ cone_height = 512.0
 
 [node name="TextRevealAreas" type="Node" parent="."]
 
-[node name="1" type="Area2D" parent="TextRevealAreas"]
+[node name="1" type="Area2D" parent="TextRevealAreas" node_paths=PackedStringArray("canvas_item", "mobile_canvas_item")]
 position = Vector2(334, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_af4br")
+canvas_item = NodePath("Text")
+mobile_canvas_item = NodePath("Control")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/1"]
+position = Vector2(0, 896)
+shape = SubResource("RectangleShape2D_0t4of")
 
 [node name="Text" type="RichTextLabel" parent="TextRevealAreas/1"]
 z_index = -10
@@ -85,15 +95,47 @@ text = "utilise les flêches directionnelles
 [b]gauche[/b] & [b]droite[/b]
 pour te déplacer"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/1"]
-position = Vector2(0, 896)
-shape = SubResource("RectangleShape2D_0t4of")
+[node name="Control" type="Control" parent="TextRevealAreas/1"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="5" type="Area2D" parent="TextRevealAreas"]
+[node name="Text" type="RichTextLabel" parent="TextRevealAreas/1/Control"]
+z_index = -10
+offset_left = -220.0
+offset_top = 548.0
+offset_right = 488.0
+offset_bottom = 771.0
+bbcode_enabled = true
+text = "utilise             &
+pour te déplacer"
+
+[node name="TextureRect" type="TextureRect" parent="TextRevealAreas/1/Control"]
+layout_mode = 0
+offset_left = -94.0
+offset_top = 542.0
+offset_right = -27.0
+offset_bottom = 609.0
+texture = ExtResource("6_8y1sg")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="TextRevealAreas/1/Control"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 542.0
+offset_right = 103.0
+offset_bottom = 609.0
+texture = ExtResource("7_pvt5t")
+expand_mode = 1
+
+[node name="5" type="Area2D" parent="TextRevealAreas" node_paths=PackedStringArray("canvas_item", "mobile_canvas_item")]
 position = Vector2(1285, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_af4br")
+canvas_item = NodePath("Text")
+mobile_canvas_item = NodePath("Control")
 
 [node name="Text" type="RichTextLabel" parent="TextRevealAreas/5"]
 z_index = -10
@@ -108,11 +150,35 @@ text = "saute avec la [b]barre d'espace[/b]"
 position = Vector2(0, 540)
 shape = SubResource("RectangleShape2D_af4br")
 
-[node name="11" type="Area2D" parent="TextRevealAreas"]
+[node name="Control" type="Control" parent="TextRevealAreas/5"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Text" type="RichTextLabel" parent="TextRevealAreas/5/Control"]
+z_index = -10
+offset_left = 395.0
+offset_top = 627.0
+offset_right = 1271.0
+offset_bottom = 723.0
+bbcode_enabled = true
+text = "saute avec"
+
+[node name="TextureRect" type="TextureRect" parent="TextRevealAreas/5/Control"]
+offset_left = 600.0
+offset_top = 624.0
+offset_right = 667.0
+offset_bottom = 691.0
+texture = ExtResource("8_engsw")
+expand_mode = 1
+
+[node name="11" type="Area2D" parent="TextRevealAreas" node_paths=PackedStringArray("canvas_item")]
 position = Vector2(2509, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_af4br")
+canvas_item = NodePath("Text")
 
 [node name="Text" type="RichTextLabel" parent="TextRevealAreas/11"]
 z_index = -10
@@ -121,18 +187,19 @@ offset_top = 419.0
 offset_right = 1095.0
 offset_bottom = 582.0
 bbcode_enabled = true
-text = "Maintiens la enfoncée
+text = "Maintiens enfoncée
 pour sauter [b]plus haut[/b]"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/11"]
 position = Vector2(0, 540)
 shape = SubResource("RectangleShape2D_af4br")
 
-[node name="12" type="Area2D" parent="TextRevealAreas"]
+[node name="12" type="Area2D" parent="TextRevealAreas" node_paths=PackedStringArray("canvas_item")]
 position = Vector2(3416, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_af4br")
+canvas_item = NodePath("Text")
 
 [node name="Text" type="RichTextLabel" parent="TextRevealAreas/12"]
 z_index = -10
@@ -147,11 +214,12 @@ text = "prends de la vitesse pour sauter [b]plus loin[/b]"
 position = Vector2(0, 540)
 shape = SubResource("RectangleShape2D_af4br")
 
-[node name="13" type="Area2D" parent="TextRevealAreas"]
+[node name="13" type="Area2D" parent="TextRevealAreas" node_paths=PackedStringArray("canvas_item")]
 position = Vector2(4790, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_af4br")
+canvas_item = NodePath("Text")
 
 [node name="Text" type="RichTextLabel" parent="TextRevealAreas/13"]
 z_index = -10
@@ -167,11 +235,12 @@ pour [b]courir[/b] à la [b]vertical[/b]"
 position = Vector2(0, 540)
 shape = SubResource("RectangleShape2D_af4br")
 
-[node name="6" type="Area2D" parent="TextRevealAreas"]
+[node name="6" type="Area2D" parent="TextRevealAreas" node_paths=PackedStringArray("canvas_item")]
 position = Vector2(6151, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_af4br")
+canvas_item = NodePath("Text")
 
 [node name="Text" type="RichTextLabel" parent="TextRevealAreas/6"]
 z_index = -10
@@ -186,11 +255,12 @@ text = "une fois sur un mur, sautes à nouveau dans la direction opposées"
 position = Vector2(0, 540)
 shape = SubResource("RectangleShape2D_af4br")
 
-[node name="7" type="Area2D" parent="TextRevealAreas"]
+[node name="7" type="Area2D" parent="TextRevealAreas" node_paths=PackedStringArray("canvas_item")]
 position = Vector2(6279, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_af4br")
+canvas_item = NodePath("Text")
 
 [node name="Text" type="RichTextLabel" parent="TextRevealAreas/7"]
 z_index = -10
@@ -205,11 +275,12 @@ text = "pour"
 position = Vector2(0, 540)
 shape = SubResource("RectangleShape2D_af4br")
 
-[node name="8" type="Area2D" parent="TextRevealAreas"]
+[node name="8" type="Area2D" parent="TextRevealAreas" node_paths=PackedStringArray("canvas_item")]
 position = Vector2(6407, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_af4br")
+canvas_item = NodePath("Text")
 
 [node name="Text" type="RichTextLabel" parent="TextRevealAreas/8"]
 z_index = -10
@@ -224,11 +295,12 @@ text = "[b]rebondir[/b]"
 position = Vector2(0, 540)
 shape = SubResource("RectangleShape2D_af4br")
 
-[node name="9" type="Area2D" parent="TextRevealAreas"]
+[node name="9" type="Area2D" parent="TextRevealAreas" node_paths=PackedStringArray("canvas_item")]
 position = Vector2(7311, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_af4br")
+canvas_item = NodePath("Text")
 
 [node name="Text" type="RichTextLabel" parent="TextRevealAreas/9"]
 z_index = -10
@@ -244,11 +316,58 @@ du [b]Soubalien[/b]"
 position = Vector2(0, 540)
 shape = SubResource("RectangleShape2D_af4br")
 
-[node name="10" type="Area2D" parent="TextRevealAreas"]
+[node name="14" type="Area2D" parent="TextRevealAreas" node_paths=PackedStringArray("canvas_item", "mobile_canvas_item")]
+position = Vector2(8852, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_af4br")
+canvas_item = NodePath("Text")
+mobile_canvas_item = NodePath("Control")
+
+[node name="Text" type="RichTextLabel" parent="TextRevealAreas/14"]
+z_index = -10
+offset_left = 306.0
+offset_top = 486.0
+offset_right = 1043.0
+offset_bottom = 643.0
+bbcode_enabled = true
+text = "Fais une pause
+en appuyant sur la touche [b]ESC[/b]"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/14"]
+position = Vector2(0, 540)
+shape = SubResource("RectangleShape2D_af4br")
+
+[node name="Control" type="Control" parent="TextRevealAreas/14"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Text" type="RichTextLabel" parent="TextRevealAreas/14/Control"]
+z_index = -10
+offset_left = 306.0
+offset_top = 486.0
+offset_right = 1043.0
+offset_bottom = 643.0
+bbcode_enabled = true
+text = "Fais une pause
+en appuyant sur "
+
+[node name="TextureRect" type="TextureRect" parent="TextRevealAreas/14/Control"]
+offset_left = 608.0
+offset_top = 541.0
+offset_right = 675.0
+offset_bottom = 608.0
+texture = ExtResource("9_i3gn5")
+expand_mode = 1
+
+[node name="10" type="Area2D" parent="TextRevealAreas" node_paths=PackedStringArray("canvas_item")]
 position = Vector2(9863, 28)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_af4br")
+canvas_item = NodePath("Text")
 
 [node name="Text" type="RichTextLabel" parent="TextRevealAreas/10"]
 z_index = -10
@@ -317,10 +436,8 @@ target = NodePath("../Player")
 
 [node name="Background" type="TextureRect" parent="."]
 z_index = -20
-offset_left = 3.0
-offset_top = 25.0
-offset_right = 10666.0
-offset_bottom = 1222.0
+offset_right = 10663.0
+offset_bottom = 1197.0
 texture = SubResource("GradientTexture2D_elm2s")
 
 [node name="EndPortal" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_61wbf")]

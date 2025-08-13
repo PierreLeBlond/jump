@@ -16,7 +16,6 @@ func transition_out(target: Node2D) -> void:
     current_target = target
     visible = true
 
-    # var target_screen_position = current_target.get_global_transform_with_canvas().origin
     var target_screen_position = get_viewport().get_stretch_transform() * current_target.get_global_transform_with_canvas().origin
     screen_position = target_screen_position
     canvas_item.material.set_shader_parameter("target_screen_position", screen_position)
@@ -33,7 +32,6 @@ func transition_out(target: Node2D) -> void:
 func transition_in(target: Node2D) -> void:
     current_target = target
 
-    # var target_screen_position = current_target.get_global_transform_with_canvas().origin
     var target_screen_position = get_viewport().get_stretch_transform() * current_target.get_global_transform_with_canvas().origin
     screen_position = target_screen_position
     canvas_item.material.set_shader_parameter("target_screen_position", screen_position)
@@ -52,8 +50,6 @@ func _process(delta: float) -> void:
     if current_target == null:
         return
 
-    # var target_screen_position = current_target.get_global_transform_with_canvas().origin
     var target_screen_position = get_viewport().get_stretch_transform() * current_target.get_global_transform_with_canvas().origin
-    print("transform: ", target_screen_position)
     screen_position = lerp(screen_position, target_screen_position, delta * 10)
     canvas_item.material.set_shader_parameter("target_screen_position", screen_position)
