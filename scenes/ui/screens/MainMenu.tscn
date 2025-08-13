@@ -169,8 +169,8 @@ scale = Vector2(50.4219, 46.5156)
 color = Color(0.761295, 0.743076, 0.289112, 0.945098)
 shadow_enabled = true
 shadow_color = Color(0.4, 0.24, 0.36, 1)
-shadow_filter = 2
-shadow_filter_smooth = 0.6
+shadow_filter = 1
+shadow_filter_smooth = 5.8
 texture = SubResource("GradientTexture2D_tbfit")
 
 [node name="SoubalienContainer" type="Node2D" parent="Control"]
@@ -193,7 +193,7 @@ occluder = SubResource("OccluderPolygon2D_xnmwc")
 position = Vector2(1514.67, 260.404)
 scale = Vector2(0.916667, 0.99639)
 texture = SubResource("GradientTexture2D_6j5qt")
-polygon = PackedVector2Array(162.909, 925.938, -1669.82, 1014.26, -18.1818, -85.7138, -6.18176, -89.7283, 0.363647, -88.7247, 10.1819, -83.7066, 21.0909, -70.6595, 23.2728, -63.6341, 24.3636, -57.6124)
+polygon = PackedVector2Array(162.909, 925.938, -1669.82, 1014.26, -18.1818, -85.7138, -6.18176, -89.7283, 6.35999, -87.218, 16.1781, -82.1999, 24.9054, -73.1673, 29.269, -65.1383, 30.36, -52.0912)
 uv = PackedVector2Array(64, 64, 1.90735e-06, 64, 0, 0, 24, 0, 32, 0, 40, 0, 48, 0, 56, 0, 64, -2.38419e-06)
 
 [node name="Feis" type="TextureRect" parent="Control"]

@@ -27,8 +27,11 @@ restart_button = NodePath("MainContainer/MarginContainer/MenuContainer/MarginCon
 quit_to_main_menu_button = NodePath("MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/QuitToMainMenuButton")
 
 [node name="MainContainer" type="PanelContainer" parent="."]
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("2_70ys4")
 theme_override_styles/panel = SubResource("StyleBoxFlat_r7mit")
 
