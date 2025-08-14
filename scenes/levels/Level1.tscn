@@ -112,6 +112,7 @@ soubalien_race_audio_stream_player = NodePath("../Soubalien/AudioStreamPlayer2D"
 
 [node name="RaceAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("15_p5s5a")
+volume_db = 8.0
 
 [node name="ForestAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("16_njy47")
@@ -121,6 +122,7 @@ parameters/looping = true
 
 [node name="SoubalienAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("6_dqba7")
+volume_db = 10.0
 playback_type = 1
 parameters/looping = false
 
