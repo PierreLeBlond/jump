@@ -121,10 +121,12 @@ parameters/looping = true
 
 [node name="SoubalienAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("6_dqba7")
+playback_type = 1
 parameters/looping = false
 
 [node name="RaceNoteAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("8_usw5k")
+playback_type = 1
 parameters/looping = false
 
 [node name="NoteAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
