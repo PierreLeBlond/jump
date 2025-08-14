@@ -36,8 +36,8 @@ func _ready() -> void:
     end_portal.player_captured.connect(on_player_finished)
 
     player.collector.combo_duration = NOTE_COMBO_DURATION
-    player.collector.note_collected.connect(func(_count: int): Events.note_collected.emit())
-    player.collector.combo_updated.connect(func(duration: float, count: int): Events.combo_updated.emit(duration, count))
+    player.collector.note_collected.connect(func(_count: int): Events.emit_note_collected())
+    player.collector.combo_updated.connect(func(duration: float, count: int): Events.emit_combo_updated(duration, count))
 
     soubalien.visible = false
     soubalien.process_mode = Node.PROCESS_MODE_DISABLED
@@ -64,7 +64,7 @@ func introduce_race(_body: Node2D) -> void:
 
     soubalien_introduce_path.call_deferred("set_child", soubalien)
     race_introduction_camera.set_target(soubalien)
-    Events.soubalien_appears.emit()
+    Events.emit_soubalien_appears()
     await soubalien_introduce_path.start()
 
     player.collector.combo_duration = RACE_NOTE_COMBO_DURATION
@@ -87,7 +87,7 @@ func start_chase() -> void:
 
     cinematic_bars.unreveal()
 
-    Events.race_starts.emit()
+    Events.emit_race_starts()
     await countdown.play()
 
     game_run.reset_time()
@@ -115,7 +115,7 @@ func race_introduction_checkpoint_load() -> void:
 func on_player_captured() -> void:
     soubalien.captured_player.disconnect(on_player_captured)
     soubalien.ray_captured_player.disconnect(on_ray_captured_player)
-    Events.race_ends.emit()
+    Events.emit_race_ends()
 
     var release = await Transition.create_circle_transition_out(get_tree().root, player)
 
@@ -127,7 +127,7 @@ func on_player_finished() -> void:
     soubalien_chase_path.stop()
     soubalien.captured_player.disconnect(on_player_captured)
     soubalien.ray_captured_player.disconnect(on_ray_captured_player)
-    Events.race_ends.emit()
+    Events.emit_race_ends()
 
     var release = await Transition.create_circle_transition_out(get_tree().root, player)
     # load_level("Level2")

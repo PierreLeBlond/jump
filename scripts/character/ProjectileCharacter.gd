@@ -64,8 +64,8 @@ func cancel_jump() -> bool:
 
 func lock_key(key: String) -> void:
     unlocked_keys.keys[key] = false
-    Events.player_unlocked_keys_changed.emit(unlocked_keys)
+    Events.emit_player_unlocked_keys_changed(unlocked_keys)
 
 func unlock_key(key: String) -> void:
     unlocked_keys.keys[key] = true
-    Events.player_unlocked_keys_changed.emit(unlocked_keys)
+    Events.emit_player_unlocked_keys_changed(unlocked_keys)
