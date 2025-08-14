@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cb86qpl3esx1b"]
+
+[ext_resource type="PackedScene" uid="uid://bjoeperplwjuw" path="res://scenes/ui/components/ComboScore.tscn" id="1_l8lb3"]
+
+[node name="ComboNoteScore" type="Node2D"]
+
+[node name="Label" parent="." instance=ExtResource("1_l8lb3")]
+offset_left = -46.0
+offset_top = -46.0
+offset_right = 46.0
+offset_bottom = 46.0

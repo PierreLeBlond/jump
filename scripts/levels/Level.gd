@@ -43,9 +43,8 @@ func _ready() -> void:
 
     checkpoint_manager.activate_checkpoints(self, game_run)
 
-    player.collector.note_collected.connect(add_score)
-    player.collector.note_restored.connect(set_score)
-    player.collector.life_collected.connect(add_life)
+    player.collector.note_collected.connect(game_run.add_note)
+    player.collector.life_collected.connect(game_run.add_life)
 
 
 func load_level(level_name: String) -> void:
@@ -65,19 +64,10 @@ func start_new_game() -> void:
 
 func die() -> void:
     if game_run.life > 1:
-        game_run.add_life(-1)
+        game_run.remove_life()
         load_checkpoint()
     else:
         game_over.emit()
 
 func finish() -> void:
     victory.emit()
-
-func add_score(value: int) -> void:
-    game_run.add_score(value)
-
-func set_score(value: int) -> void:
-    game_run.set_score(value)
-
-func add_life(value: int) -> void:
-    game_run.add_life(value)

@@ -35,9 +35,9 @@ func _ready() -> void:
     end_portal.spawn()
     end_portal.player_captured.connect(on_player_finished)
 
-    player.collector.combo_duration = NOTE_COMBO_DURATION
-    player.collector.note_collected.connect(func(_count: int): Events.emit_note_collected())
-    player.collector.combo_updated.connect(func(duration: float, count: int): Events.emit_combo_updated(duration, count))
+    game_run.combo_duration = NOTE_COMBO_DURATION
+    player.collector.note_collected.connect(func(): Events.emit_note_collected())
+    game_run.combo_updated.connect(func(duration: float, count: int): Events.emit_combo_updated(duration, count))
 
     soubalien.visible = false
     soubalien.process_mode = Node.PROCESS_MODE_DISABLED
@@ -70,7 +70,7 @@ func introduce_race(_body: Node2D) -> void:
     Events.emit_soubalien_appears()
     await soubalien_introduce_path.start()
 
-    player.collector.combo_duration = RACE_NOTE_COMBO_DURATION
+    game_run.combo_duration = RACE_NOTE_COMBO_DURATION
 
     start_chase()
 

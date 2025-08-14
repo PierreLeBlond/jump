@@ -11,7 +11,6 @@ signal checkpoint_loaded()
 @export var game_run: GameRun
 
 var collected_notes_index: int = 0
-var saved_time: float = 0.0
 
 func _ready() -> void:
     body_entered.connect(on_body_entered)
@@ -25,13 +24,14 @@ func save():
     collected_notes_index = player.collector.collected_notes.size()
 
     if game_run:
-        saved_time = game_run.accumulated_time
+        # NOTE: Won't work if we load a checkpoint after another on has been loaded
+        game_run.save()
 
     checkpoint_saved.emit(self)
 
 func load():
     if game_run:
-        game_run.accumulated_time = saved_time
+        game_run.restore()
 
     player.collector.restore(collected_notes_index)
 
