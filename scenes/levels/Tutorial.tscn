@@ -25,13 +25,13 @@ size = Vector2(512, 128)
 size = Vector2(128, 1080)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_61wbf"]
-size = Vector2(130, 1080)
+size = Vector2(522, 121)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_off5s"]
 size = Vector2(128, 1080)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ktok"]
-size = Vector2(512, 128)
+size = Vector2(512, 750)
 
 [sub_resource type="Gradient" id="Gradient_61wbf"]
 colors = PackedColorArray(0.72914, 0.819629, 1, 1, 1, 1, 1, 1)
@@ -103,6 +103,7 @@ offset_bottom = 40.0
 
 [node name="Text" type="RichTextLabel" parent="TextRevealAreas/1/Control"]
 z_index = -10
+layout_mode = 0
 offset_left = -220.0
 offset_top = 548.0
 offset_right = 488.0
@@ -158,6 +159,7 @@ offset_bottom = 40.0
 
 [node name="Text" type="RichTextLabel" parent="TextRevealAreas/5/Control"]
 z_index = -10
+layout_mode = 0
 offset_left = 395.0
 offset_top = 627.0
 offset_right = 1271.0
@@ -166,6 +168,7 @@ bbcode_enabled = true
 text = "saute avec"
 
 [node name="TextureRect" type="TextureRect" parent="TextRevealAreas/5/Control"]
+layout_mode = 0
 offset_left = 600.0
 offset_top = 624.0
 offset_right = 667.0
@@ -346,6 +349,7 @@ offset_bottom = 40.0
 
 [node name="Text" type="RichTextLabel" parent="TextRevealAreas/14/Control"]
 z_index = -10
+layout_mode = 0
 offset_left = 306.0
 offset_top = 486.0
 offset_right = 1043.0
@@ -355,6 +359,7 @@ text = "Fais une pause
 en appuyant sur "
 
 [node name="TextureRect" type="TextureRect" parent="TextRevealAreas/14/Control"]
+layout_mode = 0
 offset_left = 608.0
 offset_top = 541.0
 offset_right = 675.0
@@ -386,15 +391,26 @@ shape = SubResource("RectangleShape2D_af4br")
 
 [node name="UnlockAreas" type="Node" parent="."]
 
-[node name="UnlockRunArea" type="Area2D" parent="UnlockAreas"]
+[node name="UnlockMoveArea" type="Area2D" parent="UnlockAreas"]
 position = Vector2(1183, 11)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("5_0t4of")
-unlocked_keys = Array[String](["run_unlocked"])
+unlocked_keys = Array[String](["move_unlocked"])
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UnlockAreas/UnlockRunArea"]
-position = Vector2(-651, 535)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UnlockAreas/UnlockMoveArea"]
+position = Vector2(-847, 882.5)
+shape = SubResource("RectangleShape2D_61wbf")
+
+[node name="UnlockPauseArea" type="Area2D" parent="UnlockAreas"]
+position = Vector2(8850, 11)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("5_0t4of")
+unlocked_keys = Array[String](["pause_unlocked"])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UnlockAreas/UnlockPauseArea"]
+position = Vector2(0, 535)
 shape = SubResource("RectangleShape2D_61wbf")
 
 [node name="UnlockJumpArea" type="Area2D" parent="UnlockAreas"]
@@ -408,15 +424,15 @@ unlocked_keys = Array[String](["jump_unlocked"])
 position = Vector2(0, 540)
 shape = SubResource("RectangleShape2D_off5s")
 
-[node name="LockRun&JumpArea" type="Area2D" parent="UnlockAreas"]
+[node name="LockControlsArea" type="Area2D" parent="UnlockAreas"]
 position = Vector2(334, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("5_0t4of")
-locked_keys = Array[String](["jump_unlocked", "run_unlocked"])
+locked_keys = Array[String](["jump_unlocked", "move_unlocked", "pause_unlocked"])
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UnlockAreas/LockRun&JumpArea"]
-position = Vector2(0, 896)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UnlockAreas/LockControlsArea"]
+position = Vector2(0, 374)
 shape = SubResource("RectangleShape2D_7ktok")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]

@@ -31,7 +31,7 @@ func disappear() -> void:
     await animationPlayer.animation_finished
 
 func capture_player() -> void:
-    player.is_externally_controlled = true
+    player.lock_key(Globals.PHYSICS_UNLOCKED_KEY)
     var tween = create_tween()
     tween.tween_property(player, "scale", Vector2(0, 0), 0.5)
     is_player_captured = true
@@ -39,7 +39,7 @@ func capture_player() -> void:
     await disappear()
 
 func hold_player() -> void:
-    player.is_externally_controlled = true
+    player.lock_key(Globals.PHYSICS_UNLOCKED_KEY)
     player.global_position = global_position
     player.scale = Vector2(1, 1)
     player.modulate.a = 0
@@ -49,7 +49,7 @@ func release_player() -> void:
     var tween = create_tween()
     tween.tween_property(player, "modulate:a", 1, 0.5)
     player.velocity = Vector2.UP * 700
-    player.is_externally_controlled = false
+    player.unlock_key(Globals.PHYSICS_UNLOCKED_KEY)
     is_player_captured = false
     disappear()
 

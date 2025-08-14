@@ -73,7 +73,7 @@ func on_body_entered(body: Node2D) -> void:
 
     state = SoubalienState.CAPTURING_PLAYER
 
-    player.is_externally_controlled = true
+    player.lock_key(Globals.PHYSICS_UNLOCKED_KEY)
     var tween = create_tween()
     tween.tween_property(player, "scale", Vector2(0, 0), 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
     tween.parallel().tween_property(player, "modulate:a", 0.0, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
@@ -112,7 +112,7 @@ func get_angle_from_cone(point: Vector2) -> float:
 
 
 func restore_player() -> void:
-    player.is_externally_controlled = false
+    player.unlock_key(Globals.PHYSICS_UNLOCKED_KEY)
     player.external_accelerations = {}
     player.set_collision_mask_value(1, true)
     player.scale = Vector2(1, 1)

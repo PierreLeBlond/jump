@@ -27,7 +27,6 @@ var unlocked_keys: UnlockedKeys = UnlockedKeys.new()
 var external_accelerations: Dictionary[String, Vector2] = {}
 
 var is_in_gravity_field: bool = false
-var is_externally_controlled: bool = false
 
 var direction: int = 1
 
@@ -36,7 +35,7 @@ func _ready() -> void:
     state_machine.init(self)
 
 func _physics_process(delta: float) -> void:
-    if is_externally_controlled:
+    if !unlocked_keys.has_unlocked_physics():
         return
 
     if (velocity.y < 0):
@@ -62,3 +61,11 @@ func wants_to_walk() -> bool:
 
 func cancel_jump() -> bool:
     return movement_controller.cancel_jump()
+
+func lock_key(key: String) -> void:
+    unlocked_keys.keys[key] = false
+    Events.player_unlocked_keys_changed.emit(unlocked_keys)
+
+func unlock_key(key: String) -> void:
+    unlocked_keys.keys[key] = true
+    Events.player_unlocked_keys_changed.emit(unlocked_keys)

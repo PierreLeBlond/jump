@@ -13,18 +13,16 @@ const INAUDIBLE_VOLUME_DB: float = -80.0
 @export var race_audio_stream_player: AudioStreamPlayer
 @export var soubalien_race_audio_stream_player: AudioStreamPlayer2D
 
-@export var event_dispatcher: EventDispatcher
-
 var note_collected_tween: Tween
 
 var current_note_audio_stream_player: AudioStreamPlayer
 var current_note_duration: float = 0.0
 
 func _ready() -> void:
-    event_dispatcher.soubalien_appears.connect(on_soubalien_appears)
-    event_dispatcher.race_starts.connect(on_race_starts)
-    event_dispatcher.race_ends.connect(on_race_ends)
-    event_dispatcher.combo_updated.connect(on_combo_updated)
+    Events.soubalien_appears.connect(on_soubalien_appears)
+    Events.race_starts.connect(on_race_starts)
+    Events.race_ends.connect(on_race_ends)
+    Events.combo_updated.connect(on_combo_updated)
 
     current_note_audio_stream_player = note_audio_stream_player
     current_note_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB

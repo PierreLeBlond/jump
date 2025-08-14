@@ -13,6 +13,8 @@ var level: Level:
         if !level && get_tree().paused:
             close_pause_menu()
 
+var can_pause: bool = true
+
 func _ready() -> void:
     process_mode = Node.PROCESS_MODE_ALWAYS
 
@@ -23,14 +25,19 @@ func _ready() -> void:
     pause_menu.wants_to_restart.connect(start_new_game)
     pause_menu.wants_to_quit_to_main_menu.connect(quit_to_main_menu)
 
+    Events.player_unlocked_keys_changed.connect(on_player_unlocked_keys_changed)
+
 func _input(event: InputEvent) -> void:
-    if !level || !event.is_action_pressed("pause"):
+    if !level || !event.is_action_pressed("pause") || !can_pause:
         return
 
     if get_tree().paused:
         close_pause_menu()
     else:
         open_pause_menu()
+
+func on_player_unlocked_keys_changed(unlocked_keys: UnlockedKeys) -> void:
+    can_pause = unlocked_keys.has_unlocked_pause()
 
 func open_pause_menu() -> void:
     paused.emit()

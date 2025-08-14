@@ -8,13 +8,11 @@ class_name ComboNote
 @export var combo_label: Label
 @export var texture_range: Range
 
-@export var event_dispatcher: EventDispatcher
-
 var tween: Tween
 
 func _ready() -> void:
     hide()
-    event_dispatcher.combo_updated.connect(on_combo_updated)
+    Events.combo_updated.connect(on_combo_updated)
 
 func _process(_delta: float) -> void:
     global_position = target.get_global_transform().origin + offset

@@ -76,6 +76,8 @@ func load_level(level_name: String) -> Level:
 
     pause_manager.level = current_level
 
+    Events.player_unlocked_keys_changed.emit(current_level.player.unlocked_keys)
+
     resume()
 
     release.call_deferred()

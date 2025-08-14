@@ -1,7 +1,7 @@
 [gd_scene load_steps=38 format=4 uid="uid://de32o3g1w17vm"]
 
 [ext_resource type="Script" uid="uid://ft5l0rjyxnrn" path="res://scripts/levels/Level1.gd" id="1_p5s5a"]
-[ext_resource type="Script" uid="uid://b1qlks4lid3un" path="res://scripts/levels/EventDispatcher.gd" id="2_dqba7"]
+[ext_resource type="Script" uid="uid://b1qlks4lid3un" path="res://scripts/game/Events.gd" id="2_dqba7"]
 [ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/components/CinematicBars.tscn" id="2_j7nyf"]
 [ext_resource type="Script" uid="uid://calrwlxq3l0el" path="res://scripts/game/CheckpointManager.gd" id="2_xbvxr"]
 [ext_resource type="Script" uid="uid://ewkys0jryvy8" path="res://scripts/levels/MusicManager.gd" id="3_bspq0"]
@@ -74,7 +74,7 @@ size = Vector2(127, 1088)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j7nyf"]
 size = Vector2(3226, 1049)
 
-[node name="Level1" type="Node2D" node_paths=PackedStringArray("race_introduction_camera", "player_focus_camera", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "end_portal", "countdown", "combo_note", "cinematic_bars", "race_introduction_area", "race_introduction_checkpoint", "event_dispatcher", "player", "player_camera", "camera_manager", "checkpoint_manager")]
+[node name="Level1" type="Node2D" node_paths=PackedStringArray("race_introduction_camera", "player_focus_camera", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "end_portal", "countdown", "combo_note", "cinematic_bars", "race_introduction_area", "race_introduction_checkpoint", "player", "player_camera", "camera_manager", "checkpoint_manager")]
 process_mode = 1
 script = ExtResource("1_p5s5a")
 race_introduction_camera = NodePath("RaceIntroduceCamera")
@@ -88,7 +88,6 @@ combo_note = NodePath("ComboNote")
 cinematic_bars = NodePath("CinematicBars")
 race_introduction_area = NodePath("RaceIntroductionArea")
 race_introduction_checkpoint = NodePath("Checkpoint")
-event_dispatcher = NodePath("EventDispatcher")
 player = NodePath("Player")
 player_camera = NodePath("PlayerCamera")
 camera_manager = NodePath("CameraManager")
@@ -102,7 +101,7 @@ script = ExtResource("2_xbvxr")
 start_checkpoint = NodePath("../StartCheckpoint")
 metadata/_custom_type_script = "uid://calrwlxq3l0el"
 
-[node name="MusicManager" type="Node" parent="." node_paths=PackedStringArray("forest_audio_stream_player", "note_audio_stream_player", "soubalien_audio_stream_player", "race_note_audio_stream_player", "race_audio_stream_player", "soubalien_race_audio_stream_player", "event_dispatcher")]
+[node name="MusicManager" type="Node" parent="." node_paths=PackedStringArray("forest_audio_stream_player", "note_audio_stream_player", "soubalien_audio_stream_player", "race_note_audio_stream_player", "race_audio_stream_player", "soubalien_race_audio_stream_player")]
 script = ExtResource("3_bspq0")
 forest_audio_stream_player = NodePath("ForestAudioStreamPlayer")
 note_audio_stream_player = NodePath("NoteAudioStreamPlayer")
@@ -110,7 +109,6 @@ soubalien_audio_stream_player = NodePath("SoubalienAudioStreamPlayer")
 race_note_audio_stream_player = NodePath("RaceNoteAudioStreamPlayer")
 race_audio_stream_player = NodePath("RaceAudioStreamPlayer")
 soubalien_race_audio_stream_player = NodePath("../Soubalien/AudioStreamPlayer2D")
-event_dispatcher = NodePath("../EventDispatcher")
 
 [node name="RaceAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("15_p5s5a")
@@ -347,13 +345,12 @@ metadata/_custom_type_script = "uid://bbujjd3t0eg6e"
 [node name="Countdown" parent="." instance=ExtResource("16_p5s5a")]
 bpm = 108
 
-[node name="ComboNote" parent="." node_paths=PackedStringArray("target", "event_dispatcher") instance=ExtResource("24_6ex7q")]
+[node name="ComboNote" parent="." node_paths=PackedStringArray("target") instance=ExtResource("24_6ex7q")]
 offset_left = 224.0
 offset_top = 695.0
 offset_right = 224.0
 offset_bottom = 695.0
 target = NodePath("../Player")
 offset = Vector2(0, -128)
-event_dispatcher = NodePath("../EventDispatcher")
 
 [node name="MobileControls" parent="." instance=ExtResource("25_ijfg6")]
