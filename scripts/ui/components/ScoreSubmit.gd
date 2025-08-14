@@ -9,6 +9,7 @@ signal submitted()
 
 @export var player_name_input: LineEdit
 
+@export var prompt_button: TextureButton
 @export var submit_button: Button
 
 var score: int = 0:
@@ -22,7 +23,19 @@ var time: float = 0:
         time_label.text = Utils.format_time(time)
 
 func _ready() -> void:
+    prompt_button.pressed.connect(on_prompt_button_pressed)
     submit_button.pressed.connect(on_submit_button_pressed)
+
+    if OS.has_feature('mobile'):
+        prompt_button.visible = true
+    else:
+        prompt_button.visible = false
+
+func on_prompt_button_pressed() -> void:
+    if OS.has_feature('mobile'):
+        player_name_input.text = JavaScriptBridge.eval("""
+        window.prompt('nom') 
+        """).substring(0, 16)
 
 func on_submit_button_pressed() -> void:
     if player_name_input.text.is_empty():
