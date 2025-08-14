@@ -41,15 +41,12 @@ func _ready() -> void:
     var release = await Transition.create_circle_transition_in(get_tree().root, player)
     release.call_deferred()
 
-    show_hud()
-
 func introduce_race(_body: Node2D) -> void:
     race_introduction_area.body_entered.disconnect(introduce_race)
 
     player.unlocked_keys.keys[Globals.MOVE_UNLOCKED_KEY] = false
     await get_tree().create_timer(1.0).timeout
 
-    hide_hud()
     cinematic_bars.reveal()
     camera_manager.fly_to(race_introduction_camera)
 
@@ -82,14 +79,12 @@ func start_chase() -> void:
     await countdown_animation_player.animation_finished
 
     camera_manager.fly_to(player_camera)
-    show_hud()
 
     player.unlocked_keys.keys[Globals.MOVE_UNLOCKED_KEY] = true
 
     soubalien_chase_path.start()
 
 func race_introduction_checkpoint_preload() -> void:
-    hide_hud()
     cinematic_bars.reveal()
     soubalien_chase_path.reset()
     player.unlocked_keys.keys[Globals.MOVE_UNLOCKED_KEY] = false
@@ -119,7 +114,6 @@ func on_player_finished() -> void:
     release.call_deferred()
 
 func on_ray_captured_player() -> void:
-    hide_hud()
     cinematic_bars.reveal()
     player.unlocked_keys.keys[Globals.MOVE_UNLOCKED_KEY] = false
     soubalien_chase_path.stop()

@@ -11,13 +11,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("2_05upv")
 start_new_game_button = NodePath("PanelContainer/VBoxContainer/VBoxContainer/StartNewGame")
 quit_to_main_menu_button = NodePath("PanelContainer/VBoxContainer/VBoxContainer/QuitToMainMenu")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-offset_right = 1920.0
-offset_bottom = 1080.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("2_nhrd6")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]

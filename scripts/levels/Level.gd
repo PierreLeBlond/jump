@@ -35,6 +35,12 @@ func _ready() -> void:
     hud.score_counter.update_counter(game_run.score)
     hud.time_counter.update_time_counter(game_run.accumulated_time)
 
+    hud.hide_life_counter()
+    hud.hide_score_counter()
+    hud.hide_time_counter()
+
+    add_child(hud)
+
     checkpoint_manager.activate_checkpoints(self, game_run)
 
     player.collector.note_collected.connect(add_score)
@@ -57,20 +63,8 @@ func quit_to_main_menu() -> void:
 func start_new_game() -> void:
     wants_to_start_new_game.emit()
 
-func show_hud() -> void:
-    if hud.get_parent():
-        return
-
-    add_child(hud)
-
-func hide_hud() -> void:
-    if !hud.get_parent():
-        return
-
-    remove_child(hud)
-
 func die() -> void:
-    if game_run.life > 0:
+    if game_run.life > 1:
         game_run.add_life(-1)
         load_checkpoint()
     else:

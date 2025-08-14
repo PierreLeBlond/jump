@@ -47,7 +47,8 @@ func _ready() -> void:
     release.call_deferred()
 
     hud.hide_time_counter()
-    show_hud()
+    hud.reveal_life_counter()
+    hud.reveal_score_counter()
 
 func introduce_race(_body: Node2D) -> void:
     race_introduction_area.body_entered.disconnect(introduce_race)
@@ -55,7 +56,9 @@ func introduce_race(_body: Node2D) -> void:
     player.lock_key(Globals.MOVE_UNLOCKED_KEY)
     await get_tree().create_timer(1.0).timeout
 
-    hide_hud()
+    hud.unreveal_life_counter()
+    hud.unreveal_score_counter()
+
     cinematic_bars.reveal()
     camera_manager.fly_to(race_introduction_camera)
 
@@ -92,17 +95,22 @@ func start_chase() -> void:
 
     game_run.reset_time()
     game_run.play()
-    hud.show_time_counter()
+
+    hud.reveal_life_counter()
+    hud.reveal_time_counter()
+    hud.reveal_score_counter()
 
     camera_manager.fly_to(player_camera)
-    show_hud()
 
     player.unlock_key(Globals.MOVE_UNLOCKED_KEY)
 
     soubalien_chase_path.start()
 
 func race_introduction_checkpoint_preload() -> void:
-    hide_hud()
+    hud.unreveal_life_counter()
+    hud.unreveal_score_counter()
+    hud.unreveal_time_counter()
+
     cinematic_bars.reveal()
     soubalien_chase_path.reset()
     player.lock_key(Globals.MOVE_UNLOCKED_KEY)
@@ -135,7 +143,10 @@ func on_player_finished() -> void:
     release.call_deferred()
 
 func on_ray_captured_player() -> void:
-    hide_hud()
+    hud.unreveal_life_counter()
+    hud.unreveal_score_counter()
+    hud.unreveal_time_counter()
+
     cinematic_bars.reveal()
     player.lock_key(Globals.MOVE_UNLOCKED_KEY)
     soubalien_chase_path.stop()

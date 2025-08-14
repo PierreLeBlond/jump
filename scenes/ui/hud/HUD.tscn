@@ -1,314 +1,234 @@
-[gd_scene load_steps=13 format=3 uid="uid://82tigqg507ba"]
+[gd_scene load_steps=8 format=3 uid="uid://82tigqg507ba"]
 
 [ext_resource type="Script" uid="uid://cbyph1udid6vi" path="res://scripts/ui/hud/HUD.gd" id="1_f4fii"]
+[ext_resource type="Script" uid="uid://de2d2njqqoynk" path="res://scripts/ui/hud/LifeCounter.gd" id="2_w7tcg"]
 [ext_resource type="Script" uid="uid://be7ric8odntpy" path="res://scripts/ui/hud/Counter.gd" id="2_x328j"]
 [ext_resource type="Texture2D" uid="uid://b7yga0pu0e4fy" path="res://assets/sprites/note.png" id="3_x328j"]
 [ext_resource type="Texture2D" uid="uid://bntjuemh2bca1" path="res://assets/sprites/heart.png" id="4_x328j"]
 [ext_resource type="Texture2D" uid="uid://dwmx02woptjx6" path="res://assets/sprites/clock.png" id="5_2jm8r"]
 [ext_resource type="Script" uid="uid://cqfhfvfoiscye" path="res://scripts/ui/hud/TimeCounter.gd" id="5_t01tj"]
 
-[sub_resource type="Animation" id="Animation_gyw86"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_i654n"]
-resource_name = "pulse"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.25, 1.25), Vector2(1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gyw86"]
-_data = {
-&"RESET": SubResource("Animation_gyw86"),
-&"pulse": SubResource("Animation_i654n")
-}
-
-[sub_resource type="Animation" id="Animation_2jm8r"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LifeCounter:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ScoreCounter:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("TimeCounter:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_x328j"]
-resource_name = "reveal"
-length = 0.7
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LifeCounter:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.5),
-"transitions": PackedFloat32Array(1.75, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(1.25, 1.25), Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ScoreCounter:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.6),
-"transitions": PackedFloat32Array(1.75, 1, 1),
-"update": 0,
-"values": [Vector2(1e-05, 1e-05), Vector2(1.25, 1.25), Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("TimeCounter:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.7),
-"transitions": PackedFloat32Array(1.75, 1, 1),
-"update": 0,
-"values": [Vector2(1e-05, 1e-05), Vector2(1.25, 1.25), Vector2(1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_t01tj"]
-_data = {
-&"RESET": SubResource("Animation_2jm8r"),
-&"reveal": SubResource("Animation_x328j")
-}
-
-[node name="Hud" type="CanvasLayer" node_paths=PackedStringArray("animation_player", "life_counter", "score_counter", "time_counter")]
+[node name="Hud" type="CanvasLayer" node_paths=PackedStringArray("life_counter", "score_counter", "time_counter")]
 layer = 2
 script = ExtResource("1_f4fii")
-animation_player = NodePath("AnimationPlayer")
-life_counter = NodePath("LifeCounter")
-score_counter = NodePath("ScoreCounter")
-time_counter = NodePath("TimeCounter")
+life_counter = NodePath("Control/MarginContainer/LifeCounter")
+score_counter = NodePath("Control/ScoreCounter")
+time_counter = NodePath("Control/MarginContainer2/TimeCounter")
 
-[node name="LifeCounter" type="Control" parent="." node_paths=PackedStringArray("animation_player", "counter_label")]
+[node name="Control" type="Control" parent="."]
 layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 2
+offset_right = 156.0
+offset_bottom = 127.0
+theme_override_constants/margin_left = 64
+
+[node name="LifeCounter" type="HBoxContainer" parent="Control/MarginContainer" node_paths=PackedStringArray("lifes")]
+layout_mode = 2
+script = ExtResource("2_w7tcg")
+lifes = [NodePath("Control/TextureRect"), NodePath("Control2/TextureRect"), NodePath("Control3/TextureRect")]
+
+[node name="Control" type="Control" parent="Control/MarginContainer/LifeCounter"]
+custom_minimum_size = Vector2(92, 92)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/LifeCounter/Control"]
+texture_filter = 4
+custom_minimum_size = Vector2(92, 92)
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -909.0
-offset_top = -491.0
-offset_right = -679.0
-offset_bottom = -399.0
+offset_left = -46.0
+offset_top = -46.0
+offset_right = 46.0
+offset_bottom = 46.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(115, 46)
-size_flags_horizontal = 4
-size_flags_vertical = 4
-script = ExtResource("2_x328j")
-animation_player = NodePath("AnimationPlayer")
-counter_label = NodePath("Label")
-
-[node name="Control" type="Control" parent="LifeCounter"]
-custom_minimum_size = Vector2(92, 92)
-layout_mode = 2
-anchors_preset = 0
-offset_right = 92.0
-offset_bottom = 92.0
 pivot_offset = Vector2(46, 46)
-
-[node name="TextureRect" type="TextureRect" parent="LifeCounter/Control"]
-texture_filter = 4
-custom_minimum_size = Vector2(92, 92)
-layout_mode = 2
-offset_right = 92.0
-offset_bottom = 92.0
 size_flags_horizontal = 4
 texture = ExtResource("4_x328j")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="LifeCounter"]
+[node name="Control2" type="Control" parent="Control/MarginContainer/LifeCounter"]
+custom_minimum_size = Vector2(92, 92)
 layout_mode = 2
-offset_left = 120.0
-offset_top = 22.0
-offset_right = 208.0
-offset_bottom = 69.0
-size_flags_horizontal = 4
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 16
-theme_override_font_sizes/font_size = 48
-text = "00"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="LifeCounter"]
-libraries = {
-&"": SubResource("AnimationLibrary_gyw86")
-}
-
-[node name="ScoreCounter" type="Control" parent="." node_paths=PackedStringArray("animation_player", "counter_label")]
-layout_mode = 3
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/LifeCounter/Control2"]
+texture_filter = 4
+custom_minimum_size = Vector2(92, 92)
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -156.0
-offset_top = -491.0
-offset_right = 74.0
-offset_bottom = -399.0
+offset_left = -46.0
+offset_top = -46.0
+offset_right = 46.0
+offset_bottom = 46.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(115, 46)
+pivot_offset = Vector2(46, 46)
+size_flags_horizontal = 4
+texture = ExtResource("4_x328j")
+expand_mode = 1
+
+[node name="Control3" type="Control" parent="Control/MarginContainer/LifeCounter"]
+custom_minimum_size = Vector2(92, 92)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/LifeCounter/Control3"]
+texture_filter = 4
+custom_minimum_size = Vector2(92, 92)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -46.0
+offset_right = 46.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(46, 46)
+size_flags_horizontal = 4
+texture = ExtResource("4_x328j")
+expand_mode = 1
+
+[node name="Control4" type="Control" parent="Control/MarginContainer/LifeCounter"]
+visible = false
+custom_minimum_size = Vector2(92, 92)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/LifeCounter/Control4"]
+texture_filter = 4
+custom_minimum_size = Vector2(92, 92)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -46.0
+offset_right = 46.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(46, 46)
+size_flags_horizontal = 4
+texture = ExtResource("4_x328j")
+expand_mode = 1
+
+[node name="ScoreCounter" type="HBoxContainer" parent="Control" node_paths=PackedStringArray("control", "counter_label")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+pivot_offset = Vector2(128, 64)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("2_x328j")
-animation_player = NodePath("AnimationPlayer")
+control = NodePath(".")
 counter_label = NodePath("Label")
 
-[node name="Control" type="Control" parent="ScoreCounter"]
+[node name="Control" type="Control" parent="Control/ScoreCounter"]
 custom_minimum_size = Vector2(92, 92)
 layout_mode = 2
-anchors_preset = 0
-offset_right = 92.0
-offset_bottom = 92.0
-pivot_offset = Vector2(46, 46)
+size_flags_horizontal = 3
 
-[node name="TextureRect" type="TextureRect" parent="ScoreCounter/Control"]
+[node name="TextureRect" type="TextureRect" parent="Control/ScoreCounter/Control"]
 texture_filter = 4
 custom_minimum_size = Vector2(92, 92)
-layout_mode = 2
-offset_left = -13.0
-offset_top = -14.0
-offset_right = 107.0
-offset_bottom = 106.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(60, 60)
 size_flags_horizontal = 4
 texture = ExtResource("3_x328j")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="ScoreCounter"]
+[node name="Label" type="Label" parent="Control/ScoreCounter"]
 layout_mode = 2
-offset_left = 120.0
-offset_top = 22.0
-offset_right = 208.0
-offset_bottom = 69.0
-size_flags_horizontal = 4
+size_flags_horizontal = 2
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 48
 text = "00"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ScoreCounter"]
-libraries = {
-&"": SubResource("AnimationLibrary_gyw86")
-}
+[node name="MarginContainer2" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -399.0
+offset_bottom = 128.0
+grow_horizontal = 0
+pivot_offset = Vector2(232, 64)
+theme_override_constants/margin_right = 321
 
-[node name="TimeCounter" type="Control" parent="." node_paths=PackedStringArray("animation_player", "counter_label")]
-layout_mode = 3
+[node name="TimeCounter" type="HBoxContainer" parent="Control/MarginContainer2" node_paths=PackedStringArray("control", "time_label")]
+layout_mode = 2
+theme_override_constants/separation = 16
+script = ExtResource("5_t01tj")
+control = NodePath("..")
+time_label = NodePath("Control2/Label")
+
+[node name="Control" type="Control" parent="Control/MarginContainer2/TimeCounter"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer2/TimeCounter/Control"]
+texture_filter = 4
+custom_minimum_size = Vector2(92, 92)
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 492.0
-offset_top = -491.0
-offset_right = 722.0
-offset_bottom = -399.0
+offset_left = -46.0
+offset_top = -46.0
+offset_right = 46.0
+offset_bottom = 46.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(115, 46)
-size_flags_horizontal = 4
-size_flags_vertical = 4
-script = ExtResource("5_t01tj")
-animation_player = NodePath("AnimationPlayer")
-counter_label = NodePath("Label")
-
-[node name="Control" type="Control" parent="TimeCounter"]
-custom_minimum_size = Vector2(92, 92)
-layout_mode = 2
-anchors_preset = 0
-offset_right = 92.0
-offset_bottom = 92.0
-pivot_offset = Vector2(46, 46)
-
-[node name="TextureRect" type="TextureRect" parent="TimeCounter/Control"]
-texture_filter = 4
-custom_minimum_size = Vector2(92, 92)
-layout_mode = 2
-offset_left = -13.0
-offset_top = -14.0
-offset_right = 107.0
-offset_bottom = 106.0
 pivot_offset = Vector2(60, 60)
 size_flags_horizontal = 4
 texture = ExtResource("5_2jm8r")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="TimeCounter"]
+[node name="Control2" type="Control" parent="Control/MarginContainer2/TimeCounter"]
 layout_mode = 2
-offset_left = 120.0
-offset_top = 22.0
-offset_right = 208.0
-offset_bottom = 69.0
-size_flags_horizontal = 4
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Control/MarginContainer2/TimeCounter/Control2"]
+layout_mode = 2
+offset_left = 16.0
+offset_top = 29.0
+offset_right = 255.0
+offset_bottom = 98.0
+size_flags_horizontal = 6
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 48
 text = "00:00:00"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TimeCounter"]
-libraries = {
-&"": SubResource("AnimationLibrary_gyw86")
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_t01tj")
-}
