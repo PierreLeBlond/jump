@@ -27,9 +27,18 @@ func _ready() -> void:
     current_note_audio_stream_player = note_audio_stream_player
     current_note_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
     current_note_audio_stream_player.play()
+    current_note_audio_stream_player.finished.connect(func():
+        current_note_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
+        current_note_audio_stream_player.play()
+    )
+
+    forest_audio_stream_player.finished.connect(func():
+        forest_audio_stream_player.play()
+    )
 
 func on_soubalien_appears() -> void:
     fade_out(forest_audio_stream_player)
+    fade_out(note_audio_stream_player)
     play(soubalien_audio_stream_player)
 
 func play(audio_stream_player: AudioStreamPlayer) -> void:
