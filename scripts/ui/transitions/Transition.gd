@@ -65,3 +65,19 @@ static func create_fall_transition_out(parent: Node) -> Callable:
     await transition.transition_out()
     return func():
         transition.queue_free()
+
+static func create_loading_transition_in(parent: Node) -> Callable:
+    var resource = load("res://scenes/ui/transitions/scenes/LoadingTransition.tscn")
+    var transition = resource.instantiate()
+    parent.add_child(transition)
+    await transition.transition_in()
+    return func():
+        transition.queue_free()
+
+static func create_loading_transition_out(parent: Node) -> Callable:
+    var resource = load("res://scenes/ui/transitions/scenes/LoadingTransition.tscn")
+    var transition = resource.instantiate()
+    parent.add_child(transition)
+    await transition.transition_out()
+    return func():
+        transition.queue_free()

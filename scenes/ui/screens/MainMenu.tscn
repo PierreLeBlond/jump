@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://mfaxiu15banr"]
+[gd_scene load_steps=14 format=3 uid="uid://mfaxiu15banr"]
 
 [ext_resource type="Script" uid="uid://cq404dg781ufs" path="res://scripts/ui/screens/MainMenu.gd" id="1_a40ga"]
 [ext_resource type="Texture2D" uid="uid://niglju8i3a5s" path="res://assets/sprites/title-screen-soubalien.png" id="2_7one5"]
@@ -98,18 +98,6 @@ _data = {
 &"intro": SubResource("Animation_xnmwc")
 }
 
-[sub_resource type="Gradient" id="Gradient_j2lur"]
-offsets = PackedFloat32Array(0, 0.613419)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_tbfit"]
-gradient = SubResource("Gradient_j2lur")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xnmwc"]
-polygon = PackedVector2Array(-6, -15, 35, -10, 63, 1, 89, 18, 110, 40, 129, 68, 139, 102, 140, 138, 131, 170, 112, 199, 84, 218, 50, 228, 14, 227, -19, 219, -48, 204, -69, 186, -90, 161, -103, 138, -112, 100, -108, 67, -98, 36, -68, 5, -33, -12)
-
 [sub_resource type="Gradient" id="Gradient_j4pmt"]
 colors = PackedColorArray(0, 0, 0, 0, 0.939738, 0.666838, 0.857891, 1)
 
@@ -163,16 +151,6 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="PointLight2D" type="PointLight2D" parent="Control"]
-position = Vector2(-331.499, 18.4991)
-scale = Vector2(50.4219, 46.5156)
-color = Color(0.761295, 0.743076, 0.289112, 0.945098)
-shadow_enabled = true
-shadow_color = Color(0.4, 0.24, 0.36, 1)
-shadow_filter = 1
-shadow_filter_smooth = 5.8
-texture = SubResource("GradientTexture2D_tbfit")
-
 [node name="SoubalienContainer" type="Node2D" parent="Control"]
 position = Vector2(-1916.5, 0.499146)
 
@@ -184,10 +162,6 @@ offset_right = 1838.0
 offset_bottom = 550.0
 texture = ExtResource("2_7one5")
 expand_mode = 1
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Control/SoubalienContainer"]
-position = Vector2(1479, 110)
-occluder = SubResource("OccluderPolygon2D_xnmwc")
 
 [node name="Polygon2D" type="Polygon2D" parent="Control/SoubalienContainer"]
 position = Vector2(1514.67, 260.404)

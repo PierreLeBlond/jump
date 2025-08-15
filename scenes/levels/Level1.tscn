@@ -113,6 +113,7 @@ soubalien_race_audio_stream_player = NodePath("../Soubalien/AudioStreamPlayer2D"
 [node name="RaceAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("15_p5s5a")
 volume_db = 8.0
+autoplay = true
 
 [node name="ForestAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("16_njy47")
@@ -121,12 +122,15 @@ autoplay = true
 [node name="SoubalienAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("6_dqba7")
 volume_db = 10.0
+autoplay = true
 
 [node name="RaceNoteAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("8_usw5k")
+autoplay = true
 
 [node name="NoteAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("9_6ex7q")
+autoplay = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -1

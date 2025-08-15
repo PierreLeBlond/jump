@@ -18,8 +18,6 @@ func init(projectile_character: ProjectileCharacter) -> void:
     )
 
 func change_state(new_state: State, delta: float) -> void:
-    print("Changing state from ", current_state.name, " to ", new_state.name)
-
     new_state.exit()
 
     var previous_state = current_state
@@ -31,9 +29,6 @@ func _ready() -> void:
     current_state = initial_state
 
 func handle_physics(delta: float) -> void:
-    if (parent.wants_to_jump()):
-        print("Wants to jump")
-
     current_state.update(delta)
 
     var new_state = current_state.get_next_state(delta)

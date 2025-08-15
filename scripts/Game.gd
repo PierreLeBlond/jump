@@ -61,11 +61,13 @@ func load_screen(screen_name: String) -> Screen:
 func load_level(level_name: String) -> Level:
     var release = await Transition.create_right_bar_transition_out(get_tree().root)
 
+    var release_loading = await Transition.create_loading_transition_in(get_tree().root)
+
     current_level = load_scene("res://scenes/levels/" + level_name + ".tscn")
-
     current_level.game_run = game_run
-
     level_wrapper.add_child(current_level)
+
+    release_loading.call_deferred()
 
     current_level.wants_to_load_level.connect(load_level)
     current_level.wants_to_start_new_game.connect(start_new_game)

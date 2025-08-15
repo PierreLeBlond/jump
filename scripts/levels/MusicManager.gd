@@ -24,9 +24,15 @@ func _ready() -> void:
     Events.race_ends.connect(on_race_ends)
     Events.combo_updated.connect(on_combo_updated)
 
+    race_note_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
+    race_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
+    soubalien_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
+    soubalien_race_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
+
     current_note_audio_stream_player = note_audio_stream_player
     current_note_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
     current_note_audio_stream_player.play()
+
     current_note_audio_stream_player.finished.connect(func():
         current_note_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
         current_note_audio_stream_player.play()
