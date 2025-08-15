@@ -37,7 +37,6 @@ func _ready() -> void:
 
     game_run.combo_duration = NOTE_COMBO_DURATION
     player.collector.note_collected.connect(func(): Events.emit_note_collected())
-    game_run.combo_updated.connect(func(duration: float, count: int): Events.emit_combo_updated(duration, count))
 
     soubalien.visible = false
     soubalien.process_mode = Node.PROCESS_MODE_DISABLED

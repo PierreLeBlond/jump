@@ -209,6 +209,7 @@ cone_height = 800.0
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Soubalien"]
 stream = ExtResource("7_j7nyf")
 volume_db = 10.0
+autoplay = true
 max_distance = 1920.0
 attenuation = 1.2
 
