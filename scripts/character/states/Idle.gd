@@ -29,12 +29,6 @@ func get_next_state(_delta: float) -> State:
     if (parent.is_in_gravity_field):
         return gravity_field
 
-    if (!parent.is_on_floor()):
-        return fall
-    
-    if (parent.cliff_detector.is_on_cliff()):
-        return cliff_hang
-
     if (parent.wants_to_jump()):
         return jump
 
@@ -44,6 +38,13 @@ func get_next_state(_delta: float) -> State:
     if (parent.wants_to_move()):
         return run
 
+    if (!parent.is_on_floor()):
+        return fall
+    
+    if (parent.cliff_detector.is_on_cliff()):
+        return cliff_hang
+
+    
     return null
 
 func get_parameters() -> Dictionary:

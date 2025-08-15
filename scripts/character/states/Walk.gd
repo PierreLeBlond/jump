@@ -16,14 +16,14 @@ func get_next_state(_delta: float) -> State:
     if (parent.is_in_gravity_field):
         return gravity_field
 
+    if (parent.wants_to_jump()):
+        return jump
+
     if (!parent.is_on_floor()):
         return fall
 
     if (!parent.wants_to_walk()):
         return run
-
-    if (parent.wants_to_jump()):
-        return jump
 
     if (!parent.wants_to_move()):
         return idle
