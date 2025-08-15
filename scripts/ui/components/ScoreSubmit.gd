@@ -26,16 +26,17 @@ func _ready() -> void:
     prompt_button.pressed.connect(on_prompt_button_pressed)
     submit_button.pressed.connect(on_submit_button_pressed)
 
-    if OS.has_feature('mobile'):
+    if OS.has_feature('web'):
         prompt_button.visible = true
     else:
         prompt_button.visible = false
 
 func on_prompt_button_pressed() -> void:
-    if OS.has_feature('mobile'):
-        player_name_input.text = JavaScriptBridge.eval("""
-        window.prompt('nom') 
-        """).substring(0, 16)
+    if OS.has_feature('web'):
+        var player_name = JavaScriptBridge.eval("""
+            window.prompt('nom') 
+            """)
+        player_name_input.text = String(player_name).left(16)
 
 func on_submit_button_pressed() -> void:
     if player_name_input.text.is_empty():

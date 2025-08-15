@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Prenez garde à l'espace en la Terre & Arkab Posterior"
-run/main_scene="uid://dayu043kaonhh"
+run/main_scene="uid://ka3icxdhn46e"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/image="uid://c4jco17wov1w7"
 config/icon="res://icon.svg"

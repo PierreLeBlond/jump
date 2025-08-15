@@ -117,12 +117,10 @@ volume_db = 8.0
 [node name="ForestAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("16_njy47")
 autoplay = true
-parameters/looping = true
 
 [node name="SoubalienAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("6_dqba7")
 volume_db = 10.0
-parameters/looping = false
 
 [node name="RaceNoteAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("8_usw5k")
