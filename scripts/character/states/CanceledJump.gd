@@ -2,6 +2,8 @@ extends State
 
 class_name CanceledJump
 
+const OVERSHOT_FACTOR = 0.4
+
 @export var fall: State
 
 @export var gravity_field: State
@@ -18,12 +20,21 @@ func enter(previous_state: State, delta: float) -> void:
 
     super (previous_state, delta)
 
+    # Basically, we change physics parameters to reach the top of our curve sooner, with a modified transition curve
+    # BUT this is bugged, we keep it like that until it is properly fixed while keeping the same game feel
+
     var jump_pressed_gravity = 2 * parent.projectile_parameters.jump_height / (parent.projectile_parameters.jump_time * parent.projectile_parameters.jump_time)
     var jump_pressed_time = previous_state.jump_pressed_time
     var jump_pressed_height = jump_pressed_gravity * jump_pressed_time * jump_pressed_time / 2 + -2 * parent.projectile_parameters.jump_height * jump_pressed_time / parent.projectile_parameters.jump_time
 
-    canceled_jump_time = jump_pressed_time + 0.2 * parent.projectile_parameters.jump_time
-    canceled_jump_height = jump_pressed_height + 32
+    canceled_jump_time = jump_pressed_time + OVERSHOT_FACTOR * parent.projectile_parameters.jump_time
+    # So, this is wrong, it just artificially adds a downward force, and it just happen that this is what we kind of want
+    # Hovewer, it can cause some bugs, which is why we patch get_next_state
+    canceled_jump_height = jump_pressed_height + OVERSHOT_FACTOR * parent.projectile_parameters.jump_height
+    # This might be the correct evaluation
+    # canceled_jump_height = - jump_pressed_height + OVERSHOT_FACTOR * parent.projectile_parameters.jump_height
+
+    print(canceled_jump_height, " ", canceled_jump_time)
 
     var gravity = 2 * canceled_jump_height / (canceled_jump_time * canceled_jump_time)
 
@@ -46,10 +57,13 @@ func get_next_state(_delta: float) -> State:
     if (parent.wants_to_jump() && parent.projectile_parameters.max_double_jumps > 0):
         return double_jump
 
-    if (parent.velocity.y > 0):
-        return fall
+    # if (parent.velocity.y > 0):
+        # return fall
 
-    return null
+    # return null
+
+    # Just profit of the downward force, but go back to fall state immediatly
+    return fall
 
 func get_parameters() -> Dictionary:
     return {
