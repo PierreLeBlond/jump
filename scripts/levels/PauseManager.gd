@@ -27,6 +27,15 @@ func _ready() -> void:
 
     Events.player_unlocked_keys_changed.connect(on_player_unlocked_keys_changed)
 
+    Events.soubalien_appears.connect(disable_load_checkpoint)
+    Events.race_pre_starts.connect(disable_load_checkpoint)
+    Events.race_starts.connect(enable_load_checkpoint)
+
+    Events.soubalien_captured.connect(disable_load_checkpoint)
+
+    Events.portal_captured.connect(disable_load_checkpoint)
+    Events.portal_released.connect(enable_load_checkpoint)
+
 func _input(event: InputEvent) -> void:
     if !level || !event.is_action_pressed("pause") || !can_pause:
         return
@@ -76,3 +85,9 @@ func quit_to_main_menu() -> void:
         return
 
     level.quit_to_main_menu()
+
+func disable_load_checkpoint() -> void:
+    pause_menu.load_checkpoint_button.disabled = true;
+
+func enable_load_checkpoint() -> void:
+    pause_menu.load_checkpoint_button.disabled = false;

@@ -50,6 +50,7 @@ func _ready() -> void:
     hud.reveal_score_counter()
 
 func introduce_race(_body: Node2D) -> void:
+    Events.emit_soubalien_appears()
     race_introduction_area.body_entered.disconnect(introduce_race)
 
     player.lock_key(Globals.MOVE_UNLOCKED_KEY)
@@ -66,14 +67,15 @@ func introduce_race(_body: Node2D) -> void:
 
     soubalien_introduce_path.call_deferred("set_child", soubalien)
     race_introduction_camera.set_target(soubalien)
-    Events.emit_soubalien_appears()
     await soubalien_introduce_path.start()
 
     game_run.combo_duration = RACE_NOTE_COMBO_DURATION
 
-    start_chase()
+    start_race()
 
-func start_chase() -> void:
+func start_race() -> void:
+    Events.emit_race_pre_starts()
+
     race_introduction_camera.set_target(player)
 
     soubalien_chase_path.call_deferred("set_child", soubalien)
@@ -89,7 +91,7 @@ func start_chase() -> void:
 
     cinematic_bars.unreveal()
 
-    Events.emit_race_starts()
+    Events.emit_countdown_starts()
     await countdown.play()
 
     game_run.reset_time()
@@ -105,6 +107,8 @@ func start_chase() -> void:
 
     soubalien_chase_path.start()
 
+    Events.emit_race_starts()
+
 func race_introduction_checkpoint_preload() -> void:
     hud.unreveal_life_counter()
     hud.unreveal_score_counter()
@@ -117,7 +121,7 @@ func race_introduction_checkpoint_preload() -> void:
 
 func race_introduction_checkpoint_load() -> void:
     await camera_manager.fly_to(race_introduction_camera)
-    start_chase()
+    start_race()
 
 func on_player_captured() -> void:
     soubalien.captured_player.disconnect(on_player_captured)

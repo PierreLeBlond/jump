@@ -90,6 +90,8 @@ func on_ray_area_body_entered(body: Node2D) -> void:
     if (state != SoubalienState.IDLE):
         return
 
+    Events.emit_soubalien_captured()
+
     state = SoubalienState.CAPTURING_PLAYER_IN_RAY
 
     player.velocity = Vector2.ZERO

@@ -31,6 +31,7 @@ func disappear() -> void:
     await animationPlayer.animation_finished
 
 func capture_player() -> void:
+    Events.emit_portal_captured()
     player.lock_key(Globals.PHYSICS_UNLOCKED_KEY)
     var tween = create_tween()
     tween.tween_property(player, "scale", Vector2(0, 0), 0.5)
@@ -52,6 +53,7 @@ func release_player() -> void:
     player.unlock_key(Globals.PHYSICS_UNLOCKED_KEY)
     is_player_captured = false
     disappear()
+    Events.emit_portal_released()
 
 
 func _physics_process(delta: float) -> void:

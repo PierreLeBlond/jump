@@ -20,7 +20,7 @@ var current_note_duration: float = 0.0
 
 func _ready() -> void:
     Events.soubalien_appears.connect(on_soubalien_appears)
-    Events.race_starts.connect(on_race_starts)
+    Events.countdown_starts.connect(on_countdown_starts)
     Events.race_ends.connect(on_race_ends)
     Events.combo_updated.connect(on_combo_updated)
 
@@ -67,7 +67,7 @@ func fade_out_2d(audio_stream_player: AudioStreamPlayer2D, duration: float = 1.0
     await tween.finished
     audio_stream_player.stop()
 
-func on_race_starts() -> void:
+func on_countdown_starts() -> void:
     fade_out(soubalien_audio_stream_player)
     await get_tree().create_timer(RACE_MUSIC_DELAY).timeout
 

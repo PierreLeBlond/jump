@@ -7,3 +7,5 @@
 .env
 
 override.cfg
+
+.vscode
