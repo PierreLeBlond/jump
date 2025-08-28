@@ -172,10 +172,10 @@ uv = PackedVector2Array(64, 64, 1.90735e-06, 64, 0, 0, 24, 0, 32, 0, 40, 0, 48, 
 
 [node name="Feis" type="TextureRect" parent="Control"]
 layout_mode = 0
-offset_left = -1180.0
-offset_top = 1010.0
-offset_right = -740.0
-offset_bottom = 1450.0
+offset_left = 879.0
+offset_top = 44.0
+offset_right = 1319.0
+offset_bottom = 484.0
 texture = ExtResource("5_qi40j")
 expand_mode = 1
 

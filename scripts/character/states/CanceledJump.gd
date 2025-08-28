@@ -34,8 +34,6 @@ func enter(previous_state: State, delta: float) -> void:
     # This might be the correct evaluation
     # canceled_jump_height = - jump_pressed_height + OVERSHOT_FACTOR * parent.projectile_parameters.jump_height
 
-    print(canceled_jump_height, " ", canceled_jump_time)
-
     var gravity = 2 * canceled_jump_height / (canceled_jump_time * canceled_jump_time)
 
     var vertical_velocity = -2 * canceled_jump_height / canceled_jump_time + gravity * jump_pressed_time
