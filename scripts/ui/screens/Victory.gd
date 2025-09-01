@@ -5,6 +5,7 @@ class_name Victory
 @export var start_new_game_button: Button
 @export var quit_to_main_menu_button: Button
 
+@export var on_screen_keyboard: OnScreenKeyboard
 @export var score_submit: ScoreSubmit
 
 var score: int = 0:
@@ -23,5 +24,4 @@ func _ready() -> void:
 
     score_submit.submitted.connect(quit_to_main_menu)
 
-func focus() -> void:
     start_new_game_button.grab_focus()
