@@ -1,4 +1,4 @@
-extends Node
+extends Resource
 
 class_name ProjectileParameters
 
@@ -6,13 +6,13 @@ class_name ProjectileParameters
 
 @export var jump_time: float = 0.4
 
-@export var fall_time: float = 0.3
+@export var fall_time: float = 0.35
 
 @export var jump_distance: float = 70
 
 var maximum_velocity: float = jump_distance / (jump_time + fall_time)
 
-@export var max_double_jumps: int = 1
+@export var max_double_jumps: int = 0
 
 @export var double_jump_height: float = 74
 
@@ -22,7 +22,7 @@ var maximum_velocity: float = jump_distance / (jump_time + fall_time)
 
 var double_jump_maximum_velocity: float = double_jump_distance / (double_jump_time + fall_time)
 
-@export var acceleration_factor: float = 1000
+@export var acceleration_factor: float = 2000
 
 @export var deceleration_factor: float = 2000
 
@@ -47,3 +47,6 @@ var double_jump_maximum_velocity: float = double_jump_distance / (double_jump_ti
 @export var buffered_jump_frames: int = 6
 
 @export var coyote_jump_frames: int = 6
+
+# func _init() -> void:
+#     pass

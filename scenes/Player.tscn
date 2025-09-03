@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b6kdes8c5suyq" path="res://scripts/character/ProjectileCharacter.gd" id="1_lkdrv"]
 [ext_resource type="Texture2D" uid="uid://3k4btk54cqba" path="res://assets/spritesheets/player/player.png" id="2_0rnld"]
+[ext_resource type="Resource" uid="uid://bvl3cqclybygu" path="res://data/projectileParameters/player.tres" id="2_sfy4j"]
 [ext_resource type="Script" uid="uid://ssril2w6enj" path="res://scripts/character/states/StateMachine.gd" id="3_lkdrv"]
 [ext_resource type="Script" uid="uid://bucbmqmbeeupx" path="res://scripts/character/states/Idle.gd" id="4_p7iby"]
 [ext_resource type="Script" uid="uid://c710qahwivjfa" path="res://scripts/character/states/Fall.gd" id="5_0rnld"]
@@ -14,7 +15,6 @@
 [ext_resource type="Script" uid="uid://cx473tyk8323v" path="res://scripts/controls/PlayerController.gd" id="11_gv3ic"]
 [ext_resource type="Script" uid="uid://btq1tr1q7jasc" path="res://scripts/character/states/GravityField.gd" id="11_p7iby"]
 [ext_resource type="Script" uid="uid://2wnddxpocco4" path="res://scripts/character/states/CanceledJump.gd" id="12_0rnld"]
-[ext_resource type="Script" uid="uid://dimlaqea8jyy3" path="res://scripts/character/ProjectileParameters.gd" id="12_b8lor"]
 [ext_resource type="Script" uid="uid://blh3ndwp2n1vi" path="res://scripts/character/CornerCorrector.gd" id="13_lkdrv"]
 [ext_resource type="Script" uid="uid://djcf013m042qh" path="res://scripts/character/states/WallRun.gd" id="13_srp4u"]
 [ext_resource type="Script" uid="uid://n0not04aejg6" path="res://scripts/character/CliffDetector.gd" id="18_61ith"]
@@ -206,7 +206,7 @@ size = Vector2(56, 102)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gv3ic"]
 size = Vector2(54, 104)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("corner_corrector", "cliff_detector", "wall_detector", "state_machine", "movement_controller", "projectile_parameters", "animation_player", "sprite_2d", "collector")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("corner_corrector", "cliff_detector", "wall_detector", "state_machine", "movement_controller", "animation_player", "sprite_2d", "collector")]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_lkdrv")
@@ -215,7 +215,7 @@ cliff_detector = NodePath("CliffDetector")
 wall_detector = NodePath("WallDetector")
 state_machine = NodePath("StateMachine")
 movement_controller = NodePath("MovementController")
-projectile_parameters = NodePath("ProjectileParameters")
+projectile_parameters = ExtResource("2_sfy4j")
 animation_player = NodePath("AnimationPlayer")
 sprite_2d = NodePath("Sprite2D")
 collector = NodePath("Collector")
@@ -333,12 +333,6 @@ animation = "wallrun"
 
 [node name="MovementController" type="Node" parent="."]
 script = ExtResource("11_gv3ic")
-
-[node name="ProjectileParameters" type="Node" parent="."]
-script = ExtResource("12_b8lor")
-fall_time = 0.35
-max_double_jumps = 0
-acceleration_factor = 2000.0
 
 [node name="CornerCorrector" type="Node2D" parent="." node_paths=PackedStringArray("outer_left_ceiling_ray_cast", "inner_left_ceiling_ray_cast", "outer_right_ceiling_ray_cast", "inner_right_ceiling_ray_cast", "movement_controller")]
 script = ExtResource("13_lkdrv")
