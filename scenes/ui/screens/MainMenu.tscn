@@ -214,7 +214,7 @@ text = "jouer"
 [node name="Fly" type="Node" parent="VBoxContainer/Play"]
 script = ExtResource("3_y7cv1")
 y = 800.0
-delay = 0.1
+delay = 0.15
 
 [node name="Leaderboard" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -229,7 +229,7 @@ text = "scores"
 [node name="Fly" type="Node" parent="VBoxContainer/Leaderboard"]
 script = ExtResource("3_y7cv1")
 y = 800.0
-delay = 0.2
+delay = 0.3
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0

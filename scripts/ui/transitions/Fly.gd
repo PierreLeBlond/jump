@@ -9,7 +9,7 @@ class_name Fly
 
 @export var delay: float = 0.0
 
-func _enter_tree() -> void:
+func _ready() -> void:
     transition_in()
 
 func transition_in() -> void:
