@@ -16,16 +16,22 @@ var combo_timer: Timer
 
 var combo_duration: float = DEFAULT_COMBO_DURATION
 
-var life: int = MAX_LIFE
-var score: int = 0
+var life: int = MAX_LIFE:
+    set(value):
+        life = value
+        life_changed.emit(life)
+var score: int = 0:
+    set(value):
+        score = value
+        score_changed.emit(score)
 
-var accumulated_time: float = 0.0
+var elapsed_time: float = 0.0:
+    set(value):
+        elapsed_time = value
+        time_changed.emit(elapsed_time)
 var last_time: float = 0.0
 
 var is_playing: bool = false
-
-var saved_score: int = 0
-var saved_time: float = 0.0
 
 func _ready() -> void:
     reset()
@@ -35,66 +41,53 @@ func reset() -> void:
     score = 0
     reset_time()
 
-    life_changed.emit(life)
-    score_changed.emit(score)
-    time_changed.emit(accumulated_time)
-
-func accumulate_time() -> void:
+func update_time() -> void:
     var time_now = Time.get_unix_time_from_system()
-    accumulated_time += time_now - last_time
+    elapsed_time += time_now - last_time
     last_time = time_now
-    time_changed.emit(accumulated_time)
 
 func reset_time() -> void:
-    accumulated_time = 0.0
+    elapsed_time = 0.0
     last_time = Time.get_unix_time_from_system()
 
-func play() -> void:
+func resume() -> void:
     is_playing = true
     last_time = Time.get_unix_time_from_system()
 
 func pause() -> void:
-    accumulate_time()
+    update_time()
     is_playing = false
 
 func add_life() -> void:
     life += 1
-    life_changed.emit(life)
 
 func remove_life() -> void:
     life -= 1
-    life_changed.emit(life)
 
 func add_note() -> void:
     update_combo()
     score += combo_count
-    score_changed.emit(score)
 
-func save() -> void:
-    saved_score = score
-    saved_time = accumulated_time
-
-func restore() -> void:
-    score = saved_score
-    score_changed.emit(score)
-    accumulated_time = saved_time
-    time_changed.emit(accumulated_time)
+func clear_timer() -> void:
+    if combo_timer:
+        combo_timer.stop()
+        combo_timer.timeout.disconnect(end_combo)
+        combo_timer = null
 
 func update_combo() -> void:
     combo_count += 1
     if combo_timer:
-        combo_timer.stop()
-        combo_timer.timeout.disconnect(on_combo_timeout)
-        combo_timer = null
+        clear_timer()
     combo_timer = Timer.new()
     combo_timer.wait_time = combo_duration
     combo_timer.one_shot = true
     add_child(combo_timer)
     combo_timer.start()
-    combo_timer.timeout.connect(on_combo_timeout)
+    combo_timer.timeout.connect(end_combo)
     Events.emit_combo_updated(combo_duration, combo_count)
 
-func on_combo_timeout() -> void:
+func end_combo() -> void:
+    clear_timer()
     combo_count = 0
     combo_ended.emit()
 
@@ -102,4 +95,4 @@ func _process(_delta: float) -> void:
     if !is_playing:
       return
 
-    accumulate_time()
+    update_time()

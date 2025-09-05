@@ -11,13 +11,23 @@ func focus() -> void:
     pass
 
 func quit_to_main_menu() -> void:
+    disable()
     wants_to_quit_to_main_menu.emit()
 
 func load_level(level_name: String) -> void:
+    disable()
     wants_to_load_level.emit(level_name)
 
 func start_new_game() -> void:
+    disable()
     wants_to_start_new_game.emit()
 
 func open_leaderboard() -> void:
+    disable()
     wants_to_open_leaderboard.emit()
+
+func disable() -> void:
+    pass
+
+func enable() -> void:
+    pass

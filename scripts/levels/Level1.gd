@@ -42,6 +42,9 @@ func _ready() -> void:
     soubalien.process_mode = Node.PROCESS_MODE_DISABLED
     race_introduction_area.body_entered.connect(introduce_race)
 
+    reveal.call_deferred()
+
+func reveal() -> void:
     var release = await Transition.create_circle_transition_in(get_tree().root, player)
     release.call_deferred()
 
@@ -95,7 +98,7 @@ func start_race() -> void:
     await countdown.play()
 
     game_run.reset_time()
-    game_run.play()
+    game_run.resume()
 
     hud.reveal_life_counter()
     hud.reveal_time_counter()
@@ -141,7 +144,6 @@ func on_player_finished() -> void:
     Events.emit_race_ends()
 
     var release = await Transition.create_circle_transition_out(get_tree().root, player)
-    # load_level("Level2")
     finish()
     release.call_deferred()
 

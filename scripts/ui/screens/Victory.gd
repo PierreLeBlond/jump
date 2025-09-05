@@ -25,3 +25,11 @@ func _ready() -> void:
     score_submit.submitted.connect(quit_to_main_menu)
 
     start_new_game_button.grab_focus()
+
+func disable() -> void:
+    start_new_game_button.disabled = true
+    quit_to_main_menu_button.disabled = true
+
+func enable() -> void:
+    start_new_game_button.disabled = false
+    quit_to_main_menu_button.disabled = false

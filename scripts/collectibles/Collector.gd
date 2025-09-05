@@ -24,10 +24,3 @@ func collect_note(note: Note) -> void:
 func collect_life(life: Life) -> void:
     life_collected.emit()
     life.capture()
-
-func restore(restored_index: int):
-    var notes_to_restore = collected_notes.slice(restored_index, collected_notes.size())
-    for note in notes_to_restore:
-        note.restore()
-
-    collected_notes = collected_notes.slice(0, restored_index)

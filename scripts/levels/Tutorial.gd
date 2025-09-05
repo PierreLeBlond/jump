@@ -21,7 +21,7 @@ func _ready() -> void:
 
 func end_game() -> void:
     var release = await Transition.create_circle_transition_out(get_tree().root, player)
-    wants_to_quit_to_main_menu.emit()
+    wants_to_quit.emit()
     release.call_deferred()
 
 func on_void_entered(_body: Node2D) -> void:

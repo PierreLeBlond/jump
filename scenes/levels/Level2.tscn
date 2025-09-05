@@ -1,7 +1,7 @@
 [gd_scene load_steps=30 format=4 uid="uid://w1bd5j3aj5ht"]
 
 [ext_resource type="Script" uid="uid://b642cgu7gfurl" path="res://scripts/levels/Level2.gd" id="1_o6ptl"]
-[ext_resource type="Script" uid="uid://calrwlxq3l0el" path="res://scripts/game/CheckpointManager.gd" id="2_mctl7"]
+[ext_resource type="Script" uid="uid://calrwlxq3l0el" path="res://scripts/checkpoint/CheckpointManager.gd" id="2_mctl7"]
 [ext_resource type="TileSet" uid="uid://dftl5pyptmafp" path="res://tilesets/cloud.tres" id="3_fpd7d"]
 [ext_resource type="TileSet" uid="uid://d2f3f4ukvlod0" path="res://tilesets/tree.tres" id="4_nkm7c"]
 [ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/components/CinematicBars.tscn" id="5_uh3oe"]

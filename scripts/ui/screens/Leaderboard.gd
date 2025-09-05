@@ -64,3 +64,9 @@ func update() -> void:
         var value_label = Label.new()
         value_label.text = Utils.format_time(-time.score)
         time_values_container.add_child(value_label)
+
+func disable() -> void:
+    quit_to_main_menu_button.disabled = true
+
+func enable() -> void:
+    quit_to_main_menu_button.disabled = false

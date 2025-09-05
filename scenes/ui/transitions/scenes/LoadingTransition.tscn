@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b776f6wrrnljc" path="res://scripts/ui/transitions/LoadingTransition.gd" id="1_aje32"]
 
 [node name="LoadingTransition" type="CanvasLayer" node_paths=PackedStringArray("canvas_item")]
+process_mode = 3
 layer = 3
 script = ExtResource("1_aje32")
 canvas_item = NodePath("ColorRect")

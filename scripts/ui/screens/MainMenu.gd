@@ -13,3 +13,13 @@ func _ready() -> void:
 
 func focus() -> void:
     tutorial_button.grab_focus()
+
+func disable() -> void:
+    tutorial_button.disabled = true
+    level_1_button.disabled = true
+    leaderboard_button.disabled = true
+
+func enable() -> void:
+    tutorial_button.disabled = false
+    level_1_button.disabled = false
+    leaderboard_button.disabled = false

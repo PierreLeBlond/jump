@@ -5,13 +5,11 @@ class_name PauseManager
 signal paused()
 signal resumed()
 
-var pause_menu: PauseMenu
+signal wants_to_load_checkpoint()
+signal wants_to_restart()
+signal wants_to_quit()
 
-var level: Level:
-    set(value):
-        level = value
-        if !level && get_tree().paused:
-            close_pause_menu()
+var pause_menu: PauseMenu
 
 var can_pause: bool = true
 
@@ -22,8 +20,10 @@ func _ready() -> void:
 
     pause_menu.wants_to_resume.connect(close_pause_menu)
     pause_menu.wants_to_load_checkpoint.connect(load_checkpoint)
-    pause_menu.wants_to_restart.connect(start_new_game)
-    pause_menu.wants_to_quit_to_main_menu.connect(quit_to_main_menu)
+    pause_menu.wants_to_restart.connect(restart)
+    pause_menu.wants_to_quit_to_main_menu.connect(quit)
+
+    # TODO: Create a script whose only purpose is to deactivate or limit pause menu interactions when necessary
 
     Events.player_unlocked_keys_changed.connect(on_player_unlocked_keys_changed)
 
@@ -37,10 +37,10 @@ func _ready() -> void:
     Events.portal_released.connect(enable_load_checkpoint)
 
 func _input(event: InputEvent) -> void:
-    if !level || !event.is_action_pressed("pause") || !can_pause:
+    if !event.is_action_pressed("pause") || !can_pause:
         return
 
-    if get_tree().paused:
+    if get_children().has(pause_menu):
         close_pause_menu()
     else:
         open_pause_menu()
@@ -60,34 +60,28 @@ func close_pause_menu() -> void:
     resumed.emit()
 
 func load_checkpoint() -> void:
-    if !level:
-        return
-
+    pause_menu.disable()
     var release = await Transition.create_right_bar_transition_out(get_tree().root)
 
-    if get_tree().paused:
+    if get_children().has(pause_menu):
         close_pause_menu()
 
-    level.load_checkpoint()
+    wants_to_load_checkpoint.emit()
+    release.call_deferred()
+    pause_menu.enable()
+
+func restart() -> void:
+    pause_menu.disable()
+    wants_to_restart.emit()
+
+func quit() -> void:
+    pause_menu.disable()
+    var release = await Transition.create_right_bar_transition_out(get_tree().root)
+    wants_to_quit.emit()
     release.call_deferred()
 
-func start_new_game() -> void:
-    if !level:
-        return
-
-    if get_tree().paused:
-        close_pause_menu()
-
-    level.start_new_game()
-
-func quit_to_main_menu() -> void:
-    if !level:
-        return
-
-    level.quit_to_main_menu()
-
 func disable_load_checkpoint() -> void:
-    pause_menu.load_checkpoint_button.disabled = true;
+    pause_menu.load_checkpoint_button.disabled = true
 
 func enable_load_checkpoint() -> void:
-    pause_menu.load_checkpoint_button.disabled = false;
+    pause_menu.load_checkpoint_button.disabled = false

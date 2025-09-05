@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dpr11d1q2xb3x"]
 
-[ext_resource type="Script" uid="uid://qqha1uw625f8" path="res://scripts/contraptions/Checkpoint.gd" id="1_nue2j"]
+[ext_resource type="Script" uid="uid://qqha1uw625f8" path="res://scripts/checkpoint/Checkpoint.gd" id="1_nue2j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_njy47"]
 size = Vector2(126, 1086)

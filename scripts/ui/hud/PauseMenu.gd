@@ -32,3 +32,15 @@ func on_restart_button_pressed() -> void:
 
 func on_quit_to_main_menu_button_pressed() -> void:
     wants_to_quit_to_main_menu.emit()
+
+func disable() -> void:
+    resume_button.disabled = true
+    load_checkpoint_button.disabled = true
+    restart_button.disabled = true
+    quit_to_main_menu_button.disabled = true
+
+func enable() -> void:
+    resume_button.disabled = false
+    load_checkpoint_button.disabled = false
+    restart_button.disabled = false
+    quit_to_main_menu_button.disabled = false

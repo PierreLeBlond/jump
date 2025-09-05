@@ -10,8 +10,7 @@ signal checkpoint_loaded()
 var checkpoints: Array[Checkpoint] = []
 var current_checkpoint: Checkpoint = null
 
-func activate_checkpoints(node: Node, game_run: GameRun) -> void:
-    start_checkpoint.game_run = game_run
+func activate_checkpoints(node: Node) -> void:
     start_checkpoint.save()
 
     for child in node.find_children("*"):
@@ -19,7 +18,6 @@ func activate_checkpoints(node: Node, game_run: GameRun) -> void:
             checkpoints.append(child)
 
     for checkpoint in checkpoints:
-        checkpoint.game_run = game_run
         checkpoint.checkpoint_saved.connect(on_checkpoint_saved)
 
     current_checkpoint = start_checkpoint

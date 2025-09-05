@@ -2,30 +2,30 @@ extends Node
 
 class_name Level
 
-signal wants_to_load_level(level_name: String)
-signal wants_to_quit_to_main_menu()
-signal wants_to_start_new_game()
+signal wants_to_quit()
+signal wants_to_restart()
 
-signal game_over()
-signal victory()
+signal has_run_out_of_lives()
+signal has_finished(game_run: GameRun)
 
 @export var player: ProjectileCharacter
 @export var player_camera: Camera
-@export var camera_manager: CameraManager
 
+@export var pause_manager: PauseManager
+@export var camera_manager: CameraManager
 @export var checkpoint_manager: CheckpointManager
 
-var hud: HUD
+@export var game_run: GameRun
 
-var game_run: GameRun
-        
-func _init() -> void:
-    hud = load("res://scenes/ui/hud/HUD.tscn").instantiate()
+@export var hud: HUD
 
 func _ready() -> void:
-    if !game_run:
-        game_run = GameRun.new()
-        add_child(game_run)
+    pause_manager.paused.connect(pause)
+    pause_manager.resumed.connect(resume)
+
+    pause_manager.wants_to_load_checkpoint.connect(load_checkpoint)
+    pause_manager.wants_to_restart.connect(restart)
+    pause_manager.wants_to_quit.connect(quit)
 
     game_run.life_changed.connect(hud.life_counter.update_counter)
     game_run.score_changed.connect(hud.score_counter.update_counter)
@@ -33,22 +33,22 @@ func _ready() -> void:
 
     hud.life_counter.update_counter(game_run.life)
     hud.score_counter.update_counter(game_run.score)
-    hud.time_counter.update_time_counter(game_run.accumulated_time)
+    hud.time_counter.update_time_counter(game_run.elapsed_time)
 
     hud.hide_life_counter()
     hud.hide_score_counter()
     hud.hide_time_counter()
 
-    add_child(hud)
-
-    checkpoint_manager.activate_checkpoints(self, game_run)
+    checkpoint_manager.activate_checkpoints(self)
 
     player.collector.note_collected.connect(game_run.add_note)
     player.collector.life_collected.connect(game_run.add_life)
 
+func pause() -> void:
+    game_run.pause()
 
-func load_level(level_name: String) -> void:
-    wants_to_load_level.emit(level_name)
+func resume() -> void:
+    game_run.resume()
 
 func load_checkpoint() -> void:
     checkpoint_manager.load()
@@ -56,18 +56,18 @@ func load_checkpoint() -> void:
     var release = await Transition.create_circle_transition_in(get_tree().root, checkpoint_manager.current_checkpoint.portal)
     release.call_deferred()
 
-func quit_to_main_menu() -> void:
-    wants_to_quit_to_main_menu.emit()
+func quit() -> void:
+    wants_to_quit.emit()
 
-func start_new_game() -> void:
-    wants_to_start_new_game.emit()
+func restart() -> void:
+    wants_to_restart.emit()
 
 func die() -> void:
     if game_run.life > 1:
         game_run.remove_life()
         load_checkpoint()
     else:
-        game_over.emit()
+        has_run_out_of_lives.emit()
 
 func finish() -> void:
-    victory.emit()
+    has_finished.emit(game_run)
