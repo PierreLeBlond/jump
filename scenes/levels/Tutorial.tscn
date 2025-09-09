@@ -73,9 +73,8 @@ script = ExtResource("2_7v0t1")
 current_camera = NodePath("../Camera2D")
 metadata/_custom_type_script = "uid://dm275lbjrus7p"
 
-[node name="CheckpointManager" type="Node" parent="." node_paths=PackedStringArray("start_checkpoint")]
+[node name="CheckpointManager" type="Node" parent="."]
 script = ExtResource("2_vvfd6")
-start_checkpoint = NodePath("../StartCheckpoint")
 metadata/_custom_type_script = "uid://calrwlxq3l0el"
 
 [node name="Soubalien" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_off5s")]

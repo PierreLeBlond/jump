@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://27vdgqlbgpml"]
+[gd_scene load_steps=36 format=3 uid="uid://27vdgqlbgpml"]
 
 [ext_resource type="Script" uid="uid://b6kdes8c5suyq" path="res://scripts/character/ProjectileCharacter.gd" id="1_lkdrv"]
 [ext_resource type="Texture2D" uid="uid://3k4btk54cqba" path="res://assets/spritesheets/player/player.png" id="2_0rnld"]
@@ -17,6 +17,8 @@
 [ext_resource type="Script" uid="uid://2wnddxpocco4" path="res://scripts/character/states/CanceledJump.gd" id="12_0rnld"]
 [ext_resource type="Script" uid="uid://blh3ndwp2n1vi" path="res://scripts/character/CornerCorrector.gd" id="13_lkdrv"]
 [ext_resource type="Script" uid="uid://djcf013m042qh" path="res://scripts/character/states/WallRun.gd" id="13_srp4u"]
+[ext_resource type="Script" uid="uid://bs5q27nj5ciwb" path="res://scripts/character/states/Ray.gd" id="16_b8lor"]
+[ext_resource type="Script" uid="uid://e6to3upa2dmq" path="res://scripts/character/states/Capture.gd" id="17_6e537"]
 [ext_resource type="Script" uid="uid://n0not04aejg6" path="res://scripts/character/CliffDetector.gd" id="18_61ith"]
 [ext_resource type="Script" uid="uid://br0fm1ttogpe2" path="res://scripts/character/WallDetector.gd" id="19_ebwui"]
 [ext_resource type="Script" uid="uid://dfh6a42d2dq0n" path="res://scripts/collectibles/Collector.gd" id="20_sfy4j"]
@@ -309,9 +311,10 @@ jump = NodePath("../Jump")
 idle = NodePath("../Idle")
 animation = "walk"
 
-[node name="GravityField" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall")]
+[node name="GravityField" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "ray")]
 script = ExtResource("11_p7iby")
 fall = NodePath("../Fall")
+ray = NodePath("../Ray")
 animation = "fall"
 
 [node name="CanceledJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "gravity_field", "double_jump", "wall_jump")]
@@ -330,6 +333,15 @@ double_jump = NodePath("../DoubleJump")
 wall_jump = NodePath("../WallJump")
 canceled_jump = NodePath("../CanceledJump")
 animation = "wallrun"
+
+[node name="Ray" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "capture")]
+script = ExtResource("16_b8lor")
+fall = NodePath("../Fall")
+capture = NodePath("../Capture")
+
+[node name="Capture" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall")]
+script = ExtResource("17_6e537")
+fall = NodePath("../Fall")
 
 [node name="MovementController" type="Node" parent="."]
 script = ExtResource("11_gv3ic")

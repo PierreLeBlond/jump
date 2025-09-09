@@ -22,11 +22,11 @@ signal direction_changed(direction: int)
 
 @export var collector: Collector
 
+@export var soubalien: Soubalien
+
 var unlocked_keys: UnlockedKeys = UnlockedKeys.new()
 
 var external_accelerations: Dictionary[String, Vector2] = {}
-
-var is_in_gravity_field: bool = false
 
 var direction: int = 1
 

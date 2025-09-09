@@ -1,6 +1,6 @@
-[gd_scene load_steps=42 format=4 uid="uid://de32o3g1w17vm"]
+[gd_scene load_steps=40 format=4 uid="uid://de32o3g1w17vm"]
 
-[ext_resource type="Script" uid="uid://ft5l0rjyxnrn" path="res://scripts/levels/Level1.gd" id="1_p5s5a"]
+[ext_resource type="Script" uid="uid://ft5l0rjyxnrn" path="res://scripts/levels/Level1/Level1.gd" id="1_p5s5a"]
 [ext_resource type="Script" uid="uid://b1qlks4lid3un" path="res://scripts/game/Events.gd" id="2_dqba7"]
 [ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/components/CinematicBars.tscn" id="2_j7nyf"]
 [ext_resource type="PackedScene" uid="uid://82tigqg507ba" path="res://scenes/ui/hud/HUD.tscn" id="2_l40or"]
@@ -25,9 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://4wsynq3xc0sr" path="res://scenes/collectibles/Note.tscn" id="14_86um8"]
 [ext_resource type="AudioStream" uid="uid://bp2sx6ryr8ixr" path="res://assets/sounds/race.mp3" id="15_p5s5a"]
 [ext_resource type="AudioStream" uid="uid://cr27a3g4erh4h" path="res://assets/sounds/forest.ogg" id="16_njy47"]
-[ext_resource type="PackedScene" uid="uid://c1f16ms5h14r6" path="res://scenes/ui/components/Countdown.tscn" id="16_p5s5a"]
 [ext_resource type="Script" uid="uid://xd4woi41uhf2" path="res://scripts/camera/CameraOverrideArea.gd" id="18_j7nyf"]
-[ext_resource type="PackedScene" uid="uid://c5ujunl53hshx" path="res://scenes/ui/components/ComboNote.tscn" id="24_6ex7q"]
 [ext_resource type="PackedScene" uid="uid://cbchcmt1re0ym" path="res://scenes/ui/controls/MobileControls.tscn" id="25_ijfg6"]
 
 [sub_resource type="Gradient" id="Gradient_ukjja"]
@@ -78,7 +76,7 @@ size = Vector2(127, 1088)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j7nyf"]
 size = Vector2(3226, 1049)
 
-[node name="Level1" type="Node2D" node_paths=PackedStringArray("race_introduction_camera", "player_focus_camera", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "end_portal", "countdown", "combo_note", "cinematic_bars", "race_introduction_area", "race_introduction_checkpoint", "player", "player_camera", "pause_manager", "camera_manager", "checkpoint_manager", "game_run", "hud")]
+[node name="Level1" type="Node2D" node_paths=PackedStringArray("race_introduction_camera", "player_focus_camera", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "end_portal", "cinematic_bars", "race_introduction_area", "start_checkpoint", "race_introduction_checkpoint", "player", "player_camera", "pause_manager", "camera_manager", "checkpoint_manager", "game_run", "hud")]
 process_mode = 1
 script = ExtResource("1_p5s5a")
 race_introduction_camera = NodePath("RaceIntroduceCamera")
@@ -87,10 +85,9 @@ soubalien = NodePath("Soubalien")
 soubalien_introduce_path = NodePath("SoubalienPaths/IntroducePath")
 soubalien_chase_path = NodePath("SoubalienPaths/ChasePath")
 end_portal = NodePath("EndPortal")
-countdown = NodePath("Countdown")
-combo_note = NodePath("ComboNote")
 cinematic_bars = NodePath("CinematicBars")
 race_introduction_area = NodePath("RaceIntroductionArea")
+start_checkpoint = NodePath("StartCheckpoint")
 race_introduction_checkpoint = NodePath("Checkpoint")
 player = NodePath("Player")
 player_camera = NodePath("PlayerCamera")
@@ -111,9 +108,9 @@ script = ExtResource("4_hnhv5")
 [node name="CameraManager" type="Node" parent="."]
 script = ExtResource("13_njy47")
 
-[node name="CheckpointManager" type="Node" parent="." node_paths=PackedStringArray("start_checkpoint")]
+[node name="CheckpointManager" type="Node" parent="." node_paths=PackedStringArray("initial_checkpoint")]
 script = ExtResource("2_xbvxr")
-start_checkpoint = NodePath("../StartCheckpoint")
+initial_checkpoint = NodePath("../Checkpoint")
 metadata/_custom_type_script = "uid://calrwlxq3l0el"
 
 [node name="GameStateManager" type="Node" parent="." node_paths=PackedStringArray("checkpoint_manager", "player", "game_run")]
@@ -266,11 +263,11 @@ position = Vector2(27043, -515)
 player = NodePath("../Player")
 
 [node name="StartCheckpoint" parent="." node_paths=PackedStringArray("portal") instance=ExtResource("11_njy47")]
-position = Vector2(219, 0)
+position = Vector2(-165, 3)
 portal = NodePath("StartCheckpointPortal")
 
 [node name="StartCheckpointPortal" parent="StartCheckpoint" node_paths=PackedStringArray("player") instance=ExtResource("6_usw5k")]
-position = Vector2(2, 685)
+position = Vector2(387, 685)
 player = NodePath("../../Player")
 
 [node name="Checkpoint" parent="." node_paths=PackedStringArray("portal") instance=ExtResource("11_njy47")]
@@ -281,8 +278,9 @@ portal = NodePath("CheckpointPortal")
 position = Vector2(128, 685)
 player = NodePath("../../Player")
 
-[node name="Player" parent="." instance=ExtResource("10_ijoxy")]
+[node name="Player" parent="." node_paths=PackedStringArray("soubalien") instance=ExtResource("10_ijoxy")]
 position = Vector2(221, 832)
+soubalien = NodePath("../Soubalien")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="Player"]
 current = true
@@ -361,16 +359,5 @@ zoom_speed = 2.0
 follow_vertical_on_jump = true
 target = NodePath("../CollisionShape2D")
 metadata/_custom_type_script = "uid://bbujjd3t0eg6e"
-
-[node name="Countdown" parent="." instance=ExtResource("16_p5s5a")]
-bpm = 108
-
-[node name="ComboNote" parent="." node_paths=PackedStringArray("target") instance=ExtResource("24_6ex7q")]
-offset_left = 224.0
-offset_top = 695.0
-offset_right = 224.0
-offset_bottom = 695.0
-target = NodePath("../Player")
-offset = Vector2(0, -128)
 
 [node name="MobileControls" parent="." instance=ExtResource("25_ijfg6")]

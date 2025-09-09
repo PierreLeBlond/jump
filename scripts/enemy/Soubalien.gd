@@ -73,13 +73,6 @@ func on_body_entered(body: Node2D) -> void:
 
     state = SoubalienState.CAPTURING_PLAYER
 
-    player.lock_key(Globals.PHYSICS_UNLOCKED_KEY)
-    var tween = create_tween()
-    tween.tween_property(player, "scale", Vector2(0, 0), 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-    tween.parallel().tween_property(player, "modulate:a", 0.0, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-
-    await tween.finished
-
     captured_player.emit()
 
 
@@ -94,10 +87,6 @@ func on_ray_area_body_entered(body: Node2D) -> void:
 
     state = SoubalienState.CAPTURING_PLAYER_IN_RAY
 
-    player.velocity = Vector2.ZERO
-    player.set_collision_mask_value(1, false)
-    var tween = create_tween()
-    tween.tween_property(player, "scale", Vector2(0.8, 0.8), 0.2)
     ray_captured_player.emit()
 
 
@@ -113,32 +102,18 @@ func get_angle_from_cone(point: Vector2) -> float:
     return 0
 
 
-func restore_player() -> void:
-    player.unlock_key(Globals.PHYSICS_UNLOCKED_KEY)
-    player.external_accelerations = {}
-    player.set_collision_mask_value(1, true)
-    player.scale = Vector2(1, 1)
-    player.modulate.a = 1
-
+func reset() -> void:
     state = SoubalienState.IDLE
 
 func get_vertical_acceleration() -> float:
     if state == SoubalienState.CAPTURING_PLAYER:
         return 0
 
-    var vertical_distance_to_player = global_position.y - player.global_position.y
-    if vertical_distance_to_player > 0:
+    if !has_player_in_cone():
         return 0
 
-    var angle = get_angle_from_cone(player.global_position)
-
-    if angle > cone_angle || (angle > 0 && abs(vertical_distance_to_player) > cone_height):
-        player.is_in_gravity_field = false
-        return 0
-
-    player.is_in_gravity_field = true
     var gravity = 2 * player.projectile_parameters.jump_height / (player.projectile_parameters.fall_time * player.projectile_parameters.fall_time)
-    var factor = (min_ray_gravity_factor - max_ray_gravity_factor) * angle / cone_angle + max_ray_gravity_factor
+    var factor = (min_ray_gravity_factor - max_ray_gravity_factor) * get_angle_from_cone(player.global_position) / cone_angle + max_ray_gravity_factor
 
     return -gravity * factor
 
@@ -150,7 +125,7 @@ func get_lateral_acceleration() -> float:
 
     var distance = abs(horizontal_distance_to_player)
 
-    var acceleration_max = 6000
+    var acceleration_max = 20000
 
     var normalized_force = clamp((32 * 32) / (distance * distance), 0.5, 1)
 
@@ -164,3 +139,21 @@ func _physics_process(delta: float) -> void:
 
     if state == SoubalienState.CAPTURING_PLAYER:
         player.global_position = lerp(player.global_position, area.global_position, delta * 20)
+
+func has_player_in_cone() -> bool:
+    var vertical_distance_to_player = global_position.y - player.global_position.y
+    if vertical_distance_to_player > 0:
+        return false
+
+    var angle = get_angle_from_cone(player.global_position)
+
+    if angle > cone_angle || (angle > 0 && abs(vertical_distance_to_player) > cone_height):
+        return false
+
+    return true
+
+func has_player_in_ray() -> bool:
+    return state == SoubalienState.CAPTURING_PLAYER_IN_RAY
+
+func has_player_captured() -> bool:
+    return state == SoubalienState.CAPTURING_PLAYER

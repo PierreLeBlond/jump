@@ -43,5 +43,4 @@ func handle_physics(delta: float) -> void:
         external_velocity += acceleration * delta
     parent.velocity = controlled_velocity + external_velocity
 
-    # Will change velocity if hitting an obstacle
     parent.move_and_slide()

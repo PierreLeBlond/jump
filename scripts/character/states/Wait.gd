@@ -1,10 +1,8 @@
 extends State
 
-class_name GravityField
+class_name Wait
 
 @export var fall: State
-
-@export var ray: State
 
 func enter(previous_state: State, delta: float) -> void:
     super (previous_state, delta)
@@ -12,10 +10,7 @@ func enter(previous_state: State, delta: float) -> void:
     parent.velocity.y = sign(parent.velocity.y) * min(abs(parent.velocity.y), 10)
 
 func get_next_state(_delta: float) -> State:
-    if (parent.soubalien.has_player_in_ray()):
-        return ray
-
-    if (!parent.soubalien.has_player_in_cone()):
+    if (!parent.is_in_ray):
         return fall
 
     return null

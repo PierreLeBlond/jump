@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b46juahcxxgd5"]
+
+[ext_resource type="Script" uid="uid://ctnkosmmn3cle" path="res://scripts/levels/Level1/Level1State.gd" id="1_b76gr"]
+[ext_resource type="PackedScene" uid="uid://c1f16ms5h14r6" path="res://scenes/ui/components/Countdown.tscn" id="2_8br1s"]
+[ext_resource type="PackedScene" uid="uid://c5ujunl53hshx" path="res://scenes/ui/components/ComboNote.tscn" id="2_j0v3m"]
+
+[node name="Level1State" type="Node" node_paths=PackedStringArray("combo_note")]
+script = ExtResource("1_b76gr")
+combo_note = NodePath("ComboNote")
+countdown_scene = ExtResource("2_8br1s")
+
+[node name="ComboNote" parent="." instance=ExtResource("2_j0v3m")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 0.0
+offset_bottom = 0.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+offset = Vector2(0, -128)

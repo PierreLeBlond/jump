@@ -52,9 +52,6 @@ func resume() -> void:
 
 func load_checkpoint() -> void:
     checkpoint_manager.load()
-    await camera_manager.jump_to(player_camera)
-    var release = await Transition.create_circle_transition_in(get_tree().root, checkpoint_manager.current_checkpoint.portal)
-    release.call_deferred()
 
 func quit() -> void:
     wants_to_quit.emit()
