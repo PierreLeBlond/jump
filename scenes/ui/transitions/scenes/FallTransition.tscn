@@ -4,7 +4,7 @@
 
 [node name="FallTransition" type="CanvasLayer" node_paths=PackedStringArray("control")]
 process_mode = 3
-layer = 3
+layer = 2
 script = ExtResource("1_fqqfj")
 control = NodePath("TextureRect")
 duration = 0.6

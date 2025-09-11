@@ -2,7 +2,6 @@ extends Node
 
 class_name GameRun
 
-const MAX_LIFE: int = 3
 const DEFAULT_COMBO_DURATION: float = 1.0
 
 signal life_changed(value: int)
@@ -16,7 +15,7 @@ var combo_timer: Timer
 
 var combo_duration: float = DEFAULT_COMBO_DURATION
 
-var life: int = MAX_LIFE:
+var life: int = 0:
     set(value):
         life = value
         life_changed.emit(life)
@@ -32,14 +31,6 @@ var elapsed_time: float = 0.0:
 var last_time: float = 0.0
 
 var is_playing: bool = false
-
-func _ready() -> void:
-    reset()
-
-func reset() -> void:
-    life = MAX_LIFE
-    score = 0
-    reset_time()
 
 func update_time() -> void:
     var time_now = Time.get_unix_time_from_system()

@@ -33,6 +33,7 @@ signal ray_captured_player()
 
 enum SoubalienState {
     IDLE,
+    CHASING_PLAYER,
     CAPTURING_PLAYER,
     CAPTURING_PLAYER_IN_RAY,
 }
@@ -64,6 +65,9 @@ func _ready() -> void:
     area.body_entered.connect(on_body_entered)
     ray_area.body_entered.connect(on_ray_area_body_entered)
 
+func start_chasing_player() -> void:
+    state = SoubalienState.CHASING_PLAYER
+
 func on_body_entered(body: Node2D) -> void:
     if (body != player):
         return
@@ -80,7 +84,7 @@ func on_ray_area_body_entered(body: Node2D) -> void:
     if (body != player):
         return
 
-    if (state != SoubalienState.IDLE):
+    if (state != SoubalienState.CHASING_PLAYER):
         return
 
     Events.emit_soubalien_captured()
@@ -141,6 +145,9 @@ func _physics_process(delta: float) -> void:
         player.global_position = lerp(player.global_position, area.global_position, delta * 20)
 
 func has_player_in_cone() -> bool:
+    if state == SoubalienState.IDLE:
+        return false
+
     var vertical_distance_to_player = global_position.y - player.global_position.y
     if vertical_distance_to_player > 0:
         return false

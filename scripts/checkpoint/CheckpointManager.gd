@@ -2,33 +2,38 @@ extends Node
 
 class_name CheckpointManager
 
-@export var initial_checkpoint: Checkpoint
-
 signal checkpoint_saved()
 signal checkpoint_loaded()
 
 var checkpoints: Array[Checkpoint] = []
-var current_checkpoint: Checkpoint = null
+var last_checkpoint_index: int = 0
 
 func activate_checkpoints(node: Node) -> void:
-    initial_checkpoint.save()
+    checkpoints.clear()
 
     for child in node.find_children("*"):
-        if child is Checkpoint && child != initial_checkpoint:
+        if child is Checkpoint:
             checkpoints.append(child)
 
     for checkpoint in checkpoints:
         checkpoint.checkpoint_saved.connect(on_checkpoint_saved)
-
-    current_checkpoint = initial_checkpoint
     
 func on_checkpoint_saved(checkpoint: Checkpoint) -> void:
-    current_checkpoint = checkpoint
+    last_checkpoint_index = checkpoints.find(checkpoint)
     checkpoint_saved.emit()
 
-func load() -> void:
-    if (current_checkpoint == null):
-        return
+func load(checkpoint_index: int = 0) -> void:
+    last_checkpoint_index = checkpoint_index
 
-    await current_checkpoint.load()
+    var checkpoint = checkpoints[last_checkpoint_index]
+
+    if checkpoint == null:
+        push_error("Checkpoint not found: ", checkpoint_index)
+
+    await checkpoint.load()
+    checkpoint_loaded.emit()
+
+func load_last_checkpoint() -> void:
+    var checkpoint = checkpoints[last_checkpoint_index]
+    await checkpoint.load()
     checkpoint_loaded.emit()

@@ -18,9 +18,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-World="*res://scripts/World.gd"
 SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
 Events="*res://scripts/game/Events.gd"
+Autoload="*res://scripts/Autoload.gd"
 
 [display]
 

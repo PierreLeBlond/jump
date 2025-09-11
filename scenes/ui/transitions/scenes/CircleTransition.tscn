@@ -4,8 +4,7 @@
 [ext_resource type="Material" uid="uid://65qdwytb08uv" path="res://shaders/CircleTransition.tres" id="2_xwsxl"]
 
 [node name="Mask" type="CanvasLayer" node_paths=PackedStringArray("canvas_item")]
-process_mode = 3
-layer = 3
+layer = 2
 script = ExtResource("2_byh5n")
 canvas_item = NodePath("ColorRect")
 

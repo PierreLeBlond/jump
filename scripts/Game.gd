@@ -68,8 +68,6 @@ func load_level(level_name: String) -> Level:
     current_level.has_run_out_of_lives.connect(open_game_over)
     current_level.has_finished.connect(open_victory)
 
-    Events.emit_player_unlocked_keys_changed(current_level.player.unlocked_keys)
-
     release.call_deferred()
 
     get_tree().paused = false

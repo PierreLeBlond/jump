@@ -6,7 +6,7 @@
 process_mode = 3
 layer = 3
 script = ExtResource("1_aje32")
-canvas_item = NodePath("ColorRect")
+canvas_item = NodePath("ColorRect/MarginContainer/Label")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
