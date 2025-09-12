@@ -7,6 +7,8 @@ const RACE_NOTE_COMBO_DURATION: float = 3.0
 
 const COUNTDOWN_BPM: int = 108
 
+@export var music_manager: MusicManager
+
 @export var combo_note: ComboNote
 @export var countdown_scene: PackedScene
 
@@ -38,7 +40,11 @@ func _ready() -> void:
     end_portal.spawn()
     end_portal.player_captured.connect(on_player_finished)
 
-    player.collector.note_collected.connect(func(): Events.emit_note_collected())
+    game_run.combo_updated.connect(update_combo)
+
+func update_combo(duration: float, count: int) -> void:
+    music_manager.update_combo(duration, count)
+    combo_note.update(duration, count)
 
 func start() -> void:
     hud.hide_time_counter()
@@ -50,6 +56,8 @@ func start() -> void:
     soubalien.visible = false
     soubalien.process_mode = Node.PROCESS_MODE_DISABLED
 
+    music_manager.start()
+
     race_introduction_area.body_entered.connect(introduce_race)
 
 func reveal() -> void:
@@ -57,7 +65,8 @@ func reveal() -> void:
     hud.reveal_score_counter()
 
 func introduce_race(_body: Node2D) -> void:
-    Events.emit_soubalien_appears()
+    music_manager.introduce_race()
+
     race_introduction_area.body_entered.disconnect(introduce_race)
 
     player.lock_key(Globals.MOVE_UNLOCKED_KEY)
@@ -96,8 +105,6 @@ func pre_start_race() -> void:
     soubalien_chase_path.stop()
 
 func start_race() -> void:
-    Events.emit_race_pre_starts()
-
     race_introduction_camera.set_target(player)
 
     soubalien_chase_path.call_deferred("set_child", soubalien)
@@ -113,7 +120,8 @@ func start_race() -> void:
 
     cinematic_bars.unreveal()
 
-    Events.emit_countdown_starts()
+    music_manager.start_countdown()
+
     var countdown = countdown_scene.instantiate()
     countdown.bpm = COUNTDOWN_BPM
     add_child(countdown)
@@ -136,8 +144,6 @@ func start_race() -> void:
 
     game_run.combo_duration = RACE_NOTE_COMBO_DURATION
 
-    Events.emit_race_starts()
-
 func ray_capture_player() -> void:
     await get_tree().create_timer(1.0).timeout
 
@@ -153,16 +159,18 @@ func ray_capture_player() -> void:
 func capture_player() -> void:
     soubalien.captured_player.disconnect(on_player_captured)
     soubalien.ray_captured_player.disconnect(on_ray_captured_player)
-    Events.emit_race_ends()
-
     soubalien.reset()
+
+    music_manager.end_race()
+
     die()
 
 func reach_end() -> void:
     soubalien_chase_path.stop()
     soubalien.captured_player.disconnect(on_player_captured)
     soubalien.ray_captured_player.disconnect(on_ray_captured_player)
-    Events.emit_race_ends()
+
+    music_manager.end_race()
 
 func on_start_checkpoint_pre_load() -> void:
     start()

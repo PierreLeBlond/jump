@@ -74,9 +74,11 @@ size = Vector2(127, 1088)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j7nyf"]
 size = Vector2(3226, 1049)
 
-[node name="World1" type="Node2D" node_paths=PackedStringArray("race_introduction_camera", "player_focus_camera", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "end_portal", "cinematic_bars", "race_introduction_area", "start_checkpoint", "race_introduction_checkpoint", "player", "player_camera", "camera_manager", "game_run", "hud")]
+[node name="World1" type="Node2D" node_paths=PackedStringArray("music_manager", "combo_note", "race_introduction_camera", "player_focus_camera", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "end_portal", "cinematic_bars", "race_introduction_area", "start_checkpoint", "race_introduction_checkpoint", "player", "player_camera", "camera_manager", "game_run", "hud")]
 process_mode = 1
 script = ExtResource("1_t2wor")
+music_manager = NodePath("MusicManager")
+combo_note = NodePath("ComboNote")
 countdown_scene = ExtResource("2_w2kyn")
 race_introduction_camera = NodePath("RaceIntroduceCamera")
 player_focus_camera = NodePath("PlayerFocusCamera")
@@ -113,25 +115,18 @@ soubalien_race_audio_stream_player = NodePath("../Soubalien/AudioStreamPlayer2D"
 
 [node name="RaceAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("15_p5s5a")
-volume_db = 8.0
-autoplay = true
 
 [node name="ForestAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("16_njy47")
-autoplay = true
 
 [node name="SoubalienAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("6_dqba7")
-volume_db = 10.0
-autoplay = true
 
 [node name="RaceNoteAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("8_usw5k")
-autoplay = true
 
 [node name="NoteAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("9_6ex7q")
-autoplay = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -1

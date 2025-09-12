@@ -50,6 +50,12 @@ theme_override_constants/separation = 64
 [node name="StartNewGame" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
+focus_neighbor_left = NodePath("../QuitToMainMenu")
+focus_neighbor_top = NodePath("../QuitToMainMenu")
+focus_neighbor_right = NodePath("../QuitToMainMenu")
+focus_neighbor_bottom = NodePath("../QuitToMainMenu")
+focus_next = NodePath("../QuitToMainMenu")
+focus_previous = NodePath("../QuitToMainMenu")
 text = "Réessayer ?"
 
 [node name="Fly" type="Node" parent="PanelContainer/VBoxContainer/VBoxContainer/StartNewGame"]
@@ -60,6 +66,12 @@ metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
 [node name="QuitToMainMenu" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+focus_neighbor_left = NodePath("../StartNewGame")
+focus_neighbor_top = NodePath("../StartNewGame")
+focus_neighbor_right = NodePath("../StartNewGame")
+focus_neighbor_bottom = NodePath("../StartNewGame")
+focus_next = NodePath("../StartNewGame")
+focus_previous = NodePath("../StartNewGame")
 text = "Menu principal"
 
 [node name="Fly" type="Node" parent="PanelContainer/VBoxContainer/VBoxContainer/QuitToMainMenu"]

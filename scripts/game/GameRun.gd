@@ -8,6 +8,7 @@ signal life_changed(value: int)
 signal score_changed(value: int)
 signal time_changed(value: int)
 
+signal combo_updated(duration: float, count: int)
 signal combo_ended()
 
 var combo_count: int = 0
@@ -75,7 +76,7 @@ func update_combo() -> void:
     add_child(combo_timer)
     combo_timer.start()
     combo_timer.timeout.connect(end_combo)
-    Events.emit_combo_updated(combo_duration, combo_count)
+    combo_updated.emit(combo_duration, combo_count)
 
 func end_combo() -> void:
     clear_timer()

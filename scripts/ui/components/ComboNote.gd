@@ -16,14 +16,9 @@ var combo_tween: Tween
 
 func _ready() -> void:
     hide()
-    Events.combo_updated.connect(on_combo_updated)
 
 func _process(_delta: float) -> void:
     global_position = target.get_global_transform().origin + offset
-
-func on_combo_updated(duration: float, count: int) -> void:
-    update(duration, count)
-    spawn_score(count)
 
 func update(duration: float, count: int) -> void:
     if combo_tween:
@@ -37,6 +32,8 @@ func update(duration: float, count: int) -> void:
     show()
 
     combo_label.text = str(count)
+
+    spawn_score(count)
 
 func on_tween_finished() -> void:
     combo_label.text = str(0)

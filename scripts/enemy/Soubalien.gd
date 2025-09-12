@@ -87,8 +87,6 @@ func on_ray_area_body_entered(body: Node2D) -> void:
     if (state != SoubalienState.CHASING_PLAYER):
         return
 
-    Events.emit_soubalien_captured()
-
     state = SoubalienState.CAPTURING_PLAYER_IN_RAY
 
     ray_captured_player.emit()
