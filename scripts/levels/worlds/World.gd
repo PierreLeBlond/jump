@@ -43,6 +43,12 @@ func pause() -> void:
 func resume() -> void:
     game_run.resume()
 
+func open_on_player() -> void:
+    camera_manager.jump_to(player_camera)
+    player_camera.jump_to_target()
+    var release = await Transition.create_circle_transition_in(get_tree().root, player)
+    release.call_deferred()
+
 func die() -> void:
     has_died.emit()
 

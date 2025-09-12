@@ -30,6 +30,7 @@ func _ready() -> void:
     super._ready()
 
     start_checkpoint.checkpoint_pre_loaded.connect(on_start_checkpoint_pre_load)
+    start_checkpoint.checkpoint_loaded.connect(on_start_checkpoint_load)
 
     race_introduction_checkpoint.checkpoint_pre_loaded.connect(on_race_introduction_checkpoint_pre_load)
     race_introduction_checkpoint.checkpoint_loaded.connect(on_race_introduction_checkpoint_load)
@@ -43,9 +44,6 @@ func start() -> void:
     hud.hide_time_counter()
     hud.hide_life_counter()
     hud.hide_score_counter()
-
-    player_camera.jump_to_target()
-    camera_manager.jump_to(player_camera)
 
     game_run.combo_duration = NOTE_COMBO_DURATION
 
@@ -88,9 +86,6 @@ func pre_start_race() -> void:
     player.lock_key(Globals.MOVE_UNLOCKED_KEY)
 
     cinematic_bars.reveal()
-
-    # Warning: Avoid camera jump when starting level with race checkpoint. Unfortunatelly we don't know why.
-    camera_manager.jump_to(player_camera)
 
     race_introduction_camera.set_target(player)
     camera_manager.jump_to(race_introduction_camera)
@@ -171,14 +166,12 @@ func reach_end() -> void:
 
 func on_start_checkpoint_pre_load() -> void:
     start()
-    var release = await Transition.create_circle_transition_in(get_tree().root, player)
-    release.call_deferred()
+
+func on_start_checkpoint_load() -> void:
     reveal()
 
 func on_race_introduction_checkpoint_pre_load() -> void:
     pre_start_race()
-    var release = await Transition.create_circle_transition_in(get_tree().root, player)
-    release.call_deferred()
 
 func on_race_introduction_checkpoint_load() -> void:
     start_race()

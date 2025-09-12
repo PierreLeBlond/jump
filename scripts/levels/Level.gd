@@ -30,6 +30,7 @@ func _ready() -> void:
     pause_manager.wants_to_quit.connect(quit)
 
     checkpoint_manager.checkpoint_saved.connect(on_checkpoint_saved)
+    checkpoint_manager.checkpoint_pre_loaded.connect(on_checkpoint_pre_loaded)
     checkpoint_manager.checkpoint_loaded.connect(on_checkpoint_loaded)
 
     load_checkpoint.call_deferred(initial_checkpoint_index)
@@ -41,6 +42,9 @@ func on_checkpoint_saved() -> void:
 
     for note in world.player.collector.collected_notes:
         game_state.notes.append(world.notes.find(note))
+
+func on_checkpoint_pre_loaded() -> void:
+    world.open_on_player()
 
 func on_checkpoint_loaded() -> void:
     world.game_run.score = game_state.score
