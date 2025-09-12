@@ -4,6 +4,9 @@ extends Node2D
 
 class_name Soubalien
 
+const RAY_SPRING_CONSTANT = 100
+const CONE_SPRING_CONSTANT = 10
+
 signal captured_player()
 signal ray_captured_player()
 
@@ -17,7 +20,7 @@ signal ray_captured_player()
         return cone_angle
 
 @export_range(1, 1.05) var min_ray_gravity_factor: float = 1.0001
-@export_range(1, 1.05) var max_ray_gravity_factor: float = 1.02
+@export_range(1, 1.05) var max_ray_gravity_factor: float = 1.03
 
 @export var cone_height: float:
     set(value):
@@ -111,36 +114,39 @@ func get_vertical_acceleration() -> float:
     if state == SoubalienState.CAPTURING_PLAYER:
         return 0
 
-    if !has_player_in_cone():
-        return 0
-
     var gravity = 2 * player.projectile_parameters.jump_height / (player.projectile_parameters.fall_time * player.projectile_parameters.fall_time)
     var factor = (min_ray_gravity_factor - max_ray_gravity_factor) * get_angle_from_cone(player.global_position) / cone_angle + max_ray_gravity_factor
 
     return -gravity * factor
 
 func get_lateral_acceleration() -> float:
-    if state != SoubalienState.CAPTURING_PLAYER_IN_RAY:
+    if state == SoubalienState.IDLE:
         return 0
 
-    var horizontal_distance_to_player = global_position.x - player.global_position.x
+    var spring_contrant = RAY_SPRING_CONSTANT if state == SoubalienState.CAPTURING_PLAYER_IN_RAY else CONE_SPRING_CONSTANT
 
-    var distance = abs(horizontal_distance_to_player)
+    var horizontal_distance_to_player = player.global_position.x - global_position.x
 
-    var acceleration_max = 20000
+    var spring_force = - horizontal_distance_to_player * spring_contrant
 
-    var normalized_force = clamp((32 * 32) / (distance * distance), 0.5, 1)
-
-    return sign(horizontal_distance_to_player) * acceleration_max * normalized_force
+    return spring_force
 
 func _physics_process(delta: float) -> void:
     if Engine.is_editor_hint():
         return
 
-    player.external_accelerations["gravity_pull"] = Vector2(get_lateral_acceleration(), get_vertical_acceleration())
+    if !has_player_in_cone():
+        player.external_accelerations["soubalien_pull"] = Vector2(0, 0)
+        return
 
     if state == SoubalienState.CAPTURING_PLAYER:
         player.global_position = lerp(player.global_position, area.global_position, delta * 20)
+        player.velocity = Vector2.ZERO
+        player.external_accelerations["soubalien_pull"] = Vector2(0, 0)
+        return
+
+    player.external_accelerations["soubalien_pull"] = Vector2(get_lateral_acceleration(), get_vertical_acceleration())
+
 
 func has_player_in_cone() -> bool:
     if state == SoubalienState.IDLE:

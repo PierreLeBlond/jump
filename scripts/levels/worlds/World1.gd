@@ -145,8 +145,6 @@ func start_race() -> void:
     game_run.combo_duration = RACE_NOTE_COMBO_DURATION
 
 func ray_capture_player() -> void:
-    await get_tree().create_timer(1.0).timeout
-
     hud.unreveal_life_counter()
     hud.unreveal_score_counter()
     hud.unreveal_time_counter()
