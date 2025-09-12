@@ -120,11 +120,10 @@ func start_race() -> void:
 
     cinematic_bars.unreveal()
 
-    music_manager.start_countdown()
-
     var countdown = countdown_scene.instantiate()
     countdown.bpm = COUNTDOWN_BPM
     add_child(countdown)
+    music_manager.start_countdown()
     await countdown.play()
     countdown.queue_free()
 
