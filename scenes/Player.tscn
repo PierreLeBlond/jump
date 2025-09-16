@@ -1,9 +1,10 @@
-[gd_scene load_steps=36 format=3 uid="uid://27vdgqlbgpml"]
+[gd_scene load_steps=43 format=3 uid="uid://27vdgqlbgpml"]
 
 [ext_resource type="Script" uid="uid://b6kdes8c5suyq" path="res://scripts/character/ProjectileCharacter.gd" id="1_lkdrv"]
 [ext_resource type="Texture2D" uid="uid://3k4btk54cqba" path="res://assets/spritesheets/player/player.png" id="2_0rnld"]
 [ext_resource type="Resource" uid="uid://bvl3cqclybygu" path="res://data/projectileParameters/player.tres" id="2_sfy4j"]
 [ext_resource type="Script" uid="uid://ssril2w6enj" path="res://scripts/character/states/StateMachine.gd" id="3_lkdrv"]
+[ext_resource type="Shader" uid="uid://nwuwxuvq8aap" path="res://shaders/whirlandpinch.gdshader" id="3_viqgg"]
 [ext_resource type="Script" uid="uid://bucbmqmbeeupx" path="res://scripts/character/states/Idle.gd" id="4_p7iby"]
 [ext_resource type="Script" uid="uid://c710qahwivjfa" path="res://scripts/character/states/Fall.gd" id="5_0rnld"]
 [ext_resource type="Script" uid="uid://dp3ndbbembjqg" path="res://scripts/character/states/CliffHang.gd" id="5_jfpux"]
@@ -22,6 +23,29 @@
 [ext_resource type="Script" uid="uid://n0not04aejg6" path="res://scripts/character/CliffDetector.gd" id="18_61ith"]
 [ext_resource type="Script" uid="uid://br0fm1ttogpe2" path="res://scripts/character/WallDetector.gd" id="19_ebwui"]
 [ext_resource type="Script" uid="uid://dfh6a42d2dq0n" path="res://scripts/collectibles/Collector.gd" id="20_sfy4j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6e537"]
+shader = ExtResource("3_viqgg")
+shader_parameter/source_screen_position = Vector2(359.137, 69.6385)
+shader_parameter/target_screen_size = Vector2(982, 446)
+shader_parameter/radius = 128.0
+shader_parameter/whirl = 0.5
+shader_parameter/pinch = 1.0
+
+[sub_resource type="Animation" id="Animation_6e537"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [187]
+}
 
 [sub_resource type="Animation" id="Animation_gv3ic"]
 resource_name = "backcliffhang"
@@ -122,6 +146,38 @@ tracks/0/keys = {
 "values": [120, 133]
 }
 
+[sub_resource type="Animation" id="Animation_viqgg"]
+resource_name = "lifted"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274]
+}
+
+[sub_resource type="Animation" id="Animation_fgkxt"]
+resource_name = "ray"
+length = 0.63
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293]
+}
+
 [sub_resource type="Animation" id="Animation_u1bau"]
 resource_name = "run"
 length = 0.66667
@@ -139,6 +195,22 @@ tracks/0/keys = {
 "values": [50, 79]
 }
 
+[sub_resource type="Animation" id="Animation_p07f3"]
+resource_name = "standup"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247]
+}
+
 [sub_resource type="Animation" id="Animation_0rnld"]
 resource_name = "stop"
 length = 0.633337
@@ -153,6 +225,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [80, 99]
+}
+
+[sub_resource type="Animation" id="Animation_b8lor"]
+resource_name = "trip"
+length = 1.101
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667, 0.9, 0.933333, 0.966667, 1, 1.03333, 1.06667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219]
 }
 
 [sub_resource type="Animation" id="Animation_y7qcs"]
@@ -190,14 +278,19 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pt1rj"]
 _data = {
+&"RESET": SubResource("Animation_6e537"),
 &"backcliffhang": SubResource("Animation_gv3ic"),
 &"fall": SubResource("Animation_1pe8v"),
 &"frontcliffhang": SubResource("Animation_ebwui"),
 &"idle": SubResource("Animation_srp4u"),
 &"jump": SubResource("Animation_l8qks"),
 &"land": SubResource("Animation_jfpux"),
+&"lifted": SubResource("Animation_viqgg"),
+&"ray": SubResource("Animation_fgkxt"),
 &"run": SubResource("Animation_u1bau"),
+&"standup": SubResource("Animation_p07f3"),
 &"stop": SubResource("Animation_0rnld"),
+&"trip": SubResource("Animation_b8lor"),
 &"walk": SubResource("Animation_y7qcs"),
 &"wallrun": SubResource("Animation_61ith")
 }
@@ -222,11 +315,15 @@ animation_player = NodePath("AnimationPlayer")
 sprite_2d = NodePath("Sprite2D")
 collector = NodePath("Collector")
 
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_6e537")
+fit_margin = 64.0
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_0rnld")
-hframes = 16
-vframes = 16
-frame = 120
+hframes = 18
+vframes = 18
+frame = 187
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -315,7 +412,7 @@ animation = "walk"
 script = ExtResource("11_p7iby")
 fall = NodePath("../Fall")
 ray = NodePath("../Ray")
-animation = "fall"
+animation = "lifted"
 
 [node name="CanceledJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "gravity_field", "double_jump", "wall_jump")]
 script = ExtResource("12_0rnld")
@@ -338,10 +435,14 @@ animation = "wallrun"
 script = ExtResource("16_b8lor")
 fall = NodePath("../Fall")
 capture = NodePath("../Capture")
+animation = "ray"
 
-[node name="Capture" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall")]
+[node name="Capture" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "canvas_group", "sprite")]
 script = ExtResource("17_6e537")
 fall = NodePath("../Fall")
+canvas_group = NodePath("../../CanvasGroup")
+sprite = NodePath("../../Sprite2D")
+radius = 256.0
 
 [node name="MovementController" type="Node" parent="."]
 script = ExtResource("11_gv3ic")

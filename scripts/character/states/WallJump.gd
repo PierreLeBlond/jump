@@ -29,7 +29,7 @@ func enter(previous_state: State, delta: float) -> void:
     jump_pressed_time = 0
 
 func get_next_state(_delta: float) -> State:
-    if (parent.soubalien.has_player_in_cone()):
+    if (parent.soubalien && parent.soubalien.has_player_in_cone()):
         return gravity_field
 
     if (parent.wants_to_jump() && parent.wall_detector.is_close_to_wall(parent.direction)):

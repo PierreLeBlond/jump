@@ -35,9 +35,6 @@ func _ready() -> void:
     state_machine.init(self)
 
 func _physics_process(delta: float) -> void:
-    if !unlocked_keys.has_unlocked_physics():
-        return
-
     if (velocity.y < 0):
         corner_corrector.apply_corner_correction()
 

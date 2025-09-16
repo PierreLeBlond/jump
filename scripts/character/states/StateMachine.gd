@@ -31,6 +31,9 @@ func _ready() -> void:
 func handle_physics(delta: float) -> void:
     current_state.update(delta)
 
+    if !parent.unlocked_keys.has_unlocked_physics():
+        return
+
     var new_state = current_state.get_next_state(delta)
 
     if (new_state != null):

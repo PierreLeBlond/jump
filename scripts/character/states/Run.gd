@@ -17,7 +17,7 @@ func enter(previous_state: State, delta: float) -> void:
     maximum_lateral_velocity = parent.projectile_parameters.maximum_velocity * parent.projectile_parameters.run_factor
 
 func get_next_state(_delta: float) -> State:
-    if (parent.soubalien.has_player_in_cone()):
+    if (parent.soubalien && parent.soubalien.has_player_in_cone()):
         return gravity_field
 
     if (parent.wants_to_jump()):

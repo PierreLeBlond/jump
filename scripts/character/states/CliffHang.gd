@@ -23,7 +23,7 @@ func enter(previous_state: State, delta: float) -> void:
     parent.animation_player.play(animation_name)
 
 func get_next_state(_delta: float) -> State:
-    if (parent.soubalien.has_player_in_cone()):
+    if (parent.soubalien && parent.soubalien.has_player_in_cone()):
         return gravity_field
 
     if (parent.wants_to_jump()):

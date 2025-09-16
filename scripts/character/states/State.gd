@@ -78,7 +78,8 @@ func get_velocity(delta: float) -> Vector2:
     )
 
 func enter(_previous_state: State, _delta: float) -> void:
-    parent.animation_player.play(animation)
+    if animation:
+        parent.animation_player.play(animation)
 
 func get_next_state(_delta: float) -> State:
     return null

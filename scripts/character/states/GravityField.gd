@@ -12,10 +12,10 @@ func enter(previous_state: State, delta: float) -> void:
     parent.velocity.y = sign(parent.velocity.y) * min(abs(parent.velocity.y), 10)
 
 func get_next_state(_delta: float) -> State:
-    if (parent.soubalien.has_player_in_ray()):
+    if (parent.soubalien && parent.soubalien.has_player_in_ray()):
         return ray
 
-    if (!parent.soubalien.has_player_in_cone()):
+    if (!parent.soubalien || !parent.soubalien.has_player_in_cone()):
         return fall
 
     return null

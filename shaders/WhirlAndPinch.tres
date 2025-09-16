@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ctjit6c822e5h"]
+
+[ext_resource type="Shader" uid="uid://nwuwxuvq8aap" path="res://shaders/whirlandpinch.gdshader" id="1_kn5f7"]
+
+[resource]
+shader = ExtResource("1_kn5f7")
+shader_parameter/source_screen_position = Vector2(660.595, 345.658)
+shader_parameter/target_screen_size = Vector2(0, 0)
+shader_parameter/radius = 192.337
+shader_parameter/whirl = 0.5
+shader_parameter/pinch = 1.005

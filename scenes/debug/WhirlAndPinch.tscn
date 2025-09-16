@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=4 uid="uid://hdsgu7h2i1ie"]
+
+[ext_resource type="Material" uid="uid://ctjit6c822e5h" path="res://shaders/WhirlAndPinch.tres" id="1_3ixdp"]
+[ext_resource type="Script" uid="uid://412ru6rxj4t4" path="res://scripts/debug/scenes/WhirlAndPinchDebug.gd" id="1_r4cya"]
+[ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="3_8bbbq"]
+[ext_resource type="TileSet" uid="uid://dftl5pyptmafp" path="res://tilesets/cloud.tres" id="4_lmpoq"]
+
+[node name="WhirlAndPinch" type="Node2D" node_paths=PackedStringArray("source", "target", "canvas_item")]
+script = ExtResource("1_r4cya")
+source = NodePath("Source")
+target = NodePath("CanvasGroup/Player")
+canvas_item = NodePath("CanvasGroup")
+radius = 256.0
+whirl = 0.5
+pinch = 1.005
+
+[node name="Source" type="Marker2D" parent="."]
+position = Vector2(894, 905)
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+material = ExtResource("1_3ixdp")
+fit_margin = 64.0
+
+[node name="Player" parent="CanvasGroup" instance=ExtResource("3_8bbbq")]
+position = Vector2(1056, 875)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAABAAAQABAAMAAAABABAAAQACAAMAAAACABAAAQACAAMAAAADABAAAQACAAMAAAAEABAAAQACAAMAAAAFABAAAQACAAMAAAAGABAAAQACAAMAAAAHABAAAQACAAMAAAAIABAAAQACAAMAAAAJABAAAQACAAMAAAAKABAAAQACAAMAAAALABAAAQACAAMAAAAMABAAAQACAAMAAAANABAAAQACAAMAAAAOABAAAQACAAMAAAAPABAAAQACAAMAAAAQABAAAQACAAMAAAARABAAAQACAAMAAAASABAAAQACAAMAAAATABAAAQACAAMAAAAUABAAAQACAAMAAAAVABAAAQACAAMAAAAWABAAAQACAAMAAAAXABAAAQACAAMAAAAYABAAAQACAAMAAAAZABAAAQACAAMAAAAaABAAAQACAAMAAAAbABAAAQACAAMAAAAcABAAAQACAAMAAAAdABAAAQADAAMAAAA=")
+tile_set = ExtResource("4_lmpoq")

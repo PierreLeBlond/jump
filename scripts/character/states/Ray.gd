@@ -23,11 +23,11 @@ func clear() -> void:
         tween = null
 
 func get_next_state(_delta: float) -> State:
-    if (parent.soubalien.has_player_captured()):
+    if (parent.soubalien && parent.soubalien.has_player_captured()):
         clear()
         return capture
 
-    if (!parent.soubalien.has_player_in_ray()):
+    if (!parent.soubalien || !parent.soubalien.has_player_in_ray()):
         clear()
         parent.set_collision_mask_value(1, true)
         parent.scale = Vector2(1, 1)

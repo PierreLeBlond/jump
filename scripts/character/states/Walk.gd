@@ -13,7 +13,7 @@ class_name Walk
 @export var idle: State
 
 func get_next_state(_delta: float) -> State:
-    if (parent.soubalien.has_player_in_cone()):
+    if (parent.soubalien && parent.soubalien.has_player_in_cone()):
         return gravity_field
 
     if (parent.wants_to_jump()):
