@@ -20,8 +20,6 @@ class_name ProjectileCharacter
 
 @export var collector: Collector
 
-@export var soubalien: Soubalien
-
 var unlocked_keys: UnlockedKeys = UnlockedKeys.new()
 
 var external_accelerations: Dictionary[String, Vector2] = {}

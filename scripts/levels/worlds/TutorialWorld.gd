@@ -5,6 +5,8 @@ class_name TutorialWorld
 @export var soubalien: Soubalien
 @export var void_zone: Void
 
+@export var soubalien_player_connector: SoubalienAndPlayerConnector
+
 @export var endPortal: Portal
 
 @export var start_checkpoint: Checkpoint
@@ -14,12 +16,12 @@ func _ready() -> void:
 
     void_zone.target_entered.connect(on_void_entered)
 
-    soubalien.captured_player.connect(on_player_captured)
+    soubalien_player_connector.captured_player.connect(on_player_captured)
 
     endPortal.spawn()
     endPortal.player_captured.connect(end_game)
 
-    soubalien.start_chasing_player()
+    soubalien_player_connector.start_chasing_player()
 
     start_checkpoint.checkpoint_pre_loaded.connect(on_start_checkpoint_pre_load)
 

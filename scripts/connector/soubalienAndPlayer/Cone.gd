@@ -1,17 +1,13 @@
 extends ProjectileState
 
-class_name Ray
+class_name Cone
 
-var tween: Tween
+const MAXIMAL_INITIAL_VERTICAL_VELOCITY = 10
 
 func enter(previous_state: State, delta: float) -> void:
     super (previous_state, delta)
 
-    parent.velocity = Vector2.ZERO
-    parent.set_collision_mask_value(1, false)
-
-    tween = create_tween()
-    tween.tween_property(parent, "scale", Vector2(0.8, 0.8), 0.2)
+    parent.velocity.y = sign(parent.velocity.y) * min(abs(parent.velocity.y), MAXIMAL_INITIAL_VERTICAL_VELOCITY)
 
 func get_parameters() -> Dictionary:
     return {
@@ -21,10 +17,3 @@ func get_parameters() -> Dictionary:
         "acceleration_factor": parent.projectile_parameters.air_acceleration_factor,
         "deceleration_factor": parent.projectile_parameters.air_deceleration_factor
     }
-
-func exit() -> void:
-    if tween:
-        tween.kill()
-        tween = null
-    parent.set_collision_mask_value(1, true)
-    parent.scale = Vector2(1, 1)

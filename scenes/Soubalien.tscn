@@ -65,8 +65,6 @@ size = Vector2(64, 2370)
 [node name="Soubalien" type="Node2D" node_paths=PackedStringArray("area", "ray_area", "cone_polygon", "left_corner_marker", "right_corner_marker")]
 script = ExtResource("1_8lxm5")
 cone_angle = 0.436
-min_ray_gravity_factor = 1.001
-max_ray_gravity_factor = 1.05
 cone_height = 412.0
 area = NodePath("Animated/Area2D")
 ray_area = NodePath("Animated/RayArea2D")

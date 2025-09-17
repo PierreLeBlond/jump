@@ -15,6 +15,7 @@ const COUNTDOWN_BPM: int = 108
 @export var race_introduction_camera: Camera
 @export var player_focus_camera: Camera
 
+@export var soubalien_player_connector: SoubalienAndPlayerConnector
 @export var soubalien: Soubalien
 @export var soubalien_introduce_path: Path
 @export var soubalien_chase_path: Path
@@ -100,7 +101,7 @@ func pre_start_race() -> void:
     camera_manager.jump_to(race_introduction_camera)
 
     soubalien_chase_path.call_deferred("set_child", soubalien)
-    soubalien.reset()
+    soubalien_player_connector.reset()
     soubalien_chase_path.reset()
     soubalien_chase_path.stop()
 
@@ -112,11 +113,11 @@ func start_race() -> void:
 
     await get_tree().create_timer(1.5).timeout
 
-    if !soubalien.captured_player.is_connected(on_player_captured):
-        soubalien.captured_player.connect(on_player_captured)
+    if !soubalien_player_connector.captured_player.is_connected(on_player_captured):
+        soubalien_player_connector.captured_player.connect(on_player_captured)
 
-    if !soubalien.ray_captured_player.is_connected(on_ray_captured_player):
-        soubalien.ray_captured_player.connect(on_ray_captured_player)
+    if !soubalien_player_connector.ray_captured_player.is_connected(on_ray_captured_player):
+        soubalien_player_connector.ray_captured_player.connect(on_ray_captured_player)
 
     cinematic_bars.unreveal()
 
@@ -139,7 +140,7 @@ func start_race() -> void:
     player.unlock_key(Globals.MOVE_UNLOCKED_KEY)
 
     soubalien_chase_path.start()
-    soubalien.start_chasing_player()
+    soubalien_player_connector.start_chasing_player()
 
     game_run.combo_duration = RACE_NOTE_COMBO_DURATION
 
@@ -154,9 +155,9 @@ func ray_capture_player() -> void:
     camera_manager.fly_to(player_focus_camera)
 
 func capture_player() -> void:
-    soubalien.captured_player.disconnect(on_player_captured)
-    soubalien.ray_captured_player.disconnect(on_ray_captured_player)
-    soubalien.reset()
+    soubalien_player_connector.captured_player.disconnect(on_player_captured)
+    soubalien_player_connector.ray_captured_player.disconnect(on_ray_captured_player)
+    soubalien_player_connector.reset()
 
     music_manager.end_race()
 
@@ -164,8 +165,8 @@ func capture_player() -> void:
 
 func reach_end() -> void:
     soubalien_chase_path.stop()
-    soubalien.captured_player.disconnect(on_player_captured)
-    soubalien.ray_captured_player.disconnect(on_ray_captured_player)
+    soubalien_player_connector.captured_player.disconnect(on_player_captured)
+    soubalien_player_connector.ray_captured_player.disconnect(on_ray_captured_player)
 
     music_manager.end_race()
 

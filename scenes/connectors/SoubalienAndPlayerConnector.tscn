@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://csu7vptxeme8t"]
+
+[ext_resource type="Shader" uid="uid://nwuwxuvq8aap" path="res://shaders/whirlandpinch.gdshader" id="1_gemux"]
+[ext_resource type="Script" uid="uid://c36l3gxtk4brk" path="res://scripts/connector/soubalienAndPlayer/SoubalienAndPlayerConnector.gd" id="2_q2la3"]
+[ext_resource type="Script" uid="uid://ccg8x3q6ists2" path="res://scripts/connector/soubalienAndPlayer/Cone.gd" id="3_8ynkr"]
+[ext_resource type="Script" uid="uid://bmfkg6515ny4x" path="res://scripts/connector/soubalienAndPlayer/Ray.gd" id="4_h6p76"]
+[ext_resource type="Script" uid="uid://n2uhrt8ggeir" path="res://scripts/connector/soubalienAndPlayer/Capture.gd" id="5_dggxg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dxrc8"]
+shader = ExtResource("1_gemux")
+shader_parameter/source_screen_position = Vector2(359.137, 69.6385)
+shader_parameter/target_screen_size = Vector2(982, 446)
+shader_parameter/radius = 128.0
+shader_parameter/whirl = 0.5
+shader_parameter/pinch = 1.0
+
+[node name="SoubalienAndPlayerConnector" type="Node2D" node_paths=PackedStringArray("capture_state", "cone_state", "ray_state")]
+script = ExtResource("2_q2la3")
+capture_state = NodePath("Capture")
+cone_state = NodePath("Cone")
+ray_state = NodePath("Ray")
+
+[node name="Cone" type="Node" parent="."]
+script = ExtResource("3_8ynkr")
+animation = "cone"
+
+[node name="Ray" type="Node" parent="."]
+script = ExtResource("4_h6p76")
+animation = "ray"
+
+[node name="Capture" type="Node" parent="." node_paths=PackedStringArray("canvas_group")]
+script = ExtResource("5_dggxg")
+canvas_group = NodePath("CanvasGroup")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="Capture"]
+material = SubResource("ShaderMaterial_dxrc8")
+fit_margin = 64.0

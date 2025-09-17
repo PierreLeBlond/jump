@@ -1,9 +1,8 @@
-[gd_scene load_steps=43 format=3 uid="uid://27vdgqlbgpml"]
+[gd_scene load_steps=38 format=3 uid="uid://27vdgqlbgpml"]
 
 [ext_resource type="Script" uid="uid://b53py4t8s65s1" path="res://scripts/character/Player.gd" id="1_6e537"]
 [ext_resource type="Texture2D" uid="uid://3k4btk54cqba" path="res://assets/spritesheets/player/player.png" id="2_0rnld"]
 [ext_resource type="Resource" uid="uid://bvl3cqclybygu" path="res://data/projectileParameters/player.tres" id="2_sfy4j"]
-[ext_resource type="Shader" uid="uid://nwuwxuvq8aap" path="res://shaders/whirlandpinch.gdshader" id="3_viqgg"]
 [ext_resource type="Script" uid="uid://bucbmqmbeeupx" path="res://scripts/character/states/Idle.gd" id="4_p7iby"]
 [ext_resource type="Script" uid="uid://c710qahwivjfa" path="res://scripts/character/states/Fall.gd" id="5_0rnld"]
 [ext_resource type="Script" uid="uid://dt3f4mv56joe3" path="res://scripts/state/StateMachine.gd" id="5_6e537"]
@@ -14,23 +13,12 @@
 [ext_resource type="Script" uid="uid://c5we0dutkben8" path="res://scripts/character/states/Run.gd" id="9_ebwui"]
 [ext_resource type="Script" uid="uid://d4ejg1k4w0j6n" path="res://scripts/character/states/Walk.gd" id="10_sfy4j"]
 [ext_resource type="Script" uid="uid://cx473tyk8323v" path="res://scripts/controls/PlayerController.gd" id="11_gv3ic"]
-[ext_resource type="Script" uid="uid://btq1tr1q7jasc" path="res://scripts/character/states/GravityField.gd" id="11_p7iby"]
 [ext_resource type="Script" uid="uid://2wnddxpocco4" path="res://scripts/character/states/CanceledJump.gd" id="12_0rnld"]
 [ext_resource type="Script" uid="uid://blh3ndwp2n1vi" path="res://scripts/character/CornerCorrector.gd" id="13_lkdrv"]
 [ext_resource type="Script" uid="uid://djcf013m042qh" path="res://scripts/character/states/WallRun.gd" id="13_srp4u"]
-[ext_resource type="Script" uid="uid://bs5q27nj5ciwb" path="res://scripts/character/states/Ray.gd" id="16_b8lor"]
-[ext_resource type="Script" uid="uid://e6to3upa2dmq" path="res://scripts/character/states/Capture.gd" id="17_6e537"]
 [ext_resource type="Script" uid="uid://n0not04aejg6" path="res://scripts/character/CliffDetector.gd" id="18_61ith"]
 [ext_resource type="Script" uid="uid://br0fm1ttogpe2" path="res://scripts/character/WallDetector.gd" id="19_ebwui"]
 [ext_resource type="Script" uid="uid://dfh6a42d2dq0n" path="res://scripts/collectibles/Collector.gd" id="20_sfy4j"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6e537"]
-shader = ExtResource("3_viqgg")
-shader_parameter/source_screen_position = Vector2(359.137, 69.6385)
-shader_parameter/target_screen_size = Vector2(982, 446)
-shader_parameter/radius = 128.0
-shader_parameter/whirl = 0.5
-shader_parameter/pinch = 1.0
 
 [sub_resource type="Animation" id="Animation_6e537"]
 length = 0.001
@@ -144,22 +132,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [120, 133]
-}
-
-[sub_resource type="Animation" id="Animation_viqgg"]
-resource_name = "lifted"
-length = 0.9
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274]
 }
 
 [sub_resource type="Animation" id="Animation_fgkxt"]
@@ -276,16 +248,32 @@ tracks/0/keys = {
 "values": [134, 144]
 }
 
+[sub_resource type="Animation" id="Animation_viqgg"]
+resource_name = "cone"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pt1rj"]
 _data = {
 &"RESET": SubResource("Animation_6e537"),
 &"backcliffhang": SubResource("Animation_gv3ic"),
+&"cone": SubResource("Animation_viqgg"),
 &"fall": SubResource("Animation_1pe8v"),
 &"frontcliffhang": SubResource("Animation_ebwui"),
 &"idle": SubResource("Animation_srp4u"),
 &"jump": SubResource("Animation_l8qks"),
 &"land": SubResource("Animation_jfpux"),
-&"lifted": SubResource("Animation_viqgg"),
 &"ray": SubResource("Animation_fgkxt"),
 &"run": SubResource("Animation_u1bau"),
 &"standup": SubResource("Animation_p07f3"),
@@ -301,19 +289,16 @@ size = Vector2(56, 102)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gv3ic"]
 size = Vector2(54, 104)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cancel_jump_state", "capture_state", "cliff_hang_state", "double_jump_state", "fall_state", "gravity_field_state", "idle_state", "jump_state", "ray_state", "run_state", "walk_state", "wall_jump_state", "wall_run_state", "corner_corrector", "cliff_detector", "wall_detector", "state_machine", "movement_controller", "animation_player", "sprite_2d", "collector")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cancel_jump_state", "cliff_hang_state", "double_jump_state", "fall_state", "idle_state", "jump_state", "run_state", "walk_state", "wall_jump_state", "wall_run_state", "corner_corrector", "cliff_detector", "wall_detector", "state_machine", "movement_controller", "animation_player", "sprite_2d", "collector")]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_6e537")
 cancel_jump_state = NodePath("StateMachine/CanceledJump")
-capture_state = NodePath("StateMachine/Capture")
 cliff_hang_state = NodePath("StateMachine/CliffHang")
 double_jump_state = NodePath("StateMachine/DoubleJump")
 fall_state = NodePath("StateMachine/Fall")
-gravity_field_state = NodePath("StateMachine/GravityField")
 idle_state = NodePath("StateMachine/Idle")
 jump_state = NodePath("StateMachine/Jump")
-ray_state = NodePath("StateMachine/Ray")
 run_state = NodePath("StateMachine/Run")
 walk_state = NodePath("StateMachine/Walk")
 wall_jump_state = NodePath("StateMachine/WallJump")
@@ -327,10 +312,6 @@ projectile_parameters = ExtResource("2_sfy4j")
 animation_player = NodePath("AnimationPlayer")
 sprite_2d = NodePath("Sprite2D")
 collector = NodePath("Collector")
-
-[node name="CanvasGroup" type="CanvasGroup" parent="."]
-material = SubResource("ShaderMaterial_6e537")
-fit_margin = 64.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_0rnld")
@@ -379,10 +360,6 @@ animation = "run"
 script = ExtResource("10_sfy4j")
 animation = "walk"
 
-[node name="GravityField" type="Node" parent="StateMachine"]
-script = ExtResource("11_p7iby")
-animation = "lifted"
-
 [node name="CanceledJump" type="Node" parent="StateMachine"]
 script = ExtResource("12_0rnld")
 animation = "fall"
@@ -390,15 +367,6 @@ animation = "fall"
 [node name="WallRun" type="Node" parent="StateMachine"]
 script = ExtResource("13_srp4u")
 animation = "wallrun"
-
-[node name="Ray" type="Node" parent="StateMachine"]
-script = ExtResource("16_b8lor")
-animation = "ray"
-
-[node name="Capture" type="Node" parent="StateMachine" node_paths=PackedStringArray("canvas_group", "sprite")]
-script = ExtResource("17_6e537")
-canvas_group = NodePath("../../CanvasGroup")
-sprite = NodePath("../../Sprite2D")
 
 [node name="MovementController" type="Node" parent="."]
 script = ExtResource("11_gv3ic")

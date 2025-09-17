@@ -8,6 +8,8 @@ const FINAL_PINCH = 1.0
 
 const DEFAULT_RADIUS = 256
 
+@export var source: Node2D
+
 @export var canvas_group: CanvasGroup
 @export var sprite: Sprite2D
 
@@ -22,6 +24,8 @@ func enter(previous_state: State, delta: float) -> void:
     parent.set_collision_mask_value(1, false)
     canvas_group.visible = true
 
+    remove_child(canvas_group)
+    parent.add_child(canvas_group)
     parent.remove_child(sprite)
     canvas_group.add_child(sprite)
 
@@ -31,6 +35,7 @@ func enter(previous_state: State, delta: float) -> void:
     tween = create_tween()
     tween.tween_property(canvas_group.material, "shader_parameter/whirl", FINAL_WHIRL, TWEEN_DURATION)
     tween.parallel().tween_property(canvas_group.material, "shader_parameter/pinch", FINAL_PINCH, TWEEN_DURATION)
+    tween.parallel().tween_property(parent, "scale", Vector2(0.8, 0.8), 0.3)
 
 func get_parameters() -> Dictionary:
     return {
@@ -42,7 +47,6 @@ func get_parameters() -> Dictionary:
     }
 
 func update(_delta: float) -> void:
-    var source = parent.soubalien.area
     canvas_group.material.set_shader_parameter("source_screen_position", source.get_viewport().get_screen_transform() * source.get_global_transform_with_canvas().origin)
     canvas_group.material.set_shader_parameter("target_screen_size", canvas_group.get_viewport().size)
     var s_transform = source.get_viewport().get_final_transform() * source.get_canvas_transform()
@@ -54,7 +58,10 @@ func exit() -> void:
         tween.kill()
         tween = null
     parent.set_collision_mask_value(1, true)
+    parent.scale = Vector2(1, 1)
     parent.unlock_key(Globals.PHYSICS_UNLOCKED_KEY)
     canvas_group.visible = false
     canvas_group.remove_child(sprite)
     parent.add_child(sprite)
+    parent.remove_child(canvas_group)
+    add_child(canvas_group)

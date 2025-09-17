@@ -1,11 +1,17 @@
 extends ProjectileState
 
-class_name GravityField
+class_name Ray
+
+var tween: Tween
 
 func enter(previous_state: State, delta: float) -> void:
     super (previous_state, delta)
 
-    parent.velocity.y = sign(parent.velocity.y) * min(abs(parent.velocity.y), 10)
+    parent.velocity = Vector2.ZERO
+    parent.set_collision_mask_value(1, false)
+
+    tween = create_tween()
+    tween.tween_property(parent, "scale", Vector2(0.8, 0.8), 0.3)
 
 func get_parameters() -> Dictionary:
     return {
@@ -15,3 +21,10 @@ func get_parameters() -> Dictionary:
         "acceleration_factor": parent.projectile_parameters.air_acceleration_factor,
         "deceleration_factor": parent.projectile_parameters.air_deceleration_factor
     }
+
+func exit() -> void:
+    if tween:
+        tween.kill()
+        tween = null
+    parent.set_collision_mask_value(1, true)
+    parent.scale = Vector2(1, 1)
