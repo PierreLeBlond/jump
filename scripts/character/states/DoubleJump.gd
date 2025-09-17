@@ -1,10 +1,6 @@
-extends State
+extends ProjectileState
 
 class_name DoubleJump
-
-@export var fall: State
-@export var wall_jump: State
-@export var gravity_field: State
 
 func enter(previous_state: State, delta: float) -> void:
     super (previous_state, delta)
@@ -16,18 +12,6 @@ func enter(previous_state: State, delta: float) -> void:
 
     # We should only jump to max distance if we are jumping at full speed. At speed 0, we should still be able to move to half the maximum distance.
     maximum_lateral_velocity = (abs(parent.velocity.x) + parent.projectile_parameters.double_jump_maximum_velocity) / 2 * (parent.projectile_parameters.double_jump_time + parent.projectile_parameters.fall_time)
-
-func get_next_state(_delta: float) -> State:
-    if (parent.soubalien && parent.soubalien.has_player_in_cone()):
-        return gravity_field
-
-    if (parent.wants_to_jump() && parent.wall_detector.is_close_to_wall(parent.direction)):
-        return wall_jump
-
-    if (parent.velocity.y > 0):
-        return fall
-
-    return null
 
 func get_parameters() -> Dictionary:
     return {

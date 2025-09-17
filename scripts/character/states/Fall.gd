@@ -1,20 +1,6 @@
-extends State
+extends ProjectileState
 
 class_name Fall
-
-@export var walk: State
-
-@export var gravity_field: State
-
-@export var run: State
-
-@export var jump: State
-
-@export var double_jump: State
-
-@export var wall_jump: State
-
-@export var idle: State
 
 var buffered_jump_remaining_frames: int = 0
 
@@ -27,44 +13,17 @@ func enter(previous_state: State, delta: float) -> void:
 
     maximum_lateral_velocity = previous_state.maximum_lateral_velocity
 
-    if (previous_state == run):
+    if (previous_state is Run):
         coyote_jump_remaining_frames = parent.projectile_parameters.coyote_jump_frames
     else:
         coyote_jump_remaining_frames = 0
 
-    if (previous_state == double_jump):
+    if (previous_state is DoubleJump):
         double_jump_count -= 1
     else:
         double_jump_count = parent.projectile_parameters.max_double_jumps
 
     buffered_jump_remaining_frames = 0
-
-func get_next_state(_delta: float) -> State:
-    if (parent.soubalien && parent.soubalien.has_player_in_cone()):
-        return gravity_field
-
-    if (parent.wall_detector.is_close_to_wall(parent.direction) && buffered_jump_remaining_frames > 0):
-        return wall_jump
-
-    if (parent.wants_to_jump() && coyote_jump_remaining_frames > 0):
-        return jump
-
-    if (parent.wants_to_jump() && double_jump_count > 0):
-        return double_jump
-
-    if (parent.is_on_floor() && buffered_jump_remaining_frames > 0):
-        return jump
-
-    if (parent.is_on_floor() && parent.wants_to_walk() && parent.wants_to_move()):
-        return walk
-
-    if (parent.is_on_floor() && parent.wants_to_move()):
-        return run
-
-    if (parent.is_on_floor()):
-        return idle
-
-    return null
 
 func update(delta: float) -> void:
     super (delta)
@@ -86,3 +45,12 @@ func get_parameters() -> Dictionary:
         "acceleration_factor": parent.projectile_parameters.air_acceleration_factor,
         "deceleration_factor": parent.projectile_parameters.air_deceleration_factor
     }
+
+func can_coyote_jump() -> bool:
+    return coyote_jump_remaining_frames > 0
+
+func can_double_jump() -> bool:
+    return double_jump_count > 0
+
+func can_buffered_jump() -> bool:
+    return buffered_jump_remaining_frames > 0

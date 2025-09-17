@@ -1,24 +1,11 @@
-extends State
+extends ProjectileState
 
 class_name GravityField
-
-@export var fall: State
-
-@export var ray: State
 
 func enter(previous_state: State, delta: float) -> void:
     super (previous_state, delta)
 
     parent.velocity.y = sign(parent.velocity.y) * min(abs(parent.velocity.y), 10)
-
-func get_next_state(_delta: float) -> State:
-    if (parent.soubalien && parent.soubalien.has_player_in_ray()):
-        return ray
-
-    if (!parent.soubalien || !parent.soubalien.has_player_in_cone()):
-        return fall
-
-    return null
 
 func get_parameters() -> Dictionary:
     return {

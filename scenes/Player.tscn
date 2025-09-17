@@ -1,12 +1,12 @@
 [gd_scene load_steps=43 format=3 uid="uid://27vdgqlbgpml"]
 
-[ext_resource type="Script" uid="uid://b6kdes8c5suyq" path="res://scripts/character/ProjectileCharacter.gd" id="1_lkdrv"]
+[ext_resource type="Script" uid="uid://b53py4t8s65s1" path="res://scripts/character/Player.gd" id="1_6e537"]
 [ext_resource type="Texture2D" uid="uid://3k4btk54cqba" path="res://assets/spritesheets/player/player.png" id="2_0rnld"]
 [ext_resource type="Resource" uid="uid://bvl3cqclybygu" path="res://data/projectileParameters/player.tres" id="2_sfy4j"]
-[ext_resource type="Script" uid="uid://ssril2w6enj" path="res://scripts/character/states/StateMachine.gd" id="3_lkdrv"]
 [ext_resource type="Shader" uid="uid://nwuwxuvq8aap" path="res://shaders/whirlandpinch.gdshader" id="3_viqgg"]
 [ext_resource type="Script" uid="uid://bucbmqmbeeupx" path="res://scripts/character/states/Idle.gd" id="4_p7iby"]
 [ext_resource type="Script" uid="uid://c710qahwivjfa" path="res://scripts/character/states/Fall.gd" id="5_0rnld"]
+[ext_resource type="Script" uid="uid://dt3f4mv56joe3" path="res://scripts/state/StateMachine.gd" id="5_6e537"]
 [ext_resource type="Script" uid="uid://dp3ndbbembjqg" path="res://scripts/character/states/CliffHang.gd" id="5_jfpux"]
 [ext_resource type="Script" uid="uid://cbvidipydn5cv" path="res://scripts/character/states/Jump.gd" id="6_srp4u"]
 [ext_resource type="Script" uid="uid://cewi2c06dcqg3" path="res://scripts/character/states/WallJump.gd" id="7_jfpux"]
@@ -301,10 +301,23 @@ size = Vector2(56, 102)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gv3ic"]
 size = Vector2(54, 104)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("corner_corrector", "cliff_detector", "wall_detector", "state_machine", "movement_controller", "animation_player", "sprite_2d", "collector")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cancel_jump_state", "capture_state", "cliff_hang_state", "double_jump_state", "fall_state", "gravity_field_state", "idle_state", "jump_state", "ray_state", "run_state", "walk_state", "wall_jump_state", "wall_run_state", "corner_corrector", "cliff_detector", "wall_detector", "state_machine", "movement_controller", "animation_player", "sprite_2d", "collector")]
 collision_layer = 2
 collision_mask = 9
-script = ExtResource("1_lkdrv")
+script = ExtResource("1_6e537")
+cancel_jump_state = NodePath("StateMachine/CanceledJump")
+capture_state = NodePath("StateMachine/Capture")
+cliff_hang_state = NodePath("StateMachine/CliffHang")
+double_jump_state = NodePath("StateMachine/DoubleJump")
+fall_state = NodePath("StateMachine/Fall")
+gravity_field_state = NodePath("StateMachine/GravityField")
+idle_state = NodePath("StateMachine/Idle")
+jump_state = NodePath("StateMachine/Jump")
+ray_state = NodePath("StateMachine/Ray")
+run_state = NodePath("StateMachine/Run")
+walk_state = NodePath("StateMachine/Walk")
+wall_jump_state = NodePath("StateMachine/WallJump")
+wall_run_state = NodePath("StateMachine/WallRun")
 corner_corrector = NodePath("CornerCorrector")
 cliff_detector = NodePath("CliffDetector")
 wall_detector = NodePath("WallDetector")
@@ -331,118 +344,61 @@ libraries = {
 }
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_lkdrv")
+script = ExtResource("5_6e537")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("cliff_hang", "gravity_field", "jump", "fall", "run", "walk")]
+[node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("4_p7iby")
-cliff_hang = NodePath("../CliffHang")
-gravity_field = NodePath("../GravityField")
-jump = NodePath("../Jump")
-fall = NodePath("../Fall")
-run = NodePath("../Run")
-walk = NodePath("../Walk")
 animation = "idle"
 
-[node name="CliffHang" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle", "gravity_field", "jump", "fall", "run", "walk")]
+[node name="CliffHang" type="Node" parent="StateMachine"]
 script = ExtResource("5_jfpux")
-idle = NodePath("../Idle")
-gravity_field = NodePath("../GravityField")
-jump = NodePath("../Jump")
-fall = NodePath("../Fall")
-run = NodePath("../Run")
-walk = NodePath("../Walk")
 animation = "idle"
 
-[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("walk", "gravity_field", "run", "jump", "double_jump", "wall_jump", "idle")]
+[node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("5_0rnld")
-walk = NodePath("../Walk")
-gravity_field = NodePath("../GravityField")
-run = NodePath("../Run")
-jump = NodePath("../Jump")
-double_jump = NodePath("../DoubleJump")
-wall_jump = NodePath("../WallJump")
-idle = NodePath("../Idle")
 animation = "fall"
 
-[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "gravity_field", "double_jump", "wall_run", "wall_jump", "canceled_jump")]
+[node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource("6_srp4u")
-fall = NodePath("../Fall")
-gravity_field = NodePath("../GravityField")
-double_jump = NodePath("../DoubleJump")
-wall_run = NodePath("../WallRun")
-wall_jump = NodePath("../WallJump")
-canceled_jump = NodePath("../CanceledJump")
 animation = "jump"
 
-[node name="WallJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "gravity_field", "double_jump", "next_wall_jump")]
+[node name="WallJump" type="Node" parent="StateMachine"]
 script = ExtResource("7_jfpux")
-fall = NodePath("../Fall")
-gravity_field = NodePath("../GravityField")
-double_jump = NodePath("../DoubleJump")
-next_wall_jump = NodePath(".")
 animation = "jump"
 
-[node name="DoubleJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "wall_jump", "gravity_field")]
+[node name="DoubleJump" type="Node" parent="StateMachine"]
 script = ExtResource("8_61ith")
-fall = NodePath("../Fall")
-wall_jump = NodePath("../WallJump")
-gravity_field = NodePath("../GravityField")
 animation = "jump"
 
-[node name="Run" type="Node" parent="StateMachine" node_paths=PackedStringArray("gravity_field", "fall", "jump", "walk", "idle")]
+[node name="Run" type="Node" parent="StateMachine"]
 script = ExtResource("9_ebwui")
-gravity_field = NodePath("../GravityField")
-fall = NodePath("../Fall")
-jump = NodePath("../Jump")
-walk = NodePath("../Walk")
-idle = NodePath("../Idle")
 animation = "run"
 
-[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("gravity_field", "fall", "run", "jump", "idle")]
+[node name="Walk" type="Node" parent="StateMachine"]
 script = ExtResource("10_sfy4j")
-gravity_field = NodePath("../GravityField")
-fall = NodePath("../Fall")
-run = NodePath("../Run")
-jump = NodePath("../Jump")
-idle = NodePath("../Idle")
 animation = "walk"
 
-[node name="GravityField" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "ray")]
+[node name="GravityField" type="Node" parent="StateMachine"]
 script = ExtResource("11_p7iby")
-fall = NodePath("../Fall")
-ray = NodePath("../Ray")
 animation = "lifted"
 
-[node name="CanceledJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "gravity_field", "double_jump", "wall_jump")]
+[node name="CanceledJump" type="Node" parent="StateMachine"]
 script = ExtResource("12_0rnld")
-fall = NodePath("../Fall")
-gravity_field = NodePath("../GravityField")
-double_jump = NodePath("../DoubleJump")
-wall_jump = NodePath("../WallJump")
 animation = "fall"
 
-[node name="WallRun" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "gravity_field", "double_jump", "wall_jump", "canceled_jump")]
+[node name="WallRun" type="Node" parent="StateMachine"]
 script = ExtResource("13_srp4u")
-fall = NodePath("../Fall")
-gravity_field = NodePath("../GravityField")
-double_jump = NodePath("../DoubleJump")
-wall_jump = NodePath("../WallJump")
-canceled_jump = NodePath("../CanceledJump")
 animation = "wallrun"
 
-[node name="Ray" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "capture")]
+[node name="Ray" type="Node" parent="StateMachine"]
 script = ExtResource("16_b8lor")
-fall = NodePath("../Fall")
-capture = NodePath("../Capture")
 animation = "ray"
 
-[node name="Capture" type="Node" parent="StateMachine" node_paths=PackedStringArray("fall", "canvas_group", "sprite")]
+[node name="Capture" type="Node" parent="StateMachine" node_paths=PackedStringArray("canvas_group", "sprite")]
 script = ExtResource("17_6e537")
-fall = NodePath("../Fall")
 canvas_group = NodePath("../../CanvasGroup")
 sprite = NodePath("../../Sprite2D")
-radius = 256.0
 
 [node name="MovementController" type="Node" parent="."]
 script = ExtResource("11_gv3ic")

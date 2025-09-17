@@ -1,16 +1,8 @@
-extends State
+extends ProjectileState
 
 class_name CanceledJump
 
 const OVERSHOT_FACTOR = 0.4
-
-@export var fall: State
-
-@export var gravity_field: State
-
-@export var double_jump: State
-
-@export var wall_jump: State
 
 var canceled_jump_height: float
 var canceled_jump_time: float
@@ -44,24 +36,6 @@ func enter(previous_state: State, delta: float) -> void:
 
     # We should only jump to max distance if we are jumping at full speed. At speed 0, we should still be able to move to half the maximum distance.
     maximum_lateral_velocity = (abs(parent.velocity.x) + parent.projectile_parameters.maximum_velocity * run_factor) / 2 * (parent.projectile_parameters.jump_time + parent.projectile_parameters.fall_time)
-
-func get_next_state(_delta: float) -> State:
-    if (parent.soubalien && parent.soubalien.has_player_in_cone()):
-        return gravity_field
-
-    if (parent.wants_to_jump() && parent.wall_detector.is_close_to_wall(parent.direction)):
-        return wall_jump
-
-    if (parent.wants_to_jump() && parent.projectile_parameters.max_double_jumps > 0):
-        return double_jump
-
-    # if (parent.velocity.y > 0):
-        # return fall
-
-    # return null
-
-    # Just profit of the downward force, but go back to fall state immediatly
-    return fall
 
 func get_parameters() -> Dictionary:
     return {

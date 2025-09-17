@@ -2,8 +2,6 @@ extends CharacterBody2D
 
 class_name ProjectileCharacter
 
-signal direction_changed(direction: int)
-
 @export var corner_corrector: CornerCorrector
 
 @export var cliff_detector: CliffDetector
@@ -32,20 +30,32 @@ var direction: int = 1
 
 func _ready() -> void:
     corner_corrector.init(self)
-    state_machine.init(self)
 
 func _physics_process(delta: float) -> void:
     if (velocity.y < 0):
         corner_corrector.apply_corner_correction()
 
-    state_machine.handle_physics(delta)
+    state_machine.update(delta)
+
+    if !unlocked_keys.has_unlocked_physics():
+        return
+
+    # TODO: current_state is not correctly typed has a projectile state
+    var controlled_velocity = state_machine.current_state.get_velocity(delta)
+    var external_velocity = Vector2.ZERO
+
+    for acceleration in external_accelerations.values():
+        external_velocity += acceleration * delta
+    velocity = controlled_velocity + external_velocity
+
+    move_and_slide()
 
     var controller_direction = movement_controller.get_direction()
     if (controller_direction == 0 || direction == controller_direction):
         return
 
     direction = controller_direction
-    direction_changed.emit(direction)
+    sprite_2d.scale.x = direction * abs(sprite_2d.scale.x)
 
 func wants_to_move() -> bool:
     return movement_controller.wants_to_move() && unlocked_keys.has_unlocked_move()

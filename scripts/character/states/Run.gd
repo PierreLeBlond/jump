@@ -1,38 +1,10 @@
-extends State
+extends ProjectileState
 
 class_name Run
-
-@export var gravity_field: State
-
-@export var fall: State
-
-@export var jump: State
-
-@export var walk: State
-
-@export var idle: State
 
 func enter(previous_state: State, delta: float) -> void:
     super (previous_state, delta)
     maximum_lateral_velocity = parent.projectile_parameters.maximum_velocity * parent.projectile_parameters.run_factor
-
-func get_next_state(_delta: float) -> State:
-    if (parent.soubalien && parent.soubalien.has_player_in_cone()):
-        return gravity_field
-
-    if (parent.wants_to_jump()):
-        return jump
-
-    if (!parent.is_on_floor()):
-        return fall
-
-    if (parent.wants_to_walk()):
-        return walk
-
-    if (!parent.wants_to_move()):
-        return idle
-
-    return null
 
 func get_parameters() -> Dictionary:
     return {

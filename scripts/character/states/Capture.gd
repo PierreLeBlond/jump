@@ -1,4 +1,4 @@
-extends State
+extends ProjectileState
 
 class_name Capture
 
@@ -6,12 +6,12 @@ const TWEEN_DURATION = 0.5
 const FINAL_WHIRL = 1.0
 const FINAL_PINCH = 1.0
 
-@export var fall: State
+const DEFAULT_RADIUS = 256
 
 @export var canvas_group: CanvasGroup
 @export var sprite: Sprite2D
 
-@export var radius: float = 128.0
+@export var radius: float = DEFAULT_RADIUS
 
 var tween: Tween
 
@@ -32,23 +32,6 @@ func enter(previous_state: State, delta: float) -> void:
     tween.tween_property(canvas_group.material, "shader_parameter/whirl", FINAL_WHIRL, TWEEN_DURATION)
     tween.parallel().tween_property(canvas_group.material, "shader_parameter/pinch", FINAL_PINCH, TWEEN_DURATION)
 
-func clear() -> void:
-    if tween:
-        tween.kill()
-        tween = null
-    parent.set_collision_mask_value(1, true)
-    parent.unlock_key(Globals.PHYSICS_UNLOCKED_KEY)
-    canvas_group.visible = false
-    canvas_group.remove_child(sprite)
-    parent.add_child(sprite)
-
-func get_next_state(_delta: float) -> State:
-    if (!parent.soubalien || !parent.soubalien.has_player_captured()):
-        clear()
-        return fall
-
-    return null
-
 func get_parameters() -> Dictionary:
     return {
         "jump_height": parent.projectile_parameters.jump_height,
@@ -65,3 +48,13 @@ func update(_delta: float) -> void:
     var s_transform = source.get_viewport().get_final_transform() * source.get_canvas_transform()
     var screen_radius = radius * s_transform.get_scale().x
     canvas_group.material.set_shader_parameter("radius", screen_radius)
+
+func exit() -> void:
+    if tween:
+        tween.kill()
+        tween = null
+    parent.set_collision_mask_value(1, true)
+    parent.unlock_key(Globals.PHYSICS_UNLOCKED_KEY)
+    canvas_group.visible = false
+    canvas_group.remove_child(sprite)
+    parent.add_child(sprite)

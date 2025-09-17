@@ -1,6 +1,6 @@
-extends Node
+extends State
 
-class_name State
+class_name ProjectileState
 
 @export var animation: String
 
@@ -13,12 +13,6 @@ func init(projectile_character: ProjectileCharacter) -> void:
     self.parent = projectile_character
     self.state_machine = projectile_character.state_machine
     self.maximum_lateral_velocity = parent.projectile_parameters.maximum_velocity
-
-func flip_sprite(direction: int) -> void:
-    parent.sprite_2d.scale = Vector2(
-        direction * abs(parent.sprite_2d.scale.x),
-        parent.sprite_2d.scale.y
-    )
 
 func get_lateral_velocity(delta: float, current_velocity: float, maximum_velocity: float, acceleration_factor: float, deceleration_factor: float) -> float:
     var direction = parent.movement_controller.get_direction() if parent.unlocked_keys.has_unlocked_move() else 0
@@ -80,12 +74,3 @@ func get_velocity(delta: float) -> Vector2:
 func enter(_previous_state: State, _delta: float) -> void:
     if animation:
         parent.animation_player.play(animation)
-
-func get_next_state(_delta: float) -> State:
-    return null
-
-func update(_delta: float) -> void:
-    pass
-
-func exit() -> void:
-    pass

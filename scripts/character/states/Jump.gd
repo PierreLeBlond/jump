@@ -1,18 +1,6 @@
-extends State
+extends ProjectileState
 
 class_name Jump
-
-@export var fall: State
-
-@export var gravity_field: State
-
-@export var double_jump: State
-
-@export var wall_run: State
-
-@export var wall_jump: State
-
-@export var canceled_jump: State
 
 var buffered_jump_remaining_frames: int = 0
 
@@ -35,27 +23,6 @@ func enter(previous_state: State, delta: float) -> void:
 
     buffered_jump_remaining_frames = 0
 
-func get_next_state(_delta: float) -> State:
-    if (parent.soubalien && parent.soubalien.has_player_in_cone()):
-        return gravity_field
-
-    if (parent.wall_detector.is_close_to_wall(parent.direction) && buffered_jump_remaining_frames > 0):
-        return wall_jump
-
-    if (parent.wall_detector.is_hugging_wall(parent.direction)):
-        return wall_run
-
-    if (parent.wants_to_jump() && parent.projectile_parameters.max_double_jumps > 0):
-        return double_jump
-
-    if (parent.velocity.y > 0):
-        return fall
-
-    if (parent.cancel_jump() && jump_pressed_time > parent.projectile_parameters.minimum_jump_pressed_time):
-        return canceled_jump
-    
-    return null
-
 func update(delta: float) -> void:
     jump_pressed_time += delta
 
@@ -73,3 +40,12 @@ func get_parameters() -> Dictionary:
         "acceleration_factor": parent.projectile_parameters.acceleration_factor,
         "deceleration_factor": parent.projectile_parameters.deceleration_factor
     }
+
+func can_buffered_jump() -> bool:
+    return buffered_jump_remaining_frames > 0
+
+func can_double_jump() -> bool:
+    return parent.projectile_parameters.max_double_jumps > 0
+
+func can_cancel_jump() -> bool:
+    return jump_pressed_time > parent.projectile_parameters.minimum_jump_pressed_time

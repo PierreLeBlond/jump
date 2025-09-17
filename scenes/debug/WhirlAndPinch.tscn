@@ -15,7 +15,7 @@ whirl = 0.5
 pinch = 1.005
 
 [node name="Source" type="Marker2D" parent="."]
-position = Vector2(894, 905)
+position = Vector2(678, 785)
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
 material = ExtResource("1_3ixdp")

@@ -1,34 +1,6 @@
-extends State
+extends ProjectileState
 
 class_name Walk
-
-@export var gravity_field: State
-
-@export var fall: State
-
-@export var run: State
-
-@export var jump: State
-
-@export var idle: State
-
-func get_next_state(_delta: float) -> State:
-    if (parent.soubalien && parent.soubalien.has_player_in_cone()):
-        return gravity_field
-
-    if (parent.wants_to_jump()):
-        return jump
-
-    if (!parent.is_on_floor()):
-        return fall
-
-    if (!parent.wants_to_walk()):
-        return run
-
-    if (!parent.wants_to_move()):
-        return idle
-
-    return null
 
 func get_parameters() -> Dictionary:
     return {

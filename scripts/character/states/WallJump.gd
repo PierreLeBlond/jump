@@ -1,14 +1,6 @@
-extends State
+extends ProjectileState
 
 class_name WallJump
-
-@export var fall: State
-
-@export var gravity_field: State
-
-@export var double_jump: State
-
-@export var next_wall_jump: State
 
 var jump_pressed_time: float = 0
 
@@ -28,24 +20,6 @@ func enter(previous_state: State, delta: float) -> void:
 
     jump_pressed_time = 0
 
-func get_next_state(_delta: float) -> State:
-    if (parent.soubalien && parent.soubalien.has_player_in_cone()):
-        return gravity_field
-
-    if (parent.wants_to_jump() && parent.wall_detector.is_close_to_wall(parent.direction)):
-        return next_wall_jump
-
-    if (parent.wants_to_jump()):
-        return double_jump
-
-    if (parent.velocity.y > 0):
-        return fall
-
-    if (parent.cancel_jump() && jump_pressed_time > parent.projectile_parameters.minimum_jump_pressed_time):
-        return fall
-
-    return null
-
 func update(delta: float) -> void:
     jump_pressed_time += delta
 
@@ -57,3 +31,6 @@ func get_parameters() -> Dictionary:
         "acceleration_factor": parent.projectile_parameters.wall_jump_acceleration_factor,
         "deceleration_factor": parent.projectile_parameters.wall_jump_deceleration_factor
     }
+
+func can_cancel_jump() -> bool:
+    return jump_pressed_time > parent.projectile_parameters.minimum_jump_pressed_time
