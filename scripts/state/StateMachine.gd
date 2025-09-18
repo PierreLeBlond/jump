@@ -42,5 +42,4 @@ func update(delta: float) -> void:
     var new_state = get_next_state()
 
     if (new_state != null):
-        print("Changing state to", new_state)
         change_state(new_state, delta)

@@ -10,9 +10,9 @@
 shader = ExtResource("1_gemux")
 shader_parameter/source_screen_position = Vector2(359.137, 69.6385)
 shader_parameter/target_screen_size = Vector2(982, 446)
-shader_parameter/radius = 128.0
-shader_parameter/whirl = 0.5
-shader_parameter/pinch = 1.0
+shader_parameter/radius = 256.0
+shader_parameter/whirl = 0.1
+shader_parameter/pinch = 0.2
 
 [node name="SoubalienAndPlayerConnector" type="Node2D" node_paths=PackedStringArray("capture_state", "cone_state", "ray_state")]
 script = ExtResource("2_q2la3")
@@ -28,10 +28,11 @@ animation = "cone"
 script = ExtResource("4_h6p76")
 animation = "ray"
 
-[node name="Capture" type="Node" parent="." node_paths=PackedStringArray("canvas_group")]
+[node name="Capture" type="Node" parent="." node_paths=PackedStringArray("canvas_group", "canvas_group_parent")]
 script = ExtResource("5_dggxg")
-canvas_group = NodePath("CanvasGroup")
+canvas_group = NodePath("../CanvasGroup")
+canvas_group_parent = NodePath("..")
 
-[node name="CanvasGroup" type="CanvasGroup" parent="Capture"]
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
 material = SubResource("ShaderMaterial_dxrc8")
 fit_margin = 64.0
