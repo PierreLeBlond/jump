@@ -38,7 +38,6 @@ func _ready() -> void:
 func on_checkpoint_saved() -> void:
     game_state.score = world.game_run.score
     game_state.time = world.game_run.elapsed_time
-    game_state.life = world.game_run.life
 
     for note in world.player.collector.collected_notes:
         game_state.notes.append(world.notes.find(note))
@@ -68,6 +67,10 @@ func unload_world() -> void:
         world = null
 
 func load_world() -> void:
+    # Life does persist through level loading
+    if world:
+        game_state.life = world.game_run.life
+
     var release_loading = await Transition.create_loading_transition_in(get_tree().root)
     unload_world()
 
@@ -94,8 +97,7 @@ func restart() -> void:
 
 func die() -> void:
     # We'll need to also update game state life when life can be collected
-    if game_state.life > 1:
-        game_state.life -= 1
+    if world.game_run.life > 0:
         load_last_checkpoint.call_deferred()
     else:
         has_run_out_of_lives.emit()

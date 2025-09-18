@@ -154,6 +154,8 @@ func ray_capture_player() -> void:
     soubalien_chase_path.stop()
     camera_manager.fly_to(player_focus_camera)
 
+    game_run.remove_life()
+
 func capture_player() -> void:
     soubalien_player_connector.captured_player.disconnect(on_player_captured)
     soubalien_player_connector.ray_captured_player.disconnect(on_ray_captured_player)
