@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dm275lbjrus7p" path="res://scripts/camera/CameraManager.gd" id="1_3awgc"]
 [ext_resource type="Script" uid="uid://bbujjd3t0eg6e" path="res://scripts/camera/Camera.gd" id="1_oiqh6"]
 [ext_resource type="Script" uid="uid://xd4woi41uhf2" path="res://scripts/camera/CameraOverrideArea.gd" id="2_kjhmi"]
-[ext_resource type="TileSet" uid="uid://d2f3f4ukvlod0" path="res://tilesets/tree.tres" id="3_3awgc"]
+[ext_resource type="TileSet" uid="uid://dftl5pyptmafp" path="res://tilesets/cloud.tres" id="4_3awgc"]
 [ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="5_cygix"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oiqh6"]
@@ -49,7 +49,7 @@ metadata/_custom_type_script = "uid://bbujjd3t0eg6e"
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAAABAAAQABAAMAAAABABAAAQACAAMAAAACABAAAQACAAMAAAADABAAAQACAAMAAAAFABAAAQACAAMAAAAEABAAAQACAAMAAAAHABAAAQACAAMAAAAGABAAAQACAAMAAAAJABAAAQACAAMAAAAIABAAAQACAAMAAAAKABAAAQACAAIAAAAPABAAAQACAAMAAAARABAAAQACAAMAAAAQABAAAQACAAMAAAASABAAAQACAAMAAAATABAAAQACAAMAAAAUABAAAQACAAMAAAAVABAAAQACAAMAAAAWABAAAQACAAMAAAAXABAAAQACAAMAAAAYABAAAQACAAMAAAAZABAAAQACAAMAAAAaABAAAQACAAMAAAAbABAAAQACAAMAAAAcABAAAQACAAMAAAAdABAAAQADAAMAAAALABAAAQACAAMAAAAMABAAAQACAAMAAAANABAAAQACAAMAAAAOABAAAQACAAMAAAAFAA0AAQAAAAIAAAAFAAwAAQAAAAEAAAAFAAsAAQAAAAEAAAAFAAoAAQAAAAEAAAAFAAkAAQAAAAEAAAAFAAgAAQAAAAEAAAAFAAcAAQAAAAEAAAAFAAYAAQAAAAEAAAAFAAUAAQAAAAEAAAAFAAQAAQAAAAEAAAAFAAMAAQAAAAAAAAAKAA8AAQAAAAEAAAAKAA4AAQAAAAEAAAAKAA0AAQAAAAEAAAAKAAwAAQAAAAEAAAAKAAsAAQAAAAEAAAAKAAoAAQAAAAEAAAAKAAkAAQAAAAEAAAAKAAgAAQAAAAEAAAAKAAcAAQAAAAEAAAAKAAYAAQAAAAEAAAAKAAUAAQAAAAAAAAA=")
-tile_set = ExtResource("3_3awgc")
+tile_set = ExtResource("4_3awgc")
 
 [node name="Player" parent="." instance=ExtResource("5_cygix")]
 position = Vector2(200, 929)
