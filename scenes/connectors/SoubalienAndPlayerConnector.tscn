@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://csu7vptxeme8t"]
+[gd_scene load_steps=8 format=3 uid="uid://csu7vptxeme8t"]
 
 [ext_resource type="Shader" uid="uid://nwuwxuvq8aap" path="res://shaders/whirlandpinch.gdshader" id="1_gemux"]
 [ext_resource type="Script" uid="uid://c36l3gxtk4brk" path="res://scripts/connector/soubalienAndPlayer/SoubalienAndPlayerConnector.gd" id="2_q2la3"]
 [ext_resource type="Script" uid="uid://ccg8x3q6ists2" path="res://scripts/connector/soubalienAndPlayer/Cone.gd" id="3_8ynkr"]
 [ext_resource type="Script" uid="uid://bmfkg6515ny4x" path="res://scripts/connector/soubalienAndPlayer/Ray.gd" id="4_h6p76"]
 [ext_resource type="Script" uid="uid://n2uhrt8ggeir" path="res://scripts/connector/soubalienAndPlayer/Capture.gd" id="5_dggxg"]
+[ext_resource type="Script" uid="uid://ca2li6e3fnp26" path="res://scripts/connector/soubalienAndPlayer/WhirlAndPinch.gd" id="6_8ynkr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dxrc8"]
 shader = ExtResource("1_gemux")
@@ -14,8 +15,9 @@ shader_parameter/radius = 256.0
 shader_parameter/whirl = 0.1
 shader_parameter/pinch = 0.2
 
-[node name="SoubalienAndPlayerConnector" type="Node2D" node_paths=PackedStringArray("capture_state", "cone_state", "ray_state")]
+[node name="SoubalienAndPlayerConnector" type="Node2D" node_paths=PackedStringArray("whirl_and_pinch", "capture_state", "cone_state", "ray_state")]
 script = ExtResource("2_q2la3")
+whirl_and_pinch = NodePath("WhirlAndPinch")
 capture_state = NodePath("Capture")
 cone_state = NodePath("Cone")
 ray_state = NodePath("Ray")
@@ -24,15 +26,20 @@ ray_state = NodePath("Ray")
 script = ExtResource("3_8ynkr")
 animation = "cone"
 
-[node name="Ray" type="Node" parent="."]
+[node name="Ray" type="Node" parent="." node_paths=PackedStringArray("whirl_and_pinch")]
 script = ExtResource("4_h6p76")
+whirl_and_pinch = NodePath("../WhirlAndPinch")
 animation = "ray"
 
-[node name="Capture" type="Node" parent="." node_paths=PackedStringArray("canvas_group", "canvas_group_parent")]
+[node name="Capture" type="Node" parent="." node_paths=PackedStringArray("whirl_and_pinch")]
 script = ExtResource("5_dggxg")
-canvas_group = NodePath("../CanvasGroup")
-canvas_group_parent = NodePath("..")
+whirl_and_pinch = NodePath("../WhirlAndPinch")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
 material = SubResource("ShaderMaterial_dxrc8")
 fit_margin = 64.0
+
+[node name="WhirlAndPinch" type="Node" parent="." node_paths=PackedStringArray("canvas_group", "canvas_group_parent")]
+script = ExtResource("6_8ynkr")
+canvas_group = NodePath("../CanvasGroup")
+canvas_group_parent = NodePath("..")

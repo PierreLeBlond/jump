@@ -2,6 +2,10 @@ extends ProjectileState
 
 class_name Ray
 
+const DEFAULT_RADIUS = 256
+
+@export var whirl_and_pinch: WhirlAndPinch
+
 var tween: Tween
 
 func enter(previous_state: State, delta: float) -> void:
@@ -10,8 +14,15 @@ func enter(previous_state: State, delta: float) -> void:
     parent.velocity = Vector2.ZERO
     parent.set_collision_mask_value(1, false)
 
+    whirl_and_pinch.setup()
+
+    whirl_and_pinch.whirl = 0.0
+    whirl_and_pinch.pinch = 0.1
+
     tween = create_tween()
     tween.tween_property(parent, "scale", Vector2(0.8, 0.8), 0.3)
+
+    whirl_and_pinch.update_shader_parameters()
 
 func get_parameters() -> Dictionary:
     return {
@@ -22,9 +33,13 @@ func get_parameters() -> Dictionary:
         "deceleration_factor": parent.projectile_parameters.air_deceleration_factor
     }
 
+func update(_delta: float) -> void:
+    whirl_and_pinch.update_shader_parameters()
+
 func exit() -> void:
     if tween:
         tween.kill()
         tween = null
     parent.set_collision_mask_value(1, true)
     parent.scale = Vector2(1, 1)
+    whirl_and_pinch.cleanup()

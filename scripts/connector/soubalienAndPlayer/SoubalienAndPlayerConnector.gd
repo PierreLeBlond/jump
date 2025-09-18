@@ -19,6 +19,7 @@ var soubalien_state: SoubalienState = SoubalienState.IDLE
 
 @export var soubalien: Soubalien
 @export var player: Player
+@export var whirl_and_pinch: WhirlAndPinch
 
 @export var capture_state: Capture
 @export var cone_state: Cone
@@ -28,9 +29,11 @@ var soubalien_state: SoubalienState = SoubalienState.IDLE
 @export_range(1, 2.0) var max_ray_gravity_factor: float = 1.1
 
 func _ready() -> void:
+    whirl_and_pinch.source = soubalien.area
+    whirl_and_pinch.sprite = player.sprite_2d
+    whirl_and_pinch.sprite_parent = player
+
     capture_state.init(player)
-    capture_state.source = soubalien.area
-    capture_state.sprite = player.sprite_2d
 
     player.state_machine.add_transition(capture_state, player.fall_state, func(): return !has_player_captured())
 
