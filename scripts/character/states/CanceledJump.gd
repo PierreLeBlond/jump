@@ -7,6 +7,8 @@ const OVERSHOT_FACTOR = 0.4
 var canceled_jump_height: float
 var canceled_jump_time: float
 
+var buffered_jump_remaining_frames: int = 0
+
 func enter(previous_state: State, delta: float) -> void:
     assert(previous_state is Jump or previous_state is WallJump or previous_state is WallRun)
 
@@ -37,6 +39,15 @@ func enter(previous_state: State, delta: float) -> void:
     # We should only jump to max distance if we are jumping at full speed. At speed 0, we should still be able to move to half the maximum distance.
     maximum_lateral_velocity = (abs(parent.velocity.x) + parent.projectile_parameters.maximum_velocity * run_factor) / 2 * (parent.projectile_parameters.jump_time + parent.projectile_parameters.fall_time)
 
+    buffered_jump_remaining_frames = 0
+
+func update(_delta: float) -> void:
+    if (buffered_jump_remaining_frames > 0):
+        buffered_jump_remaining_frames -= 1
+
+    if (parent.wants_to_jump()):
+        buffered_jump_remaining_frames = parent.projectile_parameters.buffered_jump_frames
+
 func get_parameters() -> Dictionary:
     return {
         "jump_height": canceled_jump_height,
@@ -45,3 +56,6 @@ func get_parameters() -> Dictionary:
         "acceleration_factor": parent.projectile_parameters.acceleration_factor,
         "deceleration_factor": parent.projectile_parameters.deceleration_factor
     }
+
+func can_buffered_jump() -> bool:
+    return buffered_jump_remaining_frames > 0

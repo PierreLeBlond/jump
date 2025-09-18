@@ -2,7 +2,7 @@ extends ProjectileCharacter
 
 class_name Player
 
-@export var cancel_jump_state: ProjectileState
+@export var cancel_jump_state: CanceledJump
 @export var cliff_hang_state: ProjectileState
 @export var double_jump_state: ProjectileState
 @export var fall_state: Fall
@@ -19,7 +19,7 @@ func _ready() -> void:
     cancel_jump_state.init(self)
     state_machine.add_state(cancel_jump_state)
 
-    state_machine.add_transition(cancel_jump_state, wall_jump_state, wants_to_wall_jump)
+    state_machine.add_transition(cancel_jump_state, wall_jump_state, func(): return wall_detector.is_close_to_wall(direction) && cancel_jump_state.can_buffered_jump())
     state_machine.add_transition(cancel_jump_state, double_jump_state, wants_to_double_jump)
     # Just profit of the downward force, but go back to fall state immediatly
     state_machine.add_transition(cancel_jump_state, fall_state, func(): return true)
@@ -35,13 +35,13 @@ func _ready() -> void:
     double_jump_state.init(self)
     state_machine.add_state(double_jump_state)
 
-    state_machine.add_transition(double_jump_state, wall_jump_state, wants_to_wall_jump)
+    state_machine.add_transition(double_jump_state, wall_jump_state, func(): return wall_detector.is_close_to_wall(direction) && double_jump_state.can_buffered_jump())
     state_machine.add_transition(double_jump_state, fall_state, is_falling)
 
     fall_state.init(self)
     state_machine.add_state(fall_state)
 
-    state_machine.add_transition(fall_state, wall_jump_state, wants_to_wall_jump)
+    state_machine.add_transition(fall_state, wall_jump_state, func(): return wall_detector.is_close_to_wall(direction) && fall_state.can_buffered_jump())
     state_machine.add_transition(fall_state, jump_state, func(): return (wants_to_jump() && fall_state.can_coyote_jump()) || (is_on_floor() && fall_state.can_buffered_jump()))
     state_machine.add_transition(fall_state, double_jump_state, func(): return wants_to_jump() && fall_state.can_double_jump())
     state_machine.add_transition(fall_state, walk_state, func(): return is_on_floor() && wants_to_walk() && wants_to_move())
@@ -86,7 +86,7 @@ func _ready() -> void:
     wall_jump_state.init(self)
     state_machine.add_state(wall_jump_state)
 
-    state_machine.add_transition(wall_jump_state, wall_jump_state, func(): return wants_to_jump() && wall_detector.is_close_to_wall(direction))
+    state_machine.add_transition(wall_jump_state, wall_jump_state, func(): return wall_detector.is_close_to_wall(direction) && wall_jump_state.can_buffered_jump())
     state_machine.add_transition(wall_jump_state, fall_state, is_falling)
     state_machine.add_transition(wall_jump_state, cancel_jump_state, func(): return cancel_jump() && wall_jump_state.can_cancel_jump())
 
@@ -96,9 +96,6 @@ func _ready() -> void:
     state_machine.add_transition(wall_run_state, wall_jump_state, func(): return wants_to_jump() && wall_detector.is_close_to_wall(direction))
     state_machine.add_transition(wall_run_state, fall_state, is_falling)
     state_machine.add_transition(wall_run_state, cancel_jump_state, func(): return cancel_jump() && wall_run_state.can_cancel_jump())
-
-func wants_to_wall_jump() -> bool:
-    return wants_to_jump() && wall_detector.is_close_to_wall(direction)
 
 func wants_to_double_jump() -> bool:
     return wants_to_jump() && projectile_parameters.max_double_jumps > 0

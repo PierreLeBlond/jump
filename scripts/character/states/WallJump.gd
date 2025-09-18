@@ -2,6 +2,8 @@ extends ProjectileState
 
 class_name WallJump
 
+var buffered_jump_remaining_frames: int = 0
+
 var jump_pressed_time: float = 0
 
 func enter(previous_state: State, delta: float) -> void:
@@ -20,8 +22,16 @@ func enter(previous_state: State, delta: float) -> void:
 
     jump_pressed_time = 0
 
+    buffered_jump_remaining_frames = 0
+
 func update(delta: float) -> void:
     jump_pressed_time += delta
+
+    if (buffered_jump_remaining_frames > 0):
+        buffered_jump_remaining_frames -= 1
+
+    if (parent.wants_to_jump()):
+        buffered_jump_remaining_frames = parent.projectile_parameters.buffered_jump_frames
 
 func get_parameters() -> Dictionary:
     return {
@@ -34,3 +44,6 @@ func get_parameters() -> Dictionary:
 
 func can_cancel_jump() -> bool:
     return jump_pressed_time > parent.projectile_parameters.minimum_jump_pressed_time
+
+func can_buffered_jump() -> bool:
+    return buffered_jump_remaining_frames > 0
