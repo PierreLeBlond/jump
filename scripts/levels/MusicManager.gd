@@ -89,7 +89,6 @@ func start_countdown() -> void:
     play(race_audio_stream_player)
     play_2d(soubalien_race_audio_stream_player)
 
-
 func end_race() -> void:
     if note_collected_tween:
         note_collected_tween.stop()
