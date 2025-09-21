@@ -9,8 +9,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dxrc8"]
 shader = ExtResource("1_gemux")
-shader_parameter/source_screen_position = Vector2(359.137, 69.6385)
+shader_parameter/source_position = Vector2(0, 0)
 shader_parameter/target_screen_size = Vector2(982, 446)
+shader_parameter/scale_factor = 0.0
 shader_parameter/radius = 256.0
 shader_parameter/whirl = 0.1
 shader_parameter/pinch = 0.2
@@ -37,9 +38,11 @@ whirl_and_pinch = NodePath("../WhirlAndPinch")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
 material = SubResource("ShaderMaterial_dxrc8")
-fit_margin = 64.0
+fit_margin = 0.0
+clear_margin = 0.0
 
 [node name="WhirlAndPinch" type="Node" parent="." node_paths=PackedStringArray("canvas_group", "canvas_group_parent")]
 script = ExtResource("6_8ynkr")
 canvas_group = NodePath("../CanvasGroup")
 canvas_group_parent = NodePath("..")
+radius = 256.0

@@ -22,7 +22,7 @@ func enter(previous_state: State, delta: float) -> void:
     tween = create_tween()
     tween.tween_property(parent, "scale", Vector2(0.8, 0.8), 0.3)
 
-    whirl_and_pinch.update_shader_parameters()
+    whirl_and_pinch.update_shader_source_position()
 
 func get_parameters() -> Dictionary:
     return {
@@ -34,7 +34,7 @@ func get_parameters() -> Dictionary:
     }
 
 func update(_delta: float) -> void:
-    whirl_and_pinch.update_shader_parameters()
+    whirl_and_pinch.update_shader_source_position()
 
 func exit() -> void:
     if tween:

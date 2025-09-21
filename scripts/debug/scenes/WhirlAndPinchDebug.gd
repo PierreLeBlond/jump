@@ -1,36 +1,34 @@
-@tool
-
 extends Node2D
 
 class_name WhirlAndPinchDebug
 
 @export var source: Node2D
-@export var target: Node2D
-@export var canvas_item: CanvasItem
 
-@export var target_size: Vector2 = Vector2(256, 256)
-
-@export var radius: float = 100.0
-@export var whirl: float = 1.0:
-    set(value):
-        whirl = value
-        if canvas_item:
-            canvas_item.material.set_shader_parameter("whirl", value)
-@export var pinch: float = 1.0:
-    set(value):
-        pinch = value
-        if canvas_item:
-            canvas_item.material.set_shader_parameter("pinch", value)
+@export var whirl_and_pinch: WhirlAndPinch
+@export var sprite_parent: Node2D
+@export var sprite: Sprite2D
 
 func _ready() -> void:
-    var screen_radius = radius / source.get_viewport().get_final_transform().get_scale().x
-    canvas_item.material.set_shader_parameter("radius", screen_radius)
-    canvas_item.material.set_shader_parameter("whirl", whirl)
-    canvas_item.material.set_shader_parameter("pinch", pinch)
+    whirl_and_pinch.sprite = sprite
+    whirl_and_pinch.sprite_parent = sprite_parent
+    init.call_deferred()
+
+func init() -> void:
+    whirl_and_pinch.setup()
+    whirl_and_pinch.update_shader_parameters()
+    whirl_and_pinch.update_shader_source_position()
 
 func _process(_delta: float) -> void:
-    canvas_item.material.set_shader_parameter("source_screen_position", source.get_viewport().get_final_transform() * source.get_global_transform_with_canvas().origin)
-    canvas_item.material.set_shader_parameter("target_screen_size", target.get_viewport().size)
-    var s_transform = source.get_viewport().get_final_transform() * source.get_canvas_transform()
-    var screen_radius = radius * s_transform.get_scale().x
-    canvas_item.material.set_shader_parameter("radius", screen_radius)
+    whirl_and_pinch.update_shader_source_position()
+
+# Move source with arrows
+func _input(event: InputEvent) -> void:
+    if event is InputEventKey and event.pressed:
+        if event.keycode == KEY_UP:
+            source.position.y -= 10
+        elif event.keycode == KEY_DOWN:
+            source.position.y += 10
+        elif event.keycode == KEY_LEFT:
+            source.position.x -= 10
+        elif event.keycode == KEY_RIGHT:
+            source.position.x += 10

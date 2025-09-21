@@ -27,7 +27,7 @@ func enter(previous_state: State, delta: float) -> void:
     tween.tween_property(whirl_and_pinch, "whirl", FINAL_WHIRL, TWEEN_DURATION)
     tween.parallel().tween_property(whirl_and_pinch, "pinch", FINAL_PINCH, TWEEN_DURATION)
 
-    whirl_and_pinch.update_shader_parameters()
+    whirl_and_pinch.update_shader_source_position()
 
 func get_parameters() -> Dictionary:
     return {
@@ -39,7 +39,7 @@ func get_parameters() -> Dictionary:
     }
 
 func update(_delta: float) -> void:
-    whirl_and_pinch.update_shader_parameters()
+    whirl_and_pinch.update_shader_source_position()
 
 func exit() -> void:
     if tween:
