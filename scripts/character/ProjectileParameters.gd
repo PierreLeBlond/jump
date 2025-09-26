@@ -12,6 +12,10 @@ class_name ProjectileParameters
 
 var maximum_velocity: float = jump_distance / (jump_time + fall_time)
 
+@export var cancel_jump_factor: float = 0.3
+
+@export var cancel_jump_minimum_frames: int = 6
+
 @export var max_double_jumps: int = 0
 
 @export var double_jump_height: float = 74
@@ -42,11 +46,6 @@ var double_jump_maximum_velocity: float = double_jump_distance / (double_jump_ti
 
 @export var wall_friction_factor: float = 0.5
 
-@export var minimum_jump_pressed_time: float = 0.1
-
 @export var buffered_jump_frames: int = 6
 
 @export var coyote_jump_frames: int = 6
-
-# func _init() -> void:
-#     pass

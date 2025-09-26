@@ -21,8 +21,7 @@ func _ready() -> void:
 
     state_machine.add_transition(cancel_jump_state, wall_jump_state, func(): return wall_detector.is_close_to_wall(direction) && cancel_jump_state.can_buffered_jump())
     state_machine.add_transition(cancel_jump_state, double_jump_state, wants_to_double_jump)
-    # Just profit of the downward force, but go back to fall state immediatly
-    state_machine.add_transition(cancel_jump_state, fall_state, func(): return true)
+    state_machine.add_transition(cancel_jump_state, fall_state, is_falling)
 
     cliff_hang_state.init(self)
     state_machine.add_state(cliff_hang_state)

@@ -4,7 +4,7 @@ class_name WallJump
 
 var buffered_jump_remaining_frames: int = 0
 
-var jump_pressed_time: float = 0
+var jump_pressed_frames: int = 0
 
 func enter(previous_state: State, delta: float) -> void:
     super (previous_state, delta)
@@ -20,18 +20,18 @@ func enter(previous_state: State, delta: float) -> void:
     # We should only jump to max distance if we are jumping at full speed. At speed 0, we should still be able to move to half the maximum distance.
     maximum_lateral_velocity = (abs(parent.velocity.x) + parent.projectile_parameters.maximum_velocity * run_factor) / 2 * (parent.projectile_parameters.jump_time + parent.projectile_parameters.fall_time)
 
-    jump_pressed_time = 0
+    jump_pressed_frames = 0
 
     buffered_jump_remaining_frames = 0
 
-func update(delta: float) -> void:
-    jump_pressed_time += delta
-
+func update(_delta: float) -> void:
     if (buffered_jump_remaining_frames > 0):
         buffered_jump_remaining_frames -= 1
 
     if (parent.wants_to_jump()):
         buffered_jump_remaining_frames = parent.projectile_parameters.buffered_jump_frames
+
+    jump_pressed_frames += 1
 
 func get_parameters() -> Dictionary:
     return {
@@ -42,8 +42,8 @@ func get_parameters() -> Dictionary:
         "deceleration_factor": parent.projectile_parameters.wall_jump_deceleration_factor
     }
 
-func can_cancel_jump() -> bool:
-    return jump_pressed_time > parent.projectile_parameters.minimum_jump_pressed_time
-
 func can_buffered_jump() -> bool:
     return buffered_jump_remaining_frames > 0
+
+func can_cancel_jump() -> bool:
+    return jump_pressed_frames > parent.projectile_parameters.cancel_jump_minimum_frames

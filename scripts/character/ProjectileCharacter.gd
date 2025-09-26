@@ -30,23 +30,32 @@ func _ready() -> void:
     corner_corrector.init(self)
 
 func _physics_process(delta: float) -> void:
-    if (velocity.y < 0):
-        corner_corrector.apply_corner_correction()
+    corner_corrector.apply_corner_correction()
 
     state_machine.update(delta)
 
     if !unlocked_keys.has_unlocked_physics():
         return
 
-    # TODO: current_state is not correctly typed has a projectile state
+    var gravity = state_machine.current_state.get_gravity()
+    # second part of the simplified velocity verlet with constant acceleration
+    position += 0.5 * gravity * delta * delta
+    # The first part will be handled by move_and_slide
+    # BUT in comparison to simply updating the position, not handling the collision, we have a half pixel error
+    # if (velocity.y < 0):
+        # position += velocity * delta
+    # else:
+    move_and_slide()
+
+    # TODO: current_state is not correctly typed as a projectile state
     var controlled_velocity = state_machine.current_state.get_velocity(delta)
     var external_velocity = Vector2.ZERO
 
     for acceleration in external_accelerations.values():
         external_velocity += acceleration * delta
-    velocity = controlled_velocity + external_velocity
 
-    move_and_slide()
+    # Final part of the simplified velocity verlet with constant acceleration
+    velocity = controlled_velocity + external_velocity
 
     var controller_direction = movement_controller.get_direction()
     if (controller_direction == 0 || direction == controller_direction):

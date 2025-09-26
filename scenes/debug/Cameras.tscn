@@ -53,3 +53,4 @@ tile_set = ExtResource("4_3awgc")
 
 [node name="Player" parent="." instance=ExtResource("5_cygix")]
 position = Vector2(200, 929)
+slide_on_ceiling = false

@@ -52,6 +52,11 @@ func get_parameters() -> Dictionary:
         "deceleration_factor": parent.projectile_parameters.deceleration_factor
     }
 
+func get_gravity() -> Vector2:
+    var parameters = get_parameters()
+
+    return Vector2(0, 2 * parameters.jump_height / (parameters.jump_time * parameters.jump_time))
+
 func get_velocity(delta: float) -> Vector2:
     var parameters = get_parameters()
 

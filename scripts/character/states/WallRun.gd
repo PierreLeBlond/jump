@@ -2,7 +2,7 @@ extends ProjectileState
 
 class_name WallRun
 
-var jump_pressed_time: float = 0
+var jump_pressed_frames: int = 0
 
 var wall_friction_factor: float = 1.0
 
@@ -10,13 +10,13 @@ func enter(previous_state: State, delta: float) -> void:
     super (previous_state, delta)
 
     wall_friction_factor = parent.projectile_parameters.wall_friction_factor
-    jump_pressed_time = 0
+    jump_pressed_frames = 0
 
-func update(delta: float) -> void:
-    jump_pressed_time += delta
-
+func update(_delta: float) -> void:
     if (!parent.wall_detector.is_hugging_wall(parent.direction)):
         wall_friction_factor = 1.0
+
+    jump_pressed_frames += 1
 
 func get_parameters() -> Dictionary:
     return {
@@ -28,4 +28,4 @@ func get_parameters() -> Dictionary:
     }
 
 func can_cancel_jump() -> bool:
-    return jump_pressed_time > parent.projectile_parameters.minimum_jump_pressed_time
+    return jump_pressed_frames > parent.projectile_parameters.cancel_jump_minimum_frames

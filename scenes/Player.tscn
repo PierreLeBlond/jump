@@ -52,6 +52,22 @@ tracks/0/keys = {
 "values": [166, 186]
 }
 
+[sub_resource type="Animation" id="Animation_viqgg"]
+resource_name = "cone"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274]
+}
+
 [sub_resource type="Animation" id="Animation_1pe8v"]
 resource_name = "fall"
 length = 0.300003
@@ -248,22 +264,6 @@ tracks/0/keys = {
 "values": [134, 144]
 }
 
-[sub_resource type="Animation" id="Animation_viqgg"]
-resource_name = "cone"
-length = 0.9
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pt1rj"]
 _data = {
 &"RESET": SubResource("Animation_6e537"),
@@ -362,7 +362,6 @@ animation = "walk"
 
 [node name="CanceledJump" type="Node" parent="StateMachine"]
 script = ExtResource("12_0rnld")
-animation = "fall"
 
 [node name="WallRun" type="Node" parent="StateMachine"]
 script = ExtResource("13_srp4u")
@@ -371,13 +370,12 @@ animation = "wallrun"
 [node name="MovementController" type="Node" parent="."]
 script = ExtResource("11_gv3ic")
 
-[node name="CornerCorrector" type="Node2D" parent="." node_paths=PackedStringArray("outer_left_ceiling_ray_cast", "inner_left_ceiling_ray_cast", "outer_right_ceiling_ray_cast", "inner_right_ceiling_ray_cast", "movement_controller")]
+[node name="CornerCorrector" type="Node2D" parent="." node_paths=PackedStringArray("outer_left_ceiling_ray_cast", "inner_left_ceiling_ray_cast", "outer_right_ceiling_ray_cast", "inner_right_ceiling_ray_cast")]
 script = ExtResource("13_lkdrv")
 outer_left_ceiling_ray_cast = NodePath("OuterLeftCeilingRayCast2D")
 inner_left_ceiling_ray_cast = NodePath("InnerLeftCeilingRayCast2D")
 outer_right_ceiling_ray_cast = NodePath("OuterRightCeilingRayCast2D")
 inner_right_ceiling_ray_cast = NodePath("InnerRightCeilingRayCast2D")
-movement_controller = NodePath("../MovementController")
 
 [node name="InnerLeftCeilingRayCast2D" type="RayCast2D" parent="CornerCorrector"]
 position = Vector2(-8, 0)

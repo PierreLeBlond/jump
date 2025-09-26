@@ -4,23 +4,6 @@
 
 [resource]
 script = ExtResource("1_it1vw")
-jump_height = 256.0
-jump_time = 0.4
-fall_time = 0.35
-jump_distance = 70.0
-max_double_jumps = 0
-double_jump_height = 74.0
-double_jump_time = 0.3
-double_jump_distance = 128.0
-acceleration_factor = 2000.0
-deceleration_factor = 2000.0
-idle_deceleration_factor = 600.0
-air_acceleration_factor = 1600.0
-air_deceleration_factor = 800.0
-wall_jump_acceleration_factor = 900.0
-wall_jump_deceleration_factor = 700.0
-run_factor = 6.0
-wall_friction_factor = 0.5
-minimum_jump_pressed_time = 0.1
-buffered_jump_frames = 6
-coyote_jump_frames = 6
+fall_time = 0.3
+cancel_jump_factor = 0.4
+cancel_jump_minimum_frames = 3
