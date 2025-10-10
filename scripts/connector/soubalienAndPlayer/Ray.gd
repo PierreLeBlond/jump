@@ -4,6 +4,9 @@ class_name Ray
 
 const DEFAULT_RADIUS = 256
 
+const CONE_ACCELERATION_DISTANCE = 512
+const CONE_DECELERATION_DISTANCE = 8
+
 @export var whirl_and_pinch: WhirlAndPinch
 
 var tween: Tween
@@ -24,14 +27,10 @@ func enter(previous_state: State, delta: float) -> void:
 
     whirl_and_pinch.update_shader_source_position()
 
-func get_parameters() -> Dictionary:
-    return {
-        "jump_height": parent.projectile_parameters.jump_height,
-        "jump_time": parent.projectile_parameters.fall_time,
-        "maximum_lateral_velocity": maximum_lateral_velocity,
-        "acceleration_factor": parent.projectile_parameters.air_acceleration_factor,
-        "deceleration_factor": parent.projectile_parameters.air_deceleration_factor
-    }
+    acceleration_distance = CONE_ACCELERATION_DISTANCE
+    deceleration_distance = CONE_DECELERATION_DISTANCE
+
+    jump_time = parent.projectile_parameters.fall_time
 
 func update(_delta: float) -> void:
     whirl_and_pinch.update_shader_source_position()

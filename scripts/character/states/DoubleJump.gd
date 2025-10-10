@@ -11,13 +11,13 @@ func enter(previous_state: State, delta: float) -> void:
     parent.velocity = velocity
 
     # We should only jump to max distance if we are jumping at full speed. At speed 0, we should still be able to move to half the maximum distance.
-    maximum_lateral_velocity = (abs(parent.velocity.x) + parent.projectile_parameters.double_jump_maximum_velocity) / 2 * (parent.projectile_parameters.double_jump_time + parent.projectile_parameters.fall_time)
+    final_velocity = (abs(parent.velocity.x) + parent.projectile_parameters.final_velocity) / 2 * (parent.projectile_parameters.double_jump_time + parent.projectile_parameters.fall_time)
 
 func get_parameters() -> Dictionary:
     return {
         "jump_height": parent.projectile_parameters.double_jump_height,
         "jump_time": parent.projectile_parameters.double_jump_time,
-        "maximum_lateral_velocity": maximum_lateral_velocity,
-        "acceleration_factor": parent.projectile_parameters.acceleration_factor,
-        "deceleration_factor": parent.projectile_parameters.deceleration_factor
+        "final_velocity": final_velocity,
+        "acceleration_distance": parent.projectile_parameters.acceleration_distance,
+        "deceleration_distance": parent.projectile_parameters.deceleration_distance,
     }

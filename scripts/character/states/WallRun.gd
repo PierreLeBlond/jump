@@ -12,20 +12,15 @@ func enter(previous_state: State, delta: float) -> void:
     wall_friction_factor = parent.projectile_parameters.wall_friction_factor
     jump_pressed_frames = 0
 
+    jump_height = parent.projectile_parameters.jump_height * wall_friction_factor
+    acceleration_distance = parent.projectile_parameters.wall_jump_acceleration_distance
+    deceleration_distance = parent.projectile_parameters.wall_jump_deceleration_distance
+
 func update(_delta: float) -> void:
     if (!parent.wall_detector.is_hugging_wall(parent.direction)):
         wall_friction_factor = 1.0
 
     jump_pressed_frames += 1
-
-func get_parameters() -> Dictionary:
-    return {
-        "jump_height": parent.projectile_parameters.jump_height * wall_friction_factor,
-        "jump_time": parent.projectile_parameters.jump_time,
-        "maximum_lateral_velocity": maximum_lateral_velocity,
-        "acceleration_factor": parent.projectile_parameters.acceleration_factor,
-        "deceleration_factor": parent.projectile_parameters.deceleration_factor
-    }
 
 func can_cancel_jump() -> bool:
     return jump_pressed_frames > parent.projectile_parameters.cancel_jump_minimum_frames

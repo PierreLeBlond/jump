@@ -11,8 +11,6 @@ var double_jump_count: int = 0
 func enter(previous_state: State, delta: float) -> void:
     super (previous_state, delta)
 
-    maximum_lateral_velocity = previous_state.maximum_lateral_velocity
-
     if (previous_state is Run):
         coyote_jump_remaining_frames = parent.projectile_parameters.coyote_jump_frames
     else:
@@ -25,6 +23,14 @@ func enter(previous_state: State, delta: float) -> void:
 
     buffered_jump_remaining_frames = 0
 
+    # We should only jump to max distance if we are jumping at full speed. At speed 0, we should still be able to move to half the maximum distance.
+    final_velocity = (abs(parent.velocity.x) + parent.projectile_parameters.final_velocity) / 2
+
+    acceleration_distance = parent.projectile_parameters.air_acceleration_distance
+    deceleration_distance = parent.projectile_parameters.air_deceleration_distance
+
+    jump_time = parent.projectile_parameters.fall_time
+
 func update(delta: float) -> void:
     super (delta)
 
@@ -36,15 +42,6 @@ func update(delta: float) -> void:
 
     if (parent.wants_to_jump()):
         buffered_jump_remaining_frames = parent.projectile_parameters.buffered_jump_frames
-
-func get_parameters() -> Dictionary:
-    return {
-        "jump_height": parent.projectile_parameters.jump_height,
-        "jump_time": parent.projectile_parameters.fall_time,
-        "maximum_lateral_velocity": maximum_lateral_velocity,
-        "acceleration_factor": parent.projectile_parameters.air_acceleration_factor,
-        "deceleration_factor": parent.projectile_parameters.air_deceleration_factor
-    }
 
 func can_coyote_jump() -> bool:
     return coyote_jump_remaining_frames > 0

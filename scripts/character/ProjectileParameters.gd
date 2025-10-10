@@ -8,9 +8,15 @@ class_name ProjectileParameters
 
 @export var fall_time: float = 0.35
 
-@export var jump_distance: float = 70
+@export var jump_distance: float = 420
 
-var maximum_velocity: float = jump_distance / (jump_time + fall_time)
+var final_velocity: float = jump_distance / (jump_time + fall_time)
+
+@export var acceleration_distance: float = 256
+
+@export var deceleration_distance: float = 64
+
+@export var walk_factor: float = 0.2
 
 @export var cancel_jump_factor: float = 0.3
 
@@ -24,25 +30,14 @@ var maximum_velocity: float = jump_distance / (jump_time + fall_time)
 
 @export var double_jump_distance: float = 128
 
-var double_jump_maximum_velocity: float = double_jump_distance / (double_jump_time + fall_time)
+@export var air_acceleration_distance: float = 64
 
-@export var acceleration_factor: float = 2000
-
-@export var deceleration_factor: float = 2000
-
-# Should allow the player to come to a stop quickly when releasing controls
-@export var idle_deceleration_factor: float = 600
-
-@export var air_acceleration_factor: float = 1600
-
-@export var air_deceleration_factor: float = 800
+@export var air_deceleration_distance: float = 12
 
 # We don't want the player to be able to move back higher on the wall after the a wall jump, hence less air controls
-@export var wall_jump_acceleration_factor: float = 900
+@export var wall_jump_acceleration_distance: float = 256
 
-@export var wall_jump_deceleration_factor: float = 700
-
-@export var run_factor: float = 6
+@export var wall_jump_deceleration_distance: float = 128
 
 @export var wall_friction_factor: float = 0.5
 

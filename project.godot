@@ -112,6 +112,13 @@ pause={
 2d_physics/layer_3="enemies"
 2d_physics/layer_4="collectibles"
 
+[physics]
+
+2d/default_linear_damp=0.0
+2d/default_angular_damp=0.0
+2d/sleep_threshold_linear=0.0
+2d/sleep_threshold_angular=0.0
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=2

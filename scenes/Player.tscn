@@ -1,11 +1,13 @@
-[gd_scene load_steps=38 format=3 uid="uid://27vdgqlbgpml"]
+[gd_scene load_steps=40 format=3 uid="uid://27vdgqlbgpml"]
 
 [ext_resource type="Script" uid="uid://b53py4t8s65s1" path="res://scripts/character/Player.gd" id="1_6e537"]
 [ext_resource type="Texture2D" uid="uid://3k4btk54cqba" path="res://assets/spritesheets/player/player.png" id="2_0rnld"]
 [ext_resource type="Resource" uid="uid://bvl3cqclybygu" path="res://data/projectileParameters/player.tres" id="2_sfy4j"]
+[ext_resource type="Script" uid="uid://cm4k3qn0u5clr" path="res://scripts/character/physics/LateralAccelerator.gd" id="4_gv3ic"]
 [ext_resource type="Script" uid="uid://bucbmqmbeeupx" path="res://scripts/character/states/Idle.gd" id="4_p7iby"]
 [ext_resource type="Script" uid="uid://c710qahwivjfa" path="res://scripts/character/states/Fall.gd" id="5_0rnld"]
 [ext_resource type="Script" uid="uid://dt3f4mv56joe3" path="res://scripts/state/StateMachine.gd" id="5_6e537"]
+[ext_resource type="Script" uid="uid://smg6jxxwu6et" path="res://scripts/character/physics/HorizontalAccelerator.gd" id="5_b8lor"]
 [ext_resource type="Script" uid="uid://dp3ndbbembjqg" path="res://scripts/character/states/CliffHang.gd" id="5_jfpux"]
 [ext_resource type="Script" uid="uid://cbvidipydn5cv" path="res://scripts/character/states/Jump.gd" id="6_srp4u"]
 [ext_resource type="Script" uid="uid://cewi2c06dcqg3" path="res://scripts/character/states/WallJump.gd" id="7_jfpux"]
@@ -289,7 +291,7 @@ size = Vector2(56, 102)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gv3ic"]
 size = Vector2(54, 104)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cancel_jump_state", "cliff_hang_state", "double_jump_state", "fall_state", "idle_state", "jump_state", "run_state", "walk_state", "wall_jump_state", "wall_run_state", "corner_corrector", "cliff_detector", "wall_detector", "state_machine", "movement_controller", "animation_player", "sprite_2d", "collector")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cancel_jump_state", "cliff_hang_state", "double_jump_state", "fall_state", "idle_state", "jump_state", "run_state", "walk_state", "wall_jump_state", "wall_run_state", "corner_corrector", "cliff_detector", "wall_detector", "state_machine", "lateral_accelerator", "horizontal_accelerator", "movement_controller", "animation_player", "sprite_2d", "collector")]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_6e537")
@@ -307,6 +309,8 @@ corner_corrector = NodePath("CornerCorrector")
 cliff_detector = NodePath("CliffDetector")
 wall_detector = NodePath("WallDetector")
 state_machine = NodePath("StateMachine")
+lateral_accelerator = NodePath("LateralAccelerator")
+horizontal_accelerator = NodePath("HorizontalAccelerator")
 movement_controller = NodePath("MovementController")
 projectile_parameters = ExtResource("2_sfy4j")
 animation_player = NodePath("AnimationPlayer")
@@ -323,6 +327,14 @@ frame = 187
 libraries = {
 &"": SubResource("AnimationLibrary_pt1rj")
 }
+
+[node name="LateralAccelerator" type="Node" parent="." node_paths=PackedStringArray("character_body")]
+script = ExtResource("4_gv3ic")
+character_body = NodePath("..")
+
+[node name="HorizontalAccelerator" type="Node" parent="." node_paths=PackedStringArray("character_body")]
+script = ExtResource("5_b8lor")
+character_body = NodePath("..")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_6e537")

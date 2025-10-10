@@ -2,8 +2,8 @@ extends Node2D
 
 class_name SoubalienAndPlayerConnector
 
-const RAY_SPRING_CONSTANT = 100
-const CONE_SPRING_CONSTANT = 10
+const RAY_SPRING_CONSTANT = 500
+const CONE_SPRING_CONSTANT = 100
 
 signal captured_player()
 signal ray_captured_player()

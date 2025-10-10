@@ -10,6 +10,9 @@ class_name ProjectileCharacter
 
 @export var state_machine: StateMachine
 
+@export var lateral_accelerator: LateralAccelerator
+@export var horizontal_accelerator: HorizontalAccelerator
+
 @export var movement_controller: MovementController
 
 @export var projectile_parameters: ProjectileParameters
@@ -24,12 +27,18 @@ var unlocked_keys: UnlockedKeys = UnlockedKeys.new()
 
 var external_accelerations: Dictionary[String, Vector2] = {}
 
+# 1 or -1
 var direction: int = 1
 
 func _ready() -> void:
     corner_corrector.init(self)
 
 func _physics_process(delta: float) -> void:
+    var controller_direction = movement_controller.get_direction()
+    if (controller_direction != 0 && direction != controller_direction):
+        direction = controller_direction
+        sprite_2d.scale.x = direction * abs(sprite_2d.scale.x)
+
     corner_corrector.apply_corner_correction()
 
     state_machine.update(delta)
@@ -37,32 +46,37 @@ func _physics_process(delta: float) -> void:
     if !unlocked_keys.has_unlocked_physics():
         return
 
-    var gravity = state_machine.current_state.get_gravity()
+    lateral_accelerator.maximum_velocity = state_machine.current_state.maximum_velocity
+    lateral_accelerator.final_velocity = state_machine.current_state.final_velocity * controller_direction
+    lateral_accelerator.acceleration_distance = state_machine.current_state.acceleration_distance
+    lateral_accelerator.deceleration_distance = state_machine.current_state.deceleration_distance
+
+    horizontal_accelerator.jump_height = state_machine.current_state.jump_height
+    horizontal_accelerator.jump_time = state_machine.current_state.jump_time
+
+    var controlled_acceleration = Vector2(lateral_accelerator.get_acceleration(delta), horizontal_accelerator.get_acceleration())
+
     # second part of the simplified velocity verlet with constant acceleration
-    position += 0.5 * gravity * delta * delta
+    position += 0.5 * controlled_acceleration * delta * delta
+
     # The first part will be handled by move_and_slide
-    # BUT in comparison to simply updating the position, not handling the collision, we have a half pixel error
+    # BUT in comparison to simply updating the position, not handling the collision, we have a half pixel error on jump height
     # if (velocity.y < 0):
         # position += velocity * delta
     # else:
+    # velocity.x = 0.9481
     move_and_slide()
 
-    # TODO: current_state is not correctly typed as a projectile state
-    var controlled_velocity = state_machine.current_state.get_velocity(delta)
+    # Final part of the simplified velocity verlet with constant acceleration
+    velocity += controlled_acceleration * delta
+
     var external_velocity = Vector2.ZERO
 
-    for acceleration in external_accelerations.values():
-        external_velocity += acceleration * delta
+    for external_acceleration in external_accelerations.values():
+        external_velocity += external_acceleration * delta
 
-    # Final part of the simplified velocity verlet with constant acceleration
-    velocity = controlled_velocity + external_velocity
+    velocity += external_velocity
 
-    var controller_direction = movement_controller.get_direction()
-    if (controller_direction == 0 || direction == controller_direction):
-        return
-
-    direction = controller_direction
-    sprite_2d.scale.x = direction * abs(sprite_2d.scale.x)
 
 func wants_to_move() -> bool:
     return movement_controller.wants_to_move() && unlocked_keys.has_unlocked_move()

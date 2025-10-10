@@ -22,6 +22,7 @@ whirl_and_pinch = NodePath("WhirlAndPinch")
 capture_state = NodePath("Capture")
 cone_state = NodePath("Cone")
 ray_state = NodePath("Ray")
+min_ray_gravity_factor = 1.05
 
 [node name="Cone" type="Node" parent="."]
 script = ExtResource("3_8ynkr")
