@@ -3,7 +3,7 @@ extends Node2D
 class_name SoubalienAndPlayerConnector
 
 const RAY_SPRING_CONSTANT = 500
-const CONE_SPRING_CONSTANT = 100
+const CONE_SPRING_CONSTANT = 10
 
 signal captured_player()
 signal ray_captured_player()
@@ -16,6 +16,8 @@ enum SoubalienState {
 }
 
 var soubalien_state: SoubalienState = SoubalienState.IDLE
+
+@export var whirl_and_pinch_area: Area2D
 
 @export var soubalien: Soubalien
 @export var player: Player
@@ -45,6 +47,7 @@ func _ready() -> void:
     cone_state.init(player)
 
     player.state_machine.add_transition(cone_state, ray_state, has_player_in_ray)
+    player.state_machine.add_transition(cone_state, capture_state, has_player_captured)
     player.state_machine.add_transition(cone_state, player.fall_state, func(): return !has_player_in_cone())
 
     # TODO: Beware of other states that could be added to the player state machine
@@ -57,6 +60,27 @@ func _ready() -> void:
 
     soubalien.area.body_entered.connect(on_body_entered)
     soubalien.ray_area.body_entered.connect(on_ray_area_body_entered)
+
+    remove_child(whirl_and_pinch_area)
+    soubalien.add_child(whirl_and_pinch_area)
+
+    whirl_and_pinch_area.body_entered.connect(on_whirl_and_pinch_area_body_entered)
+    whirl_and_pinch_area.body_exited.connect(on_whirl_and_pinch_area_body_exited)
+
+func on_whirl_and_pinch_area_body_entered(body: Node2D) -> void:
+    if (body != player):
+        return
+
+    whirl_and_pinch.setup()
+
+    whirl_and_pinch.whirl = 0.0
+    whirl_and_pinch.pinch = 0.1
+
+func on_whirl_and_pinch_area_body_exited(body: Node2D) -> void:
+    if (body != player):
+        return
+
+    whirl_and_pinch.cleanup.call_deferred()
 
 
 func start_chasing_player() -> void:

@@ -18,16 +18,12 @@ func enter(previous_state: State, delta: float) -> void:
     parent.set_collision_mask_value(1, false)
     parent.scale = Vector2(0.8, 0.8)
 
-    whirl_and_pinch.setup()
-
     whirl_and_pinch.whirl = 0.0
     whirl_and_pinch.pinch = 0.1
 
     tween = create_tween()
     tween.tween_property(whirl_and_pinch, "whirl", FINAL_WHIRL, TWEEN_DURATION)
     tween.parallel().tween_property(whirl_and_pinch, "pinch", FINAL_PINCH, TWEEN_DURATION)
-
-    whirl_and_pinch.update_shader_source_position()
 
     acceleration_distance = parent.projectile_parameters.air_acceleration_distance
     deceleration_distance = parent.projectile_parameters.air_deceleration_distance
@@ -44,4 +40,6 @@ func exit() -> void:
     parent.set_collision_mask_value(1, true)
     parent.scale = Vector2(1, 1)
     parent.unlock_key(Globals.PHYSICS_UNLOCKED_KEY)
-    whirl_and_pinch.cleanup()
+
+    whirl_and_pinch.whirl = 0.0
+    whirl_and_pinch.pinch = 0.1

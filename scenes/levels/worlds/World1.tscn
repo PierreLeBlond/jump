@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://de32o3g1w17vm"]
+[gd_scene load_steps=40 format=4 uid="uid://de32o3g1w17vm"]
 
 [ext_resource type="Script" uid="uid://8g3j4qvgpbuq" path="res://scripts/levels/worlds/World1.gd" id="1_t2wor"]
 [ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/components/CinematicBars.tscn" id="2_j7nyf"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://xd4woi41uhf2" path="res://scripts/camera/CameraOverrideArea.gd" id="18_j7nyf"]
 [ext_resource type="PackedScene" uid="uid://c5ujunl53hshx" path="res://scenes/ui/components/ComboNote.tscn" id="24_0bhon"]
 [ext_resource type="PackedScene" uid="uid://cbchcmt1re0ym" path="res://scenes/ui/controls/MobileControls.tscn" id="25_ijfg6"]
+[ext_resource type="PackedScene" uid="uid://d1tavs3t65e2q" path="res://scenes/connectors/StartRaceConnector.tscn" id="27_2cvtv"]
 
 [sub_resource type="Gradient" id="Gradient_ukjja"]
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.643137)
@@ -75,7 +76,7 @@ size = Vector2(127, 1088)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j7nyf"]
 size = Vector2(3226, 1049)
 
-[node name="World1" type="Node2D" node_paths=PackedStringArray("music_manager", "combo_note", "race_introduction_camera", "player_focus_camera", "soubalien_player_connector", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "end_portal", "cinematic_bars", "race_introduction_area", "start_checkpoint", "race_introduction_checkpoint", "player", "player_camera", "camera_manager", "game_run", "hud")]
+[node name="World1" type="Node2D" node_paths=PackedStringArray("music_manager", "combo_note", "race_introduction_camera", "player_focus_camera", "soubalien_player_connector", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "end_portal", "cinematic_bars", "race_introduction_area", "start_race_connector", "start_checkpoint", "race_introduction_checkpoint", "player", "player_camera", "camera_manager", "game_run", "hud")]
 process_mode = 1
 script = ExtResource("1_t2wor")
 music_manager = NodePath("MusicManager")
@@ -90,6 +91,7 @@ soubalien_chase_path = NodePath("SoubalienPaths/ChasePath")
 end_portal = NodePath("EndPortal")
 cinematic_bars = NodePath("CinematicBars")
 race_introduction_area = NodePath("RaceIntroductionArea")
+start_race_connector = NodePath("StartRaceConnector")
 start_checkpoint = NodePath("StartCheckpoint")
 race_introduction_checkpoint = NodePath("Checkpoint")
 player = NodePath("Player")
@@ -352,4 +354,7 @@ offset = Vector2(0, -128)
 
 [node name="SoubalienAndPlayerConnector" parent="." node_paths=PackedStringArray("soubalien", "player") instance=ExtResource("15_1cy2d")]
 soubalien = NodePath("../Soubalien")
+player = NodePath("../Player")
+
+[node name="StartRaceConnector" parent="." node_paths=PackedStringArray("player") instance=ExtResource("27_2cvtv")]
 player = NodePath("../Player")

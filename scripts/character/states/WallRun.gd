@@ -4,21 +4,19 @@ class_name WallRun
 
 var jump_pressed_frames: int = 0
 
-var wall_friction_factor: float = 1.0
-
 func enter(previous_state: State, delta: float) -> void:
     super (previous_state, delta)
 
-    wall_friction_factor = parent.projectile_parameters.wall_friction_factor
     jump_pressed_frames = 0
 
-    jump_height = parent.projectile_parameters.jump_height * wall_friction_factor
     acceleration_distance = parent.projectile_parameters.wall_jump_acceleration_distance
     deceleration_distance = parent.projectile_parameters.wall_jump_deceleration_distance
 
 func update(_delta: float) -> void:
     if (!parent.wall_detector.is_hugging_wall(parent.direction)):
-        wall_friction_factor = 1.0
+        jump_height = parent.projectile_parameters.jump_height
+    else:
+        jump_height = parent.projectile_parameters.jump_height * parent.projectile_parameters.wall_friction_factor
 
     jump_pressed_frames += 1
 

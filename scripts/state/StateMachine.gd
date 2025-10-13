@@ -15,18 +15,30 @@ func _ready() -> void:
 func add_state(state: State) -> void:
     states.append(state)
 
-func add_transition(from_state: State, to_state: State, condition: Callable) -> void:
+func add_transition(from_state: State, to_state: State, condition: Callable, index: int = -1) -> void:
     if !states_transitions.has(from_state):
         states_transitions[from_state] = []
-    states_transitions[from_state].append({"to_state": to_state, "condition": condition})
+    if index == -1:
+        states_transitions[from_state].append({"to_state": to_state, "condition": condition})
+    else:
+        states_transitions[from_state].insert(index, {"to_state": to_state, "condition": condition})
+
+func remove_transition(from_state: State, to_state: State) -> void:
+    if !states_transitions.has(from_state):
+        return
+    states_transitions[from_state] = states_transitions[from_state].filter(func(transition): return transition["to_state"] != to_state)
 
 func get_next_state() -> State:
-  var transitions = states_transitions.get(current_state)
-  for transition in transitions:
-    if transition["condition"].call():
-      return transition["to_state"]
+    var transitions = states_transitions.get(current_state)
 
-  return null
+    if transitions == null:
+        return null
+
+    for transition in transitions:
+        if transition["condition"].call():
+            return transition["to_state"]
+
+    return null
 
 func change_state(new_state: State, delta: float) -> void:
     current_state.exit()

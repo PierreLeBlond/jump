@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://csu7vptxeme8t"]
+[gd_scene load_steps=9 format=3 uid="uid://csu7vptxeme8t"]
 
 [ext_resource type="Shader" uid="uid://nwuwxuvq8aap" path="res://shaders/whirlandpinch.gdshader" id="1_gemux"]
 [ext_resource type="Script" uid="uid://c36l3gxtk4brk" path="res://scripts/connector/soubalienAndPlayer/SoubalienAndPlayerConnector.gd" id="2_q2la3"]
@@ -16,8 +16,12 @@ shader_parameter/radius = 256.0
 shader_parameter/whirl = 0.1
 shader_parameter/pinch = 0.2
 
-[node name="SoubalienAndPlayerConnector" type="Node2D" node_paths=PackedStringArray("whirl_and_pinch", "capture_state", "cone_state", "ray_state")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_8ynkr"]
+radius = 256.0
+
+[node name="SoubalienAndPlayerConnector" type="Node2D" node_paths=PackedStringArray("whirl_and_pinch_area", "whirl_and_pinch", "capture_state", "cone_state", "ray_state")]
 script = ExtResource("2_q2la3")
+whirl_and_pinch_area = NodePath("Area2D")
 whirl_and_pinch = NodePath("WhirlAndPinch")
 capture_state = NodePath("Capture")
 cone_state = NodePath("Cone")
@@ -28,9 +32,8 @@ min_ray_gravity_factor = 1.05
 script = ExtResource("3_8ynkr")
 animation = "cone"
 
-[node name="Ray" type="Node" parent="." node_paths=PackedStringArray("whirl_and_pinch")]
+[node name="Ray" type="Node" parent="."]
 script = ExtResource("4_h6p76")
-whirl_and_pinch = NodePath("../WhirlAndPinch")
 animation = "ray"
 
 [node name="Capture" type="Node" parent="." node_paths=PackedStringArray("whirl_and_pinch")]
@@ -39,7 +42,7 @@ whirl_and_pinch = NodePath("../WhirlAndPinch")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
 material = SubResource("ShaderMaterial_dxrc8")
-fit_margin = 0.0
+fit_margin = 64.0
 clear_margin = 0.0
 
 [node name="WhirlAndPinch" type="Node" parent="." node_paths=PackedStringArray("canvas_group", "canvas_group_parent")]
@@ -47,3 +50,10 @@ script = ExtResource("6_8ynkr")
 canvas_group = NodePath("../CanvasGroup")
 canvas_group_parent = NodePath("..")
 radius = 256.0
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_8ynkr")

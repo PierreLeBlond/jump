@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1tavs3t65e2q"]
+
+[ext_resource type="Script" uid="uid://dlhglw25qapxk" path="res://scripts/connector/startRace/StartRaceConnector.gd" id="1_ihgij"]
+[ext_resource type="Script" uid="uid://cd36ii7sn7bfs" path="res://scripts/connector/startRace/Trip.gd" id="2_x1qnv"]
+[ext_resource type="Script" uid="uid://bnaiu1f5mtcf3" path="res://scripts/connector/startRace/StartingBlock.gd" id="3_0m4op"]
+
+[node name="StartRaceConnector" type="Node2D" node_paths=PackedStringArray("trip_state", "starting_block_state")]
+script = ExtResource("1_ihgij")
+trip_state = NodePath("Trip")
+starting_block_state = NodePath("StartingBlock")
+
+[node name="Trip" type="Node" parent="."]
+script = ExtResource("2_x1qnv")
+
+[node name="StartingBlock" type="Node" parent="."]
+script = ExtResource("3_0m4op")

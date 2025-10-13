@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://27vdgqlbgpml"]
+[gd_scene load_steps=43 format=3 uid="uid://27vdgqlbgpml"]
 
 [ext_resource type="Script" uid="uid://b53py4t8s65s1" path="res://scripts/character/Player.gd" id="1_6e537"]
 [ext_resource type="Texture2D" uid="uid://3k4btk54cqba" path="res://assets/spritesheets/player/player.png" id="2_0rnld"]
@@ -118,6 +118,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0, 19]
+}
+
+[sub_resource type="Animation" id="Animation_xsi7p"]
+resource_name = "idleturn"
+length = 0.13333668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [294, 295, 296, 297, 298]
 }
 
 [sub_resource type="Animation" id="Animation_l8qks"]
@@ -266,6 +282,40 @@ tracks/0/keys = {
 "values": [134, 144]
 }
 
+[sub_resource type="Animation" id="Animation_1jpwa"]
+resource_name = "startingblock"
+length = 0.33333668
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002, 0.23333335, 0.26666668, 0.3, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309]
+}
+
+[sub_resource type="Animation" id="Animation_pfeki"]
+resource_name = "startingblockrun"
+length = 0.20000334
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [310, 311, 312, 313, 314, 315, 316]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pt1rj"]
 _data = {
 &"RESET": SubResource("Animation_6e537"),
@@ -274,11 +324,14 @@ _data = {
 &"fall": SubResource("Animation_1pe8v"),
 &"frontcliffhang": SubResource("Animation_ebwui"),
 &"idle": SubResource("Animation_srp4u"),
+&"idleturn": SubResource("Animation_xsi7p"),
 &"jump": SubResource("Animation_l8qks"),
 &"land": SubResource("Animation_jfpux"),
 &"ray": SubResource("Animation_fgkxt"),
 &"run": SubResource("Animation_u1bau"),
 &"standup": SubResource("Animation_p07f3"),
+&"startingblock": SubResource("Animation_1jpwa"),
+&"startingblockrun": SubResource("Animation_pfeki"),
 &"stop": SubResource("Animation_0rnld"),
 &"trip": SubResource("Animation_b8lor"),
 &"walk": SubResource("Animation_y7qcs"),

@@ -62,3 +62,7 @@ func update_shader_parameters() -> void:
 
 func update_shader_source_position() -> void:
     canvas_group.material.set_shader_parameter("source_position", source.global_position)
+
+func _process(_delta: float) -> void:
+    if canvas_group.visible:
+        update_shader_source_position()

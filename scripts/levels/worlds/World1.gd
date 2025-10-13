@@ -25,6 +25,7 @@ const COUNTDOWN_BPM: int = 108
 @export var cinematic_bars: CinematicBars
 
 @export var race_introduction_area: Area2D
+@export var start_race_connector: StartRaceConnector
 
 @export var start_checkpoint: Checkpoint
 @export var race_introduction_checkpoint: Checkpoint
@@ -70,13 +71,17 @@ func introduce_race(_body: Node2D) -> void:
 
     race_introduction_area.body_entered.disconnect(introduce_race)
 
-    player.lock_key(Globals.MOVE_UNLOCKED_KEY)
+    # player.lock_key(Globals.MOVE_UNLOCKED_KEY)
+    start_race_connector.trip()
     await get_tree().create_timer(1.0).timeout
 
     hud.unreveal_life_counter()
     hud.unreveal_score_counter()
 
     cinematic_bars.reveal()
+
+    await get_tree().create_timer(1.0).timeout
+
     camera_manager.fly_to(race_introduction_camera)
 
     soubalien.visible = true
@@ -93,8 +98,6 @@ func pre_start_race() -> void:
     hud.unreveal_score_counter()
     hud.unreveal_time_counter()
 
-    player.lock_key(Globals.MOVE_UNLOCKED_KEY)
-
     cinematic_bars.reveal()
 
     race_introduction_camera.set_target(player)
@@ -106,6 +109,7 @@ func pre_start_race() -> void:
     soubalien_chase_path.stop()
 
 func start_race() -> void:
+    start_race_connector.starting_block()
     race_introduction_camera.set_target(player)
 
     soubalien_chase_path.call_deferred("set_child", soubalien)
@@ -125,6 +129,7 @@ func start_race() -> void:
     countdown.bpm = COUNTDOWN_BPM
     add_child(countdown)
     music_manager.start_countdown()
+
     await countdown.play()
     countdown.queue_free()
 
@@ -137,7 +142,8 @@ func start_race() -> void:
     hud.reveal_time_counter()
     hud.reveal_score_counter()
 
-    player.unlock_key(Globals.MOVE_UNLOCKED_KEY)
+    # player.unlock_key(Globals.MOVE_UNLOCKED_KEY)
+    start_race_connector.start()
 
     soubalien_chase_path.start()
     soubalien_player_connector.start_chasing_player()
