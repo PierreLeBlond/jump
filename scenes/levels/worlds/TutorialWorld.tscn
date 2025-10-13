@@ -253,7 +253,7 @@ offset_top = 674.0
 offset_right = 754.0
 offset_bottom = 857.0
 bbcode_enabled = true
-text = "une fois sur un mur, sautes à nouveau dans la direction opposées"
+text = "une fois sur un mur, sautes à nouveau dans la direction opposée"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/6"]
 position = Vector2(0, 540)
