@@ -6,6 +6,9 @@ var buffered_jump_remaining_frames: int = 0
 
 var jump_pressed_frames: int = 0
 
+var animations: Array[String] = ["jump", "jumpleft"]
+var jump_animation: String = "jump"
+
 func enter(previous_state: State, delta: float) -> void:
     super (previous_state, delta)
 
@@ -22,6 +25,10 @@ func enter(previous_state: State, delta: float) -> void:
 
     buffered_jump_remaining_frames = 0
     jump_pressed_frames = 0
+
+    jump_animation = animations[randi() % animations.size()]
+
+    parent.animation_player.play(jump_animation)
 
 func update(_delta: float) -> void:
     if (buffered_jump_remaining_frames > 0):

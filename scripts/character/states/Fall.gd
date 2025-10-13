@@ -8,6 +8,12 @@ var coyote_jump_remaining_frames: int = 0
 
 var double_jump_count: int = 0
 
+var animations: Array[String] = ["fall", "fallleft"]
+var animations_map: Dictionary = {
+    "jump": "fall",
+    "jumpleft": "fallleft",
+}
+
 func enter(previous_state: State, delta: float) -> void:
     super (previous_state, delta)
 
@@ -30,6 +36,11 @@ func enter(previous_state: State, delta: float) -> void:
     deceleration_distance = parent.projectile_parameters.air_deceleration_distance
 
     jump_time = parent.projectile_parameters.fall_time
+
+    var fall_animation = animations[randi() % animations.size()]
+    if (previous_state is Jump):
+        fall_animation = animations_map[previous_state.jump_animation]
+    parent.animation_player.play(fall_animation)
 
 func update(delta: float) -> void:
     super (delta)

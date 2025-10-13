@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://27vdgqlbgpml"]
+[gd_scene load_steps=44 format=3 uid="uid://27vdgqlbgpml"]
 
 [ext_resource type="Script" uid="uid://b53py4t8s65s1" path="res://scripts/character/Player.gd" id="1_6e537"]
 [ext_resource type="Texture2D" uid="uid://3k4btk54cqba" path="res://assets/spritesheets/player/player.png" id="2_0rnld"]
@@ -21,21 +21,6 @@
 [ext_resource type="Script" uid="uid://n0not04aejg6" path="res://scripts/character/CliffDetector.gd" id="18_61ith"]
 [ext_resource type="Script" uid="uid://br0fm1ttogpe2" path="res://scripts/character/WallDetector.gd" id="19_ebwui"]
 [ext_resource type="Script" uid="uid://dfh6a42d2dq0n" path="res://scripts/collectibles/Collector.gd" id="20_sfy4j"]
-
-[sub_resource type="Animation" id="Animation_6e537"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [187]
-}
 
 [sub_resource type="Animation" id="Animation_gv3ic"]
 resource_name = "backcliffhang"
@@ -217,6 +202,40 @@ tracks/0/keys = {
 "values": [221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247]
 }
 
+[sub_resource type="Animation" id="Animation_1jpwa"]
+resource_name = "startingblock"
+length = 0.33333668
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002, 0.23333335, 0.26666668, 0.3, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309]
+}
+
+[sub_resource type="Animation" id="Animation_pfeki"]
+resource_name = "startingblockrun"
+length = 0.20000334
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [310, 311, 312, 313, 314, 315, 316]
+}
+
 [sub_resource type="Animation" id="Animation_0rnld"]
 resource_name = "stop"
 length = 0.633337
@@ -282,10 +301,9 @@ tracks/0/keys = {
 "values": [134, 144]
 }
 
-[sub_resource type="Animation" id="Animation_1jpwa"]
-resource_name = "startingblock"
-length = 0.33333668
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_axnmu"]
+resource_name = "jumpleft"
+length = 0.300003
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -293,16 +311,15 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002, 0.23333335, 0.26666668, 0.3, 0.33333334),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309]
+"times": PackedFloat32Array(0, 0.300003),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [317, 326]
 }
 
-[sub_resource type="Animation" id="Animation_pfeki"]
-resource_name = "startingblockrun"
-length = 0.20000334
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_fvsjc"]
+resource_name = "fallleft"
+length = 0.300003
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -310,22 +327,23 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [310, 311, 312, 313, 314, 315, 316]
+"times": PackedFloat32Array(0, 0.300003),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [327, 336]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pt1rj"]
 _data = {
-&"RESET": SubResource("Animation_6e537"),
 &"backcliffhang": SubResource("Animation_gv3ic"),
 &"cone": SubResource("Animation_viqgg"),
 &"fall": SubResource("Animation_1pe8v"),
+&"fallleft": SubResource("Animation_fvsjc"),
 &"frontcliffhang": SubResource("Animation_ebwui"),
 &"idle": SubResource("Animation_srp4u"),
 &"idleturn": SubResource("Animation_xsi7p"),
 &"jump": SubResource("Animation_l8qks"),
+&"jumpleft": SubResource("Animation_axnmu"),
 &"land": SubResource("Animation_jfpux"),
 &"ray": SubResource("Animation_fgkxt"),
 &"run": SubResource("Animation_u1bau"),
@@ -372,9 +390,9 @@ collector = NodePath("Collector")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_0rnld")
-hframes = 18
-vframes = 18
-frame = 187
+hframes = 19
+vframes = 19
+frame = 166
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
