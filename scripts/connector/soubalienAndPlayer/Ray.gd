@@ -2,10 +2,8 @@ extends ProjectileState
 
 class_name Ray
 
-const DEFAULT_RADIUS = 256
-
-const CONE_ACCELERATION_DISTANCE = 512
-const CONE_DECELERATION_DISTANCE = 8
+const RAY_ACCELERATION_DISTANCE = 512
+const RAY_DECELERATION_DISTANCE = 8
 
 var tween: Tween
 
@@ -18,8 +16,8 @@ func enter(previous_state: State, delta: float) -> void:
     tween = create_tween()
     tween.tween_property(parent, "scale", Vector2(0.8, 0.8), 0.3)
 
-    acceleration_distance = CONE_ACCELERATION_DISTANCE
-    deceleration_distance = CONE_DECELERATION_DISTANCE
+    acceleration_distance = RAY_ACCELERATION_DISTANCE
+    deceleration_distance = RAY_DECELERATION_DISTANCE
 
     jump_time = parent.projectile_parameters.fall_time
 

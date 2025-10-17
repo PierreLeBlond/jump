@@ -132,7 +132,7 @@ func get_lateral_acceleration() -> float:
     return spring_force
 
 func _physics_process(delta: float) -> void:
-    if !has_player_in_cone():
+    if !has_player_in_cone() && !has_player_in_ray():
         player.external_accelerations["soubalien_pull"] = Vector2(0, 0)
         return
 
