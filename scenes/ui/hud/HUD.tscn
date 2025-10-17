@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cbyph1udid6vi" path="res://scripts/ui/hud/HUD.gd" id="1_f4fii"]
 [ext_resource type="Script" uid="uid://de2d2njqqoynk" path="res://scripts/ui/hud/LifeCounter.gd" id="2_w7tcg"]
 [ext_resource type="Script" uid="uid://be7ric8odntpy" path="res://scripts/ui/hud/Counter.gd" id="2_x328j"]
-[ext_resource type="Texture2D" uid="uid://b7yga0pu0e4fy" path="res://assets/sprites/note.png" id="3_x328j"]
+[ext_resource type="Texture2D" uid="uid://dvy3hrsp6d6rn" path="res://assets/sprites/note.png" id="3_x328j"]
 [ext_resource type="Texture2D" uid="uid://bntjuemh2bca1" path="res://assets/sprites/heart.png" id="4_x328j"]
 [ext_resource type="Texture2D" uid="uid://dwmx02woptjx6" path="res://assets/sprites/clock.png" id="5_2jm8r"]
 [ext_resource type="Script" uid="uid://cqfhfvfoiscye" path="res://scripts/ui/hud/TimeCounter.gd" id="5_t01tj"]
@@ -24,7 +24,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
-layout_mode = 2
+layout_mode = 0
 offset_right = 156.0
 offset_bottom = 127.0
 theme_override_constants/margin_left = 64
@@ -161,6 +161,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+rotation = 0.3763498
 pivot_offset = Vector2(60, 60)
 size_flags_horizontal = 4
 texture = ExtResource("3_x328j")
@@ -222,7 +223,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="Control/MarginContainer2/TimeCounter/Control2"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 16.0
 offset_top = 29.0
 offset_right = 255.0

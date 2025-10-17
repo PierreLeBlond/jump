@@ -2,7 +2,7 @@ extends Node
 
 class_name MusicManager
 
-const RACE_MUSIC_DELAY: float = 0.25
+const RACE_MUSIC_DELAY: float = 0.0
 const INAUDIBLE_VOLUME_DB: float = -80.0
 
 @export var forest_audio_stream_player: AudioStreamPlayer

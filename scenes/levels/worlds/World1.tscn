@@ -1,52 +1,37 @@
-[gd_scene load_steps=40 format=4 uid="uid://de32o3g1w17vm"]
+[gd_scene load_steps=38 format=4 uid="uid://de32o3g1w17vm"]
 
 [ext_resource type="Script" uid="uid://8g3j4qvgpbuq" path="res://scripts/levels/worlds/World1.gd" id="1_t2wor"]
 [ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/components/CinematicBars.tscn" id="2_j7nyf"]
 [ext_resource type="PackedScene" uid="uid://82tigqg507ba" path="res://scenes/ui/hud/HUD.tscn" id="2_l40or"]
 [ext_resource type="PackedScene" uid="uid://c1f16ms5h14r6" path="res://scenes/ui/components/Countdown.tscn" id="2_w2kyn"]
 [ext_resource type="Script" uid="uid://ewkys0jryvy8" path="res://scripts/levels/MusicManager.gd" id="3_bspq0"]
-[ext_resource type="AudioStream" uid="uid://bjqatew8thb07" path="res://assets/sounds/soubalien.mp3" id="6_dqba7"]
 [ext_resource type="Script" uid="uid://d7xk4vlngnl8" path="res://scripts/game/GameRun.gd" id="6_t2wor"]
 [ext_resource type="PackedScene" uid="uid://cgexvf3ochgd8" path="res://scenes/contraptions/Portal.tscn" id="6_usw5k"]
-[ext_resource type="AudioStream" uid="uid://bx8i0hum8nlfe" path="res://assets/sounds/soubalien-race.mp3" id="7_j7nyf"]
 [ext_resource type="TileSet" uid="uid://dftl5pyptmafp" path="res://tilesets/cloud.tres" id="7_jsker"]
+[ext_resource type="AudioStream" uid="uid://b2g4n5a03p8hu" path="res://assets/sounds/level_1/base.mp3" id="7_ol147"]
 [ext_resource type="TileSet" uid="uid://d2f3f4ukvlod0" path="res://tilesets/tree.tres" id="8_6ex7q"]
-[ext_resource type="AudioStream" uid="uid://k67ywhq5ev6b" path="res://assets/sounds/note-race.mp3" id="8_usw5k"]
-[ext_resource type="AudioStream" uid="uid://b7ek2ej3vlbbg" path="res://assets/sounds/note.mp3" id="9_6ex7q"]
+[ext_resource type="AudioStream" uid="uid://bkg10tf1w5jfs" path="res://assets/sounds/level_1/soubalien-intro.mp3" id="9_3pfwh"]
 [ext_resource type="PackedScene" uid="uid://b8dorlf7ulbwy" path="res://scenes/Soubalien.tscn" id="9_ijfg6"]
+[ext_resource type="AudioStream" uid="uid://q6kcg1k0tod1" path="res://assets/sounds/level_1/theme.mp3" id="10_3pfwh"]
 [ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="10_ijoxy"]
 [ext_resource type="Script" uid="uid://c8b0g0enel70w" path="res://scripts/enemy/Path.gd" id="10_njy47"]
+[ext_resource type="AudioStream" uid="uid://b22p4onf5b8xr" path="res://assets/sounds/level_1/excerpt.mp3" id="11_3pfwh"]
 [ext_resource type="PackedScene" uid="uid://dpr11d1q2xb3x" path="res://scenes/contraptions/Checkpoint.tscn" id="11_njy47"]
+[ext_resource type="PackedScene" uid="uid://dmsk824oqqo0r" path="res://scenes/environments/backgrounds/Landscape.tscn" id="12_3pfwh"]
 [ext_resource type="Script" uid="uid://bbujjd3t0eg6e" path="res://scripts/camera/Camera.gd" id="12_l40or"]
 [ext_resource type="Script" uid="uid://dm275lbjrus7p" path="res://scripts/camera/CameraManager.gd" id="13_njy47"]
 [ext_resource type="PackedScene" uid="uid://4wsynq3xc0sr" path="res://scenes/collectibles/Note.tscn" id="14_86um8"]
 [ext_resource type="PackedScene" uid="uid://csu7vptxeme8t" path="res://scenes/connectors/SoubalienAndPlayerConnector.tscn" id="15_1cy2d"]
-[ext_resource type="AudioStream" uid="uid://bp2sx6ryr8ixr" path="res://assets/sounds/race.mp3" id="15_p5s5a"]
 [ext_resource type="AudioStream" uid="uid://cr27a3g4erh4h" path="res://assets/sounds/forest.ogg" id="16_njy47"]
+[ext_resource type="AudioStream" uid="uid://b76noj4bwyfuc" path="res://assets/sounds/level_1/soubalien.mp3" id="17_3pfwh"]
 [ext_resource type="Script" uid="uid://xd4woi41uhf2" path="res://scripts/camera/CameraOverrideArea.gd" id="18_j7nyf"]
 [ext_resource type="PackedScene" uid="uid://c5ujunl53hshx" path="res://scenes/ui/components/ComboNote.tscn" id="24_0bhon"]
 [ext_resource type="PackedScene" uid="uid://cbchcmt1re0ym" path="res://scenes/ui/controls/MobileControls.tscn" id="25_ijfg6"]
 [ext_resource type="PackedScene" uid="uid://d1tavs3t65e2q" path="res://scenes/connectors/StartRaceConnector.tscn" id="27_2cvtv"]
-
-[sub_resource type="Gradient" id="Gradient_ukjja"]
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.643137)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_p5s5a"]
-gradient = SubResource("Gradient_ukjja")
-fill_from = Vector2(0, 0.213675)
-fill_to = Vector2(0, 1)
-
-[sub_resource type="Gradient" id="Gradient_p5s5a"]
-offsets = PackedFloat32Array(0, 0.996815)
-colors = PackedColorArray(1, 1, 1, 0, 0.66, 0.960333, 1, 0.890196)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_njy47"]
-gradient = SubResource("Gradient_p5s5a")
-fill_from = Vector2(0, 0.200855)
-fill_to = Vector2(0, 1)
+[ext_resource type="Texture2D" uid="uid://j3adclf42twd" path="res://assets/sprites/bakground-6.png" id="30_12kx7"]
 
 [sub_resource type="Gradient" id="Gradient_njy47"]
-colors = PackedColorArray(1, 1, 1, 1, 5.77569e-07, 0.327346, 0.478314, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.35199997, 0.7128, 0.88, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_j7nyf"]
 gradient = SubResource("Gradient_njy47")
@@ -118,65 +103,19 @@ race_audio_stream_player = NodePath("RaceAudioStreamPlayer")
 soubalien_race_audio_stream_player = NodePath("../Soubalien/AudioStreamPlayer2D")
 
 [node name="RaceAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
-stream = ExtResource("15_p5s5a")
+stream = ExtResource("7_ol147")
 
 [node name="ForestAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("16_njy47")
 
 [node name="SoubalienAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
-stream = ExtResource("6_dqba7")
+stream = ExtResource("9_3pfwh")
 
 [node name="RaceNoteAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
-stream = ExtResource("8_usw5k")
+stream = ExtResource("10_3pfwh")
 
 [node name="NoteAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
-stream = ExtResource("9_6ex7q")
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-layer = -1
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.2, 1)
-motion_mirroring = Vector2(3840, 0)
-
-[node name="TileMapLayer" type="TileMapLayer" parent="ParallaxBackground/ParallaxLayer"]
-modulate = Color(0.82, 0.82, 0.82, 0.780392)
-tile_map_data = PackedByteArray("AAAHAAUAAQAIAAMAAAAIAAQAAQAFAAEAAAAIAAUAAQAJAAMAAAAJAAQAAQAJAAIAAAAJAAUAAQAJAAMAAAAKAAQAAQAJAAIAAAAKAAUAAQAJAAMAAAALAAQAAQAJAAIAAAALAAUAAQAJAAMAAAAMAAQAAQAGAAEAAAAMAAUAAQAJAAMAAAANAAUAAQALAAMAAAASAAQAAQAIAAMAAAATAAQAAQAJAAMAAAAUAAQAAQAJAAMAAAAVAAQAAQALAAMAAAAYAAcAAQAIAAMAAAAZAAcAAQALAAMAAAAFAAUAAQAAAAMAAAAHAAQAAQAIAAAAAAAIAAMAAQAIAAAAAAAJAAMAAQAKAAAAAAAKAAMAAQAKAAAAAAALAAMAAQAKAAAAAAAMAAMAAQALAAAAAAANAAQAAQALAAAAAAAQAAUAAQAAAAMAAAASAAMAAQAIAAAAAAATAAMAAQAKAAAAAAAUAAMAAQAKAAAAAAAVAAMAAQALAAAAAAAYAAYAAQAIAAAAAAAZAAYAAQALAAAAAAAdAAUAAQAFAAMAAAAdAAQAAQAIAAAAAAAeAAQAAQAKAAAAAAAfAAQAAQALAAAAAAAfAAUAAQALAAMAAAAeAAUAAQAJAAMAAAAcAAUAAQABAAMAAAAjAAcAAQABAAMAAAAkAAcAAQAFAAMAAAAlAAcAAQAJAAMAAAAmAAcAAQAJAAMAAAAnAAcAAQAJAAMAAAAoAAcAAQAJAAMAAAApAAcAAQAGAAMAAAAqAAcAAQADAAMAAAAkAAYAAQAIAAAAAAAlAAYAAQAFAAEAAAAmAAYAAQAJAAIAAAAnAAYAAQAJAAIAAAAoAAYAAQAGAAEAAAApAAYAAQALAAAAAAAoAAUAAQALAAAAAAAnAAUAAQAGAAEAAAAmAAUAAQAJAAIAAAAlAAUAAQAIAAEAAAAlAAQAAQAIAAAAAAAmAAQAAQAKAAAAAAAnAAQAAQALAAAAAAAlAAIAAQAAAAMAAAAuAAQAAQAEAAIAAAAuAAMAAQAFAAAAAAAvAAMAAQALAAAAAAAvAAQAAQAGAAMAAAAwAAQAAQADAAMAAAAuAAUAAQAAAAIAAAAtAAMAAQABAAMAAAA0AAYAAQAAAAMAAAA2AAUAAQAAAAMAAAA1AAMAAQAAAAMAAAA5AAYAAQAAAAMAAAA6AAQAAQAAAAMAAAA=")
-tile_set = ExtResource("7_jsker")
-collision_enabled = false
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 3840.0
-offset_bottom = 1080.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = SubResource("GradientTexture2D_p5s5a")
-
-[node name="TreesLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.8, 1)
-motion_mirroring = Vector2(3840, 0)
-
-[node name="TileMapLayer" type="TileMapLayer" parent="ParallaxBackground/TreesLayer"]
-modulate = Color(0.6314, 0.78228, 0.82, 1)
-position = Vector2(0, -28)
-tile_map_data = PackedByteArray("AAAAAA0AAQAKAAAAAAAAAA4AAQAJAAMAAAABAA0AAQAKAAAAAAABAA4AAQAJAAMAAAACAA0AAQAKAAAAAAACAA4AAQAJAAMAAAADAAkAAQAIAAAAAAADAAoAAQAIAAMAAAADAA0AAQAKAAAAAAADAA4AAQAJAAMAAAAEAAkAAQAKAAAAAAAEAAoAAQAJAAMAAAAEAA0AAQAKAAAAAAAEAA4AAQAJAAMAAAAFAAkAAQAKAAAAAAAFAAoAAQAKAAMAAAAFAAsAAQAAAAEAAAAFAAwAAQAAAAEAAAAFAA0AAQAJAAAAAAAFAA4AAQAJAAMAAAAGAAkAAQAKAAAAAAAGAAoAAQAJAAMAAAAGAA0AAQAKAAAAAAAGAA4AAQAJAAMAAAAHAAkAAQALAAAAAAAHAAoAAQALAAMAAAAHAAwAAQAIAAAAAAAHAA0AAQAFAAEAAAAHAA4AAQAJAAMAAAAIAAwAAQALAAAAAAAIAA0AAQAGAAEAAAAIAA4AAQAJAAMAAAAJAA0AAQAKAAAAAAAJAA4AAQAJAAMAAAAKAA0AAQAKAAAAAAAKAA4AAQAJAAMAAAALAAsAAQAIAAAAAAALAAwAAQAIAAEAAAALAA0AAQAFAAEAAAALAA4AAQAJAAMAAAAMAAsAAQALAAAAAAAMAAwAAQALAAIAAAAMAA0AAQAGAAEAAAAMAA4AAQAJAAMAAAANAA0AAQAKAAAAAAANAA4AAQAJAAMAAAAOAA0AAQAKAAAAAAAOAA4AAQAJAAMAAAAPAAcAAQAIAAAAAAAPAAgAAQAIAAEAAAAPAAkAAQAIAAMAAAAPAAsAAQABAAMAAAAPAA0AAQAKAAAAAAAPAA4AAQAJAAMAAAAQAAcAAQAKAAAAAAAQAAgAAQAJAAIAAAAQAAkAAQAKAAMAAAAQAAoAAQAAAAEAAAAQAAsAAQADAAEAAAAQAAwAAQAAAAEAAAAQAA0AAQAJAAAAAAAQAA4AAQAJAAMAAAARAAcAAQALAAAAAAARAAgAAQALAAIAAAARAAkAAQALAAMAAAARAA0AAQAKAAAAAAARAA4AAQAJAAMAAAASAA0AAQAKAAAAAAASAA4AAQAFAAIAAAASAA8AAQAIAAMAAAATAA0AAQAKAAAAAAATAA4AAQAJAAIAAAATAA8AAQAJAAMAAAAUAAsAAQAIAAAAAAAUAAwAAQAIAAEAAAAUAA0AAQAFAAEAAAAUAA4AAQAJAAIAAAAUAA8AAQAJAAMAAAAVAAsAAQALAAAAAAAVAAwAAQALAAIAAAAVAA0AAQAGAAEAAAAVAA4AAQAJAAIAAAAVAA8AAQAJAAMAAAAWAA0AAQAKAAAAAAAWAA4AAQAJAAIAAAAWAA8AAQAJAAMAAAAXAA0AAQAKAAAAAAAXAA4AAQAGAAIAAAAXAA8AAQALAAMAAAAYAAkAAQAIAAAAAAAYAAoAAQAIAAMAAAAYAA0AAQAKAAAAAAAYAA4AAQAJAAMAAAAZAAkAAQAKAAAAAAAZAAoAAQAKAAMAAAAZAAsAAQAAAAEAAAAZAAwAAQAAAAEAAAAZAA0AAQAJAAAAAAAZAA4AAQAJAAMAAAAaAAkAAQALAAAAAAAaAAoAAQALAAMAAAAaAA0AAQAKAAAAAAAaAA4AAQAJAAMAAAAbAA0AAQAKAAAAAAAbAA4AAQAJAAMAAAAcAAwAAQAAAAAAAAAcAA0AAQAJAAAAAAAcAA4AAQAJAAMAAAAdAA0AAQAKAAAAAAAdAA4AAQAJAAMAAAAeAA0AAQAKAAAAAAAeAA4AAQAJAAMAAAAfAA0AAQAKAAAAAAAfAA4AAQAJAAMAAAAgAA0AAQAKAAAAAAAgAA4AAQAJAAMAAAAhAA4AAQAJAAMAAAAhAA0AAQAKAAAAAAAiAA0AAQAKAAAAAAAjAA0AAQAFAAEAAAAkAA0AAQAJAAIAAAAlAA0AAQAGAAEAAAAmAA0AAQAKAAAAAAAnAA0AAQAKAAAAAAAoAA0AAQAFAAEAAAApAA0AAQAJAAIAAAAqAA0AAQAJAAIAAAArAA0AAQAJAAIAAAAsAA0AAQAGAAEAAAAtAA0AAQAKAAAAAAAuAA0AAQAKAAAAAAAvAA0AAQAKAAAAAAAwAA0AAQAJAAAAAAAxAA0AAQAKAAAAAAAyAA0AAQAKAAAAAAAzAA0AAQAKAAAAAAA0AA0AAQAKAAAAAAA1AA0AAQAJAAAAAAA2AA0AAQAKAAAAAAA3AA0AAQAKAAAAAAA4AA0AAQAKAAAAAAA5AA0AAQAKAAAAAAA6AA0AAQAKAAAAAAA7AA0AAQAKAAAAAAA7AA4AAQAJAAMAAAA6AA4AAQAJAAMAAAA5AA4AAQAJAAMAAAA4AA4AAQAJAAMAAAA3AA4AAQAJAAMAAAA2AA4AAQAJAAMAAAA1AA4AAQAJAAMAAAA0AA4AAQAJAAMAAAAzAA4AAQAJAAMAAAAyAA4AAQAJAAMAAAAxAA4AAQAJAAMAAAAwAA4AAQAJAAMAAAAvAA4AAQAJAAMAAAAuAA4AAQAJAAMAAAAtAA4AAQAJAAMAAAAsAA4AAQAJAAMAAAArAA4AAQAJAAMAAAAqAA4AAQAJAAMAAAApAA4AAQAJAAMAAAAoAA4AAQAJAAMAAAAnAA4AAQAJAAMAAAAmAA4AAQAJAAMAAAAlAA4AAQAJAAMAAAAkAA4AAQAJAAMAAAAjAA4AAQAJAAMAAAAiAA4AAQAJAAMAAAA8AA0AAQALAAAAAAA8AA4AAQALAAMAAAAjAAwAAQAIAAEAAAAjAAsAAQAIAAAAAAAkAAsAAQALAAAAAAAkAAwAAQAGAAEAAAAlAAwAAQALAAAAAAAoAAwAAQAIAAAAAAApAAwAAQAFAAEAAAApAAsAAQAIAAEAAAApAAoAAQAIAAAAAAAqAAoAAQAKAAAAAAArAAoAAQAJAAAAAAAsAAoAAQALAAAAAAAsAAsAAQALAAIAAAArAAsAAQAJAAIAAAArAAwAAQAJAAIAAAAqAAwAAQAJAAIAAAAqAAsAAQAJAAIAAAAsAAwAAQALAAIAAAArAAkAAQAAAAEAAAArAAgAAQAKAAMAAAAqAAgAAQAIAAMAAAAqAAcAAQAIAAAAAAArAAcAAQAKAAAAAAAsAAcAAQALAAAAAAAsAAgAAQALAAMAAAAwAAwAAQAAAAAAAAA1AAwAAQAAAAEAAAA1AAsAAQAAAAEAAAA1AAoAAQAKAAMAAAA0AAoAAQAIAAMAAAA0AAkAAQAIAAAAAAA1AAkAAQAKAAAAAAA2AAkAAQAKAAAAAAA3AAkAAQALAAAAAAA3AAoAAQALAAMAAAA2AAoAAQAJAAMAAAA=")
-tile_set = ExtResource("8_6ex7q")
-collision_enabled = false
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/TreesLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 3840.0
-offset_bottom = 1080.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_njy47")
+stream = ExtResource("11_3pfwh")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 layer = -2
@@ -188,6 +127,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_j7nyf")
+
+[node name="Landscape" parent="." instance=ExtResource("12_3pfwh")]
 
 [node name="CinematicBars" parent="." instance=ExtResource("2_j7nyf")]
 
@@ -206,11 +147,11 @@ cone_angle = 0.42
 cone_height = 800.0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Soubalien"]
-stream = ExtResource("7_j7nyf")
+stream = ExtResource("17_3pfwh")
 volume_db = 10.0
 autoplay = true
-max_distance = 1920.0
-attenuation = 1.2
+max_distance = 4096.0
+attenuation = 2.0
 
 [node name="SoubalienPaths" type="Node2D" parent="."]
 
@@ -229,7 +170,7 @@ loop = false
 position = Vector2(5427, 312)
 curve = SubResource("Curve2D_p5s5a")
 script = ExtResource("10_njy47")
-speed = 0.016
+speed = 0.02
 
 [node name="PathFollow2D" type="PathFollow2D" parent="SoubalienPaths/ChasePath"]
 position = Vector2(141, 232)
@@ -300,9 +241,12 @@ follow_vertical_on_jump = true
 target = NodePath("../Player")
 
 [node name="NoteLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAA4BCQAAAAAAAAAAQA/AigAAAAAAAAAAQBBADEAAAAAAAAAAQDfACEAAAAAAAAAAQALAjQAAAAAAAAAAQCBAjEAAAAAAAAAAQDQAjQAAAAAAAAAAQARAyAAAAAAAAAAAQBSAwwAAAAAAAAAAQCZAw0AAAAAAAAAAQDjAyQAAAAAAAAAAQB7BDAAAAAAAAAAAQCYBRAAAAAAAAAAAQDYBSwAAAAAAAAAAQAZBhAAAAAAAAAAAQBMBv//AAAAAAAAAQBqBvf/AAAAAAAAAQCDBu//AAAAAAAAAQC8BCwAAAAAAAAAAQD9BCkAAAAAAAAAAQBIBRgAAAAAAAAAAQCWACAAAAAAAAAAAQCHACgAAAAAAAAAAQC0ABgAAAAAAAAAAQA=")
+tile_map_data = PackedByteArray("AAA4BCQAAAAAAAAAAQA/AigAAAAAAAAAAQDfACEAAAAAAAAAAQALAjQAAAAAAAAAAQCBAjEAAAAAAAAAAQDQAjQAAAAAAAAAAQARAyAAAAAAAAAAAQBSAwwAAAAAAAAAAQCZAw0AAAAAAAAAAQDjAyQAAAAAAAAAAQB7BDAAAAAAAAAAAQCYBRAAAAAAAAAAAQDYBSwAAAAAAAAAAQAZBhAAAAAAAAAAAQBMBv//AAAAAAAAAQBqBvf/AAAAAAAAAQCDBu//AAAAAAAAAQC8BCwAAAAAAAAAAQD9BCkAAAAAAAAAAQBIBRgAAAAAAAAAAQCWACAAAAAAAAAAAQC0ABgAAAAAAAAAAQBBADEAAAAAAAAAAQCHACgAAAAAAAAAAQDgASwAAAAAAAAAAQA=")
 tile_set = SubResource("TileSet_t6keq")
+rendering_quadrant_size = 8
 collision_enabled = false
+physics_quadrant_size = 8
+navigation_enabled = false
 
 [node name="RaceIntroductionArea" type="Area2D" parent="."]
 position = Vector2(6205, 0)
@@ -336,6 +280,38 @@ zoom_speed = 2.0
 follow_vertical_on_jump = true
 target = NodePath("../CollisionShape2D")
 metadata/_custom_type_script = "uid://bbujjd3t0eg6e"
+
+[node name="Parallax2D" type="ParallaxBackground" parent="."]
+layer = 0
+
+[node name="FrontBushes" type="ParallaxLayer" parent="Parallax2D"]
+modulate = Color(0.5124, 0.84, 0.58338, 1)
+motion_scale = Vector2(1.1, 1.1)
+motion_mirroring = Vector2(3840, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Parallax2D/FrontBushes"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 276.0
+offset_right = 1920.0
+offset_bottom = 1356.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("30_12kx7")
+
+[node name="TextureRect2" type="TextureRect" parent="Parallax2D/FrontBushes"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1920.0
+offset_top = 276.0
+offset_right = 3840.0
+offset_bottom = 1356.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("30_12kx7")
+flip_h = true
 
 [node name="MobileControls" parent="." instance=ExtResource("25_ijfg6")]
 

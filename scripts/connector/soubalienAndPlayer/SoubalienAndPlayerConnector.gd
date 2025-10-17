@@ -53,6 +53,7 @@ func _ready() -> void:
     # TODO: Beware of other states that could be added to the player state machine
     for state in player.state_machine.states:
         player.state_machine.add_transition(state, cone_state, func(): return has_player_in_cone())
+        player.state_machine.add_transition(state, ray_state, func(): return has_player_in_ray())
 
     player.state_machine.add_state(capture_state)
     player.state_machine.add_state(ray_state)

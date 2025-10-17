@@ -284,6 +284,7 @@ _data = {
 [node name="Countdown" type="CanvasLayer" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_vrb0f")
 animation_player = NodePath("AnimationPlayer")
+bpm = 160
 
 [node name="1" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0)

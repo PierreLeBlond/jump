@@ -5,7 +5,7 @@ class_name World1
 const NOTE_COMBO_DURATION: float = 0.7
 const RACE_NOTE_COMBO_DURATION: float = 3.0
 
-const COUNTDOWN_BPM: int = 108
+const COUNTDOWN_BPM: int = 160
 
 @export var music_manager: MusicManager
 
@@ -44,6 +44,14 @@ func _ready() -> void:
 
     game_run.combo_updated.connect(update_combo)
 
+    synchronize_notes.call_deferred()
+
+func synchronize_notes() -> void:
+    var sorted_noted = notes.duplicate()
+    sorted_noted.sort_custom(func(a: Note, b: Note): return a.global_position.x < b.global_position.x)
+    for i in range(sorted_noted.size()):
+        sorted_noted[i].offset_animation(0.0 if i % 2 == 0 else 0.5)
+
 func update_combo(duration: float, count: int) -> void:
     music_manager.update_combo(duration, count)
     combo_note.update(duration, count)
@@ -71,7 +79,6 @@ func introduce_race(_body: Node2D) -> void:
 
     race_introduction_area.body_entered.disconnect(introduce_race)
 
-    # player.lock_key(Globals.MOVE_UNLOCKED_KEY)
     start_race_connector.trip()
     await get_tree().create_timer(1.0).timeout
 

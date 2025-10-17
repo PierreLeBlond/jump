@@ -9,7 +9,6 @@
 script = ExtResource("1_7ktok")
 pause_manager = NodePath("PauseManager")
 checkpoint_manager = NodePath("CheckpointManager")
-initial_checkpoint_index = 2
 world_wrapper = NodePath("WorldWrapper")
 world_name = "TutorialWorld"
 

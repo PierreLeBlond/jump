@@ -42,7 +42,7 @@ _data = {
 }
 
 [sub_resource type="Gradient" id="Gradient_8lxm5"]
-colors = PackedColorArray(0.898039, 0.631373, 0.933333, 0, 0.92, 0.6532, 0.835513, 1)
+colors = PackedColorArray(1, 1, 1, 0, 0.97, 0.97, 0.97, 1)
 metadata/_snap_enabled = true
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_sti72"]
@@ -50,7 +50,7 @@ gradient = SubResource("Gradient_8lxm5")
 
 [sub_resource type="Gradient" id="Gradient_5ujc0"]
 offsets = PackedFloat32Array(0, 0.5, 1)
-colors = PackedColorArray(0.921569, 0.654902, 0.835294, 0, 0.92, 0.6532, 0.835513, 1, 0.92, 0.6532, 0.835513, 0)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 metadata/_snap_enabled = true
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_efyul"]
@@ -68,7 +68,7 @@ cone_angle = 0.436
 cone_height = 412.0
 area = NodePath("Animated/Area2D")
 ray_area = NodePath("Animated/RayArea2D")
-cone_polygon = NodePath("Animated/ConePolygon2D")
+cone_polygon = NodePath("Animated/Node2D/ConePolygon2D")
 left_corner_marker = NodePath("Animated/LeftCornerMarker2D")
 right_corner_marker = NodePath("Animated/RightCornerMarker2D")
 
@@ -85,15 +85,18 @@ position = Vector2(0, 8)
 position = Vector2(-62, -55)
 texture = ExtResource("2_8d8sd")
 
-[node name="ConePolygon2D" type="Polygon2D" parent="Animated"]
+[node name="Node2D" type="Node2D" parent="Animated"]
+modulate = Color(1, 0.72, 0.58000004, 1)
+
+[node name="ConePolygon2D" type="Polygon2D" parent="Animated/Node2D"]
 modulate = Color(1, 1, 1, 0.641)
 position = Vector2(0, -33)
 texture = SubResource("GradientTexture2D_sti72")
 texture_rotation = 1.5708
-polygon = PackedVector2Array(-40, 26, -27, 24, -16, 23, -8, 23, 0, 23, 8, 23, 16, 23, 28, 24, 36, 28, 227.952, 407, -231.952, 405)
+polygon = PackedVector2Array(-40, 26, -27, 24, -16, 23, -8, 23, 0, 23, 8, 23, 16, 23, 28, 24, 36, 28, 227.9521, 407, -231.9521, 405)
 uv = PackedVector2Array(3.8147e-06, -64, 8, -64, 16, -64, 24, -64, 32, -64, 40, -64, 48, -64, 56, -64, 64, -64, 64, 4.76837e-07, 1.49869e-06, -4.76837e-07)
 
-[node name="RayPolygon2D" type="Polygon2D" parent="Animated"]
+[node name="RayPolygon2D" type="Polygon2D" parent="Animated/Node2D"]
 position = Vector2(0, -51.649)
 scale = Vector2(1, 1.92056)
 texture = SubResource("GradientTexture2D_efyul")
