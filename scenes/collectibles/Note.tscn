@@ -105,7 +105,7 @@ bpm = 80.0
 shape = SubResource("CircleShape2D_evn8i")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -12)
+position = Vector2(0, -10)
 texture = ExtResource("1_ctcmp")
 hframes = 7
 vframes = 7

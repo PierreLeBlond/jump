@@ -6,7 +6,7 @@ signal finished
 
 @onready var path_follow: PathFollow2D = $PathFollow2D
 
-@export_range(0.0, 2.0, 0.001) var speed: float = 1.0
+@export_range(0.0, 1024.0, 1.0) var speed: float = 512.0
 
 var child: Node2D
 
@@ -31,7 +31,7 @@ func reset():
 
 func _process(delta: float) -> void:
     if started:
-      path_follow.progress_ratio += speed * delta
+      path_follow.progress_ratio += speed * delta / curve.get_baked_length()
 
     if path_follow.progress_ratio >= 1:
       started = false
