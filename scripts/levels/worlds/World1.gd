@@ -50,7 +50,7 @@ func synchronize_notes() -> void:
     var sorted_noted = notes.duplicate()
     sorted_noted.sort_custom(func(a: Note, b: Note): return a.global_position.x < b.global_position.x)
     for i in range(sorted_noted.size()):
-        sorted_noted[i].offset_animation(0.0 if i % 2 == 0 else 0.5)
+        sorted_noted[i].offset_animation(0.2 if i % 2 == 0 else 0.7)
 
 func update_combo(duration: float, count: int) -> void:
     music_manager.update_combo(duration, count)
@@ -137,6 +137,8 @@ func start_race() -> void:
     add_child(countdown)
     music_manager.start_countdown()
 
+    synchronize_notes()
+
     await countdown.play()
     countdown.queue_free()
 
@@ -149,7 +151,6 @@ func start_race() -> void:
     hud.reveal_time_counter()
     hud.reveal_score_counter()
 
-    # player.unlock_key(Globals.MOVE_UNLOCKED_KEY)
     start_race_connector.start()
 
     soubalien_chase_path.start()

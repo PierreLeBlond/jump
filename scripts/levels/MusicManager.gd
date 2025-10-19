@@ -5,21 +5,39 @@ class_name MusicManager
 const RACE_MUSIC_DELAY: float = 0.0
 const INAUDIBLE_VOLUME_DB: float = -80.0
 
+const EFFECT_BUS_INDEX: int = 1
+const LOW_PASS_FILTER_EFFECT_INDEX: int = 0
+const REVERB_EFFECT_INDEX: int = 1
+
+const LOW_PASS_FILTER_INNACTIVE_CUTOFF_HZ: float = 20500.0
+
+const INTRO_LOW_PASS_FILTER_CUTOFF_HZ: float = 500
+const INTRO_REVERB_WET: float = 0.5
+
+const RACE_LOW_PASS_FILTER_CUTOFF_HZ: float = 900.0
+const RACE_REVERB_WET: float = 0.3
+
 @export var forest_audio_stream_player: AudioStreamPlayer
 @export var note_audio_stream_player: AudioStreamPlayer
 @export var soubalien_audio_stream_player: AudioStreamPlayer
 
-@export var race_note_audio_stream_player: AudioStreamPlayer
 @export var race_audio_stream_player: AudioStreamPlayer
 @export var soubalien_race_audio_stream_player: AudioStreamPlayer2D
 
 var note_collected_tween: Tween
 
 var current_note_audio_stream_player: AudioStreamPlayer
-var current_note_duration: float = 0.0
+var current_low_pass_filter_cutoff_hz: float
+var current_reverb_wet: float
+
+var low_pass_filter_effect: AudioEffectLowPassFilter
+var reverb_effect: AudioEffectReverb
 
 func _ready() -> void:
     preload_samples()
+
+    low_pass_filter_effect = AudioServer.get_bus_effect(EFFECT_BUS_INDEX, LOW_PASS_FILTER_EFFECT_INDEX) as AudioEffectLowPassFilter
+    reverb_effect = AudioServer.get_bus_effect(EFFECT_BUS_INDEX, REVERB_EFFECT_INDEX) as AudioEffectReverb
 
     current_note_audio_stream_player = note_audio_stream_player
 
@@ -37,14 +55,12 @@ func preload_samples() -> void:
     forest_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
     note_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
     soubalien_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
-    race_note_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
     race_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
     soubalien_race_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
 
     forest_audio_stream_player.play()
     note_audio_stream_player.play()
     soubalien_audio_stream_player.play()
-    race_note_audio_stream_player.play()
     race_audio_stream_player.play()
     soubalien_race_audio_stream_player.play()
 
@@ -71,20 +87,32 @@ func fade_out_2d(audio_stream_player: AudioStreamPlayer2D, duration: float = 1.0
     audio_stream_player.stop()
 
 func start() -> void:
+    current_low_pass_filter_cutoff_hz = INTRO_LOW_PASS_FILTER_CUTOFF_HZ
+    current_reverb_wet = INTRO_REVERB_WET
+
+    low_pass_filter_effect.cutoff_hz = current_low_pass_filter_cutoff_hz
+    reverb_effect.wet = current_reverb_wet
+
     play(forest_audio_stream_player)
+    play(note_audio_stream_player)
 
 func introduce_race() -> void:
+    low_pass_filter_effect.cutoff_hz = LOW_PASS_FILTER_INNACTIVE_CUTOFF_HZ
+    reverb_effect.wet = 0.0
+
     fade_out(forest_audio_stream_player)
     fade_out(note_audio_stream_player)
     play(soubalien_audio_stream_player)
 
 func start_countdown() -> void:
+    current_low_pass_filter_cutoff_hz = RACE_LOW_PASS_FILTER_CUTOFF_HZ
+    current_reverb_wet = RACE_REVERB_WET
+
+    low_pass_filter_effect.cutoff_hz = LOW_PASS_FILTER_INNACTIVE_CUTOFF_HZ
+    reverb_effect.wet = 0.0
+
     fade_out(soubalien_audio_stream_player)
     await get_tree().create_timer(RACE_MUSIC_DELAY).timeout
-
-    current_note_audio_stream_player = race_note_audio_stream_player
-    current_note_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
-    current_note_audio_stream_player.play()
 
     play(race_audio_stream_player)
     play_2d(soubalien_race_audio_stream_player)
@@ -103,7 +131,8 @@ func update_combo(duration: float, _count: int) -> void:
         note_collected_tween = null
 
     var tween = create_tween()
-    tween.tween_property(current_note_audio_stream_player, "volume_db", 0.0, 0.2)
+    tween.tween_property(low_pass_filter_effect, "cutoff_hz", LOW_PASS_FILTER_INNACTIVE_CUTOFF_HZ, 0.5)
+    tween.tween_property(reverb_effect, "wet", 0.0, 0.5)
     note_collected_tween = tween
     await tween.finished
     await get_tree().create_timer(duration).timeout
@@ -114,7 +143,8 @@ func update_combo(duration: float, _count: int) -> void:
     tween.stop()
 
     tween = create_tween()
-    tween.tween_property(current_note_audio_stream_player, "volume_db", INAUDIBLE_VOLUME_DB, 1.0)
+    tween.tween_property(low_pass_filter_effect, "cutoff_hz", current_low_pass_filter_cutoff_hz, 0.5)
+    tween.tween_property(reverb_effect, "wet", current_reverb_wet, 0.5)
     note_collected_tween = tween
 
     await tween.finished

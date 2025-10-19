@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dqmuothieoafl" path="res://assets/sprites/circle.svg" id="1_3jh0w"]
 [ext_resource type="Script" uid="uid://cr42wdikh5snv" path="res://scripts/ui/components/ComboNote.gd" id="1_n837y"]
-[ext_resource type="Texture2D" uid="uid://b7yga0pu0e4fy" path="res://assets/sprites/note.png" id="2_n837y"]
+[ext_resource type="Texture2D" uid="uid://dvy3hrsp6d6rn" path="res://assets/sprites/note.png" id="2_n837y"]
 [ext_resource type="PackedScene" uid="uid://cb86qpl3esx1b" path="res://scenes/ui/components/ComboNoteScore.tscn" id="2_uwwi1"]
 
 [node name="ComboNote" type="Control" node_paths=PackedStringArray("combo_label", "combo_score_spawn", "texture_range")]

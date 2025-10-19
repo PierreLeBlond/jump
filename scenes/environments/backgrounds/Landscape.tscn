@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bjmbsqpm38sxq" path="res://assets/sprites/bakground-tests.png" id="6_pqmd8"]
 
 [sub_resource type="Gradient" id="Gradient_nijgr"]
-offsets = PackedFloat32Array(0.19135803, 0.83950615, 1)
-colors = PackedColorArray(0.2035, 0.55, 0.33055, 1, 0.38039216, 0.69803923, 0.72156864, 1, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0.9059829, 1)
+colors = PackedColorArray(0.24960001, 0.3938133, 0.52, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_yi7p2"]
 gradient = SubResource("Gradient_nijgr")
@@ -31,6 +31,7 @@ fill_to = Vector2(0, 0.39545456)
 layer = -1
 
 [node name="Clouds" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.84000003, 0.9253333, 1, 1)
 position = Vector2(0, -138)
 motion_scale = Vector2(0.1, 0.1)
 motion_mirroring = Vector2(3840, 0)
@@ -71,6 +72,7 @@ polygon = PackedVector2Array(-488, -72, -432, -62, -280, -290, -223, -309, -56, 
 uv = PackedVector2Array(1.6768082, 7.0896225, 2.5638666, 7.248026, 4.971616, 3.6363955, 5.8745356, 3.3354244, 8.519891, 5.9807873, 11.054365, 2.6701221, 11.95727, 3.2245388, 15.014508, 8.57863, 15.743167, 8.277659, 18.816229, 4.064086, 22.000162, 5.378847, 22.063538, 6.8836956, 25.358343, 9.291452, 29.096718, 10.41613, 32.264828, 10.796299, 38.664368, 9.386495, 42.117596, 7.0262604, 47.02815, 5.1729193, 50.481373, 7.96085, 57.086887, 2.4958782, 59.336246, 3.620552, 62.50433, 7.0896225, 62.50433, 40.909096, 1.6768082, 40.909096)
 
 [node name="FrontClouds" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.595, 0.731, 0.85, 1)
 position = Vector2(0, 110)
 motion_scale = Vector2(0.4, 0.4)
 motion_mirroring = Vector2(3840, 0)
@@ -100,7 +102,7 @@ texture = ExtResource("2_yi7p2")
 flip_h = true
 
 [node name="Land" type="ParallaxLayer" parent="ParallaxBackground"]
-modulate = Color(0.6, 0.5205, 0.28200004, 1)
+modulate = Color(0.1536, 0.24234666, 0.32, 1)
 position = Vector2(0, -138)
 motion_scale = Vector2(0.7, 0.7)
 motion_mirroring = Vector2(3840, 0)
@@ -135,7 +137,7 @@ texture = ExtResource("3_icsne")
 flip_h = true
 
 [node name="Trees" type="ParallaxLayer" parent="ParallaxBackground"]
-modulate = Color(0.5468052, 0.48816407, 0.4470685, 1)
+modulate = Color(0.0816, 0.12874667, 0.17, 1)
 position = Vector2(0, -138)
 motion_scale = Vector2(0.9, 0.9)
 motion_mirroring = Vector2(3840, 0)
@@ -175,7 +177,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_kdw8r")
 
 [node name="Bushes" type="ParallaxLayer" parent="ParallaxBackground"]
-modulate = Color(0.3827, 0.43, 0.38506502, 1)
+modulate = Color(0.046400003, 0.16, 0.14485334, 1)
 position = Vector2(0, -138)
 motion_mirroring = Vector2(3840, 0)
 

@@ -10,6 +10,7 @@ process_mode = 1
 script = ExtResource("1_6owa4")
 pause_manager = NodePath("PauseManager")
 checkpoint_manager = NodePath("CheckpointManager")
+initial_checkpoint_index = 1
 world_wrapper = NodePath("WorldWrapper")
 world_name = "World1"
 
