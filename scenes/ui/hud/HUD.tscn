@@ -131,7 +131,7 @@ size_flags_horizontal = 4
 texture = ExtResource("4_x328j")
 expand_mode = 1
 
-[node name="ScoreCounter" type="HBoxContainer" parent="Control" node_paths=PackedStringArray("control", "counter_label")]
+[node name="ScoreCounter" type="HBoxContainer" parent="Control" node_paths=PackedStringArray("control", "counter_sprite", "counter_label", "flashed_sprite", "flashed_label")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -145,7 +145,10 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("2_x328j")
 control = NodePath(".")
-counter_label = NodePath("Label")
+counter_sprite = NodePath("Control/TextureRect")
+counter_label = NodePath("Control2/Label")
+flashed_sprite = NodePath("Control/TextureRect/FlashedSprite")
+flashed_label = NodePath("Control2/Label/FlashedLabel")
 
 [node name="Control" type="Control" parent="Control/ScoreCounter"]
 custom_minimum_size = Vector2(92, 92)
@@ -153,6 +156,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="TextureRect" type="TextureRect" parent="Control/ScoreCounter/Control"]
+clip_children = 2
 texture_filter = 4
 custom_minimum_size = Vector2(92, 92)
 layout_mode = 1
@@ -167,13 +171,44 @@ size_flags_horizontal = 4
 texture = ExtResource("3_x328j")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="Control/ScoreCounter"]
+[node name="FlashedSprite" type="ColorRect" parent="Control/ScoreCounter/Control/TextureRect"]
+visible = false
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+
+[node name="Control2" type="Control" parent="Control/ScoreCounter"]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Control/ScoreCounter/Control2"]
+clip_children = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -63.0
+offset_top = -34.5
+offset_right = 6.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(34.5, 34.5)
 size_flags_horizontal = 2
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 48
 text = "00"
+
+[node name="FlashedLabel" type="ColorRect" parent="Control/ScoreCounter/Control2/Label"]
+visible = false
+layout_mode = 0
+offset_left = -23.0
+offset_top = -29.0
+offset_right = 105.0
+offset_bottom = 99.0
 
 [node name="MarginContainer2" type="MarginContainer" parent="Control"]
 layout_mode = 1
