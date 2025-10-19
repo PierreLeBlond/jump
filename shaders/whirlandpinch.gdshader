@@ -36,18 +36,10 @@ void fragment() {
   vec2 new_position = mix(FRAGCOORD.xy, FRAGCOORD.xy - source_to_target + offset, factor);
 
 	vec4 c = texture(screen_texture, new_position * SCREEN_PIXEL_SIZE, 0.0);
-	// vec4 c = texture(screen_texture, FRAGCOORD.xy * SCREEN_PIXEL_SIZE, 0.0);
-	//vec4 c = texture(screen_texture, SCREEN_UV, 0.0);
-  // vec4 c = vec4(step(FRAGCOORD.xy, vec2(512.0, 512.0)), 0.0, 1.0);
 
   if (c.a > 0.0001) {
 		c.rgb /= c.a;
 	}
 
 	COLOR *= c;
-
-  // COLOR = vec4(vec2((step(SCREEN_UV.x, 0.9)) * SCREEN_UV.x, (step(SCREEN_UV.y, 0.9)) * SCREEN_UV.y), 0.0, 1.0);
-  // COLOR = vec4(vec3(step(source_screen_position.y, 1.0 / SCREEN_PIXEL_SIZE.y)), 1.0);
-
-
 }

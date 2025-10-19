@@ -94,21 +94,30 @@ _data = {
 &"fly": SubResource("Animation_bcdh4")
 }
 
-[node name="Note" type="Area2D"]
+[node name="Note" type="Area2D" node_paths=PackedStringArray("flashed_sprite")]
 position = Vector2(8, 4)
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_evn8i")
 bpm = 80.0
+flashed_sprite = NodePath("Sprite2D/FlashedSprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_evn8i")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+clip_children = 2
 position = Vector2(0, -10)
 texture = ExtResource("1_ctcmp")
 hframes = 7
 vframes = 7
+
+[node name="FlashedSprite" type="ColorRect" parent="Sprite2D"]
+visible = false
+offset_left = -72.0
+offset_top = -122.0
+offset_right = 56.0
+offset_bottom = 70.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
