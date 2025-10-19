@@ -10,6 +10,8 @@ class_name TutorialWorld
 @export var endPortal: Portal
 
 @export var start_checkpoint: Checkpoint
+@export var hole_checkpoint: Checkpoint
+@export var soubalien_checkpoint: Checkpoint
 
 func _ready() -> void:
     super._ready()
@@ -24,11 +26,24 @@ func _ready() -> void:
     soubalien_player_connector.start_chasing_player()
 
     start_checkpoint.checkpoint_pre_loaded.connect(on_start_checkpoint_pre_load)
+    hole_checkpoint.checkpoint_pre_loaded.connect(on_hole_checkpoint_pre_load)
+    soubalien_checkpoint.checkpoint_pre_loaded.connect(on_soubalien_checkpoint_pre_load)
 
 func on_start_checkpoint_pre_load() -> void:
+    camera_manager.jump_to(player_camera)
+    player_camera.jump_to_target()
+
     player.lock_key(Globals.MOVE_UNLOCKED_KEY)
     player.lock_key(Globals.JUMP_UNLOCKED_KEY)
     player.lock_key(Globals.PAUSE_UNLOCKED_KEY)
+
+func on_hole_checkpoint_pre_load() -> void:
+    camera_manager.jump_to(player_camera)
+    player_camera.jump_to_target()
+
+func on_soubalien_checkpoint_pre_load() -> void:
+    camera_manager.jump_to(player_camera)
+    player_camera.jump_to_target()
 
 func on_void_entered(_body: Node2D) -> void:
     var release = await Transition.create_fall_transition_out(get_tree().root)

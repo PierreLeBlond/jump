@@ -58,6 +58,9 @@ func update_combo(duration: float, count: int) -> void:
     combo_connector.update(duration, count)
 
 func start() -> void:
+    camera_manager.jump_to(player_camera)
+    player_camera.jump_to_target()
+
     hud.hide_time_counter()
     hud.hide_life_counter()
     hud.hide_score_counter()
@@ -108,13 +111,15 @@ func pre_start_race() -> void:
 
     cinematic_bars.reveal()
 
-    race_introduction_camera.set_target(player)
-    camera_manager.jump_to(race_introduction_camera)
-
     soubalien_chase_path.call_deferred("set_child", soubalien)
     soubalien_player_connector.reset()
     soubalien_chase_path.reset()
     soubalien_chase_path.stop()
+
+    player_camera.jump_to_target()
+
+    race_introduction_camera.set_target(player)
+    camera_manager.jump_to(race_introduction_camera)
 
 func start_race() -> void:
     start_race_connector.starting_block()

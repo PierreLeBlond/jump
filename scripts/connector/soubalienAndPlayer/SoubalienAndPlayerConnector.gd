@@ -5,8 +5,6 @@ class_name SoubalienAndPlayerConnector
 const RAY_SPRING_CONSTANT = 500
 const CONE_SPRING_CONSTANT = 10
 
-const CHASE_PATH_SPEED_ACCELERATION_THRESHOLD = 1600
-
 signal captured_player()
 signal ray_captured_player()
 
@@ -28,9 +26,6 @@ var soubalien_state: SoubalienState = SoubalienState.IDLE
 @export var capture_state: Capture
 @export var cone_state: Cone
 @export var ray_state: Ray
-
-const MUSIC_DURATION: float = 75.0
-@export var chase_path: Path
 
 @export_range(1, 2.0) var min_ray_gravity_factor: float = 1.001
 @export_range(1, 2.0) var max_ray_gravity_factor: float = 1.1
@@ -73,7 +68,6 @@ func _ready() -> void:
     whirl_and_pinch_area.body_entered.connect(on_whirl_and_pinch_area_body_entered)
     whirl_and_pinch_area.body_exited.connect(on_whirl_and_pinch_area_body_exited)
 
-    chase_path.speed = player.projectile_parameters.final_velocity * 0.7
 
 func on_whirl_and_pinch_area_body_entered(body: Node2D) -> void:
     if (body != player):
@@ -138,15 +132,8 @@ func get_lateral_acceleration() -> float:
 
     return spring_force
 
-func update_chase_path_speed() -> void:
-    if abs(soubalien.global_position.x - player.global_position.x) < CHASE_PATH_SPEED_ACCELERATION_THRESHOLD:
-        chase_path.speed = player.projectile_parameters.final_velocity * 0.7
-    else:
-        chase_path.speed = player.projectile_parameters.final_velocity
 
 func _physics_process(delta: float) -> void:
-    update_chase_path_speed()
-
     if !has_player_in_cone() && !has_player_in_ray():
         player.external_accelerations["soubalien_pull"] = Vector2(0, 0)
         return

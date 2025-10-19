@@ -42,7 +42,7 @@ fill_to = Vector2(0, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vvfd6"]
 size = Vector2(137.5, 1048)
 
-[node name="TutorialWorld" type="Node2D" node_paths=PackedStringArray("soubalien", "void_zone", "soubalien_player_connector", "endPortal", "start_checkpoint", "player", "player_camera", "camera_manager", "game_run", "hud")]
+[node name="TutorialWorld" type="Node2D" node_paths=PackedStringArray("soubalien", "void_zone", "soubalien_player_connector", "endPortal", "start_checkpoint", "hole_checkpoint", "soubalien_checkpoint", "player", "player_camera", "camera_manager", "game_run", "hud")]
 process_mode = 1
 script = ExtResource("1_bqgfu")
 soubalien = NodePath("Soubalien")
@@ -50,6 +50,8 @@ void_zone = NodePath("Void")
 soubalien_player_connector = NodePath("SoubalienAndPlayerConnector")
 endPortal = NodePath("EndPortal")
 start_checkpoint = NodePath("StartCheckpoint")
+hole_checkpoint = NodePath("HoleCheckpoint")
+soubalien_checkpoint = NodePath("SoubalienCheckpoint")
 player = NodePath("Player")
 player_camera = NodePath("Camera2D")
 camera_manager = NodePath("CameraManager")
