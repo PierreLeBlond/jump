@@ -227,6 +227,7 @@ drag_horizontal_enabled = true
 drag_left_margin = 0.0
 editor_draw_drag_margin = true
 script = ExtResource("12_l40or")
+vertical_speed = 3.0
 target = NodePath("../Player")
 
 [node name="PlayerFocusCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
@@ -236,7 +237,7 @@ process_callback = 0
 limit_bottom = 1080
 editor_draw_drag_margin = true
 script = ExtResource("12_l40or")
-vertical_speed = 3.0
+vertical_speed = 10.0
 follow_vertical_on_jump = true
 target = NodePath("../Player")
 
