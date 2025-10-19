@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://de32o3g1w17vm"]
+[gd_scene load_steps=41 format=4 uid="uid://de32o3g1w17vm"]
 
 [ext_resource type="Script" uid="uid://8g3j4qvgpbuq" path="res://scripts/levels/worlds/World1.gd" id="1_t2wor"]
 [ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/components/CinematicBars.tscn" id="2_j7nyf"]
@@ -15,8 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="10_ijoxy"]
 [ext_resource type="Script" uid="uid://c8b0g0enel70w" path="res://scripts/enemy/Path.gd" id="10_njy47"]
 [ext_resource type="AudioStream" uid="uid://b22p4onf5b8xr" path="res://assets/sounds/level_1/excerpt.mp3" id="11_3pfwh"]
+[ext_resource type="AudioStream" uid="uid://dm02s78nylc68" path="res://assets/sounds/whoosh-in.mp3" id="11_fpjla"]
 [ext_resource type="PackedScene" uid="uid://dpr11d1q2xb3x" path="res://scenes/contraptions/Checkpoint.tscn" id="11_njy47"]
 [ext_resource type="PackedScene" uid="uid://dmsk824oqqo0r" path="res://scenes/environments/backgrounds/Landscape.tscn" id="12_3pfwh"]
+[ext_resource type="AudioStream" uid="uid://cf6e4vihn38iv" path="res://assets/sounds/whoosh-out.mp3" id="12_4cpu8"]
 [ext_resource type="Script" uid="uid://bbujjd3t0eg6e" path="res://scripts/camera/Camera.gd" id="12_l40or"]
 [ext_resource type="Script" uid="uid://dm275lbjrus7p" path="res://scripts/camera/CameraManager.gd" id="13_njy47"]
 [ext_resource type="PackedScene" uid="uid://4wsynq3xc0sr" path="res://scenes/collectibles/Note.tscn" id="14_86um8"]
@@ -29,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://cbchcmt1re0ym" path="res://scenes/ui/controls/MobileControls.tscn" id="25_ijfg6"]
 [ext_resource type="PackedScene" uid="uid://d1tavs3t65e2q" path="res://scenes/connectors/StartRaceConnector.tscn" id="27_2cvtv"]
 [ext_resource type="Texture2D" uid="uid://j3adclf42twd" path="res://assets/sprites/bakground-6.png" id="30_12kx7"]
+[ext_resource type="Script" uid="uid://bqa4n87khu0cw" path="res://scripts/connector/comboConnector/ComboConnector.gd" id="32_4cpu8"]
 
 [sub_resource type="Gradient" id="Gradient_njy47"]
 colors = PackedColorArray(1, 1, 1, 1, 0.40800002, 0.6437334, 0.85, 1)
@@ -61,10 +64,11 @@ size = Vector2(127, 1088)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j7nyf"]
 size = Vector2(3226, 1049)
 
-[node name="World1" type="Node2D" node_paths=PackedStringArray("music_manager", "combo_note", "race_introduction_camera", "player_focus_camera", "soubalien_player_connector", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "end_portal", "cinematic_bars", "race_introduction_area", "start_race_connector", "start_checkpoint", "race_introduction_checkpoint", "player", "player_camera", "camera_manager", "game_run", "hud")]
+[node name="World1" type="Node2D" node_paths=PackedStringArray("music_manager", "combo_connector", "combo_note", "race_introduction_camera", "player_focus_camera", "soubalien_player_connector", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "end_portal", "cinematic_bars", "race_introduction_area", "start_race_connector", "start_checkpoint", "race_introduction_checkpoint", "player", "player_camera", "camera_manager", "game_run", "hud")]
 process_mode = 1
 script = ExtResource("1_t2wor")
 music_manager = NodePath("MusicManager")
+combo_connector = NodePath("ComboConnector")
 combo_note = NodePath("ComboNote")
 countdown_scene = ExtResource("2_w2kyn")
 race_introduction_camera = NodePath("RaceIntroduceCamera")
@@ -93,13 +97,15 @@ script = ExtResource("13_njy47")
 [node name="GameRun" type="Node" parent="."]
 script = ExtResource("6_t2wor")
 
-[node name="MusicManager" type="Node" parent="." node_paths=PackedStringArray("forest_audio_stream_player", "note_audio_stream_player", "soubalien_audio_stream_player", "race_audio_stream_player", "soubalien_race_audio_stream_player")]
+[node name="MusicManager" type="Node" parent="." node_paths=PackedStringArray("forest_audio_stream_player", "note_audio_stream_player", "soubalien_audio_stream_player", "race_audio_stream_player", "soubalien_race_audio_stream_player", "whoosh_in_audio_stream_player", "whoosh_out_audio_stream_player")]
 script = ExtResource("3_bspq0")
 forest_audio_stream_player = NodePath("ForestAudioStreamPlayer")
 note_audio_stream_player = NodePath("NoteAudioStreamPlayer")
 soubalien_audio_stream_player = NodePath("SoubalienAudioStreamPlayer")
 race_audio_stream_player = NodePath("RaceAudioStreamPlayer")
 soubalien_race_audio_stream_player = NodePath("../Soubalien/TransformLock/AudioStreamPlayer2D")
+whoosh_in_audio_stream_player = NodePath("WhooshInAudioStreamPlayer")
+whoosh_out_audio_stream_player = NodePath("WhooshOutAudioStreamPlayer")
 
 [node name="RaceAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("7_ol147")
@@ -114,6 +120,12 @@ stream = ExtResource("9_3pfwh")
 [node name="NoteAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("11_3pfwh")
 bus = &"Effect"
+
+[node name="WhooshInAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
+stream = ExtResource("11_fpjla")
+
+[node name="WhooshOutAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
+stream = ExtResource("12_4cpu8")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 layer = -2
@@ -317,7 +329,7 @@ flip_h = true
 
 [node name="MobileControls" parent="." instance=ExtResource("25_ijfg6")]
 
-[node name="ComboNote" parent="." node_paths=PackedStringArray("target") instance=ExtResource("24_0bhon")]
+[node name="ComboNote" parent="." instance=ExtResource("24_0bhon")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -327,7 +339,6 @@ offset_right = 0.0
 offset_bottom = 0.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-target = NodePath("../Player")
 offset = Vector2(0, -128)
 
 [node name="SoubalienAndPlayerConnector" parent="." node_paths=PackedStringArray("soubalien", "player", "chase_path") instance=ExtResource("15_1cy2d")]
@@ -337,3 +348,9 @@ chase_path = NodePath("../SoubalienPaths/ChasePath")
 
 [node name="StartRaceConnector" parent="." node_paths=PackedStringArray("player") instance=ExtResource("27_2cvtv")]
 player = NodePath("../Player")
+
+[node name="ComboConnector" type="Node" parent="." node_paths=PackedStringArray("target", "music_manager", "combo_note")]
+script = ExtResource("32_4cpu8")
+target = NodePath("../Player")
+music_manager = NodePath("../MusicManager")
+combo_note = NodePath("../ComboNote")

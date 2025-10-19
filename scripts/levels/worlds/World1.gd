@@ -9,7 +9,9 @@ const COUNTDOWN_BPM: int = 160
 
 @export var music_manager: MusicManager
 
+@export var combo_connector: ComboConnector
 @export var combo_note: ComboNote
+
 @export var countdown_scene: PackedScene
 
 @export var race_introduction_camera: Camera
@@ -53,8 +55,7 @@ func synchronize_notes() -> void:
         sorted_noted[i].offset_animation(0.2 if i % 2 == 0 else 0.7)
 
 func update_combo(duration: float, count: int) -> void:
-    music_manager.update_combo(duration, count)
-    combo_note.update(duration, count)
+    combo_connector.update(duration, count)
 
 func start() -> void:
     hud.hide_time_counter()

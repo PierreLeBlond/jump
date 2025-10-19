@@ -2,7 +2,6 @@ extends Control
 
 class_name ComboNote
 
-@export var target: Node2D
 @export var offset: Vector2 = Vector2.ZERO
 
 @export var combo_label: Label
@@ -12,23 +11,23 @@ class_name ComboNote
 
 @export var texture_range: Range
 
-var combo_tween: Tween
+var _combo_tween: Tween
 
 func _ready() -> void:
     hide()
 
-func _process(_delta: float) -> void:
+func update_position(target: Node2D) -> void:
     global_position = target.get_global_transform().origin + offset
 
 func update(duration: float, count: int) -> void:
-    if combo_tween:
-        combo_tween.stop()
-        combo_tween = null
+    if _combo_tween:
+        _combo_tween.stop()
+        _combo_tween = null
 
     texture_range.value = 100.0
-    combo_tween = create_tween()
-    combo_tween.tween_property(texture_range, "value", 0.0, duration)
-    combo_tween.finished.connect(on_tween_finished)
+    _combo_tween = create_tween()
+    _combo_tween.tween_property(texture_range, "value", 0.0, duration)
+    _combo_tween.finished.connect(on_tween_finished)
     show()
 
     combo_label.text = str(count)

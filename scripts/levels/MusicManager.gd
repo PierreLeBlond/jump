@@ -24,7 +24,10 @@ const RACE_REVERB_WET: float = 0.3
 @export var race_audio_stream_player: AudioStreamPlayer
 @export var soubalien_race_audio_stream_player: AudioStreamPlayer2D
 
-var note_collected_tween: Tween
+@export var whoosh_in_audio_stream_player: AudioStreamPlayer
+@export var whoosh_out_audio_stream_player: AudioStreamPlayer
+
+var _muffle_tween: Tween
 
 var current_note_audio_stream_player: AudioStreamPlayer
 var current_low_pass_filter_cutoff_hz: float
@@ -57,12 +60,16 @@ func preload_samples() -> void:
     soubalien_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
     race_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
     soubalien_race_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
+    whoosh_in_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
+    whoosh_out_audio_stream_player.volume_db = INAUDIBLE_VOLUME_DB
 
     forest_audio_stream_player.play()
     note_audio_stream_player.play()
     soubalien_audio_stream_player.play()
     race_audio_stream_player.play()
     soubalien_race_audio_stream_player.play()
+    whoosh_in_audio_stream_player.play()
+    whoosh_out_audio_stream_player.play()
 
     # Maybe we can then stop the samples from playing ?
 
@@ -118,33 +125,27 @@ func start_countdown() -> void:
     play_2d(soubalien_race_audio_stream_player)
 
 func end_race() -> void:
-    if note_collected_tween:
-        note_collected_tween.stop()
-        note_collected_tween = null
+    if _muffle_tween:
+        _muffle_tween.stop()
+        _muffle_tween = null
 
     fade_out(race_audio_stream_player)
     fade_out_2d(soubalien_race_audio_stream_player)
 
-func update_combo(duration: float, _count: int) -> void:
-    if note_collected_tween:
-        note_collected_tween.stop()
-        note_collected_tween = null
+func muffle() -> void:
+    if _muffle_tween:
+        _muffle_tween.stop()
+        _muffle_tween = null
+    _muffle_tween = create_tween()
+    _muffle_tween.tween_property(low_pass_filter_effect, "cutoff_hz", current_low_pass_filter_cutoff_hz, 0.1)
+    _muffle_tween.parallel().tween_property(reverb_effect, "wet", current_reverb_wet, 0.1)
+    play(whoosh_in_audio_stream_player)
 
-    var tween = create_tween()
-    tween.tween_property(low_pass_filter_effect, "cutoff_hz", LOW_PASS_FILTER_INNACTIVE_CUTOFF_HZ, 0.5)
-    tween.tween_property(reverb_effect, "wet", 0.0, 0.5)
-    note_collected_tween = tween
-    await tween.finished
-    await get_tree().create_timer(duration).timeout
-
-    if note_collected_tween != tween:
-        return
-
-    tween.stop()
-
-    tween = create_tween()
-    tween.tween_property(low_pass_filter_effect, "cutoff_hz", current_low_pass_filter_cutoff_hz, 0.5)
-    tween.tween_property(reverb_effect, "wet", current_reverb_wet, 0.5)
-    note_collected_tween = tween
-
-    await tween.finished
+func unmuffle() -> void:
+    if _muffle_tween:
+        _muffle_tween.stop()
+        _muffle_tween = null
+    _muffle_tween = create_tween()
+    _muffle_tween.tween_property(low_pass_filter_effect, "cutoff_hz", LOW_PASS_FILTER_INNACTIVE_CUTOFF_HZ, 0.5)
+    _muffle_tween.parallel().tween_property(reverb_effect, "wet", 0.0, 0.5)
+    play(whoosh_out_audio_stream_player)
