@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://de32o3g1w17vm"]
+[gd_scene load_steps=44 format=4 uid="uid://de32o3g1w17vm"]
 
 [ext_resource type="Script" uid="uid://8g3j4qvgpbuq" path="res://scripts/levels/worlds/World1.gd" id="1_t2wor"]
 [ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/components/CinematicBars.tscn" id="2_j7nyf"]
@@ -10,6 +10,7 @@
 [ext_resource type="TileSet" uid="uid://dftl5pyptmafp" path="res://tilesets/cloud.tres" id="7_jsker"]
 [ext_resource type="AudioStream" uid="uid://b2g4n5a03p8hu" path="res://assets/sounds/level_1/base.mp3" id="7_ol147"]
 [ext_resource type="TileSet" uid="uid://d2f3f4ukvlod0" path="res://tilesets/tree.tres" id="8_6ex7q"]
+[ext_resource type="Script" uid="uid://c6cop2exxlt13" path="res://scripts/audio/AudioPlayer.gd" id="8_12kx7"]
 [ext_resource type="AudioStream" uid="uid://bkg10tf1w5jfs" path="res://assets/sounds/level_1/soubalien-intro.mp3" id="9_3pfwh"]
 [ext_resource type="PackedScene" uid="uid://b8dorlf7ulbwy" path="res://scenes/Soubalien.tscn" id="9_ijfg6"]
 [ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="10_ijoxy"]
@@ -27,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://b76noj4bwyfuc" path="res://assets/sounds/level_1/soubalien.mp3" id="17_3pfwh"]
 [ext_resource type="Script" uid="uid://bnmaalvi4e4sp" path="res://scripts/node/TransformLock.gd" id="17_gxmol"]
 [ext_resource type="Script" uid="uid://xd4woi41uhf2" path="res://scripts/camera/CameraOverrideArea.gd" id="18_j7nyf"]
+[ext_resource type="Script" uid="uid://cn50xbfn3ids8" path="res://scripts/audio/AudioPlayer2D.gd" id="21_032bw"]
 [ext_resource type="PackedScene" uid="uid://c5ujunl53hshx" path="res://scenes/ui/components/ComboNote.tscn" id="24_0bhon"]
 [ext_resource type="PackedScene" uid="uid://cbchcmt1re0ym" path="res://scenes/ui/controls/MobileControls.tscn" id="25_ijfg6"]
 [ext_resource type="PackedScene" uid="uid://d1tavs3t65e2q" path="res://scenes/connectors/StartRaceConnector.tscn" id="27_2cvtv"]
@@ -98,35 +100,43 @@ script = ExtResource("13_njy47")
 [node name="GameRun" type="Node" parent="."]
 script = ExtResource("6_t2wor")
 
-[node name="MusicManager" type="Node" parent="." node_paths=PackedStringArray("forest_audio_stream_player", "note_audio_stream_player", "soubalien_audio_stream_player", "race_audio_stream_player", "soubalien_race_audio_stream_player", "whoosh_in_audio_stream_player", "whoosh_out_audio_stream_player")]
+[node name="MusicManager" type="Node" parent="." node_paths=PackedStringArray("forest_audio_player", "note_audio_player", "soubalien_audio_player", "race_audio_player", "soubalien_race_audio_player", "whoosh_in_audio_player", "whoosh_out_audio_player")]
 script = ExtResource("3_bspq0")
-forest_audio_stream_player = NodePath("ForestAudioStreamPlayer")
-note_audio_stream_player = NodePath("NoteAudioStreamPlayer")
-soubalien_audio_stream_player = NodePath("SoubalienAudioStreamPlayer")
-race_audio_stream_player = NodePath("RaceAudioStreamPlayer")
-soubalien_race_audio_stream_player = NodePath("../Soubalien/TransformLock/AudioStreamPlayer2D")
-whoosh_in_audio_stream_player = NodePath("WhooshInAudioStreamPlayer")
-whoosh_out_audio_stream_player = NodePath("WhooshOutAudioStreamPlayer")
+forest_audio_player = NodePath("ForestAudioStreamPlayer")
+note_audio_player = NodePath("NoteAudioStreamPlayer")
+soubalien_audio_player = NodePath("SoubalienAudioStreamPlayer")
+race_audio_player = NodePath("RaceAudioStreamPlayer")
+soubalien_race_audio_player = NodePath("../Soubalien/TransformLock/AudioStreamPlayer2D")
+whoosh_in_audio_player = NodePath("WhooshInAudioStreamPlayer")
+whoosh_out_audio_player = NodePath("WhooshOutAudioStreamPlayer")
 
 [node name="RaceAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("7_ol147")
 bus = &"Effect"
+script = ExtResource("8_12kx7")
 
 [node name="ForestAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("16_njy47")
+script = ExtResource("8_12kx7")
 
 [node name="SoubalienAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("9_3pfwh")
+script = ExtResource("8_12kx7")
 
 [node name="NoteAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("11_3pfwh")
 bus = &"Effect"
+script = ExtResource("8_12kx7")
 
 [node name="WhooshInAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("11_fpjla")
+script = ExtResource("8_12kx7")
+target_volume_db = -12.0
 
 [node name="WhooshOutAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("12_4cpu8")
+script = ExtResource("8_12kx7")
+target_volume_db = -12.0
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 layer = -2
@@ -164,10 +174,11 @@ horizontal = false
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Soubalien/TransformLock"]
 stream = ExtResource("17_3pfwh")
-volume_db = 12.0
 autoplay = true
-max_distance = 4096.0
+max_distance = 2048.0
 panning_strength = 2.0
+script = ExtResource("21_032bw")
+target_volume_db = 12.0
 
 [node name="SoubalienPaths" type="Node2D" parent="."]
 
@@ -232,6 +243,7 @@ vertical_speed = 3.0
 target = NodePath("../Player")
 
 [node name="ColorRect" type="ColorRect" parent="PlayerCamera"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -257,6 +269,7 @@ follow_vertical_on_jump = true
 target = NodePath("../Player")
 
 [node name="ColorRect" type="ColorRect" parent="PlayerFocusCamera"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -285,6 +298,7 @@ follow_vertical_on_jump = true
 target = NodePath("../Player")
 
 [node name="ColorRect" type="ColorRect" parent="RaceIntroduceCamera"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

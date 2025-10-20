@@ -2,7 +2,7 @@ extends World
 
 class_name World1
 
-const NOTE_COMBO_DURATION: float = 0.7
+const NOTE_COMBO_DURATION: float = 2.0
 const RACE_NOTE_COMBO_DURATION: float = 3.0
 
 const COUNTDOWN_BPM: int = 160
