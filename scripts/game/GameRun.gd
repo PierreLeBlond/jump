@@ -18,15 +18,21 @@ var combo_duration: float = DEFAULT_COMBO_DURATION
 
 var life: int = 0:
     set(value):
+        if life == value:
+            return
         life = value
         life_changed.emit(life)
 var score: int = 0:
     set(value):
+        if score == value:
+            return
         score = value
         score_changed.emit(score)
 
 var elapsed_time: float = 0.0:
     set(value):
+        if elapsed_time == value:
+            return
         elapsed_time = value
         time_changed.emit(elapsed_time)
 var last_time: float = 0.0
