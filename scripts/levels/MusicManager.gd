@@ -19,7 +19,7 @@ const RACE_LOW_PASS_FILTER_CUTOFF_HZ: float = 900.0
 const RACE_REVERB_WET: float = 0.3
 
 @export var forest_audio_player: AudioPlayer
-@export var note_audio_player: AudioPlayer
+@export var note_audio_player: AudioPlayer2D
 @export var soubalien_audio_player: AudioPlayer
 
 @export var race_audio_player: AudioPlayer
@@ -30,7 +30,6 @@ const RACE_REVERB_WET: float = 0.3
 
 var _muffle_tween: Tween
 
-var current_note_audio_player: AudioPlayer
 var current_low_pass_filter_cutoff_hz: float
 var current_reverb_wet: float
 
@@ -45,8 +44,6 @@ var effect_volume_db: float:
 func _ready() -> void:
     low_pass_filter_effect = AudioServer.get_bus_effect(EFFECT_BUS_INDEX, LOW_PASS_FILTER_EFFECT_INDEX) as AudioEffectLowPassFilter
     reverb_effect = AudioServer.get_bus_effect(EFFECT_BUS_INDEX, REVERB_EFFECT_INDEX) as AudioEffectReverb
-
-    current_note_audio_player = note_audio_player
 
     # We need sample playback to support low end devices like mobiles, so looping has to be done manually
     note_audio_player.finished.connect(func():

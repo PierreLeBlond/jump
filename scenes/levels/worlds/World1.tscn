@@ -123,10 +123,13 @@ script = ExtResource("8_12kx7")
 stream = ExtResource("9_3pfwh")
 script = ExtResource("8_12kx7")
 
-[node name="NoteAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
+[node name="NoteAudioStreamPlayer" type="AudioStreamPlayer2D" parent="MusicManager"]
+position = Vector2(14, 896)
 stream = ExtResource("11_3pfwh")
+max_distance = 4096.0
+attenuation = 0.045752715
 bus = &"Effect"
-script = ExtResource("8_12kx7")
+script = ExtResource("21_032bw")
 
 [node name="WhooshInAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("11_fpjla")
