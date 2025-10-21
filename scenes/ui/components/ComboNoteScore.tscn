@@ -9,3 +9,4 @@ offset_left = -46.0
 offset_top = -46.0
 offset_right = 46.0
 offset_bottom = 46.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)

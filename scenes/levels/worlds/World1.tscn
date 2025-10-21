@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://de32o3g1w17vm"]
+[gd_scene load_steps=45 format=4 uid="uid://de32o3g1w17vm"]
 
 [ext_resource type="Script" uid="uid://8g3j4qvgpbuq" path="res://scripts/levels/worlds/World1.gd" id="1_t2wor"]
 [ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/components/CinematicBars.tscn" id="2_j7nyf"]
@@ -31,6 +31,7 @@
 [ext_resource type="Script" uid="uid://cn50xbfn3ids8" path="res://scripts/audio/AudioPlayer2D.gd" id="21_032bw"]
 [ext_resource type="PackedScene" uid="uid://c5ujunl53hshx" path="res://scenes/ui/components/ComboNote.tscn" id="24_0bhon"]
 [ext_resource type="PackedScene" uid="uid://cbchcmt1re0ym" path="res://scenes/ui/controls/MobileControls.tscn" id="25_ijfg6"]
+[ext_resource type="PackedScene" uid="uid://qo3gw8ipw7af" path="res://scenes/contraptions/StaffCape.tscn" id="25_p40yc"]
 [ext_resource type="PackedScene" uid="uid://d1tavs3t65e2q" path="res://scenes/connectors/StartRaceConnector.tscn" id="27_2cvtv"]
 [ext_resource type="Texture2D" uid="uid://j3adclf42twd" path="res://assets/sprites/bakground-6.png" id="30_12kx7"]
 [ext_resource type="Script" uid="uid://bqa4n87khu0cw" path="res://scripts/connector/comboConnector/ComboConnector.gd" id="32_4cpu8"]
@@ -226,6 +227,12 @@ portal = NodePath("CheckpointPortal")
 position = Vector2(128, 685)
 player = NodePath("../../Player")
 
+[node name="StaffCape" parent="." node_paths=PackedStringArray("player") instance=ExtResource("25_p40yc")]
+player = NodePath("../Player")
+offset = Vector2(42, 0)
+speed = Vector2(0.2, 0.4)
+cape_length = 512.0
+
 [node name="Player" parent="." instance=ExtResource("10_ijoxy")]
 position = Vector2(221, 832)
 
@@ -400,7 +407,7 @@ offset_right = 0.0
 offset_bottom = 0.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-offset = Vector2(0, -128)
+offset = Vector2(0, -64)
 
 [node name="SoubalienAndPlayerConnector" parent="." node_paths=PackedStringArray("soubalien", "player") instance=ExtResource("15_1cy2d")]
 soubalien = NodePath("../Soubalien")
@@ -415,8 +422,9 @@ soubalien = NodePath("../Soubalien")
 player = NodePath("../Player")
 chase_path = NodePath("../SoubalienPaths/ChasePath")
 
-[node name="ComboConnector" type="Node" parent="." node_paths=PackedStringArray("target", "music_manager", "combo_note")]
+[node name="ComboConnector" type="Node" parent="." node_paths=PackedStringArray("target", "music_manager", "combo_note", "staff_cape")]
 script = ExtResource("32_4cpu8")
 target = NodePath("../Player")
 music_manager = NodePath("../MusicManager")
 combo_note = NodePath("../ComboNote")
+staff_cape = NodePath("../StaffCape")

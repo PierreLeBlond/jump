@@ -4,39 +4,14 @@ class_name ComboNote
 
 @export var offset: Vector2 = Vector2.ZERO
 
-@export var combo_label: Label
-
 @export var combo_score_scene: PackedScene
 @export var combo_score_spawn: Node2D
-
-@export var texture_range: Range
-
-var _combo_tween: Tween
-
-func _ready() -> void:
-    hide()
 
 func update_position(target: Node2D) -> void:
     global_position = target.get_global_transform().origin + offset
 
-func update(duration: float, count: int) -> void:
-    if _combo_tween:
-        _combo_tween.stop()
-        _combo_tween = null
-
-    texture_range.value = 100.0
-    _combo_tween = create_tween()
-    _combo_tween.tween_property(texture_range, "value", 0.0, duration)
-    _combo_tween.finished.connect(on_tween_finished)
-    show()
-
-    combo_label.text = str(count)
-
+func update(count: int) -> void:
     spawn_score(count)
-
-func on_tween_finished() -> void:
-    combo_label.text = str(0)
-    hide()
 
 func spawn_score(count: int) -> void:
     var combo_score = combo_score_scene.instantiate()

@@ -1,0 +1,129 @@
+[gd_scene load_steps=6 format=3 uid="uid://qo3gw8ipw7af"]
+
+[ext_resource type="Script" uid="uid://ddc041jyqps0k" path="res://scripts/contraptions/StaffCape.gd" id="1_w1bfh"]
+[ext_resource type="Material" uid="uid://l7c0tpucmpmi" path="res://shaders/StaffCape.tres" id="2_3jmr4"]
+[ext_resource type="Texture2D" uid="uid://bwsvh44s1i1ks" path="res://assets/sprites/staff.png" id="2_m3hy6"]
+[ext_resource type="Texture2D" uid="uid://dvy3hrsp6d6rn" path="res://assets/sprites/note.png" id="5_6vsvr"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6vsvr"]
+viewport_path = NodePath("SubViewport")
+
+[node name="StaffCape" type="Node2D" node_paths=PackedStringArray("polygon_2d", "label")]
+script = ExtResource("1_w1bfh")
+polygon_2d = NodePath("Polygon2D")
+label = NodePath("SubViewport/Control/HBoxContainer/Label")
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+
+[node name="Bone2D2" type="Bone2D" parent="Skeleton2D"]
+rotation = 1.5707964
+rest = Transform2D(-4.371139e-08, 1, -1, -4.371139e-08, 0, 0)
+
+[node name="Bone2D" type="Bone2D" parent="Skeleton2D"]
+position = Vector2(64, 0)
+rotation = 1.5707964
+rest = Transform2D(-4.371139e-08, 1, -1, -4.371139e-08, 64, 0)
+
+[node name="Bone2D3" type="Bone2D" parent="Skeleton2D"]
+position = Vector2(128, 0)
+rotation = 1.5707964
+rest = Transform2D(-4.371139e-08, 1, -1, -4.371139e-08, 128, 0)
+
+[node name="Bone2D4" type="Bone2D" parent="Skeleton2D"]
+position = Vector2(192, 0)
+rotation = 1.5707964
+rest = Transform2D(-4.371139e-08, 1, -1, -4.371139e-08, 192, 0)
+
+[node name="Bone2D5" type="Bone2D" parent="Skeleton2D"]
+position = Vector2(256, 0)
+rotation = 1.5707964
+rest = Transform2D(-4.371139e-08, 1, -1, -4.371139e-08, 256, 0)
+
+[node name="Bone2D6" type="Bone2D" parent="Skeleton2D"]
+position = Vector2(320, 0)
+rotation = 1.5707964
+rest = Transform2D(-4.371139e-08, 1, -1, -4.371139e-08, 320, 0)
+
+[node name="Bone2D7" type="Bone2D" parent="Skeleton2D"]
+position = Vector2(384, 0)
+rotation = 1.5707964
+rest = Transform2D(-4.371139e-08, 1, -1, -4.371139e-08, 384, 0)
+
+[node name="Bone2D8" type="Bone2D" parent="Skeleton2D"]
+position = Vector2(448, 0)
+rotation = 1.5707964
+rest = Transform2D(-4.371139e-08, 1, -1, -4.371139e-08, 448, 0)
+
+[node name="Bone2D9" type="Bone2D" parent="Skeleton2D"]
+position = Vector2(512, 0)
+rotation = 1.5707964
+rest = Transform2D(-4.371139e-08, 1, -1, -4.371139e-08, 512, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+texture_filter = 6
+material = ExtResource("2_3jmr4")
+texture = SubResource("ViewportTexture_6vsvr")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(-0.081139445, 125.58508, 1.1861707, -126.74524, 61.72377, -128.9956, 127.333885, -126.63985, 196.0179, -125.21356, 255.97537, -129.4701, 317.52682, -128.87961, 385.9586, -126.000244, 449.0773, -126.7023, 512.8266, -125.76437, 506.71936, 130.3961, 442.18243, 127.26611, 383.36578, 128.23749, 321.09537, 127.26611, 256.88223, 133.74194, 192.99289, 130.50403, 125.818756, 130.47238, 60.899796, 129.40138, 65.49288, 0.6745148, 127.7246, 1.7865753, 193.37096, 1.5259583, 319.385, 2.750003, 383.34656, 0.91672057, 448.77936, 1.5743957, 255.87958, 1.6403961)
+uv = PackedVector2Array(3.3450425, 255.19969, -4.2304287, -0.68917847, 61.570034, 0.92134094, 126.149414, -2.8140435, 191.32242, 0.9044552, 253.89003, -0.65543747, 316.88757, 0.92134094, 380.9813, -0.17484808, 447.79858, -1.2541513, 513.7207, -0.31624424, 515.2664, 259.66074, 444.55002, 252.98785, 386.5117, 259.35434, 318.66415, 252.41794, 251.29239, 256.98303, 196.34415, 254.30573, 124.15478, 259.85257, 60.90426, 258.6323, 59.18593, 127.0457, 125.18917, 127.681076, 190.69412, 130.55348, 319.07758, 128.05984, 384.55103, 131.64279, 448.51328, 130.16122, 253.36174, 129.31685)
+polygons = [PackedInt32Array(1, 18, 0), PackedInt32Array(1, 2, 18), PackedInt32Array(18, 17, 0), PackedInt32Array(2, 3, 19, 18), PackedInt32Array(18, 19, 16, 17), PackedInt32Array(3, 4, 20, 19), PackedInt32Array(16, 19, 20, 15), PackedInt32Array(15, 20, 24, 14), PackedInt32Array(20, 4, 5, 24), PackedInt32Array(24, 5, 6, 21), PackedInt32Array(24, 14, 13, 21), PackedInt32Array(21, 6, 7, 22), PackedInt32Array(21, 13, 12, 22), PackedInt32Array(22, 7, 8, 23), PackedInt32Array(22, 23, 11, 12), PackedInt32Array(23, 8, 9), PackedInt32Array(23, 11, 10), PackedInt32Array(23, 9, 10)]
+bones = ["Bone2D2", PackedFloat32Array(1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Bone2D", PackedFloat32Array(0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0), "Bone2D3", PackedFloat32Array(0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0), "Bone2D4", PackedFloat32Array(0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0), "Bone2D5", PackedFloat32Array(0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1), "Bone2D6", PackedFloat32Array(0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0), "Bone2D7", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0), "Bone2D8", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0), "Bone2D9", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+internal_vertex_count = 7
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+gui_disable_input = true
+size = Vector2i(512, 256)
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport"]
+position = Vector2(256, 128)
+scale = Vector2(1, 0.5)
+texture = ExtResource("2_m3hy6")
+
+[node name="Control" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 507.715
+offset_top = 7.255
+offset_right = 1019.71497
+offset_bottom = 135.255
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(-1, 1)
+size_flags_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/Control"]
+layout_mode = 1
+offset_left = 85.22
+offset_right = 226.22
+offset_bottom = 100.0
+
+[node name="Control" type="Control" parent="SubViewport/Control/HBoxContainer"]
+custom_minimum_size = Vector2(66.8, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="SubViewport/Control/HBoxContainer/Control"]
+layout_mode = 0
+offset_left = 3.025
+offset_top = 5.59
+offset_right = 61.025
+offset_bottom = 63.59
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+size_flags_horizontal = 8
+texture = ExtResource("5_6vsvr")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="SubViewport/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 59
+text = "= 6"

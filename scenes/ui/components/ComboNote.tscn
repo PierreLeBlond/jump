@@ -1,11 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5ujunl53hshx"]
+[gd_scene load_steps=3 format=3 uid="uid://c5ujunl53hshx"]
 
-[ext_resource type="Texture2D" uid="uid://dqmuothieoafl" path="res://assets/sprites/circle.svg" id="1_3jh0w"]
 [ext_resource type="Script" uid="uid://cr42wdikh5snv" path="res://scripts/ui/components/ComboNote.gd" id="1_n837y"]
-[ext_resource type="Texture2D" uid="uid://dvy3hrsp6d6rn" path="res://assets/sprites/note.png" id="2_n837y"]
 [ext_resource type="PackedScene" uid="uid://cb86qpl3esx1b" path="res://scenes/ui/components/ComboNoteScore.tscn" id="2_uwwi1"]
 
-[node name="ComboNote" type="Control" node_paths=PackedStringArray("combo_label", "combo_score_spawn", "texture_range")]
+[node name="ComboNote" type="Control" node_paths=PackedStringArray("combo_score_spawn")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,61 +13,7 @@ offset_bottom = -1080.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n837y")
-combo_label = NodePath("Label")
 combo_score_scene = ExtResource("2_uwwi1")
 combo_score_spawn = NodePath("ComboScoreSpawn")
-texture_range = NodePath("TextureProgressBar")
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -64.0
-offset_right = 64.0
-offset_bottom = 64.0
-grow_horizontal = 2
-grow_vertical = 2
-value = 61.0
-fill_mode = 5
-texture_under = ExtResource("1_3jh0w")
-texture_progress = ExtResource("1_3jh0w")
-tint_under = Color(0.61, 0.61, 0.61, 0.882353)
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -30.0
-offset_top = -26.0
-offset_right = 67.0
-offset_bottom = 71.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_n837y")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -43.0
-offset_top = -35.0
-offset_right = 14.0
-offset_bottom = 23.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 22
-text = "99"
 
 [node name="ComboScoreSpawn" type="Marker2D" parent="."]

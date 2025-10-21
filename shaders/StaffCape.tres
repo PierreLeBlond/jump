@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://l7c0tpucmpmi"]
+
+[ext_resource type="Shader" uid="uid://di3rg2erxd2c3" path="res://shaders/staff.gdshader" id="1_usv6u"]
+
+[resource]
+shader = ExtResource("1_usv6u")
+shader_parameter/offset_x = 0.0
+shader_parameter/direction = 0.0
