@@ -20,7 +20,7 @@ func fade_out(duration: float = 1.0) -> void:
     stop()
 
 func fade_in(duration: float = 1.0) -> void:
+    play()
     var tween: Tween = create_tween()
     tween.tween_property(self, "volume_db", target_volume_db, duration)
     await tween.finished
-    play()

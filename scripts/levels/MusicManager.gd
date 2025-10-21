@@ -70,7 +70,7 @@ func introduce_race() -> void:
 
     forest_audio_player.fade_out()
     note_audio_player.fade_out()
-    soubalien_audio_player.fade_in()
+    soubalien_audio_player.fade_in(0.0)
 
 func start_countdown() -> void:
     current_low_pass_filter_cutoff_hz = RACE_LOW_PASS_FILTER_CUTOFF_HZ
