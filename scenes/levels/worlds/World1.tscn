@@ -229,8 +229,8 @@ player = NodePath("../../Player")
 
 [node name="StaffCape" parent="." node_paths=PackedStringArray("player") instance=ExtResource("25_p40yc")]
 player = NodePath("../Player")
-offset = Vector2(42, 0)
-speed = Vector2(0.2, 0.4)
+offset = Vector2(42, -20)
+speed = Vector2(0.3, 0.1)
 cape_length = 512.0
 
 [node name="Player" parent="." instance=ExtResource("10_ijoxy")]

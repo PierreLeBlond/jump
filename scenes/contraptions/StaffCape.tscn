@@ -135,10 +135,10 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="SubViewport/Control/HBoxContainer/Control"]
 layout_mode = 0
-offset_left = 3.025
-offset_top = 5.59
-offset_right = 61.025
-offset_bottom = 63.59
+offset_left = -14.835
+offset_top = -5.07
+offset_right = 57.165
+offset_bottom = 66.93
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.5, 1.5)

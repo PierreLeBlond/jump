@@ -11,13 +11,12 @@ class_name ComboConnector
 var _timer: Timer
 
 func _ready() -> void:
-    pass
     staff_cape.hide()
 
 func _process(delta: float) -> void:
     combo_note.update_position(target)
 
-    var ratio = _timer.time_left / _timer.wait_time if _timer else 0.0
+    var ratio = _timer.time_left / _timer.wait_time if _timer else 1.0
     staff_cape.update(delta, ratio)
 
 func _end() -> void:
