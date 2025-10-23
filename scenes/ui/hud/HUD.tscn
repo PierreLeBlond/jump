@@ -11,34 +11,47 @@
 [node name="Hud" type="CanvasLayer" node_paths=PackedStringArray("life_counter", "score_counter", "time_counter")]
 layer = 2
 script = ExtResource("1_f4fii")
-life_counter = NodePath("Control/MarginContainer/LifeCounter")
-score_counter = NodePath("Control/ScoreCounter")
-time_counter = NodePath("Control/MarginContainer2/TimeCounter")
+life_counter = NodePath("Control/MarginContainer/VBoxContainer/MarginContainer/LifeCounter")
+score_counter = NodePath("Control/MarginContainer/VBoxContainer/ScoreCounter")
+time_counter = NodePath("Control/MarginContainer/VBoxContainer/MarginContainer2/TimeCounter")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
+anchors_preset = 1
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+grow_horizontal = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
-layout_mode = 0
-offset_right = 156.0
-offset_bottom = 127.0
-theme_override_constants/margin_left = 64
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -399.0
+offset_bottom = 348.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
 
-[node name="LifeCounter" type="HBoxContainer" parent="Control/MarginContainer" node_paths=PackedStringArray("lifes")]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="LifeCounter" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer/MarginContainer" node_paths=PackedStringArray("lifes")]
 layout_mode = 2
 script = ExtResource("2_w7tcg")
 lifes = [NodePath("Control/TextureRect"), NodePath("Control2/TextureRect"), NodePath("Control3/TextureRect")]
 
-[node name="Control" type="Control" parent="Control/MarginContainer/LifeCounter"]
+[node name="Control" type="Control" parent="Control/MarginContainer/VBoxContainer/MarginContainer/LifeCounter"]
 custom_minimum_size = Vector2(92, 92)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/LifeCounter/Control"]
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/MarginContainer/LifeCounter/Control"]
 texture_filter = 4
 custom_minimum_size = Vector2(92, 92)
 layout_mode = 1
@@ -58,11 +71,11 @@ size_flags_horizontal = 4
 texture = ExtResource("4_x328j")
 expand_mode = 1
 
-[node name="Control2" type="Control" parent="Control/MarginContainer/LifeCounter"]
+[node name="Control2" type="Control" parent="Control/MarginContainer/VBoxContainer/MarginContainer/LifeCounter"]
 custom_minimum_size = Vector2(92, 92)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/LifeCounter/Control2"]
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/MarginContainer/LifeCounter/Control2"]
 texture_filter = 4
 custom_minimum_size = Vector2(92, 92)
 layout_mode = 1
@@ -82,11 +95,11 @@ size_flags_horizontal = 4
 texture = ExtResource("4_x328j")
 expand_mode = 1
 
-[node name="Control3" type="Control" parent="Control/MarginContainer/LifeCounter"]
+[node name="Control3" type="Control" parent="Control/MarginContainer/VBoxContainer/MarginContainer/LifeCounter"]
 custom_minimum_size = Vector2(92, 92)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/LifeCounter/Control3"]
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/MarginContainer/LifeCounter/Control3"]
 texture_filter = 4
 custom_minimum_size = Vector2(92, 92)
 layout_mode = 1
@@ -106,12 +119,12 @@ size_flags_horizontal = 4
 texture = ExtResource("4_x328j")
 expand_mode = 1
 
-[node name="Control4" type="Control" parent="Control/MarginContainer/LifeCounter"]
+[node name="Control4" type="Control" parent="Control/MarginContainer/VBoxContainer/MarginContainer/LifeCounter"]
 visible = false
 custom_minimum_size = Vector2(92, 92)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/LifeCounter/Control4"]
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/MarginContainer/LifeCounter/Control4"]
 texture_filter = 4
 custom_minimum_size = Vector2(92, 92)
 layout_mode = 1
@@ -131,17 +144,9 @@ size_flags_horizontal = 4
 texture = ExtResource("4_x328j")
 expand_mode = 1
 
-[node name="ScoreCounter" type="HBoxContainer" parent="Control" node_paths=PackedStringArray("control", "counter_sprite", "counter_label", "flashed_sprite", "flashed_label")]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -128.0
-offset_right = 128.0
-offset_bottom = 128.0
-grow_horizontal = 2
-pivot_offset = Vector2(128, 64)
-size_flags_horizontal = 4
+[node name="ScoreCounter" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer" node_paths=PackedStringArray("control", "counter_sprite", "counter_label", "flashed_sprite", "flashed_label")]
+layout_mode = 2
+size_flags_horizontal = 8
 size_flags_vertical = 4
 script = ExtResource("2_x328j")
 control = NodePath(".")
@@ -150,59 +155,34 @@ counter_label = NodePath("Control2/Label")
 flashed_sprite = NodePath("Control/TextureRect/FlashedSprite")
 flashed_label = NodePath("Control2/Label/FlashedLabel")
 
-[node name="Control" type="Control" parent="Control/ScoreCounter"]
-custom_minimum_size = Vector2(92, 92)
+[node name="Control2" type="Control" parent="Control/MarginContainer/VBoxContainer/ScoreCounter"]
+custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 10
 
-[node name="TextureRect" type="TextureRect" parent="Control/ScoreCounter/Control"]
-clip_children = 2
-texture_filter = 4
-custom_minimum_size = Vector2(92, 92)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 0.3763498
-pivot_offset = Vector2(60, 60)
-size_flags_horizontal = 4
-texture = ExtResource("3_x328j")
-expand_mode = 1
-
-[node name="FlashedSprite" type="ColorRect" parent="Control/ScoreCounter/Control/TextureRect"]
-visible = false
-layout_mode = 0
-offset_right = 128.0
-offset_bottom = 128.0
-
-[node name="Control2" type="Control" parent="Control/ScoreCounter"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="Control/ScoreCounter/Control2"]
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer/ScoreCounter/Control2"]
 clip_children = 2
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 6
+anchor_left = 1.0
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -63.0
-offset_top = -34.5
-offset_right = 6.0
-offset_bottom = 34.5
-grow_horizontal = 2
+offset_left = -89.0
+offset_top = -34.0
+offset_right = -20.0
+offset_bottom = 35.0
+grow_horizontal = 0
 grow_vertical = 2
 pivot_offset = Vector2(34.5, 34.5)
 size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 48
 text = "00"
 
-[node name="FlashedLabel" type="ColorRect" parent="Control/ScoreCounter/Control2/Label"]
+[node name="FlashedLabel" type="ColorRect" parent="Control/MarginContainer/VBoxContainer/ScoreCounter/Control2/Label"]
 visible = false
 layout_mode = 0
 offset_left = -23.0
@@ -210,61 +190,69 @@ offset_top = -29.0
 offset_right = 105.0
 offset_bottom = 99.0
 
-[node name="MarginContainer2" type="MarginContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -399.0
-offset_bottom = 128.0
-grow_horizontal = 0
-pivot_offset = Vector2(232, 64)
-theme_override_constants/margin_right = 321
-
-[node name="TimeCounter" type="HBoxContainer" parent="Control/MarginContainer2" node_paths=PackedStringArray("control", "time_label")]
-layout_mode = 2
-theme_override_constants/separation = 16
-script = ExtResource("5_t01tj")
-control = NodePath("..")
-time_label = NodePath("Control2/Label")
-
-[node name="Control" type="Control" parent="Control/MarginContainer2/TimeCounter"]
-custom_minimum_size = Vector2(128, 128)
+[node name="Control" type="Control" parent="Control/MarginContainer/VBoxContainer/ScoreCounter"]
+custom_minimum_size = Vector2(92, 92)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer2/TimeCounter/Control"]
-texture_filter = 4
-custom_minimum_size = Vector2(92, 92)
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/ScoreCounter/Control"]
+clip_children = 2
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -46.0
-offset_top = -46.0
-offset_right = 46.0
-offset_bottom = 46.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -6.0
+offset_right = 18.0
+offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(60, 60)
 size_flags_horizontal = 4
-texture = ExtResource("5_2jm8r")
+texture = ExtResource("3_x328j")
 expand_mode = 1
 
-[node name="Control2" type="Control" parent="Control/MarginContainer2/TimeCounter"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="Control/MarginContainer2/TimeCounter/Control2"]
+[node name="FlashedSprite" type="ColorRect" parent="Control/MarginContainer/VBoxContainer/ScoreCounter/Control/TextureRect"]
+visible = false
 layout_mode = 0
-offset_left = 16.0
-offset_top = 29.0
-offset_right = 255.0
-offset_bottom = 98.0
-size_flags_horizontal = 6
+offset_right = 128.0
+offset_bottom = 128.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="TimeCounter" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer/MarginContainer2" node_paths=PackedStringArray("control", "time_label")]
+layout_mode = 2
+script = ExtResource("5_t01tj")
+control = NodePath("..")
+time_label = NodePath("Control/Label")
+
+[node name="Control" type="Control" parent="Control/MarginContainer/VBoxContainer/MarginContainer2/TimeCounter"]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer/MarginContainer2/TimeCounter/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -34.5
+offset_right = 239.0
+offset_bottom = 34.5
+grow_vertical = 2
+size_flags_horizontal = 10
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 48
 text = "00:00:00"
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/MarginContainer2/TimeCounter"]
+texture_filter = 4
+custom_minimum_size = Vector2(92, 92)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("5_2jm8r")
+expand_mode = 2

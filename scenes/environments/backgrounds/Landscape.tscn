@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dmsk824oqqo0r"]
+[gd_scene load_steps=10 format=3 uid="uid://dmsk824oqqo0r"]
 
 [ext_resource type="Texture2D" uid="uid://bmiy8u04n4m34" path="res://assets/sprites/bakground-5.png" id="1_nijgr"]
 [ext_resource type="Texture2D" uid="uid://bn4dwfu1txdur" path="res://assets/sprites/bakground-7.png" id="2_yi7p2"]
 [ext_resource type="Texture2D" uid="uid://cmfortl8nq5xg" path="res://assets/sprites/bakground-2.png" id="3_icsne"]
 [ext_resource type="Texture2D" uid="uid://dnk57ni6b132c" path="res://assets/sprites/bakground-1.png" id="4_pfkke"]
 [ext_resource type="Texture2D" uid="uid://cf0supskp8dgy" path="res://assets/sprites/bakground-0.png" id="5_jju4s"]
-[ext_resource type="Texture2D" uid="uid://bjmbsqpm38sxq" path="res://assets/sprites/bakground-tests.png" id="6_pqmd8"]
 
 [sub_resource type="Gradient" id="Gradient_nijgr"]
 offsets = PackedFloat32Array(0.9059829, 1)
@@ -204,9 +203,3 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_jju4s")
 flip_h = true
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground"]
-visible = false
-offset_right = 1920.0
-offset_bottom = 992.0
-texture = ExtResource("6_pqmd8")

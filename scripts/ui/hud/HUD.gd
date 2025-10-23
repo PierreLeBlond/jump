@@ -19,10 +19,10 @@ func unreveal_life_counter() -> void:
     life_counter.unreveal()
 
 func show_time_counter() -> void:
-    time_counter.show()
+    time_counter.make_visible()
 
 func hide_time_counter() -> void:
-    time_counter.hide()
+    time_counter.make_invisible()
 
 func reveal_time_counter() -> void:
     time_counter.reveal()
