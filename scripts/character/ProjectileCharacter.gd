@@ -17,8 +17,9 @@ class_name ProjectileCharacter
 
 @export var projectile_parameters: ProjectileParameters
 
-@export var animation_player: AnimationPlayer
+@export var view: Node2D
 
+@export var animation_player: AnimationPlayer
 @export var sprite_2d: Sprite2D
 
 @export var collector: Collector

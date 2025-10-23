@@ -9,8 +9,8 @@ const DEFAULT_RADIUS = 128
 @export var canvas_group: CanvasGroup
 @export var canvas_group_parent: Node2D
 
-@export var sprite: Sprite2D
-@export var sprite_parent: Node2D
+@export var target: Node2D
+@export var target_parent: Node2D
 
 @export var radius: float = DEFAULT_RADIUS:
     set(value):
@@ -45,14 +45,14 @@ func cleanup() -> void:
 
 func setup_tree() -> void:
     canvas_group_parent.remove_child(canvas_group)
-    sprite_parent.add_child(canvas_group)
-    sprite_parent.remove_child(sprite)
-    canvas_group.add_child(sprite)
+    target_parent.add_child(canvas_group)
+    target_parent.remove_child(target)
+    canvas_group.add_child(target)
 
 func cleanup_tree() -> void:
-    canvas_group.remove_child(sprite)
-    sprite_parent.add_child(sprite)
-    sprite_parent.remove_child(canvas_group)
+    canvas_group.remove_child(target)
+    target_parent.add_child(target)
+    target_parent.remove_child(canvas_group)
     canvas_group_parent.add_child(canvas_group)
 
 func update_shader_parameters() -> void:

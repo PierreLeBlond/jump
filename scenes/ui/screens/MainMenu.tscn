@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d0lqdu5jxr0fi" path="res://assets/sprites/title-screen-feis.png" id="5_qi40j"]
 
 [sub_resource type="Gradient" id="Gradient_xnmwc"]
-colors = PackedColorArray(0.619367, 0.744863, 1, 1, 0.91664, 0.91664, 0.91664, 1)
+colors = PackedColorArray(0.40784314, 0.6431373, 0.8509804, 1, 0.91664, 0.91664, 0.91664, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_j2lur"]
 gradient = SubResource("Gradient_xnmwc")
@@ -99,7 +99,7 @@ _data = {
 }
 
 [sub_resource type="Gradient" id="Gradient_j4pmt"]
-colors = PackedColorArray(0, 0, 0, 0, 0.939738, 0.666838, 0.857891, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 0.72156864, 0.5803922, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_6j5qt"]
 gradient = SubResource("Gradient_j4pmt")
