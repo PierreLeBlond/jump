@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bn4dwfu1txdur" path="res://assets/sprites/bakground-7.png" id="2_yi7p2"]
 [ext_resource type="Texture2D" uid="uid://cmfortl8nq5xg" path="res://assets/sprites/bakground-2.png" id="3_icsne"]
 [ext_resource type="Texture2D" uid="uid://dnk57ni6b132c" path="res://assets/sprites/bakground-1.png" id="4_pfkke"]
-[ext_resource type="Texture2D" uid="uid://cf0supskp8dgy" path="res://assets/sprites/bakground-0.png" id="5_jju4s"]
+[ext_resource type="Texture2D" uid="uid://berenlgdatcab" path="res://assets/sprites/foreground.png" id="5_ssd6x"]
 
 [sub_resource type="Gradient" id="Gradient_nijgr"]
 offsets = PackedFloat32Array(0.9059829, 1)
@@ -32,7 +32,7 @@ layer = -1
 [node name="Clouds" type="ParallaxLayer" parent="ParallaxBackground"]
 modulate = Color(0.84000003, 0.9253333, 1, 1)
 position = Vector2(0, -138)
-motion_scale = Vector2(0.1, 0.1)
+motion_scale = Vector2(0.05, 0.05)
 motion_mirroring = Vector2(3840, 0)
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Clouds"]
@@ -61,7 +61,7 @@ flip_h = true
 
 [node name="Mountains" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(0, -138)
-motion_scale = Vector2(0.2, 0.2)
+motion_scale = Vector2(0.1, 0.1)
 motion_mirroring = Vector2(3840, 0)
 
 [node name="Polygon2D" type="Polygon2D" parent="ParallaxBackground/Mountains"]
@@ -73,7 +73,7 @@ uv = PackedVector2Array(1.6768082, 7.0896225, 2.5638666, 7.248026, 4.971616, 3.6
 [node name="FrontClouds" type="ParallaxLayer" parent="ParallaxBackground"]
 modulate = Color(0.595, 0.731, 0.85, 1)
 position = Vector2(0, 110)
-motion_scale = Vector2(0.4, 0.4)
+motion_scale = Vector2(0.3, 0.3)
 motion_mirroring = Vector2(3840, 0)
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/FrontClouds"]
@@ -103,7 +103,7 @@ flip_h = true
 [node name="Land" type="ParallaxLayer" parent="ParallaxBackground"]
 modulate = Color(0.1536, 0.24234666, 0.32, 1)
 position = Vector2(0, -138)
-motion_scale = Vector2(0.7, 0.7)
+motion_scale = Vector2(0.6, 0.6)
 motion_mirroring = Vector2(3840, 0)
 
 [node name="ColorRect" type="ColorRect" parent="ParallaxBackground/Land"]
@@ -138,7 +138,7 @@ flip_h = true
 [node name="Trees" type="ParallaxLayer" parent="ParallaxBackground"]
 modulate = Color(0.0816, 0.12874667, 0.17, 1)
 position = Vector2(0, -138)
-motion_scale = Vector2(0.9, 0.9)
+motion_scale = Vector2(0.95, 0.95)
 motion_mirroring = Vector2(3840, 0)
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Trees"]
@@ -176,7 +176,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_kdw8r")
 
 [node name="Bushes" type="ParallaxLayer" parent="ParallaxBackground"]
-modulate = Color(0.046400003, 0.16, 0.14485334, 1)
+modulate = Color(0.017257519, 0.0730089, 0.09993807, 1)
 position = Vector2(0, -138)
 motion_mirroring = Vector2(3840, 0)
 
@@ -184,22 +184,22 @@ motion_mirroring = Vector2(3840, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 130.0
+offset_top = 49.0
 offset_right = 1920.0
-offset_bottom = 1210.0
+offset_bottom = 1129.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("5_jju4s")
+texture = ExtResource("5_ssd6x")
+flip_h = true
 
 [node name="TextureRect2" type="TextureRect" parent="ParallaxBackground/Bushes"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1920.0
-offset_top = 130.0
+offset_top = 49.0
 offset_right = 3840.0
-offset_bottom = 1210.0
+offset_bottom = 1129.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("5_jju4s")
-flip_h = true
+texture = ExtResource("5_ssd6x")
