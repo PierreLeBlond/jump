@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://de32o3g1w17vm"]
+[gd_scene load_steps=45 format=4 uid="uid://de32o3g1w17vm"]
 
 [ext_resource type="Script" uid="uid://8g3j4qvgpbuq" path="res://scripts/levels/worlds/World1.gd" id="1_xu4di"]
 [ext_resource type="PackedScene" uid="uid://c1f16ms5h14r6" path="res://scenes/ui/components/Countdown.tscn" id="2_fwvex"]
@@ -16,7 +16,6 @@
 [ext_resource type="AudioStream" uid="uid://cf6e4vihn38iv" path="res://assets/sounds/whoosh-out.mp3" id="14_ccb2h"]
 [ext_resource type="PackedScene" uid="uid://dmsk824oqqo0r" path="res://scenes/environments/backgrounds/Landscape.tscn" id="15_cb32w"]
 [ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/components/CinematicBars.tscn" id="16_gawhb"]
-[ext_resource type="Script" uid="uid://c2m6hi7u8qp7o" path="res://scripts/character/appearance/Shadow.gd" id="17_02bmf"]
 [ext_resource type="TileSet" uid="uid://d2f3f4ukvlod0" path="res://tilesets/tree.tres" id="19_qav0l"]
 [ext_resource type="PackedScene" uid="uid://bga7gekc81cl6" path="res://scenes/levels/worlds/world1/PhysicalWorld.tscn" id="20_fwvex"]
 [ext_resource type="PackedScene" uid="uid://b8dorlf7ulbwy" path="res://scenes/Soubalien.tscn" id="20_uqmqb"]
@@ -44,9 +43,6 @@ colors = PackedColorArray(1, 1, 1, 1, 0.40800002, 0.6437334, 0.85, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_j7nyf"]
 gradient = SubResource("Gradient_njy47")
 fill_from = Vector2(1, 0.8717949)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_p40yc"]
-viewport_path = NodePath("Shadow/SubViewport")
 
 [sub_resource type="Curve2D" id="Curve2D_i654n"]
 _data = {
@@ -163,33 +159,6 @@ texture = SubResource("GradientTexture2D_j7nyf")
 
 [node name="PhysicalWorld" parent="." instance=ExtResource("20_fwvex")]
 
-[node name="Shadow" type="Node2D" parent="." node_paths=PackedStringArray("player", "shadow_receiver", "sub_viewport", "view")]
-script = ExtResource("17_02bmf")
-player = NodePath("../Player")
-shadow_receiver = NodePath("ShadowReceiver")
-sub_viewport = NodePath("SubViewport")
-view = NodePath("ShadowReceiver/RemoteTransformTarget/View")
-
-[node name="ShadowReceiver" type="Sprite2D" parent="Shadow"]
-clip_children = 2
-position = Vector2(960, 540)
-texture = SubResource("ViewportTexture_p40yc")
-
-[node name="RemoteTransformTarget" type="Node2D" parent="Shadow/ShadowReceiver"]
-position = Vector2(-717, 260)
-
-[node name="View" type="Node2D" parent="Shadow/ShadowReceiver/RemoteTransformTarget"]
-modulate = Color(0, 0, 0, 0.40784314)
-position = Vector2(-42, 60)
-rotation = 1.5707964
-scale = Vector2(0.345, -0.725)
-
-[node name="SubViewport" type="SubViewport" parent="Shadow"]
-transparent_bg = true
-size = Vector2i(1920, 1080)
-
-[node name="PhysicalWorld" parent="Shadow/SubViewport" instance=ExtResource("20_fwvex")]
-
 [node name="Soubalien" parent="." instance=ExtResource("20_uqmqb")]
 texture_filter = 2
 cone_angle = 0.42
@@ -262,9 +231,6 @@ position = Vector2(243, 800)
 
 [node name="AudioListener2D" type="AudioListener2D" parent="Player"]
 current = true
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
-remote_path = NodePath("../../Shadow/ShadowReceiver/RemoteTransformTarget")
 
 [node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 position = Vector2(221, 730)

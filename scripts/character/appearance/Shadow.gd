@@ -3,13 +3,14 @@ extends Node2D
 class_name Shadow
 
 @export var player: Player
-@export var remote_transform: RemoteTransform2D
 
 @export var shadow_receiver: Node2D
+@export var node_2d: Node2D
+@export var view: Node2D
+
 
 @export var sub_viewport: SubViewport
 
-@export var view: Node2D
 
 var _shadow_sprite: Sprite2D
 
@@ -21,6 +22,7 @@ func _process(_delta: float) -> void:
     # make the shadow match the player's animated sprite
     # TODO: offset the shadow contact point when the animation requires it
     _shadow_sprite.frame = player.sprite_2d.frame
+    node_2d.global_position = player.global_position
 
     # make the subviewport's camera to be the same as the main viewport one
     sub_viewport.canvas_transform = get_viewport().get_canvas_transform()
