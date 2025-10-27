@@ -41,6 +41,7 @@ func capture_player() -> void:
 func hold_player() -> void:
     player.lock_key(Globals.PHYSICS_UNLOCKED_KEY)
     player.global_position = global_position
+    is_player_captured = true
     player.modulate.a = 0
 
 func release_player() -> void:
