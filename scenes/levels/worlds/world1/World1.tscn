@@ -1,0 +1,467 @@
+[gd_scene load_steps=47 format=4 uid="uid://de32o3g1w17vm"]
+
+[ext_resource type="Script" uid="uid://8g3j4qvgpbuq" path="res://scripts/levels/worlds/World1.gd" id="1_xu4di"]
+[ext_resource type="PackedScene" uid="uid://c1f16ms5h14r6" path="res://scenes/ui/components/Countdown.tscn" id="2_fwvex"]
+[ext_resource type="PackedScene" uid="uid://82tigqg507ba" path="res://scenes/ui/hud/HUD.tscn" id="3_76nrp"]
+[ext_resource type="Script" uid="uid://dm275lbjrus7p" path="res://scripts/camera/CameraManager.gd" id="4_gpicu"]
+[ext_resource type="Script" uid="uid://d7xk4vlngnl8" path="res://scripts/game/GameRun.gd" id="5_c6cfv"]
+[ext_resource type="Script" uid="uid://ewkys0jryvy8" path="res://scripts/levels/MusicManager.gd" id="6_jlkrl"]
+[ext_resource type="AudioStream" uid="uid://b2g4n5a03p8hu" path="res://assets/sounds/level_1/base.mp3" id="7_u5nct"]
+[ext_resource type="Script" uid="uid://c6cop2exxlt13" path="res://scripts/audio/AudioPlayer.gd" id="8_xsfsa"]
+[ext_resource type="AudioStream" uid="uid://cr27a3g4erh4h" path="res://assets/sounds/forest.ogg" id="9_k3efu"]
+[ext_resource type="AudioStream" uid="uid://bkg10tf1w5jfs" path="res://assets/sounds/level_1/soubalien-intro.mp3" id="10_f81nh"]
+[ext_resource type="AudioStream" uid="uid://b22p4onf5b8xr" path="res://assets/sounds/level_1/excerpt.mp3" id="11_2g4u2"]
+[ext_resource type="Script" uid="uid://cn50xbfn3ids8" path="res://scripts/audio/AudioPlayer2D.gd" id="12_md3so"]
+[ext_resource type="AudioStream" uid="uid://dm02s78nylc68" path="res://assets/sounds/whoosh-in.mp3" id="13_1k3wm"]
+[ext_resource type="AudioStream" uid="uid://cf6e4vihn38iv" path="res://assets/sounds/whoosh-out.mp3" id="14_ccb2h"]
+[ext_resource type="PackedScene" uid="uid://dmsk824oqqo0r" path="res://scenes/environments/backgrounds/Landscape.tscn" id="15_cb32w"]
+[ext_resource type="PackedScene" uid="uid://dmuqgr6qb2s3b" path="res://scenes/ui/components/CinematicBars.tscn" id="16_gawhb"]
+[ext_resource type="Script" uid="uid://c2m6hi7u8qp7o" path="res://scripts/character/appearance/Shadow.gd" id="17_02bmf"]
+[ext_resource type="TileSet" uid="uid://d2f3f4ukvlod0" path="res://tilesets/tree.tres" id="19_qav0l"]
+[ext_resource type="PackedScene" uid="uid://bga7gekc81cl6" path="res://scenes/levels/worlds/world1/PhysicalWorld.tscn" id="20_fwvex"]
+[ext_resource type="PackedScene" uid="uid://b8dorlf7ulbwy" path="res://scenes/Soubalien.tscn" id="20_uqmqb"]
+[ext_resource type="Script" uid="uid://bnmaalvi4e4sp" path="res://scripts/node/TransformLock.gd" id="21_0riyv"]
+[ext_resource type="AudioStream" uid="uid://b76noj4bwyfuc" path="res://assets/sounds/level_1/soubalien.mp3" id="22_sm616"]
+[ext_resource type="Script" uid="uid://c8b0g0enel70w" path="res://scripts/enemy/Path.gd" id="23_eg2l1"]
+[ext_resource type="PackedScene" uid="uid://cgexvf3ochgd8" path="res://scenes/contraptions/Portal.tscn" id="24_bg6p2"]
+[ext_resource type="PackedScene" uid="uid://dpr11d1q2xb3x" path="res://scenes/contraptions/Checkpoint.tscn" id="25_pqlp2"]
+[ext_resource type="PackedScene" uid="uid://qo3gw8ipw7af" path="res://scenes/contraptions/StaffCape.tscn" id="26_hmddt"]
+[ext_resource type="PackedScene" uid="uid://27vdgqlbgpml" path="res://scenes/Player.tscn" id="27_44k3s"]
+[ext_resource type="Script" uid="uid://bbujjd3t0eg6e" path="res://scripts/camera/Camera.gd" id="28_5d8j5"]
+[ext_resource type="PackedScene" uid="uid://4wsynq3xc0sr" path="res://scenes/collectibles/Note.tscn" id="29_3v1na"]
+[ext_resource type="Script" uid="uid://xd4woi41uhf2" path="res://scripts/camera/CameraOverrideArea.gd" id="30_uwk46"]
+[ext_resource type="Texture2D" uid="uid://berenlgdatcab" path="res://assets/sprites/foreground.png" id="31_6gy2i"]
+[ext_resource type="PackedScene" uid="uid://cbchcmt1re0ym" path="res://scenes/ui/controls/MobileControls.tscn" id="32_mceqn"]
+[ext_resource type="PackedScene" uid="uid://c5ujunl53hshx" path="res://scenes/ui/components/ComboNote.tscn" id="33_xfv82"]
+[ext_resource type="PackedScene" uid="uid://csu7vptxeme8t" path="res://scenes/connectors/SoubalienAndPlayerConnector.tscn" id="34_qhf2d"]
+[ext_resource type="PackedScene" uid="uid://d1tavs3t65e2q" path="res://scenes/connectors/StartRaceConnector.tscn" id="35_vfr6p"]
+[ext_resource type="Script" uid="uid://dg0ee00glj6uv" path="res://scripts/connector/soubalienAndPlayer/SoubalienAndChasePathConnector.gd" id="36_p3qof"]
+[ext_resource type="Script" uid="uid://bqa4n87khu0cw" path="res://scripts/connector/comboConnector/ComboConnector.gd" id="37_eymi2"]
+
+[sub_resource type="Gradient" id="Gradient_njy47"]
+colors = PackedColorArray(1, 1, 1, 1, 0.40800002, 0.6437334, 0.85, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j7nyf"]
+gradient = SubResource("Gradient_njy47")
+fill_from = Vector2(1, 0.8717949)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_p40yc"]
+viewport_path = NodePath("Shadow/SubViewport")
+
+[sub_resource type="Curve2D" id="Curve2D_i654n"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -751, -1066, 0, 0, 0, 0, -750, 221, 0, 0, 0, 0, 140, 232)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_p5s5a"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 141, 232, 0, 0, 0, 0, 1035, -250, 0, 0, 0, 0, 30857, -248, 0, 0, 0, 0, 35281, -1464)
+}
+point_count = 4
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_fs813"]
+scenes/1/scene = ExtResource("29_3v1na")
+
+[sub_resource type="TileSet" id="TileSet_t6keq"]
+sources/0 = SubResource("TileSetScenesCollectionSource_fs813")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p5s5a"]
+size = Vector2(127, 1088)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7nyf"]
+size = Vector2(3226, 1049)
+
+[node name="World1" type="Node2D" node_paths=PackedStringArray("music_manager", "combo_connector", "combo_note", "race_introduction_camera", "player_focus_camera", "soubalien_player_connector", "soubalien", "soubalien_introduce_path", "soubalien_chase_path", "end_portal", "cinematic_bars", "race_introduction_area", "start_race_connector", "start_checkpoint", "race_introduction_checkpoint", "player", "player_camera", "camera_manager", "game_run", "hud")]
+process_mode = 1
+script = ExtResource("1_xu4di")
+music_manager = NodePath("MusicManager")
+combo_connector = NodePath("ComboConnector")
+combo_note = NodePath("ComboNote")
+countdown_scene = ExtResource("2_fwvex")
+race_introduction_camera = NodePath("RaceIntroduceCamera")
+player_focus_camera = NodePath("PlayerFocusCamera")
+soubalien_player_connector = NodePath("SoubalienAndPlayerConnector")
+soubalien = NodePath("Soubalien")
+soubalien_introduce_path = NodePath("SoubalienPaths/IntroducePath")
+soubalien_chase_path = NodePath("SoubalienPaths/ChasePath")
+end_portal = NodePath("EndPortal")
+cinematic_bars = NodePath("CinematicBars")
+race_introduction_area = NodePath("RaceIntroductionArea")
+start_race_connector = NodePath("StartRaceConnector")
+start_checkpoint = NodePath("StartCheckpoint")
+race_introduction_checkpoint = NodePath("Checkpoint")
+player = NodePath("Player")
+player_camera = NodePath("PlayerCamera")
+camera_manager = NodePath("CameraManager")
+game_run = NodePath("GameRun")
+hud = NodePath("Hud")
+
+[node name="Hud" parent="." instance=ExtResource("3_76nrp")]
+
+[node name="CameraManager" type="Node" parent="."]
+script = ExtResource("4_gpicu")
+
+[node name="GameRun" type="Node" parent="."]
+script = ExtResource("5_c6cfv")
+
+[node name="MusicManager" type="Node" parent="." node_paths=PackedStringArray("forest_audio_player", "note_audio_player", "soubalien_audio_player", "race_audio_player", "soubalien_race_audio_player", "whoosh_in_audio_player", "whoosh_out_audio_player")]
+script = ExtResource("6_jlkrl")
+forest_audio_player = NodePath("ForestAudioStreamPlayer")
+note_audio_player = NodePath("NoteAudioStreamPlayer")
+soubalien_audio_player = NodePath("SoubalienAudioStreamPlayer")
+race_audio_player = NodePath("RaceAudioStreamPlayer")
+soubalien_race_audio_player = NodePath("../Soubalien/TransformLock/AudioStreamPlayer2D")
+whoosh_in_audio_player = NodePath("WhooshInAudioStreamPlayer")
+whoosh_out_audio_player = NodePath("WhooshOutAudioStreamPlayer")
+
+[node name="RaceAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
+stream = ExtResource("7_u5nct")
+bus = &"Effect"
+script = ExtResource("8_xsfsa")
+
+[node name="ForestAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
+stream = ExtResource("9_k3efu")
+script = ExtResource("8_xsfsa")
+
+[node name="SoubalienAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
+stream = ExtResource("10_f81nh")
+script = ExtResource("8_xsfsa")
+
+[node name="NoteAudioStreamPlayer" type="AudioStreamPlayer2D" parent="MusicManager"]
+position = Vector2(14, 896)
+stream = ExtResource("11_2g4u2")
+max_distance = 4096.0
+attenuation = 0.045752715
+bus = &"Effect"
+script = ExtResource("12_md3so")
+
+[node name="WhooshInAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
+stream = ExtResource("13_1k3wm")
+script = ExtResource("8_xsfsa")
+target_volume_db = -24.0
+
+[node name="WhooshOutAudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
+stream = ExtResource("14_ccb2h")
+script = ExtResource("8_xsfsa")
+target_volume_db = -24.0
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer2"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_j7nyf")
+
+[node name="Landscape" parent="." instance=ExtResource("15_cb32w")]
+
+[node name="CinematicBars" parent="." instance=ExtResource("16_gawhb")]
+
+[node name="PhysicalWorld" parent="." instance=ExtResource("20_fwvex")]
+
+[node name="Shadow" type="Node2D" parent="." node_paths=PackedStringArray("player", "shadow_receiver", "sub_viewport", "view")]
+script = ExtResource("17_02bmf")
+player = NodePath("../Player")
+shadow_receiver = NodePath("ShadowReceiver")
+sub_viewport = NodePath("SubViewport")
+view = NodePath("ShadowReceiver/RemoteTransformTarget/View")
+
+[node name="ShadowReceiver" type="Sprite2D" parent="Shadow"]
+clip_children = 2
+position = Vector2(960, 540)
+texture = SubResource("ViewportTexture_p40yc")
+
+[node name="RemoteTransformTarget" type="Node2D" parent="Shadow/ShadowReceiver"]
+position = Vector2(-717, 260)
+
+[node name="View" type="Node2D" parent="Shadow/ShadowReceiver/RemoteTransformTarget"]
+modulate = Color(0, 0, 0, 0.40784314)
+position = Vector2(-42, 60)
+rotation = 1.5707964
+scale = Vector2(0.345, -0.725)
+
+[node name="SubViewport" type="SubViewport" parent="Shadow"]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+
+[node name="PhysicalWorld" parent="Shadow/SubViewport" instance=ExtResource("20_fwvex")]
+
+[node name="Soubalien" parent="." instance=ExtResource("20_uqmqb")]
+texture_filter = 2
+cone_angle = 0.42
+cone_height = 1024.0
+
+[node name="TransformLock" type="Node2D" parent="Soubalien" node_paths=PackedStringArray("target")]
+script = ExtResource("21_0riyv")
+target = NodePath("../../Player")
+horizontal = false
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Soubalien/TransformLock"]
+stream = ExtResource("22_sm616")
+autoplay = true
+max_distance = 2048.0
+panning_strength = 2.0
+script = ExtResource("12_md3so")
+target_volume_db = 12.0
+
+[node name="SoubalienPaths" type="Node2D" parent="."]
+
+[node name="IntroducePath" type="Path2D" parent="SoubalienPaths"]
+position = Vector2(5428, 312)
+curve = SubResource("Curve2D_i654n")
+script = ExtResource("23_eg2l1")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="SoubalienPaths/IntroducePath"]
+position = Vector2(-751, -1066)
+rotates = false
+loop = false
+
+[node name="ChasePath" type="Path2D" parent="SoubalienPaths"]
+position = Vector2(5427, 312)
+curve = SubResource("Curve2D_p5s5a")
+script = ExtResource("23_eg2l1")
+speed = 0.02
+
+[node name="PathFollow2D" type="PathFollow2D" parent="SoubalienPaths/ChasePath"]
+position = Vector2(141, 232)
+rotates = false
+loop = false
+
+[node name="EndPortal" parent="." node_paths=PackedStringArray("player") instance=ExtResource("24_bg6p2")]
+position = Vector2(39391, -515)
+player = NodePath("../Player")
+
+[node name="StartCheckpoint" parent="." node_paths=PackedStringArray("portal") instance=ExtResource("25_pqlp2")]
+position = Vector2(-165, 3)
+portal = NodePath("StartCheckpointPortal")
+
+[node name="StartCheckpointPortal" parent="StartCheckpoint" node_paths=PackedStringArray("player") instance=ExtResource("24_bg6p2")]
+position = Vector2(387, 685)
+player = NodePath("../../Player")
+
+[node name="Checkpoint" parent="." node_paths=PackedStringArray("portal") instance=ExtResource("25_pqlp2")]
+position = Vector2(6077, 0)
+portal = NodePath("CheckpointPortal")
+
+[node name="CheckpointPortal" parent="Checkpoint" node_paths=PackedStringArray("player") instance=ExtResource("24_bg6p2")]
+position = Vector2(128, 685)
+player = NodePath("../../Player")
+
+[node name="StaffCape" parent="." node_paths=PackedStringArray("player") instance=ExtResource("26_hmddt")]
+player = NodePath("../Player")
+offset = Vector2(42, -20)
+speed = Vector2(0.3, 0.1)
+cape_length = 512.0
+
+[node name="Player" parent="." instance=ExtResource("27_44k3s")]
+position = Vector2(243, 800)
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Player"]
+current = true
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Shadow/ShadowReceiver/RemoteTransformTarget")
+
+[node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(221, 730)
+offset = Vector2(512, 0)
+process_callback = 0
+limit_left = -10000
+limit_bottom = 1080
+drag_horizontal_enabled = true
+drag_left_margin = 0.0
+editor_draw_drag_margin = true
+script = ExtResource("28_5d8j5")
+vertical_speed = 3.0
+target = NodePath("../Player")
+
+[node name="ColorRect" type="ColorRect" parent="PlayerCamera"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 1)
+
+[node name="PlayerFocusCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(221, 730)
+zoom = Vector2(2, 2)
+process_callback = 0
+limit_bottom = 1080
+editor_draw_drag_margin = true
+script = ExtResource("28_5d8j5")
+vertical_speed = 10.0
+follow_vertical_on_jump = true
+target = NodePath("../Player")
+
+[node name="ColorRect" type="ColorRect" parent="PlayerFocusCamera"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.5539292, 0.9056814, 1)
+
+[node name="RaceIntroduceCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(221, 730)
+zoom = Vector2(0.9, 0.9)
+process_callback = 0
+limit_left = -10000
+limit_bottom = 1080
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource("28_5d8j5")
+vertical_speed = 0.0
+horizontal_speed = 3.0
+follow_vertical_on_jump = true
+target = NodePath("../Player")
+
+[node name="ColorRect" type="ColorRect" parent="RaceIntroduceCamera"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(3.3210217e-06, 0.6412604, 0.32205877, 1)
+
+[node name="NoteLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAA4BCQAAAAAAAAAAQDfACEAAAAAAAAAAQALAjQAAAAAAAAAAQCBAjEAAAAAAAAAAQDQAjQAAAAAAAAAAQARAyAAAAAAAAAAAQBSAwwAAAAAAAAAAQDjAyQAAAAAAAAAAQB7BDAAAAAAAAAAAQCYBRAAAAAAAAAAAQDYBSwAAAAAAAAAAQC8BCwAAAAAAAAAAQD9BCkAAAAAAAAAAQBIBRgAAAAAAAAAAQCWACAAAAAAAAAAAQC0ABgAAAAAAAAAAQBBADEAAAAAAAAAAQCHACgAAAAAAAAAAQDgASwAAAAAAAAAAQCWAwwAAAAAAAAAAQA/AjQAAAAAAAAAAQAdBiQAAAAAAAAAAQBpBiEAAAAAAAAAAQCxBhkAAAAAAAAAAQDRBhkAAAAAAAAAAQATBxsAAAAAAAAAAQCVBxQAAAAAAAAAAQDVBywAAAAAAAAAAQAOCBwAAAAAAAAAAQCzBxQAAAAAAAAAAQAbBzQAAAAAAAAAAQBvCBAAAAAAAAAAAQCtCDAAAAAAAAAAAQDsCBwAAAAAAAAAAQBKCf//AAAAAAAAAQBmCff/AAAAAAAAAQCACe//AAAAAAAAAQAPCDQAAAAAAAAAAQBSBzQAAAAAAAAAAQBBCBwAAAAAAAAAAQA=")
+tile_set = SubResource("TileSet_t6keq")
+rendering_quadrant_size = 8
+collision_enabled = false
+physics_quadrant_size = 8
+navigation_enabled = false
+
+[node name="RaceIntroductionArea" type="Area2D" parent="."]
+position = Vector2(6205, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RaceIntroductionArea"]
+position = Vector2(0, 545)
+shape = SubResource("RectangleShape2D_p5s5a")
+
+[node name="CameraOverrideArea" type="Area2D" parent="." node_paths=PackedStringArray("camera_manager", "restore_camera", "override_camera")]
+position = Vector2(38431, -192)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("30_uwk46")
+camera_manager = NodePath("../CameraManager")
+restore_camera = NodePath("../PlayerCamera")
+override_camera = NodePath("FinishCamera")
+metadata/_custom_type_script = "uid://xd4woi41uhf2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraOverrideArea"]
+position = Vector2(528, -77.5)
+shape = SubResource("RectangleShape2D_j7nyf")
+
+[node name="FinishCamera" type="Camera2D" parent="CameraOverrideArea" node_paths=PackedStringArray("target")]
+position = Vector2(528, -72)
+zoom = Vector2(0.5, 0.5)
+script = ExtResource("28_5d8j5")
+vertical_speed = 2.0
+zoom_speed = 2.0
+follow_vertical_on_jump = true
+target = NodePath("../CollisionShape2D")
+metadata/_custom_type_script = "uid://bbujjd3t0eg6e"
+
+[node name="Parallax2D" type="ParallaxBackground" parent="."]
+layer = 0
+
+[node name="FrontGround" type="ParallaxLayer" parent="Parallax2D"]
+modulate = Color(0.049300004, 0.17, 0.15390667, 1)
+motion_scale = Vector2(1.01, 1.01)
+motion_offset = Vector2(0, 9.21)
+motion_mirroring = Vector2(3840, 0)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Parallax2D/FrontGround"]
+position = Vector2(0, -17.785)
+tile_map_data = PackedByteArray("AAAAAA8AAQAKAAAAAAABAA8AAQAKAAAAAAACAA8AAQAKAAAAAAADAA8AAQAKAAAAAAAEAA8AAQAKAAAAAAAFAA8AAQAKAAAAAAAGAA8AAQAKAAAAAAAHAA8AAQAKAAAAAAAIAA8AAQAKAAAAAAAJAA8AAQAKAAAAAAAKAA8AAQAKAAAAAAALAA8AAQAKAAAAAAAMAA8AAQAKAAAAAAANAA8AAQAKAAAAAAAOAA8AAQAKAAAAAAAPAA8AAQAKAAAAAAAQAA8AAQAKAAAAAAARAA8AAQAKAAAAAAASAA8AAQAKAAAAAAATAA8AAQAKAAAAAAAUAA8AAQAKAAAAAAAVAA8AAQAKAAAAAAAWAA8AAQAKAAAAAAAXAA8AAQAKAAAAAAAYAA8AAQAKAAAAAAAZAA8AAQAKAAAAAAAaAA8AAQAKAAAAAAAbAA8AAQAKAAAAAAAcAA8AAQAKAAAAAAAdAA8AAQAKAAAAAAAeAA8AAQAKAAAAAAAfAA8AAQAKAAAAAAA8ABAAAQADAAIAAAA8AA8AAQAAAAAAAAA7ABAAAQAGAAAAAAA6ABAAAQAJAAIAAAA6AA8AAQAKAAAAAAA5ABAAAQAJAAIAAAA5AA8AAQAKAAAAAAA4ABAAAQAJAAIAAAA4AA8AAQAKAAAAAAA3ABAAAQAJAAIAAAA3AA8AAQAKAAAAAAA2ABAAAQAJAAIAAAA2AA8AAQAKAAAAAAA1ABAAAQAJAAIAAAA1AA8AAQAKAAAAAAA0ABAAAQAJAAIAAAA0AA8AAQAKAAAAAAAzABAAAQAJAAIAAAAzAA8AAQAKAAAAAAAyABAAAQAJAAIAAAAyAA8AAQAKAAAAAAAxABAAAQAJAAIAAAAxAA8AAQAKAAAAAAAwABAAAQAJAAIAAAAwAA8AAQAKAAAAAAAvABAAAQAJAAIAAAAvAA8AAQAKAAAAAAAuABAAAQAJAAIAAAAuAA8AAQAKAAAAAAAtABAAAQAJAAIAAAAtAA8AAQAKAAAAAAAsABAAAQAJAAIAAAAsAA8AAQAKAAAAAAArABAAAQAJAAIAAAArAA8AAQAKAAAAAAAqABAAAQAJAAIAAAAqAA8AAQAKAAAAAAApABAAAQAJAAIAAAApAA8AAQAKAAAAAAAoABAAAQAJAAIAAAAoAA8AAQAKAAAAAAAnABAAAQAJAAIAAAAnAA8AAQAKAAAAAAAmABAAAQAJAAIAAAAmAA8AAQAKAAAAAAAlABAAAQAJAAIAAAAlAA8AAQAKAAAAAAAkABAAAQAJAAIAAAAkAA8AAQAKAAAAAAAjABAAAQAJAAIAAAAjAA8AAQAKAAAAAAAiABAAAQAJAAIAAAAiAA8AAQAKAAAAAAAhABAAAQAJAAIAAAAhAA8AAQAKAAAAAAAgABAAAQAJAAIAAAAgAA8AAQAKAAAAAAAfABAAAQAJAAIAAAAeABAAAQAJAAIAAAAdABAAAQAJAAIAAAAcABAAAQAJAAIAAAAbABAAAQAJAAIAAAAaABAAAQAJAAIAAAAZABAAAQAJAAIAAAAYABAAAQAJAAIAAAAXABAAAQAJAAIAAAAWABAAAQAJAAIAAAAVABAAAQAJAAIAAAAUABAAAQAJAAIAAAATABAAAQAJAAIAAAASABAAAQAJAAIAAAARABAAAQAJAAIAAAAQABAAAQAJAAIAAAAPABAAAQAJAAIAAAAOABAAAQAJAAIAAAANABAAAQAJAAIAAAAMABAAAQAJAAIAAAALABAAAQAJAAIAAAAKABAAAQAJAAIAAAAJABAAAQAJAAIAAAAIABAAAQAJAAIAAAAHABAAAQAJAAIAAAAGABAAAQAJAAIAAAAFABAAAQAJAAIAAAAEABAAAQAJAAIAAAADABAAAQAJAAIAAAACABAAAQAJAAIAAAABABAAAQAJAAIAAAAAABAAAQAJAAIAAAD//xAAAQAJAAIAAAD//w8AAQAKAAAAAAAwABEAAQAJAAMAAAAvABEAAQAJAAMAAAAuABEAAQAJAAMAAQAtABEAAQAJAAMAAAAsABEAAQAJAAMAAAArABEAAQAJAAMAAAAqABEAAQAJAAMAAAApABEAAQAJAAMAAAAoABEAAQAJAAMAAAAnABEAAQAJAAMAAAAmABEAAQAJAAMAAAAlABEAAQAJAAMAAAAkABEAAQAJAAMAAAAjABEAAQAJAAMAAQAiABEAAQAJAAMAAQAhABEAAQAJAAMAAAAgABEAAQAJAAMAAAAfABEAAQAJAAMAAQAeABEAAQAJAAMAAAAdABEAAQAJAAMAAAAcABEAAQAJAAMAAQAbABEAAQAJAAMAAQAaABEAAQAJAAMAAQAZABEAAQAJAAMAAQAYABEAAQAJAAMAAQAXABEAAQAJAAMAAQAWABEAAQAJAAMAAAAVABEAAQAJAAMAAAAUABEAAQAJAAMAAQATABEAAQAJAAMAAAASABEAAQAJAAMAAQARABEAAQAJAAMAAQAQABEAAQAJAAMAAAAPABEAAQAJAAMAAQAOABEAAQAJAAMAAAANABEAAQAJAAMAAAAMABEAAQAJAAMAAQALABEAAQAJAAMAAQAKABEAAQAJAAMAAQAJABEAAQAJAAMAAQAIABEAAQAJAAMAAQAHABEAAQAJAAMAAQAGABEAAQAJAAMAAQAFABEAAQAJAAMAAAAEABEAAQAJAAMAAAADABEAAQAJAAMAAQACABEAAQAJAAMAAQABABEAAQAJAAMAAAAAABEAAQAJAAMAAQD//xEAAQAJAAMAAAA1ABEAAQAJAAMAAAA0ABEAAQAJAAMAAAAzABEAAQAJAAMAAAAyABEAAQAJAAMAAQAxABEAAQAJAAMAAQA6ABEAAQAJAAMAAAA2ABEAAQAJAAMAAAA3ABEAAQAJAAMAAAA5ABEAAQAJAAMAAAA4ABEAAQAJAAMAAAA7ABEAAQAJAAMAAAA=")
+tile_set = ExtResource("19_qav0l")
+
+[node name="FrontNature" type="ParallaxLayer" parent="Parallax2D"]
+modulate = Color(0.024637783, 0.06302626, 0.037686113, 1)
+motion_scale = Vector2(1.05, 1.05)
+motion_mirroring = Vector2(3840, 0)
+
+[node name="TextureRect2" type="TextureRect" parent="Parallax2D/FrontNature"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1920.0
+offset_top = 61.0
+offset_right = 3840.0
+offset_bottom = 1141.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("31_6gy2i")
+
+[node name="TextureRect" type="TextureRect" parent="Parallax2D/FrontNature"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 62.0
+offset_right = 1920.0
+offset_bottom = 1142.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("31_6gy2i")
+
+[node name="MobileControls" parent="." instance=ExtResource("32_mceqn")]
+
+[node name="ComboNote" parent="." instance=ExtResource("33_xfv82")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 0.0
+offset_bottom = 0.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+offset = Vector2(0, -64)
+
+[node name="SoubalienAndPlayerConnector" parent="." node_paths=PackedStringArray("soubalien", "player") instance=ExtResource("34_qhf2d")]
+soubalien = NodePath("../Soubalien")
+player = NodePath("../Player")
+
+[node name="StartRaceConnector" parent="." node_paths=PackedStringArray("player") instance=ExtResource("35_vfr6p")]
+player = NodePath("../Player")
+
+[node name="SoubalienAndChasePathConnector" type="Node" parent="." node_paths=PackedStringArray("soubalien", "player", "chase_path")]
+script = ExtResource("36_p3qof")
+soubalien = NodePath("../Soubalien")
+player = NodePath("../Player")
+chase_path = NodePath("../SoubalienPaths/ChasePath")
+
+[node name="ComboConnector" type="Node" parent="." node_paths=PackedStringArray("target", "music_manager", "combo_note", "staff_cape")]
+script = ExtResource("37_eymi2")
+target = NodePath("../Player")
+music_manager = NodePath("../MusicManager")
+combo_note = NodePath("../ComboNote")
+staff_cape = NodePath("../StaffCape")

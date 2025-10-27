@@ -362,7 +362,7 @@ size = Vector2(56, 101.00003)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gv3ic"]
 size = Vector2(54, 104)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cancel_jump_state", "cliff_hang_state", "double_jump_state", "fall_state", "idle_state", "jump_state", "run_state", "walk_state", "wall_jump_state", "wall_run_state", "corner_corrector", "cliff_detector", "wall_detector", "state_machine", "lateral_accelerator", "horizontal_accelerator", "movement_controller", "view", "animation_player", "sprite_2d", "collector")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("cancel_jump_state", "cliff_hang_state", "double_jump_state", "fall_state", "idle_state", "jump_state", "run_state", "walk_state", "wall_jump_state", "wall_run_state", "shadow", "corner_corrector", "cliff_detector", "wall_detector", "state_machine", "lateral_accelerator", "horizontal_accelerator", "movement_controller", "view", "animation_player", "sprite_2d", "collector")]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_6e537")
@@ -376,6 +376,7 @@ run_state = NodePath("StateMachine/Run")
 walk_state = NodePath("StateMachine/Walk")
 wall_jump_state = NodePath("StateMachine/WallJump")
 wall_run_state = NodePath("StateMachine/WallRun")
+shadow = NodePath("")
 corner_corrector = NodePath("CornerCorrector")
 cliff_detector = NodePath("CliffDetector")
 wall_detector = NodePath("WallDetector")
@@ -395,7 +396,6 @@ collector = NodePath("Collector")
 texture = ExtResource("2_0rnld")
 hframes = 19
 vframes = 19
-frame = 166
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="View"]
 root_node = NodePath("../..")
