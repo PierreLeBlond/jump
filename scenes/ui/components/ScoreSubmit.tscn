@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://de35stn53inu6"]
+[gd_scene load_steps=7 format=3 uid="uid://de35stn53inu6"]
 
-[ext_resource type="Texture2D" uid="uid://b7yga0pu0e4fy" path="res://assets/sprites/note.png" id="1_arw0r"]
-[ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/space.tres" id="1_ax276"]
+[ext_resource type="Texture2D" uid="uid://dvy3hrsp6d6rn" path="res://assets/sprites/note.png" id="1_arw0r"]
+[ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/menu.tres" id="1_ax276"]
 [ext_resource type="Script" uid="uid://d20mki0q6npx6" path="res://scripts/ui/components/ScoreSubmit.gd" id="1_ikebm"]
+[ext_resource type="StyleBox" uid="uid://dgehgi3vuaq8q" path="res://themes/StyleBox/floating_box.tres" id="2_g0g1y"]
 [ext_resource type="Texture2D" uid="uid://dwmx02woptjx6" path="res://assets/sprites/clock.png" id="2_ikebm"]
+[ext_resource type="Script" uid="uid://d2kv0dvtjt31f" path="res://scripts/ui/components/AnimatedButton.gd" id="6_rk3n6"]
 
 [node name="ScoreSubmit" type="PanelContainer" node_paths=PackedStringArray("score_label", "time_label", "player_name_input", "submit_button")]
 anchors_preset = 15
@@ -17,11 +19,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ax276")
 theme_type_variation = &"SubPanelContainer"
+theme_override_styles/panel = ExtResource("2_g0g1y")
 script = ExtResource("1_ikebm")
 score_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/CenterContainer/HBoxContainer/Label")
 time_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/CenterContainer2/HBoxContainer/Label")
 player_name_input = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/LineEdit")
-submit_button = NodePath("MarginContainer/VBoxContainer/Button")
+submit_button = NodePath("MarginContainer/VBoxContainer/MarginContainer/Button")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -32,13 +35,8 @@ theme_override_constants/margin_bottom = 32
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 32
+theme_override_constants/separation = 64
 alignment = 1
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Résultat"
-horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -84,7 +82,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-text = "Ton nom :"
+text = "NAME"
 
 [node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(512, 0)
@@ -98,7 +96,11 @@ virtual_keyboard_enabled = false
 caret_blink = true
 caret_force_displayed = true
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "envoyer"
+text = "SEND"
+script = ExtResource("6_rk3n6")

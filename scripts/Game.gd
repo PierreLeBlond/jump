@@ -9,7 +9,10 @@ var current_level: Level = null
 var current_screen: Screen = null
 
 func _ready() -> void:
-    call_deferred("load_screen", "MainMenu")
+    var preferred_language = OS.get_locale_language()
+    TranslationServer.set_locale(preferred_language)
+
+    call_deferred("load_screen", "TitleScreen")
 
 func unload_current_scene() -> void:
     if !current_scene:
@@ -41,7 +44,7 @@ func load_screen(screen_name: String) -> Screen:
 
     current_screen.wants_to_load_level.connect(load_level)
     current_screen.wants_to_start_new_game.connect(start_new_game)
-    current_screen.wants_to_quit_to_main_menu.connect(quit_to_main_menu)
+    current_screen.wants_to_quit_to_title_screen.connect(quit_to_title_screen)
     current_screen.wants_to_open_leaderboard.connect(open_leaderboard)
 
     current_screen.focus()
@@ -62,7 +65,7 @@ func load_level(level_name: String) -> Level:
 
     release_loading.call_deferred()
 
-    current_level.wants_to_quit.connect(quit_to_main_menu)
+    current_level.wants_to_quit.connect(quit_to_title_screen)
     current_level.wants_to_restart.connect(start_new_game)
 
     current_level.has_run_out_of_lives.connect(open_game_over)
@@ -77,8 +80,8 @@ func load_level(level_name: String) -> Level:
 func start_new_game() -> void:
     load_level("Level1")
 
-func quit_to_main_menu() -> void:
-    load_screen("MainMenu")
+func quit_to_title_screen() -> void:
+    load_screen("TitleScreen")
 
 func open_victory(game_run: GameRun) -> void:
     var score = game_run.score

@@ -1,15 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://e5n4wtiqf8xq"]
 
-[ext_resource type="Script" uid="uid://c2m6hi7u8qp7o" path="res://scripts/character/appearance/Shadow.gd" id="1_djn0l"]
-[ext_resource type="PackedScene" uid="uid://bga7gekc81cl6" path="res://scenes/levels/worlds/world1/PhysicalWorld.tscn" id="2_cf4kf"]
+[ext_resource type="Script" uid="uid://c2m6hi7u8qp7o" path="res://scripts/character/appearance/Shadow.gd" id="1_e3xv7"]
+[ext_resource type="PackedScene" uid="uid://bga7gekc81cl6" path="res://scenes/levels/worlds/world1/PhysicalWorld.tscn" id="2_tj1t8"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_p40yc"]
 viewport_path = NodePath("Shadow/SubViewport")
 
-[node name="Shadow" type="Node2D" node_paths=PackedStringArray("player", "shadow_receiver", "node_2d", "view", "sub_viewport")]
+[node name="Shadow" type="Node2D" node_paths=PackedStringArray("shadow_receiver", "node_2d", "view", "sub_viewport")]
 visible = false
-script = ExtResource("1_djn0l")
-player = NodePath("")
+script = ExtResource("1_e3xv7")
 shadow_receiver = NodePath("ShadowReceiver")
 node_2d = NodePath("ShadowReceiver/Node2D")
 view = NodePath("ShadowReceiver/Node2D/View")
@@ -33,4 +32,4 @@ scale = Vector2(0.345, -0.725)
 transparent_bg = true
 size = Vector2i(1920, 1080)
 
-[node name="PhysicalWorld" parent="SubViewport" instance=ExtResource("2_cf4kf")]
+[node name="PhysicalWorld" parent="SubViewport" instance=ExtResource("2_tj1t8")]

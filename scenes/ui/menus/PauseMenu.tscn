@@ -1,0 +1,178 @@
+[gd_scene load_steps=9 format=3 uid="uid://o7syijl1i4vb"]
+
+[ext_resource type="Script" uid="uid://tno2l180o6ki" path="res://scripts/ui/menus/PauseMenu.gd" id="1_ybn2l"]
+[ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/menu.tres" id="2_70ys4"]
+[ext_resource type="Script" uid="uid://cuhhm5ieqpgf0" path="res://scripts/ui/transitions/Fly.gd" id="3_e5dlb"]
+[ext_resource type="StyleBox" uid="uid://bln2l3kc4a1in" path="res://themes/StyleBox/panel_background.tres" id="3_r0ifa"]
+[ext_resource type="StyleBox" uid="uid://dgehgi3vuaq8q" path="res://themes/StyleBox/floating_box.tres" id="4_70ys4"]
+[ext_resource type="Script" uid="uid://d2kv0dvtjt31f" path="res://scripts/ui/components/AnimatedButton.gd" id="6_oor1q"]
+[ext_resource type="Script" uid="uid://bbxvuejpdvw8l" path="res://scripts/ui/managers/OptionsManager.gd" id="6_ybn2l"]
+[ext_resource type="PackedScene" uid="uid://bg35g3co6814c" path="res://scenes/ui/menus/OptionsMenu.tscn" id="7_atoml"]
+
+[node name="PauseMenu" type="CanvasLayer" node_paths=PackedStringArray("resume_button", "load_checkpoint_button", "restart_button", "quit_to_title_screen_button", "options_button", "options_manager")]
+process_mode = 3
+layer = 3
+script = ExtResource("1_ybn2l")
+resume_button = NodePath("MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/Resume/ResumeButton")
+load_checkpoint_button = NodePath("MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/LoadCheckpoint/LoadCheckpointButton")
+restart_button = NodePath("MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/Restart/RestartButton")
+quit_to_title_screen_button = NodePath("MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/QuitToTitleScreen/QuitToTitleScreenButton")
+options_button = NodePath("MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/Options/OptionsButton")
+options_manager = NodePath("OptionsManager")
+
+[node name="MainContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_70ys4")
+theme_override_styles/panel = ExtResource("3_r0ifa")
+
+[node name="Fly" type="Node" parent="MainContainer"]
+script = ExtResource("3_e5dlb")
+duration = 0.3
+metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 256
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 256
+theme_override_constants/margin_bottom = 128
+
+[node name="MenuContainer" type="PanelContainer" parent="MainContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_70ys4")
+
+[node name="Fly" type="Node" parent="MainContainer/MarginContainer/MenuContainer"]
+script = ExtResource("3_e5dlb")
+x = 1920.0
+duration = 0.4
+metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/MarginContainer/MenuContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 32
+
+[node name="Resume" type="MarginContainer" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/Resume"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../../QuitToTitleScreen/QuitToTitleScreenButton")
+focus_neighbor_top = NodePath("../../QuitToTitleScreen/QuitToTitleScreenButton")
+focus_neighbor_right = NodePath("../../LoadCheckpoint/LoadCheckpointButton")
+focus_neighbor_bottom = NodePath("../../LoadCheckpoint/LoadCheckpointButton")
+focus_next = NodePath("../../LoadCheckpoint/LoadCheckpointButton")
+focus_previous = NodePath("../../QuitToTitleScreen/QuitToTitleScreenButton")
+theme_override_font_sizes/font_size = 48
+text = "RESUME"
+script = ExtResource("6_oor1q")
+
+[node name="Fly" type="Node" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/Resume"]
+script = ExtResource("3_e5dlb")
+x = 512.0
+duration = 0.4
+metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
+
+[node name="LoadCheckpoint" type="MarginContainer" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LoadCheckpointButton" type="Button" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/LoadCheckpoint"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../../Resume/ResumeButton")
+focus_neighbor_top = NodePath("../../Resume/ResumeButton")
+focus_neighbor_right = NodePath("../../Restart/RestartButton")
+focus_neighbor_bottom = NodePath("../../Restart/RestartButton")
+focus_next = NodePath("../../Restart/RestartButton")
+focus_previous = NodePath("../../Resume/ResumeButton")
+theme_override_font_sizes/font_size = 48
+text = "LAST_CHECKPOINT"
+script = ExtResource("6_oor1q")
+
+[node name="Fly" type="Node" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/LoadCheckpoint"]
+script = ExtResource("3_e5dlb")
+x = 512.0
+duration = 0.4
+delay = 0.1
+metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
+
+[node name="Restart" type="MarginContainer" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/Restart"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../../LoadCheckpoint/LoadCheckpointButton")
+focus_neighbor_top = NodePath("../../LoadCheckpoint/LoadCheckpointButton")
+focus_neighbor_right = NodePath("../../QuitToTitleScreen/QuitToTitleScreenButton")
+focus_neighbor_bottom = NodePath("../../QuitToTitleScreen/QuitToTitleScreenButton")
+focus_next = NodePath("../../QuitToTitleScreen/QuitToTitleScreenButton")
+focus_previous = NodePath("../../LoadCheckpoint/LoadCheckpointButton")
+theme_override_font_sizes/font_size = 48
+text = "RESTART"
+script = ExtResource("6_oor1q")
+
+[node name="Fly" type="Node" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/Restart"]
+script = ExtResource("3_e5dlb")
+x = 512.0
+duration = 0.4
+delay = 0.2
+metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
+
+[node name="QuitToTitleScreen" type="MarginContainer" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="QuitToTitleScreenButton" type="Button" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/QuitToTitleScreen"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../../Restart/RestartButton")
+focus_neighbor_top = NodePath("../../Restart/RestartButton")
+focus_neighbor_right = NodePath("../../Options/OptionsButton")
+focus_neighbor_bottom = NodePath("../../Options/OptionsButton")
+focus_next = NodePath("../../Options/OptionsButton")
+focus_previous = NodePath("../../Restart/RestartButton")
+theme_override_font_sizes/font_size = 48
+text = "TITLE_SCREEN"
+script = ExtResource("6_oor1q")
+
+[node name="Fly" type="Node" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/QuitToTitleScreen"]
+script = ExtResource("3_e5dlb")
+x = 512.0
+duration = 0.4
+delay = 0.3
+metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
+
+[node name="Options" type="MarginContainer" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="OptionsButton" type="Button" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/Options"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../../QuitToTitleScreen/QuitToTitleScreenButton")
+focus_neighbor_top = NodePath("../../QuitToTitleScreen/QuitToTitleScreenButton")
+focus_neighbor_right = NodePath("../../Resume/ResumeButton")
+focus_neighbor_bottom = NodePath("../../Resume/ResumeButton")
+focus_next = NodePath("../../Resume/ResumeButton")
+focus_previous = NodePath("../../QuitToTitleScreen/QuitToTitleScreenButton")
+theme_override_font_sizes/font_size = 48
+text = "OPTIONS"
+script = ExtResource("6_oor1q")
+
+[node name="Fly" type="Node" parent="MainContainer/MarginContainer/MenuContainer/MarginContainer/VBoxContainer/Options"]
+script = ExtResource("3_e5dlb")
+x = 512.0
+duration = 0.4
+delay = 0.4
+metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
+
+[node name="OptionsManager" type="Node" parent="."]
+script = ExtResource("6_ybn2l")
+options_menu_scene = ExtResource("7_atoml")

@@ -1,15 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://ka3icxdhn46e"]
+[gd_scene load_steps=9 format=3 uid="uid://ka3icxdhn46e"]
 
 [ext_resource type="Script" uid="uid://fkka7gaonjq5" path="res://scripts/ui/screens/Victory.gd" id="1_og3yy"]
-[ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/space.tres" id="2_6vdng"]
+[ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/menu.tres" id="2_6vdng"]
 [ext_resource type="Script" uid="uid://cuhhm5ieqpgf0" path="res://scripts/ui/transitions/Fly.gd" id="3_6vdng"]
+[ext_resource type="Script" uid="uid://d2kv0dvtjt31f" path="res://scripts/ui/components/AnimatedButton.gd" id="4_kh4h2"]
 [ext_resource type="PackedScene" uid="uid://de35stn53inu6" path="res://scenes/ui/components/ScoreSubmit.tscn" id="5_3r8fr"]
 [ext_resource type="Script" uid="uid://b7ooaflveg5gm" path="res://addons/onscreenkeyboard/onscreen_keyboard.gd" id="5_kh4h2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c34kd"]
+bg_color = Color(0.34509805, 0.5058824, 0.34117648, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3r8fr"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="Victory" type="Control" node_paths=PackedStringArray("start_new_game_button", "quit_to_main_menu_button", "on_screen_keyboard", "score_submit")]
+[node name="Victory" type="Control" node_paths=PackedStringArray("start_new_game_button", "quit_to_title_screen_button", "on_screen_keyboard", "score_submit")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,8 +21,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_og3yy")
-start_new_game_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/StartNewGame")
-quit_to_main_menu_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/QuitToMainMenu")
+start_new_game_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/StartNewGame")
+quit_to_title_screen_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/QuitToTitleScreen")
 on_screen_keyboard = NodePath("PanelContainer/VBoxContainer/OnscreenKeyboard")
 score_submit = NodePath("PanelContainer/VBoxContainer/HBoxContainer/ScoreSubmit")
 
@@ -30,6 +34,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_6vdng")
+theme_override_styles/panel = SubResource("StyleBoxFlat_c34kd")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -51,27 +56,35 @@ alignment = 1
 layout_mode = 2
 theme_type_variation = &"Title"
 theme_override_font_sizes/font_size = 128
-text = "VICTOIRE"
+text = "VICTORY"
 horizontal_alignment = 1
 
 [node name="Fly" type="Node" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label"]
 script = ExtResource("3_6vdng")
 metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
 
-[node name="StartNewGame" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "recommencer"
 
-[node name="Fly" type="Node" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/StartNewGame"]
+[node name="StartNewGame" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "RESTART"
+script = ExtResource("4_kh4h2")
+
+[node name="Fly" type="Node" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
 script = ExtResource("3_6vdng")
 x = -800.0
 metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
 
-[node name="QuitToMainMenu" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "menu principal"
 
-[node name="Fly" type="Node" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/QuitToMainMenu"]
+[node name="QuitToTitleScreen" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+text = "TITLE_SCREEN"
+script = ExtResource("4_kh4h2")
+
+[node name="Fly" type="Node" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2"]
 script = ExtResource("3_6vdng")
 x = -800.0
 delay = 0.1
@@ -87,7 +100,6 @@ delay = 0.2
 metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
 
 [node name="OnscreenKeyboard" type="PanelContainer" parent="PanelContainer/VBoxContainer" node_paths=PackedStringArray("score_submit")]
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3r8fr")
 script = ExtResource("5_kh4h2")
@@ -97,4 +109,7 @@ set_tool_tip = false
 separation = Vector2i(16, 16)
 background = SubResource("StyleBoxFlat_3r8fr")
 font_size = 30
+font_color_normal = Color(0, 0.18806745, 0.28625926, 1)
+font_color_hover = Color(0.92964065, 0.9022812, 0.75719845, 1)
+font_color_pressed = Color(0, 0.18806745, 0.28625926, 1)
 metadata/_custom_type_script = "uid://b7ooaflveg5gm"

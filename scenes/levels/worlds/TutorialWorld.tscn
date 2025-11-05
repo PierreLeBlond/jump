@@ -73,7 +73,7 @@ position = Vector2(8426, 597)
 cone_angle = 0.36
 cone_height = 512.0
 
-[node name="TextRevealAreas" type="Node" parent="."]
+[node name="TextRevealAreas" type="Node2D" parent="."]
 
 [node name="1" type="Area2D" parent="TextRevealAreas" node_paths=PackedStringArray("canvas_item", "mobile_canvas_item")]
 position = Vector2(334, 0)
@@ -94,9 +94,7 @@ offset_top = 548.0
 offset_right = 488.0
 offset_bottom = 771.0
 bbcode_enabled = true
-text = "utilise les flêches directionnelles
-[b]gauche[/b] & [b]droite[/b]
-pour te déplacer"
+text = "TUTORIAL_KEYBOARD_TEXT_1"
 
 [node name="Control" type="Control" parent="TextRevealAreas/1"]
 layout_mode = 3
@@ -112,24 +110,23 @@ offset_top = 548.0
 offset_right = 488.0
 offset_bottom = 771.0
 bbcode_enabled = true
-text = "utilise             &
-pour te déplacer"
+text = "TUTORIAL_TOUCHSCREEN_TEXT_1"
 
 [node name="TextureRect" type="TextureRect" parent="TextRevealAreas/1/Control"]
 layout_mode = 0
-offset_left = -94.0
-offset_top = 542.0
-offset_right = -27.0
-offset_bottom = 609.0
+offset_left = -216.0
+offset_top = 601.0
+offset_right = -149.0
+offset_bottom = 668.0
 texture = ExtResource("9_8rjwt")
 expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="TextRevealAreas/1/Control"]
 layout_mode = 0
-offset_left = 36.0
-offset_top = 542.0
-offset_right = 103.0
-offset_bottom = 609.0
+offset_left = -86.0
+offset_top = 601.0
+offset_right = -19.0
+offset_bottom = 668.0
 texture = ExtResource("10_hpnfb")
 expand_mode = 1
 
@@ -148,7 +145,7 @@ offset_top = 627.0
 offset_right = 1271.0
 offset_bottom = 723.0
 bbcode_enabled = true
-text = "saute avec la [b]barre d'espace[/b]"
+text = "TUTORIAL_KEYBOARD_TEXT_2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/5"]
 position = Vector2(0, 540)
@@ -168,14 +165,14 @@ offset_top = 627.0
 offset_right = 1271.0
 offset_bottom = 723.0
 bbcode_enabled = true
-text = "saute avec"
+text = "TUTORIAL_TOUCHSCREEN_TEXT_2"
 
 [node name="TextureRect" type="TextureRect" parent="TextRevealAreas/5/Control"]
 layout_mode = 0
-offset_left = 600.0
-offset_top = 624.0
-offset_right = 667.0
-offset_bottom = 691.0
+offset_left = 398.0
+offset_top = 688.0
+offset_right = 465.0
+offset_bottom = 755.0
 texture = ExtResource("11_uco4x")
 expand_mode = 1
 
@@ -193,8 +190,7 @@ offset_top = 419.0
 offset_right = 1095.0
 offset_bottom = 582.0
 bbcode_enabled = true
-text = "Maintiens enfoncée
-pour sauter [b]plus haut[/b]"
+text = "TUTORIAL_TEXT_3"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/11"]
 position = Vector2(0, 540)
@@ -214,7 +210,7 @@ offset_top = 578.0
 offset_right = 1877.0
 offset_bottom = 670.0
 bbcode_enabled = true
-text = "prends de la vitesse pour sauter [b]plus loin[/b]"
+text = "TUTORIAL_TEXT_4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/12"]
 position = Vector2(0, 540)
@@ -234,8 +230,7 @@ offset_top = 317.0
 offset_right = 1658.0
 offset_bottom = 472.0
 bbcode_enabled = true
-text = "colles toi au mur avant de sauter
-pour [b]courir[/b] à la [b]vertical[/b]"
+text = "TUTORIAL_TEXT_5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/13"]
 position = Vector2(0, 540)
@@ -255,7 +250,7 @@ offset_top = 674.0
 offset_right = 754.0
 offset_bottom = 857.0
 bbcode_enabled = true
-text = "une fois sur un mur, sautes à nouveau dans la direction opposée"
+text = "TUTORIAL_TEXT_6"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/6"]
 position = Vector2(0, 540)
@@ -275,7 +270,7 @@ offset_top = 481.0
 offset_right = 686.0
 offset_bottom = 535.0
 bbcode_enabled = true
-text = "pour"
+text = "TUTORIAL_TEXT_7"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/7"]
 position = Vector2(0, 540)
@@ -295,7 +290,7 @@ offset_top = 213.0
 offset_right = 878.0
 offset_bottom = 321.0
 bbcode_enabled = true
-text = "[b]rebondir[/b]"
+text = "TUTORIAL_TEXT_8"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/8"]
 position = Vector2(0, 540)
@@ -315,8 +310,7 @@ offset_top = 509.0
 offset_right = 840.0
 offset_bottom = 666.0
 bbcode_enabled = true
-text = "Evites le rayon attracteur
-du [b]Soubalien[/b]"
+text = "TUTORIAL_TEXT_9"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/9"]
 position = Vector2(0, 540)
@@ -337,8 +331,7 @@ offset_top = 486.0
 offset_right = 1043.0
 offset_bottom = 643.0
 bbcode_enabled = true
-text = "Fais une pause
-en appuyant sur la touche [b]ESC[/b]"
+text = "TUTORIAL_KEYBOARD_TEXT_10"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/14"]
 position = Vector2(0, 540)
@@ -358,15 +351,14 @@ offset_top = 486.0
 offset_right = 1043.0
 offset_bottom = 643.0
 bbcode_enabled = true
-text = "Fais une pause
-en appuyant sur "
+text = "TUTORIAL_TOUCHSCREEN_TEXT_10"
 
 [node name="TextureRect" type="TextureRect" parent="TextRevealAreas/14/Control"]
 layout_mode = 0
-offset_left = 608.0
-offset_top = 541.0
-offset_right = 675.0
-offset_bottom = 608.0
+offset_left = 310.0
+offset_top = 618.0
+offset_right = 377.0
+offset_bottom = 685.0
 texture = ExtResource("12_r26p5")
 expand_mode = 1
 
@@ -384,9 +376,7 @@ offset_top = 51.0
 offset_right = 782.0
 offset_bottom = 286.0
 bbcode_enabled = true
-text = "Finis le niveau
-en atteignant
-le [b]portail[/b] :"
+text = "TUTORIAL_TEXT_11"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextRevealAreas/10"]
 position = Vector2(0, 540)

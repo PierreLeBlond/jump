@@ -1,0 +1,32 @@
+keys,en,fr
+TUTORIAL,tutorial,tutoriel
+PLAY,play,jouer
+LEADERBOARD,leaderboard,classement
+OPTIONS,options,options
+TITLE_SCREEN,title screen,menu principal
+SCORE,score,score
+TIME,time,temps
+LANGUAGE,language,langue
+VOLUME,volume level,volume sonore
+RETRY,retry ?,réessayer ?
+VICTORY,VICTORY,VICTOIRE
+RESTART,restart,recommencer
+RESULT,result,résultat
+NAME,your name :,ton nom :
+SEND,send,envoyer
+TUTORIAL_KEYBOARD_TEXT_1,use [b]left[/b] & [b]right[/b] directional arrows to move around,utilise les flêches directionnelles [b]gauche[/b] & [b]droite[/b] pour te déplacer
+TUTORIAL_TOUCHSCREEN_TEXT_1,use \n           & \n to move around,utilise \n           & \n pour te déplacer
+TUTORIAL_KEYBOARD_TEXT_2,jump with the [b]space bar[/b],saute avec la [b]barre d'espace[/b]
+TUTORIAL_TOUCHSCREEN_TEXT_2,jump with,saute avec
+TUTORIAL_TEXT_3,hold it \n to jump [b]higher[/b],Maintiens enfoncée \n pour sauter [b]plus haut[/b]
+TUTORIAL_TEXT_4,get some speed to jump [b]further[/b],prends de la vitesse pour sauter [b]plus loin[/b]
+TUTORIAL_TEXT_5,hug the wall before jumping \n to [b]run vertically[/b],colles toi au mur avant de sauter \n pour [b]courir[/b] à la [b]vertical[/b]
+TUTORIAL_TEXT_6,"once on the wall, jump again in the opposite direction","une fois sur un mur, sautes à nouveau dans la direction opposée"
+TUTORIAL_TEXT_7,to,pour
+TUTORIAL_TEXT_8,[b]bounce back[/b],[b]rebondir[/b]
+TUTORIAL_TEXT_9,avoid the attractor ray \n of [b]The Soubalien[/b],evites le rayon attracteur \n du [b]Soubalien[/b]
+TUTORIAL_KEYBOARD_TEXT_10,take a break \n by pressing [b]ESC[/b],fais une pause \n en appuyant sur la touche [b]ESC[/b]
+TUTORIAL_TOUCHSCREEN_TEXT_10,take a break \n by pressing,fais une pause \n en appuyant sur la touche [b]ESC[/b]
+TUTORIAL_TEXT_11,end the level \n by reaching \n the [b]portal[/b] :,finis le niveau \n en atteignant \n le [b]portail[/b] :
+RESUME,resume,reprendre
+LAST_CHECKPOINT,last checkpoint,dernier point de sauvegarde

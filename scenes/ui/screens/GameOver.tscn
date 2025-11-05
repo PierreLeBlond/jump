@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1n0bd0dkvmhw"]
+[gd_scene load_steps=6 format=3 uid="uid://c1n0bd0dkvmhw"]
 
 [ext_resource type="Script" uid="uid://opvrmded8k4" path="res://scripts/ui/screens/GameOver.gd" id="2_05upv"]
-[ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/space.tres" id="2_nhrd6"]
+[ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/menu.tres" id="2_nhrd6"]
 [ext_resource type="Script" uid="uid://cuhhm5ieqpgf0" path="res://scripts/ui/transitions/Fly.gd" id="3_nuotj"]
+[ext_resource type="Script" uid="uid://d2kv0dvtjt31f" path="res://scripts/ui/components/AnimatedButton.gd" id="4_nhrd6"]
 
-[node name="GameOver" type="Control" node_paths=PackedStringArray("start_new_game_button", "quit_to_main_menu_button")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nuotj"]
+bg_color = Color(0.8392157, 0.15686275, 0.15686275, 1)
+
+[node name="GameOver" type="Control" node_paths=PackedStringArray("start_new_game_button", "quit_to_title_screen_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,8 +18,8 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("2_05upv")
-start_new_game_button = NodePath("PanelContainer/VBoxContainer/VBoxContainer/StartNewGame")
-quit_to_main_menu_button = NodePath("PanelContainer/VBoxContainer/VBoxContainer/QuitToMainMenu")
+start_new_game_button = NodePath("PanelContainer/VBoxContainer/VBoxContainer/StartNewGame/StartNewGameButton")
+quit_to_title_screen_button = NodePath("PanelContainer/VBoxContainer/VBoxContainer/QuitToTitleScreen/QuitTitleScreenButton")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -25,6 +29,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_nhrd6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_nuotj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -47,34 +52,42 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 64
 
-[node name="StartNewGame" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+[node name="StartNewGame" type="MarginContainer" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="StartNewGameButton" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer/StartNewGame"]
 layout_mode = 2
 size_flags_vertical = 4
-focus_neighbor_left = NodePath("../QuitToMainMenu")
-focus_neighbor_top = NodePath("../QuitToMainMenu")
-focus_neighbor_right = NodePath("../QuitToMainMenu")
-focus_neighbor_bottom = NodePath("../QuitToMainMenu")
-focus_next = NodePath("../QuitToMainMenu")
-focus_previous = NodePath("../QuitToMainMenu")
-text = "Réessayer ?"
+focus_neighbor_left = NodePath("../../QuitToTitleScreen/QuitTitleScreenButton")
+focus_neighbor_top = NodePath("../../QuitToTitleScreen/QuitTitleScreenButton")
+focus_neighbor_right = NodePath("../../QuitToTitleScreen/QuitTitleScreenButton")
+focus_neighbor_bottom = NodePath("../../QuitToTitleScreen/QuitTitleScreenButton")
+focus_next = NodePath("../../QuitToTitleScreen/QuitTitleScreenButton")
+focus_previous = NodePath("../../QuitToTitleScreen/QuitTitleScreenButton")
+text = "RETRY"
+script = ExtResource("4_nhrd6")
 
 [node name="Fly" type="Node" parent="PanelContainer/VBoxContainer/VBoxContainer/StartNewGame"]
 script = ExtResource("3_nuotj")
 y = 800.0
 metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
 
-[node name="QuitToMainMenu" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+[node name="QuitToTitleScreen" type="MarginContainer" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="QuitTitleScreenButton" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer/QuitToTitleScreen"]
 layout_mode = 2
 size_flags_horizontal = 4
-focus_neighbor_left = NodePath("../StartNewGame")
-focus_neighbor_top = NodePath("../StartNewGame")
-focus_neighbor_right = NodePath("../StartNewGame")
-focus_neighbor_bottom = NodePath("../StartNewGame")
-focus_next = NodePath("../StartNewGame")
-focus_previous = NodePath("../StartNewGame")
-text = "Menu principal"
+focus_neighbor_left = NodePath("../../StartNewGame/StartNewGameButton")
+focus_neighbor_top = NodePath("../../StartNewGame/StartNewGameButton")
+focus_neighbor_right = NodePath("../../StartNewGame/StartNewGameButton")
+focus_neighbor_bottom = NodePath("../../StartNewGame/StartNewGameButton")
+focus_next = NodePath("../../StartNewGame/StartNewGameButton")
+focus_previous = NodePath("../../StartNewGame/StartNewGameButton")
+text = "TITLE_SCREEN"
+script = ExtResource("4_nhrd6")
 
-[node name="Fly" type="Node" parent="PanelContainer/VBoxContainer/VBoxContainer/QuitToMainMenu"]
+[node name="Fly" type="Node" parent="PanelContainer/VBoxContainer/VBoxContainer/QuitToTitleScreen"]
 script = ExtResource("3_nuotj")
 y = 800.0
 delay = 0.1

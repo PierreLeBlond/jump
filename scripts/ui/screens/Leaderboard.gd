@@ -2,7 +2,7 @@ extends Screen
 
 class_name Leaderboard
 
-@export var quit_to_main_menu_button: Button
+@export var quit_to_title_screen_button: Button
 
 @export var score_names_container: Control
 @export var score_values_container: Control
@@ -14,7 +14,7 @@ class_name Leaderboard
 @export var time_skeleton: Control
 
 func _ready() -> void:
-    quit_to_main_menu_button.pressed.connect(quit_to_main_menu)
+    quit_to_title_screen_button.pressed.connect(quit_to_title_screen)
 
 func clear() -> void:
     for child in score_names_container.get_children():
@@ -30,7 +30,7 @@ func clear() -> void:
         child.queue_free()
 
 func focus() -> void:
-    quit_to_main_menu_button.grab_focus()
+    quit_to_title_screen_button.grab_focus()
 
 func update() -> void:
     clear()
@@ -66,7 +66,7 @@ func update() -> void:
         time_values_container.add_child(value_label)
 
 func disable() -> void:
-    quit_to_main_menu_button.disabled = true
+    quit_to_title_screen_button.disabled = true
 
 func enable() -> void:
-    quit_to_main_menu_button.disabled = false
+    quit_to_title_screen_button.disabled = false

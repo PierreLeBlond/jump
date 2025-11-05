@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c352l4cf7kj1v" path="res://scripts/levels/Level.gd" id="1_6owa4"]
 [ext_resource type="Script" uid="uid://b1qlks4lid3un" path="res://scripts/game/Events.gd" id="2_dqba7"]
 [ext_resource type="Script" uid="uid://calrwlxq3l0el" path="res://scripts/checkpoint/CheckpointManager.gd" id="2_xbvxr"]
-[ext_resource type="Script" uid="uid://bm01vpvn4i6wi" path="res://scripts/levels/PauseManager.gd" id="4_hnhv5"]
+[ext_resource type="Script" uid="uid://bm01vpvn4i6wi" path="res://scripts/ui/managers/PauseManager.gd" id="4_hnhv5"]
 
 [node name="Level1" type="Node" node_paths=PackedStringArray("pause_manager", "checkpoint_manager", "world_wrapper")]
 process_mode = 1

@@ -105,6 +105,10 @@ pause={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://translations/translations.en.translation", "res://translations/translations.fr.translation")
+
 [layer_names]
 
 2d_physics/layer_1="walls"

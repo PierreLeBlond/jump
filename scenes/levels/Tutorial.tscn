@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bfshhb0w7ohbq" path="res://scripts/levels/Tutorial.gd" id="1_7ktok"]
 [ext_resource type="Script" uid="uid://b1qlks4lid3un" path="res://scripts/game/Events.gd" id="1_af4br"]
-[ext_resource type="Script" uid="uid://bm01vpvn4i6wi" path="res://scripts/levels/PauseManager.gd" id="2_pvt5t"]
+[ext_resource type="Script" uid="uid://bm01vpvn4i6wi" path="res://scripts/ui/managers/PauseManager.gd" id="2_pvt5t"]
 [ext_resource type="Script" uid="uid://calrwlxq3l0el" path="res://scripts/checkpoint/CheckpointManager.gd" id="2_vvfd6"]
 
 [node name="Tutorial" type="Node" node_paths=PackedStringArray("pause_manager", "checkpoint_manager", "world_wrapper")]

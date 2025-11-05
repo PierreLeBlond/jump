@@ -1,0 +1,143 @@
+[gd_scene load_steps=8 format=3 uid="uid://bg35g3co6814c"]
+
+[ext_resource type="StyleBox" uid="uid://bln2l3kc4a1in" path="res://themes/StyleBox/panel_background.tres" id="1_8xvwu"]
+[ext_resource type="Script" uid="uid://k8sg3lqvgiug" path="res://scripts/ui/menus/OptionsMenu.gd" id="1_v343w"]
+[ext_resource type="Script" uid="uid://cuhhm5ieqpgf0" path="res://scripts/ui/transitions/Fly.gd" id="2_373b0"]
+[ext_resource type="StyleBox" uid="uid://dgehgi3vuaq8q" path="res://themes/StyleBox/floating_box.tres" id="3_v343w"]
+[ext_resource type="Script" uid="uid://d2kv0dvtjt31f" path="res://scripts/ui/components/AnimatedButton.gd" id="5_tctq1"]
+[ext_resource type="Script" uid="uid://74gj8fsm1ae3" path="res://scripts/ui/components/VolumeSlider.gd" id="5_v343w"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_v343w"]
+
+[node name="OptionsMenu" type="CanvasLayer" node_paths=PackedStringArray("language_button_french", "language_button_english", "volume_slider")]
+layer = 4
+script = ExtResource("1_v343w")
+language_button_french = NodePath("PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2/MarginContainer/HBoxContainer/French/FrenchButton")
+language_button_english = NodePath("PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2/MarginContainer/HBoxContainer/English/EnglishButton")
+volume_slider = NodePath("PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/HSlider")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_8xvwu")
+
+[node name="Fly" type="Node" parent="PanelContainer"]
+script = ExtResource("2_373b0")
+duration = 0.3
+metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 320
+theme_override_constants/margin_top = 172
+theme_override_constants/margin_right = 320
+theme_override_constants/margin_bottom = 172
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_v343w")
+
+[node name="Fly" type="Node" parent="PanelContainer/MarginContainer/PanelContainer"]
+script = ExtResource("2_373b0")
+y = 1080.0
+duration = 0.4
+metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
+text = "OPTIONS"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "LANGUAGE"
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_right = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="French" type="MarginContainer" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FrenchButton" type="Button" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2/MarginContainer/HBoxContainer/French"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../../English/EnglishButton")
+focus_neighbor_top = NodePath("../../../../../VBoxContainer/MarginContainer/HSlider")
+focus_neighbor_right = NodePath("../../English/EnglishButton")
+focus_neighbor_bottom = NodePath("../../../../../VBoxContainer/MarginContainer/HSlider")
+focus_next = NodePath("../../English/EnglishButton")
+focus_previous = NodePath("../../../../../VBoxContainer/MarginContainer/HSlider")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_v343w")
+text = "FRANÇAIS"
+script = ExtResource("5_tctq1")
+
+[node name="English" type="MarginContainer" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EnglishButton" type="Button" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2/MarginContainer/HBoxContainer/English"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../../French/FrenchButton")
+focus_neighbor_top = NodePath("../../../../../VBoxContainer/MarginContainer/HSlider")
+focus_neighbor_right = NodePath("../../French/FrenchButton")
+focus_neighbor_bottom = NodePath("../../../../../VBoxContainer/MarginContainer/HSlider")
+focus_next = NodePath("../../../../../VBoxContainer/MarginContainer/HSlider")
+focus_previous = NodePath("../../French/FrenchButton")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_v343w")
+text = "ENGLISH"
+script = ExtResource("5_tctq1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "VOLUME"
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_right = 64
+
+[node name="HSlider" type="HSlider" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../../VBoxContainer2/MarginContainer/HBoxContainer/English/EnglishButton")
+focus_neighbor_bottom = NodePath("../../../VBoxContainer2/MarginContainer/HBoxContainer/French/FrenchButton")
+focus_next = NodePath("../../../VBoxContainer2/MarginContainer/HBoxContainer/French/FrenchButton")
+focus_previous = NodePath("../../../VBoxContainer2/MarginContainer/HBoxContainer/English/EnglishButton")
+value = 46.0
+script = ExtResource("5_v343w")
+bus_name = "Master"
