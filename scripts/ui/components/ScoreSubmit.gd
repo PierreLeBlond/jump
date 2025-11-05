@@ -30,8 +30,9 @@ func on_submit_button_pressed() -> void:
 
     submit_button.disabled = true
 
-    await SilentWolf.Scores.save_score(player_name_input.text, score)
-    await SilentWolf.Scores.save_score(player_name_input.text, -time, "time")
+    await Talo.players.identify("username", player_name_input.text)
+    await Talo.leaderboards.add_entry(Globals.SCORES_LEADERBOARD_INTERNAL_NAME, score)
+    await Talo.leaderboards.add_entry(Globals.TIMES_LEADERBOARD_INTERNAL_NAME, time)
 
     submit_button.disabled = false
 

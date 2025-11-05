@@ -311,7 +311,7 @@ offset_right = 1324.0
 offset_bottom = 330.0
 theme = ExtResource("9_w5u7w")
 theme_type_variation = &"Title"
-text = "BRASS & SPACE"
+text = "BRASS IN SPACE"
 
 [node name="Fly" type="Node" parent="Label"]
 script = ExtResource("8_64a6e")

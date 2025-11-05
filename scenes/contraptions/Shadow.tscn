@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bga7gekc81cl6" path="res://scenes/levels/worlds/world1/PhysicalWorld.tscn" id="2_tj1t8"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_p40yc"]
-viewport_path = NodePath("Shadow/SubViewport")
+viewport_path = NodePath("SubViewport")
 
 [node name="Shadow" type="Node2D" node_paths=PackedStringArray("shadow_receiver", "node_2d", "view", "sub_viewport")]
 visible = false
