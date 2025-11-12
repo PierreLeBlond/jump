@@ -9,7 +9,6 @@ class_name OptionsMenu
 func _ready() -> void:
     language_button_french.pressed.connect(on_language_button_french_pressed)
     language_button_english.pressed.connect(on_language_button_english_pressed)
-    volume_slider.value_changed.connect(on_volume_slider_value_changed)
 
     var locale = TranslationServer.get_locale()
     if locale == "fr":
@@ -19,14 +18,9 @@ func _ready() -> void:
 
 func on_language_button_french_pressed() -> void:
     TranslationServer.set_locale("fr")
-    print("Language button french pressed")
 
 func on_language_button_english_pressed() -> void:
     TranslationServer.set_locale("en")
-    print("Language button english pressed")
-
-func on_volume_slider_value_changed(_value: float) -> void:
-    print("Volume slider value changed: ", _value)
 
 func focus() -> void:
     var locale = TranslationServer.get_locale()

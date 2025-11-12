@@ -1,19 +1,47 @@
-[gd_scene load_steps=9 format=3 uid="uid://ka3icxdhn46e"]
+[gd_scene load_steps=19 format=4 uid="uid://ka3icxdhn46e"]
 
 [ext_resource type="Script" uid="uid://fkka7gaonjq5" path="res://scripts/ui/screens/Victory.gd" id="1_og3yy"]
 [ext_resource type="Theme" uid="uid://bx7hkxebggo06" path="res://themes/menu.tres" id="2_6vdng"]
+[ext_resource type="Texture2D" uid="uid://bmiy8u04n4m34" path="res://assets/sprites/bakground-5.png" id="2_odout"]
 [ext_resource type="Script" uid="uid://cuhhm5ieqpgf0" path="res://scripts/ui/transitions/Fly.gd" id="3_6vdng"]
+[ext_resource type="Texture2D" uid="uid://cc7pufusnl580" path="res://assets/sprites/bakground-4.png" id="3_n76nj"]
+[ext_resource type="Texture2D" uid="uid://bn4dwfu1txdur" path="res://assets/sprites/bakground-7.png" id="3_odout"]
+[ext_resource type="Script" uid="uid://d20mki0q6npx6" path="res://scripts/ui/components/ScoreSubmit.gd" id="4_c34kd"]
 [ext_resource type="Script" uid="uid://d2kv0dvtjt31f" path="res://scripts/ui/components/AnimatedButton.gd" id="4_kh4h2"]
-[ext_resource type="PackedScene" uid="uid://de35stn53inu6" path="res://scenes/ui/components/ScoreSubmit.tscn" id="5_3r8fr"]
-[ext_resource type="Script" uid="uid://b7ooaflveg5gm" path="res://addons/onscreenkeyboard/onscreen_keyboard.gd" id="5_kh4h2"]
+[ext_resource type="Texture2D" uid="uid://dvy3hrsp6d6rn" path="res://assets/sprites/note.png" id="5_s2vbh"]
+[ext_resource type="Texture2D" uid="uid://cmfortl8nq5xg" path="res://assets/sprites/bakground-2.png" id="5_xax7f"]
+[ext_resource type="Texture2D" uid="uid://dwmx02woptjx6" path="res://assets/sprites/clock.png" id="6_tefiy"]
+[ext_resource type="PackedScene" uid="uid://clupawugd4j8g" path="res://scenes/ui/components/TextInput.tscn" id="7_23d0j"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c34kd"]
-bg_color = Color(0.34509805, 0.5058824, 0.34117648, 1)
+[sub_resource type="Gradient" id="Gradient_xnmwc"]
+colors = PackedColorArray(0.40784314, 0.6431373, 0.8509804, 1, 0.91664, 0.91664, 0.91664, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3r8fr"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_23d0j"]
+gradient = SubResource("Gradient_xnmwc")
+fill_from = Vector2(0.910256, 0.320513)
+fill_to = Vector2(0.662393, 0.884615)
 
-[node name="Victory" type="Control" node_paths=PackedStringArray("start_new_game_button", "quit_to_title_screen_button", "on_screen_keyboard", "score_submit")]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_23d0j"]
+texture = ExtResource("2_odout")
+20:8/size_in_atlas = Vector2i(16, 12)
+20:8/0 = 0
+41:6/size_in_atlas = Vector2i(25, 15)
+41:6/0 = 0
+67:13/size_in_atlas = Vector2i(11, 10)
+67:13/0 = 0
+82:6/size_in_atlas = Vector2i(17, 8)
+82:6/0 = 0
+102:12/size_in_atlas = Vector2i(16, 13)
+102:12/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_odout"]
+sources/0 = SubResource("TileSetAtlasSource_23d0j")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vew63"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_odout"]
+
+[node name="Victory" type="Control" node_paths=PackedStringArray("start_new_game_button", "quit_to_title_screen_button", "player_name_input", "score_submit")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,10 +49,74 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_og3yy")
-start_new_game_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/StartNewGame")
-quit_to_title_screen_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/QuitToTitleScreen")
-on_screen_keyboard = NodePath("PanelContainer/VBoxContainer/OnscreenKeyboard")
-score_submit = NodePath("PanelContainer/VBoxContainer/HBoxContainer/ScoreSubmit")
+start_new_game_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/StartNewGame")
+quit_to_title_screen_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/MarginContainer2/QuitToTitleScreen")
+player_name_input = NodePath("PanelContainer/VBoxContainer/ScoreSubmit/MarginContainer/VBoxContainer/TextInput")
+score_submit = NodePath("PanelContainer/VBoxContainer/ScoreSubmit")
+
+[node name="Background" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GradientBackground" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_23d0j")
+
+[node name="Mountains" type="TextureRect" parent="Background"]
+modulate = Color(0.429, 0.59840006, 0.66, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 70.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_n76nj")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="FrontClouds" type="TextureRect" parent="Background"]
+modulate = Color(0.576, 0.8676, 0.9, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -204.0
+offset_top = 493.0
+offset_right = -204.0
+offset_bottom = 493.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_odout")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="Lands" type="TextureRect" parent="Background"]
+modulate = Color(0.25520003, 0.44, 0.43692002, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_xax7f")
+expand_mode = 2
+stretch_mode = 1
+flip_h = true
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAYAAgAAAApAAYAAABhAAgAAABmAAwAAABXAAoAAAApAAYAAABdAAUAAAAUAAgAAABjAA0AAABDAA0AAAANABUAAAApAAYAAAAaABcAAAApAAYAADAkABYAAAApAAYAABAxABcAAAAUAAgAAAA3ABMAAAAUAAgAAAA5ABgAAAAUAAgAAAAvABMAAAAUAAgAAAA+ABQAAAAUAAgAAABDABkAAAAUAAgAAAA=")
+tile_set = SubResource("TileSet_odout")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -34,82 +126,128 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_6vdng")
-theme_override_styles/panel = SubResource("StyleBoxFlat_c34kd")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_vew63")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/separation = 128
-alignment = 1
+alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-theme_override_constants/separation = 64
-alignment = 1
+size_flags_horizontal = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2/CenterContainer"]
+custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
-theme_override_constants/separation = 64
-alignment = 1
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/CenterContainer/HBoxContainer"]
 layout_mode = 2
+texture = ExtResource("5_s2vbh")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
 theme_type_variation = &"Title"
 theme_override_font_sizes/font_size = 128
 text = "VICTORY"
 horizontal_alignment = 1
 
-[node name="Fly" type="Node" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label"]
+[node name="Fly" type="Node" parent="PanelContainer/VBoxContainer/HBoxContainer2/Label"]
 script = ExtResource("3_6vdng")
 metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer2/CenterContainer2"]
+custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 
-[node name="StartNewGame" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer2/CenterContainer2/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_tefiy")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer2/CenterContainer2/HBoxContainer"]
+layout_mode = 2
+text = "00:00:00"
+
+[node name="ScoreSubmit" type="PanelContainer" parent="PanelContainer/VBoxContainer" node_paths=PackedStringArray("score_label", "time_label", "player_name_input", "submit_button")]
+layout_mode = 2
+theme = ExtResource("2_6vdng")
+theme_type_variation = &"SubPanelContainer"
+theme_override_styles/panel = SubResource("StyleBoxEmpty_odout")
+script = ExtResource("4_c34kd")
+score_label = NodePath("../HBoxContainer2/CenterContainer/HBoxContainer/Label")
+time_label = NodePath("../HBoxContainer2/CenterContainer2/HBoxContainer/Label")
+player_name_input = NodePath("MarginContainer/VBoxContainer/TextInput")
+submit_button = NodePath("MarginContainer/VBoxContainer/MarginContainer/Button")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/ScoreSubmit"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_right = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScoreSubmit/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TextInput" parent="PanelContainer/VBoxContainer/ScoreSubmit/MarginContainer/VBoxContainer" instance=ExtResource("7_23d0j")]
+layout_mode = 2
+focus_next = NodePath("../MarginContainer/Button")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/ScoreSubmit/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/ScoreSubmit/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "SEND"
+script = ExtResource("4_kh4h2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="StartNewGame" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
 text = "RESTART"
 script = ExtResource("4_kh4h2")
 
-[node name="Fly" type="Node" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+[node name="Fly" type="Node" parent="PanelContainer/VBoxContainer/HBoxContainer/MarginContainer"]
 script = ExtResource("3_6vdng")
 x = -800.0
 metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
 
-[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="QuitToTitleScreen" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2"]
+[node name="QuitToTitleScreen" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/MarginContainer2"]
 layout_mode = 2
 text = "TITLE_SCREEN"
 script = ExtResource("4_kh4h2")
 
-[node name="Fly" type="Node" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2"]
+[node name="Fly" type="Node" parent="PanelContainer/VBoxContainer/HBoxContainer/MarginContainer2"]
 script = ExtResource("3_6vdng")
 x = -800.0
 delay = 0.1
 metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
-
-[node name="ScoreSubmit" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("5_3r8fr")]
-layout_mode = 2
-
-[node name="Fly" type="Node" parent="PanelContainer/VBoxContainer/HBoxContainer/ScoreSubmit"]
-script = ExtResource("3_6vdng")
-x = 800.0
-delay = 0.2
-metadata/_custom_type_script = "uid://cuhhm5ieqpgf0"
-
-[node name="OnscreenKeyboard" type="PanelContainer" parent="PanelContainer/VBoxContainer" node_paths=PackedStringArray("score_submit")]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_3r8fr")
-script = ExtResource("5_kh4h2")
-score_submit = NodePath("../HBoxContainer/ScoreSubmit")
-animate = false
-set_tool_tip = false
-separation = Vector2i(16, 16)
-background = SubResource("StyleBoxFlat_3r8fr")
-font_size = 30
-font_color_normal = Color(0, 0.18806745, 0.28625926, 1)
-font_color_hover = Color(0.92964065, 0.9022812, 0.75719845, 1)
-font_color_pressed = Color(0, 0.18806745, 0.28625926, 1)
-metadata/_custom_type_script = "uid://b7ooaflveg5gm"

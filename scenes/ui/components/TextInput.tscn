@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://clupawugd4j8g"]
+
+[ext_resource type="Script" uid="uid://bvra67r3jjyv6" path="res://scripts/ui/components/TextInput.gd" id="1_1qlk1"]
+[ext_resource type="PackedScene" uid="uid://dqjvsuvi2v7ll" path="res://scenes/ui/controls/Keyboard.tscn" id="2_1qlk1"]
+[ext_resource type="Script" uid="uid://e106bdelh7sd" path="res://scripts/ui/components/PopOutControl.gd" id="3_mug7q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dwk71"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mug7q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tnf6p"]
+
+[node name="TextInput" type="PanelContainer" node_paths=PackedStringArray("line_edit", "length_label", "keyboard")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_dwk71")
+script = ExtResource("1_1qlk1")
+line_edit = NodePath("VBoxContainer/MarginContainer/HBoxContainer/LineEdit")
+length_label = NodePath("VBoxContainer/MarginContainer/HBoxContainer/LengthLabel")
+keyboard = NodePath("VBoxContainer/Control/Control/Keyboard")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 32
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "NAME"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+focus_neighbor_right = NodePath("../../../Control/Control/Keyboard")
+focus_neighbor_bottom = NodePath("../../../Control/Control/Keyboard")
+focus_next = NodePath("../../../Control/Control/Keyboard")
+virtual_keyboard_enabled = false
+virtual_keyboard_show_on_focus = false
+caret_force_displayed = true
+
+[node name="LengthLabel" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+text = "0/16"
+horizontal_alignment = 2
+
+[node name="Control" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxEmpty_mug7q")
+
+[node name="Control" type="PanelContainer" parent="VBoxContainer/Control"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_tnf6p")
+
+[node name="Keyboard" parent="VBoxContainer/Control/Control" instance=ExtResource("2_1qlk1")]
+layout_mode = 2
+focus_previous = NodePath("../../../MarginContainer/HBoxContainer/LineEdit")
+focus_mode = 2
+
+[node name="PopOutControl" type="Node" parent="VBoxContainer/Control/Control"]
+script = ExtResource("3_mug7q")
+metadata/_custom_type_script = "uid://e106bdelh7sd"

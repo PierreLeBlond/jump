@@ -7,7 +7,7 @@ signal submitted()
 @export var score_label: Label
 @export var time_label: Label
 
-@export var player_name_input: LineEdit
+@export var player_name_input: TextInput
 
 @export var submit_button: Button
 
@@ -25,12 +25,12 @@ func _ready() -> void:
     submit_button.pressed.connect(on_submit_button_pressed)
 
 func on_submit_button_pressed() -> void:
-    if player_name_input.text.is_empty():
+    if player_name_input.line_edit.text.is_empty():
         return
 
     submit_button.disabled = true
 
-    await Talo.players.identify("username", player_name_input.text)
+    await Talo.players.identify("username", player_name_input.line_edit.text.uri_encode())
     await Talo.leaderboards.add_entry(Globals.SCORES_LEADERBOARD_INTERNAL_NAME, score)
     await Talo.leaderboards.add_entry(Globals.TIMES_LEADERBOARD_INTERNAL_NAME, time)
 

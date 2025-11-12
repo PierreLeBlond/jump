@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://d2kv0dvtjt31f" path="res://scripts/ui/components/AnimatedButton.gd" id="4_nhrd6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nuotj"]
-bg_color = Color(0.8392157, 0.15686275, 0.15686275, 1)
+bg_color = Color(0, 0, 0, 1)
 
 [node name="GameOver" type="Control" node_paths=PackedStringArray("start_new_game_button", "quit_to_title_screen_button")]
 layout_mode = 3
