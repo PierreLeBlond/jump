@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bg35g3co6814c"]
+[gd_scene load_steps=9 format=3 uid="uid://bg35g3co6814c"]
 
 [ext_resource type="StyleBox" uid="uid://bln2l3kc4a1in" path="res://themes/StyleBox/panel_background.tres" id="1_8xvwu"]
 [ext_resource type="Script" uid="uid://k8sg3lqvgiug" path="res://scripts/ui/menus/OptionsMenu.gd" id="1_v343w"]
@@ -6,12 +6,14 @@
 [ext_resource type="StyleBox" uid="uid://dgehgi3vuaq8q" path="res://themes/StyleBox/floating_box.tres" id="3_v343w"]
 [ext_resource type="Script" uid="uid://d2kv0dvtjt31f" path="res://scripts/ui/components/AnimatedButton.gd" id="5_tctq1"]
 [ext_resource type="Script" uid="uid://74gj8fsm1ae3" path="res://scripts/ui/components/VolumeSlider.gd" id="5_v343w"]
+[ext_resource type="PackedScene" uid="uid://bvty6niosmlug" path="res://scenes/ui/components/QuitButton.tscn" id="5_yxu6n"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_v343w"]
 
-[node name="OptionsMenu" type="CanvasLayer" node_paths=PackedStringArray("language_button_french", "language_button_english", "volume_slider")]
+[node name="OptionsMenu" type="CanvasLayer" node_paths=PackedStringArray("quit_button", "language_button_french", "language_button_english", "volume_slider")]
 layer = 4
 script = ExtResource("1_v343w")
+quit_button = NodePath("PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Control/QuitButton")
 language_button_french = NodePath("PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2/MarginContainer/HBoxContainer/French/FrenchButton")
 language_button_english = NodePath("PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2/MarginContainer/HBoxContainer/English/EnglishButton")
 volume_slider = NodePath("PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/HSlider")
@@ -60,11 +62,40 @@ layout_mode = 2
 theme_override_constants/separation = 64
 alignment = 1
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="Control" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 64
 text = "OPTIONS"
+
+[node name="Control" type="CenterContainer" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -36.0
+offset_bottom = 36.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="QuitButton" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Control" instance=ExtResource("5_yxu6n")]
+layout_mode = 2
+size_flags_horizontal = 8
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -90,12 +121,6 @@ size_flags_horizontal = 3
 
 [node name="FrenchButton" type="Button" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2/MarginContainer/HBoxContainer/French"]
 layout_mode = 2
-focus_neighbor_left = NodePath("../../English/EnglishButton")
-focus_neighbor_top = NodePath("../../../../../VBoxContainer/MarginContainer/HSlider")
-focus_neighbor_right = NodePath("../../English/EnglishButton")
-focus_neighbor_bottom = NodePath("../../../../../VBoxContainer/MarginContainer/HSlider")
-focus_next = NodePath("../../English/EnglishButton")
-focus_previous = NodePath("../../../../../VBoxContainer/MarginContainer/HSlider")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_v343w")
 text = "FRANÇAIS"
@@ -107,12 +132,8 @@ size_flags_horizontal = 3
 
 [node name="EnglishButton" type="Button" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2/MarginContainer/HBoxContainer/English"]
 layout_mode = 2
-focus_neighbor_left = NodePath("../../French/FrenchButton")
-focus_neighbor_top = NodePath("../../../../../VBoxContainer/MarginContainer/HSlider")
-focus_neighbor_right = NodePath("../../French/FrenchButton")
+focus_neighbor_right = NodePath("../../../../../VBoxContainer/MarginContainer/HSlider")
 focus_neighbor_bottom = NodePath("../../../../../VBoxContainer/MarginContainer/HSlider")
-focus_next = NodePath("../../../../../VBoxContainer/MarginContainer/HSlider")
-focus_previous = NodePath("../../French/FrenchButton")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_v343w")
 text = "ENGLISH"
@@ -135,9 +156,7 @@ theme_override_constants/margin_right = 64
 [node name="HSlider" type="HSlider" parent="PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../../../VBoxContainer2/MarginContainer/HBoxContainer/English/EnglishButton")
-focus_neighbor_bottom = NodePath("../../../VBoxContainer2/MarginContainer/HBoxContainer/French/FrenchButton")
-focus_next = NodePath("../../../VBoxContainer2/MarginContainer/HBoxContainer/French/FrenchButton")
-focus_previous = NodePath("../../../VBoxContainer2/MarginContainer/HBoxContainer/English/EnglishButton")
+focus_neighbor_bottom = NodePath("../../../HBoxContainer/Control/QuitButton")
 value = 46.0
 script = ExtResource("5_v343w")
 bus_name = "Master"

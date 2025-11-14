@@ -12,9 +12,9 @@ signal key_pressed(key: String)
 var _special_key_datas = {
     "backspace": {"id": "backspace", "keycode": KEY_BACKSPACE, "icon": "arrow-left", "span": 2},
     "enter": {"id": "enter", "action": SpecialActions.VALIDATE, "icon": "corner-down-left", "span": 2},
-    "shift-left": {"id": "shift-left", "icon": "arrow-big-up", "span": 2, "switch": ["default", "caps"]},
-    "shift-right": {"id": "shift-right", "icon": "arrow-big-up", "span": 2, "switch": ["default", "caps"]},
-    "specials": {"id": "specials", "text": "&123", "span": 2, "switch": ["default", "specials"]},
+    "shift-left": {"id": "shift-left", "icon": "arrow-big-up", "span": 2, "switch": "caps"},
+    "shift-right": {"id": "shift-right", "icon": "arrow-big-up", "span": 2, "switch": "caps"},
+    "specials": {"id": "specials", "text": "&123", "span": 2, "switch": "specials"},
     "space": {"id": "space", "keycode": KEY_SPACE, "icon": "space", "span": 3},
     "left": {"id": "left", "keycode": KEY_LEFT, "icon": "chevron-left"},
     "right": {"id": "right", "keycode": KEY_RIGHT, "icon": "chevron-right"},
@@ -68,6 +68,12 @@ var _layouts = {
     "specials": specials_layout,
 }
 
+var _layout_priorities = {
+    "default": 0,
+    "caps": 1,
+    "specials": 2,
+}
+
 var _default_layout = "default"
 var _current_layout = _default_layout
 
@@ -76,6 +82,8 @@ var _key_buttons: Dictionary = {
     "caps": {},
     "specials": {},
 }
+
+var _switches = {}
 
 func _add_button(layout_id: String, id: String, keycode: int, button: AnimatedButton) -> void:
     _key_buttons[layout_id][id] = {"keycode": keycode, "button": button}
@@ -91,6 +99,10 @@ func _get_buttons_by_keycode(layout_id: String, keycode: int) -> Array:
 
 func _get_first_button(layout_id: String) -> AnimatedButton:
     return _key_buttons[layout_id].values()[0]["button"]
+
+func _get_button_id(layout_id: String, button: Button) -> String:
+    var id_index = _key_buttons.get(layout_id).values().find_custom(func(key_button): return key_button.get("button") == button)
+    return _key_buttons.get(layout_id).keys()[id_index]
 
 var _keyboard_containers: Dictionary = {}
 
@@ -110,26 +122,25 @@ func _on_focus_entered() -> void:
 func _on_key_pressed(key_data: Dictionary) -> void:
     key_pressed.emit(key_data)
 
-func _on_switch_pressed(id: String, switch: Array) -> void:
-    var layout_index = switch.find(_current_layout)
-    if layout_index == -1:
-        layout_index = 0
-    else:
-        layout_index = (layout_index + 1) % switch.size()
+func _on_switch_pressed(id: String, switch: String) -> void:
+    if !_switches.has(switch):
+        return
 
-    for layout_name in _layouts.keys():
-        for row in _layouts[layout_name]:
-            for key_data in row:
-                if key_data.has("switch") and key_data.get("switch").hash() == switch.hash() or key_data.get("id") == id:
-                    _get_button_by_id(layout_name, key_data.get("id")).set_pressed_no_signal(layout_index > 0)
+    var switched = !_switches.get(switch).get("switched")
+    
+    _switches.get(switch).set("switched", switched)
 
-    var layout_name = switch[layout_index]
-    for row in _layouts[layout_name]:
-        for key_data in row:
-            if key_data.has("switch") and key_data.get("switch").hash() == switch.hash() and key_data.get("id") == id:
-                _get_button_by_id(layout_name, key_data.get("id")).grab_focus.call_deferred()
+    var layout_to_switch_to = _switches.keys().reduce(func(layout_id, layout_id_candidate): return layout_id if !_switches.get(layout_id_candidate).get("switched") or _layout_priorities.get(layout_id) > _layout_priorities.get(layout_id_candidate) else layout_id_candidate, _default_layout)
 
-    _switch_layout(switch[layout_index])
+    # Should manually toggled button linked to this switch
+    for button in _switches.get(switch).get("buttons"):
+        button.set_pressed_no_signal(switched)
+
+    # Should set focus to button linked to this switch in the new layout
+    var button_to_focus = _get_button_by_id(layout_to_switch_to, id)
+    button_to_focus.grab_focus.call_deferred()
+
+    _switch_layout(layout_to_switch_to)
 
 func _create_keyboards() -> void:
     for layout_name in _layouts.keys():
@@ -170,6 +181,11 @@ func _create_keyboard(layout_id: String, layout: Array) -> VBoxContainer:
             if key_data.has("switch"):
                 key_button.pressed.connect(func(): _on_switch_pressed(id, key_data.get("switch")))
                 key_button.toggle_mode = true
+                var switch = key_data.get("switch")
+                if !_switches.has(switch):
+                    _switches.set(switch, {"switched": false, "buttons": [key_button]})
+                else:
+                    _switches.get(switch).get("buttons").append(key_button)
             else:
                 key_button.pressed.connect(_on_key_pressed.bind(key_data))
 

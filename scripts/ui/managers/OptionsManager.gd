@@ -23,7 +23,9 @@ func _input(event: InputEvent) -> void:
 func open_options() -> void:
     add_child(_options_menu)
     _options_menu.focus()
+    _options_menu.wants_to_quit.connect(close_options)
 
 func close_options() -> void:
+    _options_menu.wants_to_quit.disconnect(close_options)
     remove_child(_options_menu)
     emit_signal("options_closed")

@@ -60,6 +60,13 @@ func _click_key_button(id: String):
 
     await get_tree().process_frame
 
+func _press_key_button(id: String):
+    var key_button = _keyboard._get_button_by_id(_keyboard._current_layout, id)
+    key_button.grab_focus()
+
+    _input_sender.key_down(KEY_ENTER).wait_frames(TestGlobals.WAIT_FRAMES_COUNT).key_up(KEY_ENTER).wait_frames(TestGlobals.WAIT_FRAMES_COUNT)
+    await (_input_sender.idle)
+
 
 func test_should_have_one_line_edit():
     var line_edits = _text_input.find_children("*", "LineEdit")
@@ -69,21 +76,6 @@ func test_should_have_one_keyboard():
     var keyboards = _text_input.find_children("*", "Keyboard")
     assert_eq(keyboards.size(), 1)
 
-func test_sould_emit_on_key_down():
-    var sender = InputSender.new(_keyboard)
-
-    watch_signals(_keyboard)
-
-    sender.key_down(KEY_Q)
-
-    assert_signal_emitted(_keyboard, "key_pressed")
-
-func test_should_insert_text_at_caret_on_key_pressed():
-    var sender = InputSender.new(_keyboard)
-
-    sender.key_down(KEY_Q)
-
-    assert_eq(_line_edit.text, "q")
 
 func test_should_not_emit_on_line_edit_key_pressed():
     watch_signals(_keyboard)
@@ -103,48 +95,35 @@ func test_should_insert_text_at_caret_on_key_clicked():
 
     assert_eq(_line_edit.text, "q")
 
-func test_should_insert_space_at_caret_on_space_key_pressed():
-    var sender = InputSender.new(_keyboard)
+func test_should_insert_text_on_key_pressed():
+    await _press_key_button("q")
 
-    sender.key_down(KEY_SPACE)
-
-    assert_eq(_line_edit.text, " ")
+    assert_eq(_line_edit.text, "q")
 
 func test_should_not_treat_space_as_ui_accept():
-    var q_button = _keyboard._get_button_by_id("default", "q")
-    q_button.grab_focus()
-
-    _input_sender.key_down(KEY_SPACE).wait_frames(TestGlobals.WAIT_FRAMES_COUNT).key_up(KEY_SPACE).wait_frames(TestGlobals.WAIT_FRAMES_COUNT)
-
-    await (_input_sender.idle)
+    await _press_key_button("space")
 
     assert_eq(_line_edit.text, " ")
 
 func test_should_remove_text_at_caret_on_backspace_key_pressed():
-    var sender = InputSender.new(_keyboard)
-
-    sender.key_down(KEY_Q)
+    await _press_key_button("q")
 
     assert_eq(_line_edit.text, "q")
 
-    sender.key_down(KEY_BACKSPACE)
+    await _press_key_button("backspace")
 
     assert_eq(_line_edit.text, "")
 
 func test_should_move_caret_left_on_left_key_pressed():
-    var sender = InputSender.new(_keyboard)
-
-    sender.key_down(KEY_Q)
-    sender.key_down(KEY_LEFT)
+    await _press_key_button("q")
+    await _press_key_button("left")
 
     assert_eq(_line_edit.caret_column, 0)
 
 func test_should_move_caret_right_on_right_key_pressed():
-    var sender = InputSender.new(_keyboard)
-
-    sender.key_down(KEY_Q)
-    sender.key_down(KEY_LEFT)
-    sender.key_down(KEY_RIGHT)
+    await _press_key_button("q")
+    await _press_key_button("left")
+    await _press_key_button("right")
 
     assert_eq(_line_edit.caret_column, 1)
 
@@ -169,11 +148,45 @@ func test_should_focus_out_of_keyboard_on_validate_key_pressed():
     another_button.free()
     another_button = null
 
-func test_should_insert_text_on_key_ui_accept():
-    var q_button = _keyboard._get_button_by_id("default", "q")
-    q_button.grab_focus()
+func test_should_switch_layout_on_shift_key_pressed():
+    await _press_key_button("shift-left")
 
-    _input_sender.key_down(KEY_ENTER).wait_frames(TestGlobals.WAIT_FRAMES_COUNT).key_up(KEY_ENTER).wait_frames(TestGlobals.WAIT_FRAMES_COUNT)
-    await (_input_sender.idle)
+    assert_eq(_keyboard._current_layout, "caps")
 
-    assert_eq(_line_edit.text, "q")
+func test_should_switch_back_to_default_layout_on_shift_key_pressed_again():
+    await _press_key_button("shift-left")
+    await _press_key_button("shift-left")
+
+    assert_eq(_keyboard._current_layout, "default")
+
+func test_should_switch_to_first_priority_switched_layout_on_multiple_layouts_switched_in_order():
+    await _press_key_button("shift-left")
+    await _press_key_button("specials")
+
+    assert_eq(_keyboard._current_layout, "specials")
+
+func test_should_switch_to_first_priority_switched_layout_on_multiple_layouts_switched_in_reverse_order():
+    await _press_key_button("specials")
+    await _press_key_button("shift-left")
+
+    assert_eq(_keyboard._current_layout, "specials")
+
+func test_should_switch_back_to_last_switched_layout_on_layout_switched_off():
+    await _press_key_button("shift-left")
+    await _press_key_button("specials")
+    await _press_key_button("specials")
+
+    assert_eq(_keyboard._current_layout, "caps")
+
+func test_should_set_focus_to_switch_button_on_layout_switched():
+    await _press_key_button("shift-left")
+
+    var shift_left_button = _keyboard._get_button_by_id("caps", "shift-left")
+    assert_eq(shift_left_button.has_focus(), true)
+
+func test_should_set_focus_to_switch_button_on_multiple_layouts_switched():
+    await _press_key_button("shift-left")
+    await _press_key_button("specials")
+
+    var shift_left_button = _keyboard._get_button_by_id("specials", "specials")
+    assert_eq(shift_left_button.has_focus(), true)

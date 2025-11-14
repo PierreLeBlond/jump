@@ -6,12 +6,12 @@
 [ext_resource type="Script" uid="uid://cuhhm5ieqpgf0" path="res://scripts/ui/transitions/Fly.gd" id="3_6vdng"]
 [ext_resource type="Texture2D" uid="uid://cc7pufusnl580" path="res://assets/sprites/bakground-4.png" id="3_n76nj"]
 [ext_resource type="Texture2D" uid="uid://bn4dwfu1txdur" path="res://assets/sprites/bakground-7.png" id="3_odout"]
-[ext_resource type="Script" uid="uid://d20mki0q6npx6" path="res://scripts/ui/components/ScoreSubmit.gd" id="4_c34kd"]
 [ext_resource type="Script" uid="uid://d2kv0dvtjt31f" path="res://scripts/ui/components/AnimatedButton.gd" id="4_kh4h2"]
 [ext_resource type="Texture2D" uid="uid://dvy3hrsp6d6rn" path="res://assets/sprites/note.png" id="5_s2vbh"]
 [ext_resource type="Texture2D" uid="uid://cmfortl8nq5xg" path="res://assets/sprites/bakground-2.png" id="5_xax7f"]
 [ext_resource type="Texture2D" uid="uid://dwmx02woptjx6" path="res://assets/sprites/clock.png" id="6_tefiy"]
 [ext_resource type="PackedScene" uid="uid://clupawugd4j8g" path="res://scenes/ui/components/TextInput.tscn" id="7_23d0j"]
+[ext_resource type="Script" uid="uid://d20mki0q6npx6" path="res://scripts/ui/components/ScoreSubmit.gd" id="12_odout"]
 
 [sub_resource type="Gradient" id="Gradient_xnmwc"]
 colors = PackedColorArray(0.40784314, 0.6431373, 0.8509804, 1, 0.91664, 0.91664, 0.91664, 1)
@@ -51,7 +51,7 @@ grow_vertical = 2
 script = ExtResource("1_og3yy")
 start_new_game_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/StartNewGame")
 quit_to_title_screen_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/MarginContainer2/QuitToTitleScreen")
-player_name_input = NodePath("PanelContainer/VBoxContainer/ScoreSubmit/MarginContainer/VBoxContainer/TextInput")
+player_name_input = NodePath("PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/TextInput")
 score_submit = NodePath("PanelContainer/VBoxContainer/ScoreSubmit")
 
 [node name="Background" type="Control" parent="."]
@@ -187,39 +187,39 @@ expand_mode = 3
 layout_mode = 2
 text = "00:00:00"
 
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_right = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TextInput" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("7_23d0j")]
+layout_mode = 2
+focus_next = NodePath("../MarginContainer/SubmitButton")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SubmitButton" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "SEND"
+script = ExtResource("4_kh4h2")
+
 [node name="ScoreSubmit" type="PanelContainer" parent="PanelContainer/VBoxContainer" node_paths=PackedStringArray("score_label", "time_label", "player_name_input", "submit_button")]
 layout_mode = 2
 theme = ExtResource("2_6vdng")
 theme_type_variation = &"SubPanelContainer"
 theme_override_styles/panel = SubResource("StyleBoxEmpty_odout")
-script = ExtResource("4_c34kd")
+script = ExtResource("12_odout")
 score_label = NodePath("../HBoxContainer2/CenterContainer/HBoxContainer/Label")
 time_label = NodePath("../HBoxContainer2/CenterContainer2/HBoxContainer/Label")
-player_name_input = NodePath("MarginContainer/VBoxContainer/TextInput")
-submit_button = NodePath("MarginContainer/VBoxContainer/MarginContainer/Button")
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/ScoreSubmit"]
-layout_mode = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_right = 32
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScoreSubmit/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 8
-alignment = 1
-
-[node name="TextInput" parent="PanelContainer/VBoxContainer/ScoreSubmit/MarginContainer/VBoxContainer" instance=ExtResource("7_23d0j")]
-layout_mode = 2
-focus_next = NodePath("../MarginContainer/Button")
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/ScoreSubmit/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/ScoreSubmit/MarginContainer/VBoxContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "SEND"
-script = ExtResource("4_kh4h2")
+player_name_input = NodePath("../MarginContainer/VBoxContainer/TextInput")
+submit_button = NodePath("../MarginContainer/VBoxContainer/MarginContainer/SubmitButton")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -230,6 +230,7 @@ layout_mode = 2
 
 [node name="StartNewGame" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../../MarginContainer/VBoxContainer/MarginContainer/SubmitButton")
 text = "RESTART"
 script = ExtResource("4_kh4h2")
 
@@ -243,6 +244,7 @@ layout_mode = 2
 
 [node name="QuitToTitleScreen" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/MarginContainer2"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../../MarginContainer/VBoxContainer/MarginContainer/SubmitButton")
 text = "TITLE_SCREEN"
 script = ExtResource("4_kh4h2")
 

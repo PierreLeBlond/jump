@@ -18,7 +18,11 @@ func _ready() -> void:
     mouse_entered.connect(highlight_button)
     mouse_exited.connect(unhighlight_button)
 
-    var stylebox = load("res://themes/StyleBox/button_shadow.tres")
+    var stylebox = load("res://themes/StyleBox/button_shadow.tres").duplicate() as StyleBoxFlat
+    stylebox.corner_radius_bottom_left = get_theme_stylebox("normal").corner_radius_bottom_left
+    stylebox.corner_radius_bottom_right = get_theme_stylebox("normal").corner_radius_bottom_right
+    stylebox.corner_radius_top_left = get_theme_stylebox("normal").corner_radius_top_left
+    stylebox.corner_radius_top_right = get_theme_stylebox("normal").corner_radius_top_right
 
     _shadow = PanelContainer.new()
     _shadow.add_theme_stylebox_override("panel", stylebox)

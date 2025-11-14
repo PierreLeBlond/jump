@@ -27,6 +27,16 @@ func _ready() -> void:
 
     player_name_input.line_edit.grab_focus()
 
+    _setup_focus()
+
+
+func _setup_focus() -> void:
+    quit_to_title_screen_button.focus_neighbor_bottom = player_name_input.line_edit.get_path()
+    player_name_input.line_edit.focus_neighbor_top = quit_to_title_screen_button.get_path()
+
+    score_submit.focus_neighbor_top = player_name_input.keyboard.get_path()
+    player_name_input.keyboard.focus_neighbor_bottom = score_submit.get_path()
+
 func disable() -> void:
     start_new_game_button.disabled = true
     quit_to_title_screen_button.disabled = true
