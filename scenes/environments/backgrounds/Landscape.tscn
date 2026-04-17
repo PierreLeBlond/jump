@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmsk824oqqo0r"]
+[gd_scene format=3 uid="uid://dmsk824oqqo0r"]
 
 [ext_resource type="Texture2D" uid="uid://bmiy8u04n4m34" path="res://assets/sprites/bakground-5.png" id="1_nijgr"]
 [ext_resource type="Texture2D" uid="uid://bn4dwfu1txdur" path="res://assets/sprites/bakground-7.png" id="2_yi7p2"]
@@ -24,18 +24,18 @@ gradient = SubResource("Gradient_p5s5a")
 fill_from = Vector2(0, 0.34545454)
 fill_to = Vector2(0, 0.39545456)
 
-[node name="Landscape" type="Node2D"]
+[node name="Landscape" type="Node2D" unique_id=1326872527]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1345232854]
 layer = -1
 
-[node name="Clouds" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Clouds" type="ParallaxLayer" parent="ParallaxBackground" unique_id=366040874]
 modulate = Color(0.85490197, 0.84313726, 0.8039216, 1)
 position = Vector2(0, -138)
 motion_scale = Vector2(0.05, 0.05)
 motion_mirroring = Vector2(3840, 0)
 
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Clouds"]
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Clouds" unique_id=2046575330]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -46,7 +46,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_nijgr")
 
-[node name="TextureRect2" type="TextureRect" parent="ParallaxBackground/Clouds"]
+[node name="TextureRect2" type="TextureRect" parent="ParallaxBackground/Clouds" unique_id=346453782]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -59,24 +59,24 @@ grow_vertical = 2
 texture = ExtResource("1_nijgr")
 flip_h = true
 
-[node name="Mountains" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Mountains" type="ParallaxLayer" parent="ParallaxBackground" unique_id=17332648]
 position = Vector2(0, -138)
 motion_scale = Vector2(0.1, 0.1)
 motion_mirroring = Vector2(3840, 0)
 
-[node name="Polygon2D" type="Polygon2D" parent="ParallaxBackground/Mountains"]
+[node name="Polygon2D" type="Polygon2D" parent="ParallaxBackground/Mountains" unique_id=1640969122]
 position = Vector2(488, 722)
 texture = SubResource("GradientTexture2D_yi7p2")
 polygon = PackedVector2Array(-488, -72, -432, -62, -280, -290, -223, -309, -56, -142, 104, -351, 161, -316, 354, 22, 400, 3, 594, -263, 795, -180, 799, -85, 1007, 67, 1243, 138, 1443, 162, 1847, 73, 2065, -76, 2375, -193, 2593, -17, 3010, -362, 3152, -291, 3352, -72, 3352, 2063, -488, 2063)
 uv = PackedVector2Array(1.6768082, 7.0896225, 2.5638666, 7.248026, 4.971616, 3.6363955, 5.8745356, 3.3354244, 8.519891, 5.9807873, 11.054365, 2.6701221, 11.95727, 3.2245388, 15.014508, 8.57863, 15.743167, 8.277659, 18.816229, 4.064086, 22.000162, 5.378847, 22.063538, 6.8836956, 25.358343, 9.291452, 29.096718, 10.41613, 32.264828, 10.796299, 38.664368, 9.386495, 42.117596, 7.0262604, 47.02815, 5.1729193, 50.481373, 7.96085, 57.086887, 2.4958782, 59.336246, 3.620552, 62.50433, 7.0896225, 62.50433, 40.909096, 1.6768082, 40.909096)
 
-[node name="FrontClouds" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="FrontClouds" type="ParallaxLayer" parent="ParallaxBackground" unique_id=852526867]
 modulate = Color(0.85490197, 0.84313726, 0.8039216, 1)
 position = Vector2(0, 110)
 motion_scale = Vector2(0.3, 0.3)
 motion_mirroring = Vector2(3840, 0)
 
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/FrontClouds"]
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/FrontClouds" unique_id=354505850]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -87,7 +87,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_yi7p2")
 
-[node name="TextureRect2" type="TextureRect" parent="ParallaxBackground/FrontClouds"]
+[node name="TextureRect2" type="TextureRect" parent="ParallaxBackground/FrontClouds" unique_id=1657634276]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -100,18 +100,18 @@ grow_vertical = 2
 texture = ExtResource("2_yi7p2")
 flip_h = true
 
-[node name="Land" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Land" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1556917115]
 modulate = Color(0.34509805, 0.5058824, 0.34117648, 1)
 position = Vector2(0, -138)
 motion_scale = Vector2(0.6, 0.6)
 motion_mirroring = Vector2(3840, 0)
 
-[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/Land"]
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/Land" unique_id=32334377]
 offset_top = 1034.0
 offset_right = 3840.0
 offset_bottom = 2785.0
 
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Land"]
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Land" unique_id=817434307]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -122,7 +122,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_icsne")
 
-[node name="TextureRect2" type="TextureRect" parent="ParallaxBackground/Land"]
+[node name="TextureRect2" type="TextureRect" parent="ParallaxBackground/Land" unique_id=981319700]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -135,13 +135,13 @@ grow_vertical = 2
 texture = ExtResource("3_icsne")
 flip_h = true
 
-[node name="Trees" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Trees" type="ParallaxLayer" parent="ParallaxBackground" unique_id=2090684417]
 modulate = Color(0.22745098, 0.3529412, 0.2509804, 1)
 position = Vector2(0, -138)
 motion_scale = Vector2(0.95, 0.95)
 motion_mirroring = Vector2(3840, 0)
 
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Trees"]
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Trees" unique_id=926712261]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -152,7 +152,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_pfkke")
 
-[node name="TextureRect2" type="TextureRect" parent="ParallaxBackground/Trees"]
+[node name="TextureRect2" type="TextureRect" parent="ParallaxBackground/Trees" unique_id=1426728636]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -165,7 +165,7 @@ grow_vertical = 2
 texture = ExtResource("4_pfkke")
 flip_h = true
 
-[node name="TextureRect3" type="TextureRect" parent="ParallaxBackground/Trees"]
+[node name="TextureRect3" type="TextureRect" parent="ParallaxBackground/Trees" unique_id=308433460]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -175,12 +175,12 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_kdw8r")
 
-[node name="Bushes" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Bushes" type="ParallaxLayer" parent="ParallaxBackground" unique_id=572729659]
 modulate = Color(0.20392157, 0.30588236, 0.25490198, 1)
 position = Vector2(0, -138)
 motion_mirroring = Vector2(3840, 0)
 
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Bushes"]
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Bushes" unique_id=1052926783]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -192,7 +192,7 @@ grow_vertical = 2
 texture = ExtResource("5_ssd6x")
 flip_h = true
 
-[node name="TextureRect2" type="TextureRect" parent="ParallaxBackground/Bushes"]
+[node name="TextureRect2" type="TextureRect" parent="ParallaxBackground/Bushes" unique_id=1979449277]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

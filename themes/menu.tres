@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=14 format=3 uid="uid://bx7hkxebggo06"]
+[gd_resource type="Theme" format=3 uid="uid://bx7hkxebggo06"]
 
 [ext_resource type="FontFile" uid="uid://opncn7fhpnq3" path="res://assets/fonts/Coda-ExtraBold.ttf" id="1_rukvw"]
 [ext_resource type="StyleBox" uid="uid://7cyokq4g4kp0" path="res://themes/StyleBox/button_normal.tres" id="2_0mtrw"]
